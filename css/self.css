@@ -1,0 +1,44 @@
+*{
+	background-image: url("../images/project_background.png");
+	margin: 0;
+	padding: 0;
+}
+
+.navbar{
+	width: 100%;
+	margin:auto;
+	text-align: justify;
+	height:50px;
+	background:#f5f5f5;
+	display: inline-flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-items:center;
+	list-style: none;
+	
+}
+
+#navbar1 {
+	background:#4484ef;
+}
+
+#navbar1 .nav-list{
+	
+	
+	background:#4484ef;
+}
+
+#navbar-html{
+	display:none;
+}
+
+.nav-list{
+	background:#f5f5f5;
+}
+
+.stretch-li{
+	display:inline-block;
+	line-height: 0px;
+	font-size: 0px;
+	width: 100%;
+}
