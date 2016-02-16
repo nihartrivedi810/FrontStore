@@ -1,5 +1,4 @@
 *{
-	background-image: url("../images/project_background.png");
 	margin: 0;
 	padding: 0;
 }
@@ -41,4 +40,30 @@
 	line-height: 0px;
 	font-size: 0px;
 	width: 100%;
+}
+.row{
+	width: 100%;
+}
+.col-1{
+	width:49%;
+}
+.col-2{
+	width: 100%;
+}
+.video{
+	display: inline-block;
+	vertical-align: top;
+	
+	height: 400px;
+	margin-left: 10px;
+}
+.notes{
+	display: inline-block;
+	vertical-align: top;
+	
+	height: 400px;
+	margin-left: 10px;
+}
+.body{
+	/*background-image: url("../images/project_background.png");*/
 }
