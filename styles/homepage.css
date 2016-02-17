@@ -70,10 +70,7 @@ and open the template in the editor.
 .dropdown:hover .dropbtn {
     background-color: #3e8e41;
 }
-.content-container{
-    background-color: #F3F3F3;
-    height: 1000px;;
-}
+
 .content-box{
     background-color: #FFFFFF;
     display: inline-flex;

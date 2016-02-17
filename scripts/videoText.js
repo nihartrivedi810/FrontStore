@@ -179,7 +179,7 @@ $(function(){
 				this.saveurl.show();
 			}
 			$('#youtube').remove();
-			this.videoTag.prepend('<embed  id="youtube" width="100%" height="400"src="http://www.youtube.com/embed/' + octopus.getCurrentVideo() + '"">')
+			this.videoTag.prepend('<embed  id="youtube" width="100%" height="100%"src="http://www.youtube.com/embed/' + octopus.getCurrentVideo() + '"">')
 			if(!octopus.hasNextVideo())
 			{
 				$(".next").hide();
