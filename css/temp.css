@@ -1,0 +1,82 @@
+*{
+	margin:0;
+	padding:0;
+}
+
+.lesson-list{
+	width: 800px;
+	display: table;
+	table-layout: fixed;
+
+	background: #e6e6e6;
+	list-style: none;
+	line-height: 28px;
+
+
+
+}
+
+.lesson-list__lesson{
+	display: table-cell;
+    border: 1px solid #fff;
+    text-align: center;
+    background: #e6e6e6;
+    text-decoration: none;
+    color:#fff;
+    position:relative;
+
+}
+.lesson-list__lesson:visited{
+	background: #8DC5D8;
+}
+.lesson-list__lesson:hover{
+	background: #1f8fc1;
+}
+
+.lesson-list__lesson:active{
+	background: #1f8fc1;
+}
+
+.lesson-list__lesson p{
+	display: none;
+	text-align: left;
+	background-color: #1E2021;
+	padding: 20px;
+	width: 300px;
+	position: absolute;
+	border-radius: 3px;
+	box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+	right: -4px;
+	color: #FFF;
+	font-size: 13px;
+	line-height: 1.4;
+}
+
+.lesson-list__lesson:hover p{
+	display:block;
+	transform-origin: 100% 0%;
+
+	-webkit-animation: fadeIn 0.3s ease-in-out;
+	animation: fadeIn 0.3s ease-in-out;
+
+}
+
+.lesson-list__lesson p:before{ /* The pointer of the tooltip */
+	position: absolute;
+	content: '';
+	width:0;
+	height: 0;
+	border:6px solid transparent;
+	border-bottom-color:#1E2021;
+	right:10px;
+	top:-12px;
+}
+
+.lesson-list__lesson p:after{ /* Prevents the tooltip from being hidden */
+	width:100%;
+	height:40px;
+	content:'';
+	position: absolute;
+	top:-40px;
+	left:0;
+}
