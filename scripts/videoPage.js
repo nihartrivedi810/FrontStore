@@ -14,7 +14,7 @@ var resizeWindow = function () {
 		firstHeight = first.offsetHeight,
 		containerHeight = container.offsetHeight;
 
-	second.setAttribute("style","height:"+(containerHeight - firstHeight) +"px");
+	second.setAttribute("style","height:"+(containerHeight - firstHeight -5) +"px");
 }
 
 resizeWindow();
