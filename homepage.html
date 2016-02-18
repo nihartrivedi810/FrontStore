@@ -17,12 +17,13 @@ and open the template in the editor.
                 <div class="innerContent__logo">
                     <img class="innerContent__logo--image" src="images/sprinklr_logo.png" alt="Sprinklr">
                 </div>
-                <div class="innerContent__account dropdown">
-                    <p class="innerContent__account--profile-Name dropbtn">
-                        <strong>Account</strong>
+                <div class="innerContent__account drop">
+                    <p class="innerContent__account--profile-Name">
+                        <b>Account</b>
                     </p>
-                    <div class="dropdown-content">
-                        <a class="dropdown-content__element" href="index.html" style="text-decoration:none;">Logout</a>
+                    <div class="drop-list">
+                       <a class="drop-list__element" href="#">Settings</a>
+                        <a class="drop-list__element" href="index.html">Logout</a>
                     </div>
                 </div>
             </div>
@@ -30,16 +31,30 @@ and open the template in the editor.
         <div class="content-container">
             <div class="content-box">
                 <div class="content-box__course-box">
-                    <div class="content-box__course-box__course-content">
-                        <img class="course-image" src="images/HTML5.png">
+                   <div class="content-box__course-box__course-content">
+                        <div class="content-face front-box">
+                            <img class="course-image" src="images/HTML5.png">
+                        </div>
+                        <div class="content-face back-box">
+                            <p class="content-face__text">This Course contains all essential information about HTML.</p>
+                            <button class="content-face__button" onclick="#">Learn</button>
+                        </div>
                     </div>
                 </div>
                 <div class="content-box__course-box">
                     <div class="content-box__course-box__course-content">
-                        <img class="course-image" src="images/Javascript.png">
+                       <div class="content-face front-box">
+                            <img class="course-image" src="images/Javascript.png">
+                        </div>
+                        <div class="content-face back-box">
+                            <p class="content-face__text">This Course contains all essential information about JS.</p>
+                            <button class="content-face__button" onclick="#">Learn</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </body>
+    <script src="jquery-1.12.0.min.js"></script>
+    <script type="text/javascript" src="scripts/flip.js"></script>
 </html>
