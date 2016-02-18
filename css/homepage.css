@@ -76,6 +76,13 @@ and open the template in the editor.
 /*.dropdown:hover .dropdown-content {
     display: block;
 }
+<<<<<<< HEAD
+
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}
+
+=======
 */
 /*.dropdown:hover .dropbtn {
     background-color: black;

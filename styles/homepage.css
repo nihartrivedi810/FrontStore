@@ -87,6 +87,7 @@ and open the template in the editor.
 .drop:hover .drop-list{
     display: block;
 }
+
 .content-container{
     background-color: #C6C8CA;
     height: 1000px;;
