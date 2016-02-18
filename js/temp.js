@@ -20,21 +20,47 @@ view = {
 		});
 
 		sideBlk.addEventListener("mouseleave", function(e){
+
 			event.target.style.visibility = "hidden";
 			optSign.style.visibility = "visible";
 
 		});
 
+		sideBlk.addEventListener("mouseleave",function(e){
+			if(event.target.className == "lesson-list-container__lesson--video-list")
+			{
+				event.target.style.display = "none";
+			}
+		});
+
 		sideBlk.addEventListener("click",function(e){
 			var id = event.target.id;
-			console.log(event.target.parentNode.getElementsByClassName("lesson-list-container__lesson--video-list"));
+			var parent = event.target.parentNode;
+			
+			videolists = document.getElementsByClassName("lesson-list-container__lesson--video-list");
+			
+			
+			for(var videolist in videolists){
+				console.log(videolists[videolist]);
+				videolists[videolist].className ="lesson-list-container__lesson--video-list noDisplay";
+
+			}
+
 			if(event.target.className == "lesson-list-container__lesson--title"){
-				var videoList = event.target.parentNode.getElementsByClassName("lesson-list-container__lesson--video-list");
-				videoList[0].style.display = "block";
+				var videoList = parent.getElementsByClassName("lesson-list-container__lesson--video-list ");
+				if(videoList[0].className =="lesson-list-container__lesson--video-list noDisplay"){
+					videoList[0].className = "lesson-list-container__lesson--video-list";
+				}
+				else{
+					videoList[0].className = "lesson-list-container__lesson--video-list noDisplay";
+				}
+
 			}
 
 		});
-	}
+	},
+
+	
 		
 		
 		
