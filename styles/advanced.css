@@ -11,12 +11,16 @@
 .advanced-wrapper {
 	width: 100%;
 	height: 100%;
+	
 }
 .editor-container {
-	height: 100%;
+	/*height: 100%;*/
+	overflow: auto;
+	
 }
 .toolbar-container {
 	border-bottom: 1px solid #ccc;
+	display: fixed;
 }
 .basic-wrapper .toolbar-container {
 	padding: 8px 14px;

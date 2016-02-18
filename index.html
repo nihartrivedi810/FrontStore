@@ -8,25 +8,35 @@
   <link rel="stylesheet" type="text/css" href="styles/advanced.css">
 </head>
 
-<body>
-  <div>
-    <button onclick="buttonClick()">Code</button>
-    <ul id="navbar1" class="navbar">
+<body onresize="resizeWindow()">
+  <button onclick="buttonClick()">Code</button>
+  <div class="headerBar">
+    <div class="innerContent">
+      <div class="innerContent__logo">
+        <img class="innerContent__logo--image" src="images/sprinklr_logo.png" alt="Sprinklr">
+      </div>
+      <div class="innerContent__account drop">
+        <p class="innerContent__account--profile-Name">
+          <b>Account</b>
+        </p>
+        <div class="drop-list">
+         <a class="drop-list__element" href="#">Settings</a>
+         <a class="drop-list__element" href="index.html">Logout</a>
+       </div>
+     </div>
+   </div>
+ </div>
 
-      <li class="nav-list">HTML</li>
-      <li class="nav-list">Javascript</li>
-    </ul>
-  </div>
-  <div class="content-style-1" id="content-styler">
-    <div class="content-pane-1">
-      <div class="col-1 video">
-        <button type="button" class="previous">Previous</button>
-        <button type="button" class="next">Next</button>
+ <div class="content-style-1" id="content-styler">
+  <div class="content-pane-1">
+    <div class="col-1 video">
+      <button type="button" class="previous">Previous</button>
+      <button type="button" class="next">Next</button>
     </div><!-- 
   --><div class="col-1 notes">
   <div class="content-container">
-    <div class="advanced-wrapper">
-      <div class="toolbar-container"><span class="ql-format-group">
+    <div class="advanced-wrapper" id = "advance-wrapper">
+      <div class="toolbar-container" id = "toolbar-top"><span class="ql-format-group">
         <select title="Font" class="ql-font">
           <option value="sans-serif" selected>Sans Serif</option>
           <option value="Georgia, serif">Serif</option>
@@ -118,18 +128,18 @@
           <option value="right"></option>
           <option value="justify"></option>
         </select></span><span class="ql-format-group"><span title="Link" class="ql-format-button ql-link"></span><span class="ql-format-separator"></span><span title="Image" class="ql-format-button ql-image"></span><span class="ql-format-separator"></span><span title="List" class="ql-format-button ql-list"></span></span></div>
-        <div class="editor-container"></div>
+        <div class="editor-container" id = "toolbar-editor"></div>
       </div>
     </div>
     <button type="button" class="save">Save</button>
   </div>
 </div><!-- 
- --><div class="content-pane-2 jsbin col-1">
-  <input type="text" class="jsbinUrl" placeholder="Enter JSBIN embed Code">
-  <button type="button" class="saveurl">Save URL</button>
+--><div class="content-pane-2 jsbin col-1">
+<input type="text" class="jsbinUrl" placeholder="Enter JSBIN embed Code">
+<button type="button" class="saveurl">Save URL</button>
 
-  <!-- <a class="jsbin-embed" href="http://jsbin.com/kujabup/embed?js,console">JS Bin on jsbin.com</a> -->
-  
+<!-- <a class="jsbin-embed" href="http://jsbin.com/kujabup/embed?js,console">JS Bin on jsbin.com</a> -->
+
 </div>
 </div>
 </body>
