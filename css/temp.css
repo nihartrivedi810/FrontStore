@@ -1,6 +1,120 @@
 *{
 	margin:0;
 	padding:0;
+	font:normal normal normal 14px/1 FontAwesome;
+}
+
+body {
+-webkit-font-smoothing: antialiased;
+text-rendering: optimizelegibility;
+}
+
+.pr{
+	position: relative;
+}
+#side-bar{
+	height: auto;
+	width:50px;
+	top:10px;
+	left:10px;
+}
+
+#side-bar:hover > #lesson-list-container{
+
+	
+
+}
+
+
+
+#bar{
+
+	width:50px;
+	height:30px;
+	box-shadow: 1px 1px 1px #f6f6f6;
+	top:15px;
+	left:15px;
+
+}
+
+.lesson-list-container__lesson--video-list{
+	display:none;
+}
+
+.lesson-list-container__lesson--title{
+	width:80%;
+	height:40px;
+	
+	margin: 0 auto;
+	margin-top: 20px;
+	border-radius:5%;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 30px;
+	background-color: transparent;
+	color:#ffd034;
+	border-bottom: 3px solid #f3f3f3; 
+}
+
+.lesson-list-container__lesson--video-list__title{
+	
+
+	width:60%;
+	height:40px;
+	margin: 0 auto;
+	border-bottom: 1px solid #f3f3f3;
+	margin-top: 10px;
+	
+	text-align: center;
+	vertical-align: middle;
+	line-height: 25px;
+
+	color:#ffffff;
+	
+
+
+}
+.lesson-list-container__lesson--title:hover{
+	background-color: rgba(255,208,52, 0.8); 
+	color:#ffffff;
+}
+
+
+
+
+
+.lesson-list-container__lesson--video-list:hover ~ .lesson-list-container__lesson--title:hover{
+	background-color: #FF9933;
+	color:#ffffff;
+}
+
+.lesson-list-container__lesson--video-list__title:hover {
+	background-color: #f3f3f3;
+	color:rgba(0,0,0,0.67);
+}
+
+
+
+
+#lesson-list-container{
+
+	position:fixed;
+	width:23%;
+	height:100%;
+	background-color: rgba(0,0,0,0.67);
+	visibility:hidden;
+	top:0;
+	left:0;
+	list-style: none;
+	padding:10px;
+	z-index:1;
+	
+
+}
+
+*{
+	margin:0;
+	padding:0;
 }
 
 .lesson-list{
