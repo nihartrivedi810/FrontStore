@@ -37,7 +37,7 @@ authorship.addAuthor('basic', 'rgba(255,153,51,0.4)');
 
 cursorManager = advancedEditor.getModule('multi-cursor');
 
-cursorManager.setCursor('basic', 0, 'basic', 'rgba(255,153,51,0.9)');
+
 
 function buttonClick(){
   var a;
