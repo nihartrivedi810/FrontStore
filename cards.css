@@ -1,3 +1,77 @@
+*,
+*: before,
+*: after{
+    box-sizing: border-box;
+}
+
+.headerBar{
+    background-color: #0072BB;
+    height: 50px;
+}
+.header:after{
+    content: '';
+    display: table;
+    clear: both;
+}
+.innerContent{
+    width: 80%;
+    height: 100%;
+    position: relative;
+    left: 10%;
+}
+.innerContent__logo{
+    height: 100%;
+    float: left;
+    width: 20%
+}
+.innerContent__logo--image{
+    max-width: 100%;
+    max-height: 100%;
+}
+.innerContent__account{
+    height: 100%;
+    float: right;
+    width: 20%;
+    color: #FFF;
+    font-family: fantasy;
+    text-align: center;
+    
+}
+.innerContent__account--profile-Name{
+    width: 100%;
+    margin-bottom: 0px;
+    cursor: pointer;
+    margin-top: 0px;
+    height: 100%;
+    padding-top: 7%;
+    
+}
+
+.innerContent__account--profile-Name:hover{
+    background-color: #085DAD;
+}
+
+.drop-list{
+    display: none;
+    background-color: #0072BB;
+    width: 100%;
+    position: relative;
+    /* left: 30%; */
+    top: 1%;
+    /* text-align: center; */
+}
+
+.drop-list__element{
+    text-decoration: none;
+    color: #FFF;
+    display: block;
+}
+.drop-list__element:hover{
+    background-color: #085DAD;
+}
+.drop:hover .drop-list{
+    display: block;
+}
 .cards {
 	width :80%;
 	margin-top : 40px;
@@ -69,6 +143,7 @@
 
 .bg-clr {
 	background-color: #F3F3F3;
+    margin: 0px;
 }
 
 .template {
