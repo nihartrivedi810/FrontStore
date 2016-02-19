@@ -1,13 +1,13 @@
 
 
 $(function(){
-	var videoList=["AkjMCbSvTto","uPTMmyZB7tw","ND8jAv7WrmU","57kH7Yole2k"];
+	var videoList;
 	var currentVideo=0;
 	var model = {
 		init: function() {
-			if (!localStorage.notes) {
-				localStorage.notes = JSON.stringify({});
-			}
+			var topiclists=JSON.parse(localStorage.topiclists);
+			var topic = parseInt(localStorage.currentTopic);
+			videoList=topiclists[topic].material[localStorage.lesson];
 		},
 		addNewNote: function(obj) {
 			var data =JSON.parse(localStorage.notes);
@@ -60,31 +60,11 @@ $(function(){
 		getCurrentVideo: function() {
 			return videoList[currentVideo];
 		},
-		nextVideo: function() {
-			currentVideo++;
+		getAllVideos: function() {
+			return videoList;
 		},
-		hasNextVideo: function() {
-			if(currentVideo+1<=videoList.length-1)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		},
-		previousVideo: function() {
-			currentVideo--;
-		},
-		hasPreviousVideo: function() {
-			if(currentVideo>0)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
+		changeCurrentVideo: function(newVideo) {
+			currentVideo=newVideo;
 		},
 	};
 
@@ -97,21 +77,12 @@ $(function(){
 			model.addNewjsbin(jsbinURL);
 			view.render();
 		},
-		nextVideo: function() {
-			model.nextVideo();
-			view.render();
-		},
-		previousVideo: function() {
-			model.previousVideo();
-			view.render();
-		},
 		getNotesOfCurrentVideo: function() {
 			return model.getNotesOfCurrentVideo();
 		},
 		getjsbinOfCurrentVideo: function() {
 			return model.getjsbinOfCurrentVideo();
 		},
-
 		init: function() {
 			model.init();
 			view.init();
@@ -119,12 +90,13 @@ $(function(){
 		getCurrentVideo: function() {
 			return model.getCurrentVideo();
 		},
-		hasNextVideo: function() {
-			return model.hasNextVideo();
+		getAllVideos: function() {
+			return model.getAllVideos();
 		},
-		hasPreviousVideo: function() {
-			return model.hasPreviousVideo();
-		}
+		changeCurrentVideo: function(newVideo) {
+			model.changeCurrentVideo(newVideo);
+			view.render();
+		},
 	};
 
 
@@ -132,21 +104,29 @@ $(function(){
 		init: function() {
 			this.videoTag=$(".video");
 			this.jsbintag=$(".jsbin");
-			this.jsbinurl=$(".jsbinUrl");
-			this.saveurl=$(".saveurl");
-			$(".save").on('click',function(){
+			$("#saveNotes").on('click',function(){
 				a=advancedEditor.getContents();
 				octopus.addNewNote(a);
 			});
-			$(".next").on('click',function(){
-				octopus.nextVideo();
-			});
-			$(".previous").on('click',function(){
-				octopus.previousVideo();
-			});
-			$(".saveurl").on('click',function(){
-				var t2=$(".jsbinUrl").val();
+			$("#saveUrl").on('click',function(){
+				var t2=$("#jsbinUrl").val();
 				octopus.addNewjsbin(t2);
+			});
+			var videos=octopus.getAllVideos();
+			var parent=$("#l1");
+			for(var i in videos)
+			{
+				parent.append('<li id="'+ i +'"class="lesson-list-container__lesson--title">Video'+ (parseInt(i)+1) +'</li>');
+			}
+			document.getElementById("l1").addEventListener("click", function(e) {
+				// e.target is the clicked element!
+				// If it was a list item
+				if(e.target && e.target.nodeName == "LI") {
+					// List item found!  Output the ID!
+					// alert(e.target.id);
+					octopus.changeCurrentVideo(e.target.id);
+					console.log("List item ", e.target.id.replace("post-"), " was clicked!");
+				}
 			});
 			view.render();
 		},
@@ -165,37 +145,16 @@ $(function(){
 			var b=octopus.getjsbinOfCurrentVideo();
 			if(b)
 			{
-				this.jsbinurl.hide();
-				this.saveurl.hide();
-				$(".jsbin-embed").remove();
 				$("iframe").remove();
-				this.jsbintag.append(b);
+				this.jsbintag.append('<iframe src=' + b + ' style="border: 1px solid rgb(170, 170, 170); width: 100%; min-height: 300px;"></iframe>');
 			}
 			else
 			{
-				$(".jsbin-embed").remove();
 				$("iframe").remove();
-				this.jsbinurl.show();
-				this.saveurl.show();
 			}
 			$('#youtube').remove();
-			this.videoTag.prepend('<embed  id="youtube" width="100%" height="100%"src="http://www.youtube.com/embed/1cZtdKNB9jo?list=PLAwxTw4SYaPmd5v7c9i883AwqVZquegHM">')
-			if(!octopus.hasNextVideo())
-			{
-				$(".next").hide();
-			}
-			else
-			{
-				$(".next").show();
-			}
-			if(!octopus.hasPreviousVideo())
-			{
-				$(".previous").hide();
-			}
-			else
-			{
-				$(".previous").show();
-			}
+			var curVideo=octopus.getCurrentVideo();
+			this.videoTag.prepend('<embed  id="youtube" width="100%" height="100%"src="https://www.youtube.com/embed/'+ curVideo+'" frameborder="0" allowfullscreen">');
 		}
 	};
 

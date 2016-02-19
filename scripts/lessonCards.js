@@ -14,6 +14,7 @@ var octopus = {
 
 	setLesson : function (attr) {
 		localStorage.lesson = attr;
+		$(location).attr('href', 'index.html');
 	}
 },
 
