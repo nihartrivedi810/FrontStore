@@ -22,7 +22,7 @@ for (val in data) {
 	//console.log (val);
 	var template = document.getElementById("template").cloneNode(true);
 	addId (template, val);
-	var dom = document.getElementsByClassName("holder")[0];
+	var dom = document.getElementsByClassName("container")[0];
 	dom.insertAdjacentHTML('beforeend' ,template.innerHTML );
 	var contentName = document.getElementById("content-name_"+val);
 	contentName.innerHTML = val;
