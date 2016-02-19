@@ -73,7 +73,7 @@
     display: block;
 }
 .cards {
-	width :80%;
+	width :100%;
 	margin-top : 40px;
 	min-height: 70px;
 	margin-bottom: 40px;
@@ -84,7 +84,7 @@
 }
 
 .holder {
-	width: 700px;
+	width: 50%;
 	margin: 0 auto;
 	vertical-align: middle;
 }
