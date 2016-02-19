@@ -44,27 +44,7 @@ view = {
 				optSign.style.visibility = "visible";
 			}
 		});
-		sideBlk.addEventListener("click",function(e){
-			var id = event.target.id;
-			var parent = event.target.parentNode;
-			
-			videolists = document.getElementsByClassName("lesson-list-container__lesson--video-list");
-			
-			
-			// for(var videolist in videolists){
-			// 	//videolists[videolist].className ="lesson-list-container__lesson--video-list noDisplay";
-
-			// }
-
-			if(event.target.className == "lesson-list-container__lesson--title"){
-				var videoList = parent.getElementsByClassName("lesson-list-container__lesson--video-list ");
-				if(videoList[0].offsetHeight===0)
-					videoList[0].style.height = 51*videoList[0].getElementsByClassName('lesson-list-container__lesson--video-list__title').length+'px';
-				else
-					videoList[0].style.height = 0;
-			}
-
-		});
+		
 	},
 
 	
