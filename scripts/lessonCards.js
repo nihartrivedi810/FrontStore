@@ -1,35 +1,73 @@
-//var template = document.getElementById("template").cloneNode(true);
+var octopus = {
 
+	init : function () {
 
-var addId = function (node,val) {
-	//console.log (val);
-	var attr = node.getAttribute ("id");
-	if (attr) {
-		node.setAttribute("id" , attr+"_"+val);
+		view.init();
+	},
+
+	getData : function () {
+		var topics = JSON.parse(localStorage.topiclists),
+			idx = parseInt(localStorage.currentTopic);
+
+		return topics[idx].material;
+	},
+
+	setLesson : function (attr) {
+		localStorage.lesson = attr;
 	}
-	node.setAttribute ("data-id" , val);
+},
 
-	var children = node.children;
-	[].forEach.call(children,function (element) {
-		addId(element,val);
-	});
+view = {
+
+	init :function () {
+
+		var data = octopus.getData();
+
+		//TODO appropriate data
+		for (val in data) {
+			
+			var template = document.getElementById("template").cloneNode(true),
+				dom = document.getElementsByClassName("holder")[0],
+				contentName,
+				contentInfo;
+
+			this.addId (template, val);
+			dom.insertAdjacentHTML('beforeend' ,template.innerHTML );
+			
+			contentName = document.getElementById("content-name_"+val);
+			contentInfo = document.getElementById("content-info_"+val);
+			
+			contentName.innerHTML = val;
+			contentInfo.innerHTML = val;
+			this.addHandlers(val);
+		};
+	},
+
+	addId : function (node,val) {
+
+		var attr = node.getAttribute ("id"),
+			that = this,
+			children = node.children;
+
+		if (attr) {
+			node.setAttribute("id" , attr+"_"+val);
+		}
+		node.setAttribute ("data-id" , val);
+
+		[].forEach.call(children,function (element) {
+			that.addId(element,val);
+		});
+	},
+
+	addHandlers : function (val) {
+		var node = document.getElementById("card_"+val);
+		
+		node.onclick  = function (e) {
+			var attr = e.target.getAttribute("data-id");
+			octopus.setLesson (attr);
+		};
+	}
+
 };
 
-var data = JSON.parse(localStorage.topiclists);
-	data = data[parseInt(localStorage.currentTopic)].material;
-
-for (val in data) {
-	//console.log (val);
-	var template = document.getElementById("template").cloneNode(true);
-	addId (template, val);
-	var dom = document.getElementsByClassName("container")[0];
-	dom.insertAdjacentHTML('beforeend' ,template.innerHTML );
-	var contentName = document.getElementById("content-name_"+val);
-	contentName.innerHTML = val;
-
-	var contentInfo = document.getElementById("content-info_"+val);
-	contentInfo.innerHTML = val;
-	//console.log(template.innerHTML);
-};
-
-//console.log (template);
+octopus.init();
