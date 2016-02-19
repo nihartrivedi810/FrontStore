@@ -38,7 +38,6 @@ view = {
 		document.addEventListener("click",function(e){
 			var container = $("#lesson-list-container");
 			var container2 = $("#side-bar")
-			console.log(e.target,container.has(e.target) ,container2.has(e.target).length )
 			if (!container.is(e.target) && container.has(e.target).length === 0 && container2.has(e.target).length === 0) {
 				//console.log("dsfds",e.target.id,e.target);
 				sideBlk.style.transform = "translateX(-100%)"
@@ -59,13 +58,10 @@ view = {
 
 			if(event.target.className == "lesson-list-container__lesson--title"){
 				var videoList = parent.getElementsByClassName("lesson-list-container__lesson--video-list ");
-				if(videoList[0].className =="lesson-list-container__lesson--video-list noDisplay"){
-					videoList[0].className = "lesson-list-container__lesson--video-list";
-				}
-				else{
-					videoList[0].className = "lesson-list-container__lesson--video-list noDisplay";
-				}
-
+				if(videoList[0].offsetHeight===0)
+					videoList[0].style.height = 51*videoList[0].getElementsByClassName('lesson-list-container__lesson--video-list__title').length+'px';
+				else
+					videoList[0].style.height = 0;
 			}
 
 		});
