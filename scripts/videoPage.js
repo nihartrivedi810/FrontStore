@@ -1,20 +1,52 @@
-function buttonClick(){
+function changeView(){
 	var div = document.getElementById("content-styler");
 	if(div.className==="content-style-1")
 		div.className="content-style-2";
 	else
 		div.className="content-style-1";
 	resizeWindow();
+	hidemodal();
 }
 
 var resizeWindow = function () {
-	var first = document.getElementById("toolbar-top"),
-		second = document.getElementById("toolbar-editor"),
+	var toolbarTop = document.getElementById("toolbar-top"),
+		toolbarBottom = document.getElementById("toolbar-editor"),
 		container = document.getElementById("advance-wrapper"),
-		firstHeight = first.offsetHeight,
-		containerHeight = container.offsetHeight;
+		toolbarTopHeight = toolbarTop.offsetHeight,
+		containerHeight = toolbarBottom.offsetHeight;
 
-	second.setAttribute("style","height:"+(containerHeight - firstHeight -5) +"px");
+	toolbarBottom.setAttribute("style","height:"+(containerHeight - toolbarTopHeight -5) +"px");
 }
 
 resizeWindow();
+
+var jsbinmodal = function() {
+	// var modal = $(".modal-div").css('transform','scale(1)');
+	document.getElementsByClassName('modal-div')[0].style.transform='scale(1)';
+	document.getElementById('content-styler').style.opacity='0.2';
+}
+var hidemodal = function() {
+	document.getElementsByClassName('modal-div')[0].style.transform='scale(0)';
+	document.getElementById('content-styler').style.opacity='1';
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

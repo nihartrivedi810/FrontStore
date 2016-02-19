@@ -6,14 +6,19 @@
   <link href="styles/self.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="styles/quill.snow.css">
   <link rel="stylesheet" type="text/css" href="styles/advanced.css">
+  <link rel="stylesheet" type="text/css" href="styles/side-nav.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 </head>
 
 <body onresize="resizeWindow()">
-  <button onclick="buttonClick()">Code</button>
   <div class="headerBar">
+
+    <div id="side-bar" class="pr">
+      <button id="bar" ><i class="fa fa-bars fa-2x"></i></button>
+    </div>
     <div class="innerContent">
       <div class="innerContent__logo">
-        <img class="innerContent__logo--image" src="images/sprinklr_logo.png" alt="Sprinklr">
+        <img class="innerContent__logo--image" src="images/sexy_sprinlklr_logo.png" alt="Sprinklr">
       </div>
       <div class="innerContent__account drop">
         <p class="innerContent__account--profile-Name">
@@ -26,12 +31,44 @@
      </div>
    </div>
  </div>
-
- <div class="content-style-1" id="content-styler">
+ <div id="lesson-list-container">
+  <div class= "lesson-list-container__lesson" id="l1">
+    <li class="lesson-list-container__lesson--title">Lesson 1</li>
+    <div  class="lesson-list-container__lesson--video-list">
+      <div class="lesson-list-container__lesson--video-list__title">Video 1</div>
+      <div class="lesson-list-container__lesson--video-list__title">Video 2</div>
+      <div class="lesson-list-container__lesson--video-list__title">Video 3</div>
+    </div>
+  </div>  
+  <div class= "lesson-list-container__lesson">
+    <li class="lesson-list-container__lesson--title">Lesson 2</li>
+    <div  class="lesson-list-container__lesson--video-list">
+      <div class="lesson-list-container__lesson--video-list__title">Video 1</div>
+      <div class="lesson-list-container__lesson--video-list__title">Video 2</div>
+      <div class="lesson-list-container__lesson--video-list__title">Video 3</div>
+    </div>
+  </div>  
+  <div class= "lesson-list-container__lesson">
+    <li class="lesson-list-container__lesson--title">Lesson 3</li>
+    <div  class="lesson-list-container__lesson--video-list">
+      <div class="lesson-list-container__lesson--video-list__title">Video 1</div>
+      <div class="lesson-list-container__lesson--video-list__title">Video 2</div>
+      <div class="lesson-list-container__lesson--video-list__title">Video 3</div>
+    </div>
+  </div>  
+  <div class= "lesson-list-container__lesson">
+    <li class="lesson-list-container__lesson--title">Lesson 4</li>
+    <div  class="lesson-list-container__lesson--video-list">
+      <div class="lesson-list-container__lesson--video-list__title">Video 1</div>
+      <div class="lesson-list-container__lesson--video-list__title">Video 2</div>
+      <div class="lesson-list-container__lesson--video-list__title">Video 3</div>
+    </div>
+  </div>   
+</div>
+<div class="content-style-1" id="content-styler">
   <div class="content-pane-1">
     <div class="col-1 video">
-      <button type="button" class="previous">Previous</button>
-      <button type="button" class="next">Next</button>
+
     </div><!-- 
   --><div class="col-1 notes">
   <div class="content-container">
@@ -127,11 +164,10 @@
           <option value="center"></option>
           <option value="right"></option>
           <option value="justify"></option>
-        </select></span><span class="ql-format-group"><span title="Link" class="ql-format-button ql-link"></span><span class="ql-format-separator"></span><span title="Image" class="ql-format-button ql-image"></span><span class="ql-format-separator"></span><span title="List" class="ql-format-button ql-list"></span></span></div>
+        </select></span><span class="ql-format-group"><span title="Link" class="ql-format-button ql-link"></span><span class="ql-format-separator"></span><span title="Image" class="ql-format-button ql-image"></span><span class="ql-format-separator"></span><span title="List" class="ql-format-button ql-list"></span></span><span><button type="button" class="saveNotes">Save</button></span><button type="button" onclick="jsbinmodal()" class="embedBin">Embed Bin</button></span></div>
         <div class="editor-container" id = "toolbar-editor"></div>
       </div>
     </div>
-    <button type="button" class="save">Save</button>
   </div>
 </div><!-- 
 --><div class="content-pane-2 jsbin col-1">
@@ -142,6 +178,15 @@
 
 </div>
 </div>
+<div class="modal-div">
+  <div class="modal-container center">
+    <i class="fa fa-times fa-4x" onclick="hidemodal()"></i>
+    <div class="modal center">
+      <input class="modal-input center" type="text"/>
+      <button class="modal-btn center" onclick="changeView()">Embed!</button>
+    </div>
+  </div>
+</div>
 </body>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
 <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.js"></script>
@@ -150,4 +195,6 @@
 <!-- <script src="https://static.jsbin.com/js/embed.min.js?3.35.9"></script> -->
 <script type="text/javascript" src="scripts/videoText.js"></script>
 <script type="text/javascript" src="scripts/videoPage.js"></script>
+<script src="scripts/side-nav.js"></script>
+
 </html>

@@ -1,0 +1,153 @@
+*,
+*: before,
+*: after{
+    box-sizing: border-box;
+}
+
+.headerBar{
+    background-color: #0072BB;
+    height: 50px;
+}
+.header:after{
+    content: '';
+    display: table;
+    clear: both;
+}
+.innerContent{
+    width: 80%;
+    height: 100%;
+    position: relative;
+    left: 10%;
+}
+.innerContent__logo{
+    height: 100%;
+    float: left;
+    width: 20%
+}
+.innerContent__logo--image{
+    max-width: 100%;
+    max-height: 90%;
+    position: relative;
+    top:3%;
+}
+.innerContent__account{
+    height: 100%;
+    float: right;
+    width: 20%;
+    color: #FFF;
+    font-family: fantasy;
+    text-align: center;
+    
+}
+.innerContent__account--profile-Name{
+    width: 100%;
+    margin-bottom: 0px;
+    cursor: pointer;
+    margin-top: 0px;
+    height: 100%;
+    padding-top: 7%;
+    
+}
+
+.innerContent__account--profile-Name:hover{
+    background-color: #085DAD;
+}
+
+.drop-list{
+    display: none;
+    background-color: #0072BB;
+    width: 100%;
+    position: relative;
+    /* left: 30%; */
+    top: 1%;
+    /* text-align: center; */
+}
+
+.drop-list__element{
+    text-decoration: none;
+    color: #FFF;
+    display: block;
+}
+.drop-list__element:hover{
+    background-color: #085DAD;
+}
+.drop:hover .drop-list{
+    display: block;
+}
+.cards {
+	width :100%;
+	margin-top : 40px;
+	min-height: 70px;
+	margin-bottom: 40px;
+	border: 1px solid #dcdcdc;
+	border-radius: 2px;
+	background-color: #fff;
+	cursor: pointer;
+}
+
+.holder {
+	width: 50%;
+	margin: 0 auto;
+	vertical-align: middle;
+}
+
+.shadow:hover{
+	-moz-box-shadow:    2px 2px 2px 2px #ccc;
+	-webkit-box-shadow: 2px 2px 2px 2px #ccc;
+	box-shadow:         2px 2px 2px 2px #ccc;
+}
+
+.cards__content {
+	float: left;
+	width: 80%;
+	position: relative;
+	//top: 8px;
+
+}
+.content__name {
+	font-weight: 700;
+	font-size: 16px;
+	margin-bottom: 4px;
+	color: #666;
+}
+
+.content__info {
+	font-size: 12px;
+	color: #b3b3b3;
+	word-wrap: break-word;
+}
+
+.cards__play {
+	float: right;
+	top:50%;
+	right: 0;
+	position: absolute;
+}
+
+.fa{
+	color:#0072BB;
+	transform: translate(-50%,-50%);
+}
+
+.cards__holder {
+	padding: 10px;
+	width:100%;
+	position: relative;
+}
+
+.cards__holder::after {
+	content:" ";
+	height:0px;
+	visibility: none;
+	clear:both;
+	display: block;
+}
+
+.bg-clr {
+	background-color: #F3F3F3;
+    margin: 0px;
+}
+
+.template {
+	display: none;
+}
