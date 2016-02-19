@@ -99,7 +99,9 @@
 }
 
 /*header*/
-
+body{
+    margin: 0px;
+}
 .headerBar{
 	background-color: #0072BB;
 	height: 50px;
@@ -139,7 +141,7 @@
 	cursor: pointer;
 	margin-top: 0px;
 	height: 100%;
-	padding-top: 5%;
+	padding-top: 7%;
 
 }
 .innerContent__account--profile-Name:hover{
@@ -153,11 +155,13 @@
 	/* left: 30%; */
 	top: 1%;
 	/* text-align: center; */
+    cursor: pointer; 
 }
 .drop-list__element{
 	text-decoration: none;
 	color: #FFF;
 	display: block;
+    height: 23px;
 }
 .drop-list__element:hover{
 	background-color: #085DAD;
