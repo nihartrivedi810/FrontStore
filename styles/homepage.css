@@ -87,6 +87,7 @@ and open the template in the editor.
 .drop:hover .drop-list{
     display: block;
 }
+
 .content-container{
     background-color: #C6C8CA;
     height: 1000px;;
@@ -118,8 +119,8 @@ and open the template in the editor.
 .content-box__course-box__course-content{
     width: 100%;
     height: 100%;
-    -webkit-transform-style: preserve-3d;
-    -webkit-transition: 0.5s;
+    /*-webkit-transform-style: preserve-3d;
+    -webkit-transition: 0.5s;*/
     position: absolute;
     
 }
@@ -128,8 +129,8 @@ and open the template in the editor.
     height: 100%;
     
     position: absolute;
-    -webkit-backface-visibility: hidden ;
-    z-index: 2;
+    /*-webkit-backface-visibility: hidden ;
+    z-index: 2;*/
 }  
 
 .content-face__text{
@@ -148,7 +149,7 @@ and open the template in the editor.
     height: 10%;
     cursor: pointer;
     font-size: 14px;
-    background-color: #0072BB;
+    background-color: #217C7E;
     /* margin: 0px; */
     /* padding: 0px; */
     position: relative;
@@ -158,18 +159,34 @@ and open the template in the editor.
     /* top: -10%; */
     
 }
-.front-box{    
-    z-index: 1;
-    position: absolute;
+.content-box__course-box__course-content > .front-box{  
+    position:absolute;
+	transform: perspective( 600px ) rotateX( 0deg );
+	/*background:#FC0; width:240px; height:200px; border-radius: 7px;*/
+	backface-visibility: hidden;
+	transition: transform .5s linear 0s;
+    /*z-index: 1;
+    position: absolute;*/
     background-color: #FFD034;
     cursor: pointer;
 }
 
-.back-box{
-    -webkit-transform: rotatex(-180deg);
-    background-color: #FF4C3B
+.content-box__course-box__course-content > .back-box{
+    /*-webkit-transform: rotatex(-180deg);*/
+    background-color: #FF4C3B;
+    position:absolute;
+	transform: perspective( 600px ) rotateX( 180deg );
+	/*background: #80BFFF; width:240px; height:200px; border-radius: 7px;*/
+	backface-visibility: hidden;
+	transition: transform .5s linear 0s;
 }
 
+.content-box__course-box__course-content:hover > .front-box{
+	transform: perspective( 600px ) rotateX( -180deg );
+}
+.content-box__course-box__course-content:hover > .back-box{
+	transform: perspective( 600px ) rotateX( 0deg );
+}
 .course-image{
     width:80%;
     height: 80%;

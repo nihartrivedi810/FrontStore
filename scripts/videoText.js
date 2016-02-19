@@ -124,7 +124,7 @@ $(function(){
 		},
 		hasPreviousVideo: function() {
 			return model.hasPreviousVideo();
-		},
+		}
 	};
 
 
@@ -179,7 +179,7 @@ $(function(){
 				this.saveurl.show();
 			}
 			$('#youtube').remove();
-			this.videoTag.prepend('<embed  id="youtube" width="100%" height="400"src="http://www.youtube.com/embed/' + octopus.getCurrentVideo() + '"">')
+			this.videoTag.prepend('<embed  id="youtube" width="100%" height="100%"src="http://www.youtube.com/embed/1cZtdKNB9jo?list=PLAwxTw4SYaPmd5v7c9i883AwqVZquegHM">')
 			if(!octopus.hasNextVideo())
 			{
 				$(".next").hide();
