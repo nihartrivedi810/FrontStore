@@ -28,7 +28,7 @@ view = {
 		for (val in data) {
 			
 			var template = document.getElementById("template").cloneNode(true),
-				dom = document.getElementsByClassName("holder")[0],
+				dom = document.getElementsByClassName("container")[0],
 				contentName,
 				contentInfo;
 
