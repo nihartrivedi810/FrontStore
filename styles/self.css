@@ -100,10 +100,15 @@
 }
 
 /*header*/
+<<<<<<< HEAD
 .temp{
 	width:90%;
 	height:90%;
 	display: inline-block;
+=======
+body{
+    margin: 0px;
+>>>>>>> 87f01e919d421ee29d5d1eedb37660a65cc706ae
 }
 .headerBar{
 	background-color: #0072BB;
@@ -144,7 +149,7 @@
 	cursor: pointer;
 	margin-top: 0px;
 	height: 100%;
-	padding-top: 5%;
+	padding-top: 7%;
 
 }
 .innerContent__account--profile-Name:hover{
@@ -158,11 +163,13 @@
 	/* left: 30%; */
 	top: 1%;
 	/* text-align: center; */
+    cursor: pointer; 
 }
 .drop-list__element{
 	text-decoration: none;
 	color: #FFF;
 	display: block;
+    height: 23px;
 }
 .drop-list__element:hover{
 	background-color: #085DAD;

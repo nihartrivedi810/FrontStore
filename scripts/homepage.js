@@ -23,6 +23,11 @@ $(function(){
 			}
 			return a;
 		},
+		topicClicked: function(topicID)
+		{
+			localStorage.currentTopic=topicID;
+			$(location).attr('href', 'lessonCards.html');
+		}
 
 	};
 
@@ -34,6 +39,9 @@ $(function(){
 		init : function() {
 			model.init();
 			view.init();
+		},
+		topicClicked : function(topicID) {
+			model.topicClicked(topicID);
 		}
 	};
 
@@ -57,6 +65,13 @@ $(function(){
                         '</div>'+
                     '</div>'+
                 '</div>');
+                $('#'+i).on('click',(function(topicID)
+                {
+                	return function()
+                	{
+                		octopus.topicClicked(topicID);	
+                	}
+                })(i));
 			}
 		}
 	};
