@@ -26,7 +26,9 @@
 }
 .innerContent__logo--image{
     max-width: 100%;
-    max-height: 100%;
+    max-height: 90%;
+    position: relative;
+    top:3%;
 }
 .innerContent__account{
     height: 100%;
