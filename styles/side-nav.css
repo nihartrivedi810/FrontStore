@@ -18,10 +18,12 @@ text-rendering: optimizelegibility;
 }
 
 #side-bar{
+	position: absolute;
 	height: auto;
 	width:50px;
 	top:10px;
 	left:10px;
+	display: inline-block;
 }
 
 #side-bar:hover > #lesson-list-container{
