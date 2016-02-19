@@ -57,6 +57,7 @@
 .content-style-2 .video{
 	width: 100%;
 	height: 50%;
+	
 }
 .content-style-2 .notes{
 	/*display: inline-block;*/
@@ -99,7 +100,11 @@
 }
 
 /*header*/
-
+.temp{
+	width:90%;
+	height:90%;
+	display: inline-block;
+}
 .headerBar{
 	background-color: #0072BB;
 	height: 50px;

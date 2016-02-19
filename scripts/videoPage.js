@@ -13,7 +13,7 @@ var resizeWindow = function () {
 		toolbarBottom = document.getElementById("toolbar-editor"),
 		container = document.getElementById("advance-wrapper"),
 		toolbarTopHeight = toolbarTop.offsetHeight,
-		containerHeight = toolbarBottom.offsetHeight;
+		containerHeight = container.offsetHeight;
 
 	toolbarBottom.setAttribute("style","height:"+(containerHeight - toolbarTopHeight -5) +"px");
 }
