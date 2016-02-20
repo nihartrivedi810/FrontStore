@@ -8,6 +8,7 @@ var JavascriptAdvanced=['HlEgVe1EZSY','TXJB8QymWkY','I6GtlbTTK1c','Jfprj0kO7Uk',
 var complete=[{"topic":"HTML And CSS", "material":{"Intro to HTML and CSS - Basics":HTMLBeginner,"Intro to HTML and CSS - Intermediate":HTMLIntermediate,"Intro to HTML and CSS - Advanced":HTMLAdvanced}, "description":"This Course contains all essential information about HTML And CSS.","img":"HTML5.png"},{"topic":"JavaScript", "material":{"JavaScript Basics":JavascriptBeginner,"Object Oriented Programing in JavaScript":JavascriptAdvanced},"description":"This Course contains all essential information about JavaScript.","img":"Javascript.png"}];
 
 $(function(){
+
 	var model = {
 		init: function() {
 			if (!localStorage.topiclists) {

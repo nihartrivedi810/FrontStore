@@ -32,7 +32,7 @@ view = {
 				contentName,
 				contentInfo;
 
-			this.addId (template, val);
+			this.addId(template, val);
 			dom.insertAdjacentHTML('beforeend' ,template.innerHTML );
 			
 			contentName = document.getElementById("content-name_"+val);

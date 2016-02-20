@@ -264,13 +264,12 @@
 	background-color:#C6C9CA;
 }
 .modal-input {
-	height: 30px;
-	width: 300px;
-	border-radius: 5px;
-	outline: none;
-	border: none;
-	font-size: 18px;
-	padding: 0 5px;
+  height: 30px;
+  width: 300px;
+  border-radius: 5px;
+  outline: none;
+   border: none;
+  padding: 0 5px;
 }
 .fa-times {
 	right: 0;

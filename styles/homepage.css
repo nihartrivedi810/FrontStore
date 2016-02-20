@@ -91,14 +91,13 @@ and open the template in the editor.
 }
 
 .content-container{
-    background-color: #F3F3F3;
-    height: 1000px;
+    background-image: url("../images/background_homepage.jpg");
+    background-repeat: no-repeat;
+    height: 1000px;;
 }
 .content-box{
-    background-color: #FFFFFF;
     display: inline-flex;
     width: 60%;
-    height: 60%;
     position: relative;
     left: 20%;
     top:20%;
