@@ -222,6 +222,13 @@
 	cursor: pointer;
 
 }
+.saveNotes-grey{
+	background-color: #ececec;
+	color: #fff;
+	padding: 2px;
+	width: 50px;
+	height: 25px;
+}
 .modal-div {
 	width:100%;
 	height: 100%;
