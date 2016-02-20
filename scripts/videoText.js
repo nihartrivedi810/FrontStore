@@ -4,6 +4,7 @@ $(function(){
 	var videoList;
 	var currentVideo=0;
 	var model = {
+		setContentsCalled :false,
 		init: function() {
 			var topiclists=JSON.parse(localStorage.topiclists);
 			var topic = parseInt(localStorage.currentTopic);
@@ -105,6 +106,14 @@ $(function(){
 		},
 		getCurrentLessonName: function(){
 			return model.getCurrentLessonName();
+		},
+		isSetContentsCalled: function(){
+			return model.setContentsCalled;
+		},
+		setContentsCalled: function(val){
+			console.log("sadasd");
+			model.setContentsCalled = val;
+			console.log(model.setContentsCalled);
 		}
 	};
 
@@ -118,6 +127,8 @@ $(function(){
 			$("#saveNotes").on('click',function(){
 				a=advancedEditor.getContents();
 				octopus.addNewNote(a);
+				$("#saveNotes").attr('class','saveNotes-grey');
+				$("#saveNotes").attr('disabled','true');
 			});
 			$("#saveUrl").on('click',function(){
 				var t2=$("#jsbinUrl").val();
@@ -139,6 +150,13 @@ $(function(){
 					console.log("List item ", e.target.id.replace("post-"), " was clicked!");
 				}
 			});
+			advancedEditor.on("text-change",function(delta){
+				if(!octopus.isSetContentsCalled()){
+					$("#saveNotes").removeAttr('disabled');
+					$("#saveNotes").attr('class','saveNotes');
+				}
+				octopus.setContentsCalled(false);
+			});
 			view.render();
 		},
 		render: function(){
@@ -146,11 +164,13 @@ $(function(){
 			var a=octopus.getNotesOfCurrentVideo();
 			if(a)
 			{
+				octopus.setContentsCalled(true);
 				advancedEditor.setContents(a);
 			}
 			else
 			{
 				a=[];
+				octopus.setContentsCalled(true);
 				advancedEditor.setContents(a);
 			}
 			var b=octopus.getjsbinOfCurrentVideo();
