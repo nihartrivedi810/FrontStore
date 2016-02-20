@@ -63,7 +63,7 @@
 
 .content-style-2 .video{
 	margin-top: 20px;
-	}
+}
 
 .content-style-2 .notesContain{
 	/*display: inline-block;*/
@@ -82,14 +82,14 @@
 }
 .video{
 	margin:auto;
-	margin-top: 10%;
+	margin-top: 3%;
 	width:95%;
 	height: 90%;
 }
 
 .notes{
 	margin:auto;
-	margin-top: 10%;
+	margin-top: 3%;
 	width:95%;
 	height: 90%;
 }
@@ -118,6 +118,7 @@
 	height: 90vh;
 }
 .content-style-2 .content-pane-2{
+	margin-top: 20px;
 	border: 1px solid;
 	vertical-align: top;
 	display: inline-block;
@@ -153,8 +154,8 @@
 .innerContent__logo--image{
 	max-width: 100%;
 	max-height: 90%;
-    position: relative;
-    top:3%;
+	position: relative;
+	top:3%;
 }
 .innerContent__account{
 	height: 100%;
@@ -190,8 +191,8 @@
 	text-decoration: none;
 	color: #FFF;
 	display: block;
-    height: 23px;
-    padding-top: 1%;
+	height: 23px;
+	padding-top: 1%;
 }
 .drop-list__element:hover{
 	background-color: #085DAD;
@@ -231,45 +232,45 @@
 	transition: transform 0.2s ease-in;
 }
 .modal-container {
-  height: 500px;
-  width: 500px;
-  background-color: #0072BB;
-  border-radius: 50%;
+	height: 500px;
+	width: 500px;
+	background-color: #0072BB;
+	border-radius: 50%;
 }
 .center {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 .modal {
-  height: 100px;
-  width: 300px;
-/*   background-color:#FFD034; */
+	height: 100px;
+	width: 300px;
+	/*   background-color:#FFD034; */
 }
 .modal-btn {
-  display: block;
-  height: 35px;
-  width: 100px;
-  transform: translate(-50%, 150%);
-  border-radius: 5px;
-  background-color: #000000;
-  border: none;
-  color: white;
-  outline: none;
+	display: block;
+	height: 35px;
+	width: 100px;
+	transform: translate(-50%, 150%);
+	border-radius: 5px;
+	background-color: #000000;
+	border: none;
+	color: white;
+	outline: none;
 }
 .modal-btn:hover{
-  cursor: pointer;
-  background-color:#C6C9CA;
+	cursor: pointer;
+	background-color:#C6C9CA;
 }
 .modal-input {
-  height: 30px;
-  width: 300px;
-  border-radius: 5px;
-  outline: none;
-   border: none;
-  font-size: 18px;
-  padding: 0 5px;
+	height: 30px;
+	width: 300px;
+	border-radius: 5px;
+	outline: none;
+	border: none;
+	font-size: 18px;
+	padding: 0 5px;
 }
 .fa-times {
 	right: 0;
@@ -285,4 +286,13 @@
 	margin-left: 5px;
 }
 
-
+.lesson-name{
+	padding-bottom: 5px;
+	font-size: 28px;
+	margin-top: 20px;
+	border-bottom: 1px solid #ececec;
+}
+.lesson-name-container{
+	padding-left: 18px;
+	padding-right: 18px;
+}
