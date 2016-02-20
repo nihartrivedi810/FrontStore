@@ -8,6 +8,7 @@ var JavascriptAdvanced=['HlEgVe1EZSY','TXJB8QymWkY','I6GtlbTTK1c','Jfprj0kO7Uk',
 var complete=[{"topic":"HTML And CSS", "material":{"Beginner":HTMLBeginner,"Intermediate":HTMLIntermediate,"Advanced":HTMLAdvanced}},{"topic":"JavaScript", "material":{"Beginner":JavascriptBeginner,"Advanced":JavascriptAdvanced}}];
 
 $(function(){
+
 	var model = {
 		init: function() {
 			if (!localStorage.topiclists) {

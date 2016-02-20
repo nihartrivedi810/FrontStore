@@ -8,6 +8,9 @@ $(function(){
 			var topiclists=JSON.parse(localStorage.topiclists);
 			var topic = parseInt(localStorage.currentTopic);
 			videoList=topiclists[topic].material[localStorage.lesson];
+			if (!localStorage.notes) {
+				localStorage.notes = "{}";
+			}
 		},
 		addNewNote: function(obj) {
 			var data =JSON.parse(localStorage.notes);
@@ -70,6 +73,10 @@ $(function(){
 
 
 	var octopus = {
+		init: function() {
+			model.init();
+			view.init();
+		},
 		addNewNote: function(noteStr) {
 			model.addNewNote(noteStr);
 		},
@@ -83,10 +90,7 @@ $(function(){
 		getjsbinOfCurrentVideo: function() {
 			return model.getjsbinOfCurrentVideo();
 		},
-		init: function() {
-			model.init();
-			view.init();
-		},
+	
 		getCurrentVideo: function() {
 			return model.getCurrentVideo();
 		},
