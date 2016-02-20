@@ -70,6 +70,9 @@ $(function(){
 		changeCurrentVideo: function(newVideo) {
 			currentVideo=newVideo;
 		},
+		getCurrentLessonName: function(){
+			return localStorage.lesson;
+		}
 	};
 
 
@@ -102,13 +105,18 @@ $(function(){
 			model.changeCurrentVideo(newVideo);
 			view.render();
 		},
+		getCurrentLessonName: function(){
+			return model.getCurrentLessonName();
+		}
 	};
 
 
 	var view = {
 		init: function() {
+			var lessonName = $("#lesson-name");
 			this.videoTag=$(".video");
 			this.jsbintag=$(".jsbin");
+			lessonName.html(octopus.getCurrentLessonName());
 			$("#saveNotes").on('click',function(){
 				a=advancedEditor.getContents();
 				octopus.addNewNote(a);
