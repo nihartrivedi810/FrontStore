@@ -9,7 +9,8 @@ $(function(){
 			var topic = parseInt(localStorage.currentTopic);
 			videoList=topiclists[topic].material[localStorage.lesson];
 			if (!localStorage.notes) {
-				localStorage.notes = "{}";
+				
+				localStorage.notes = JSON.stringify({});
 			}
 		},
 		addNewNote: function(obj) {
@@ -158,6 +159,7 @@ $(function(){
 			}
 			$('#youtube').remove();
 			var curVideo=octopus.getCurrentVideo();
+			console.log(curVideo);
 			this.videoTag.prepend('<embed  id="youtube" width="100%" height="100%"src="https://www.youtube.com/embed/'+ curVideo+'" frameborder="0" allowfullscreen">');
 		}
 	};
