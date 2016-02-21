@@ -65,6 +65,9 @@ $(function(){
 		getCurrentVideo: function() {
 			return videoList[currentVideo];
 		},
+		getCurrentVideoId: function() {
+			return currentVideo;
+		},
 		getAllVideos: function() {
 			return videoList;
 		},
@@ -81,6 +84,10 @@ $(function(){
 		init: function() {
 			model.init();
 			view.init();
+			sidePanelView.init();
+		},
+		getCurrentVideoId: function() {
+			return model.getCurrentVideoId();
 		},
 		addNewNote: function(noteStr) {
 			model.addNewNote(noteStr);
@@ -105,6 +112,7 @@ $(function(){
 		changeCurrentVideo: function(newVideo) {
 			model.changeCurrentVideo(newVideo);
 			view.render();
+			sidePanelView.render();
 		},
 		getCurrentLessonName: function(){
 			return model.getCurrentLessonName();
@@ -118,7 +126,30 @@ $(function(){
 			console.log(model.setContentsCalled);
 		}
 	};
+	var sidePanelView = {
+		init : function() {
+			var videos=octopus.getAllVideos();
+			var parent=$("#l1");
+			for(var i in videos)
+			{
+				parent.append('<li id="'+ i +'"class="lesson-list-container__lesson--title">Video'+ (parseInt(i)+1) +'</li>');
+			}
+			$("#l1").on("click", function(e) {
+				if(e.target && e.target.nodeName == "LI") {
+					octopus.changeCurrentVideo(e.target.id);
+					console.log("List item ", e.target.id.replace("post-"), " was clicked!");
+				}
+			});
+			this.render();
+		},
+		render : function() {
+			var currentVideo=octopus.getCurrentVideoId();
+			$('.active').removeClass('active');
+			$("#"+currentVideo).addClass('active');
+			
 
+		} 
+	}; 
 
 	var view = {
 		init: function() {
@@ -135,22 +166,6 @@ $(function(){
 			$("#saveUrl").on('click',function(){
 				var t2=$("#jsbinUrl").val();
 				octopus.addNewjsbin(t2);
-			});
-			var videos=octopus.getAllVideos();
-			var parent=$("#l1");
-			for(var i in videos)
-			{
-				parent.append('<li id="'+ i +'"class="lesson-list-container__lesson--title">Video'+ (parseInt(i)+1) +'</li>');
-			}
-			document.getElementById("l1").addEventListener("click", function(e) {
-				// e.target is the clicked element!
-				// If it was a list item
-				if(e.target && e.target.nodeName == "LI") {
-					// List item found!  Output the ID!
-					// alert(e.target.id);
-					octopus.changeCurrentVideo(e.target.id);
-					console.log("List item ", e.target.id.replace("post-"), " was clicked!");
-				}
 			});
 			advancedEditor.on("text-change",function(delta){
 				if(!octopus.isSetContentsCalled()){
