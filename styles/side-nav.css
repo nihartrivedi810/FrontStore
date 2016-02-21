@@ -60,7 +60,10 @@ text-rendering: optimizelegibility;
 	color:#ffd034;
 	border-bottom: 3px solid #f3f3f3; 
 }
-
+.active{
+	background-color: rgba(255,208,52, 0.8); 
+	color:#ffffff;
+}
 .lesson-list-container__lesson--video-list__title{
 	
 
