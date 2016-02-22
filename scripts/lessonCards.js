@@ -1,8 +1,9 @@
 var octopus = {
 
 	init : function () {
-		if(!localStorageGet('topiclists')||!localStorageGet('currentTopic'))
+		if(!localStorageGet('topiclists')||(localStorageGet('currentTopic')==='false'))
 			{
+				console.log("asdsadas");
 				$(location).attr('href', 'homepage.html');
 			}
 		view.init();

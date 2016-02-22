@@ -6,7 +6,7 @@ $(function(){
 	var model = {
 		setContentsCalled :false,
 		init: function() {
-			if(!localStorageGet('lesson'))
+			if(!localStorageGet('topiclists')||(localStorageGet('currentTopic')==='false')||!localStorageGet('lesson'))
 			{
 				$(location).attr('href', 'homepage.html');
 			}
