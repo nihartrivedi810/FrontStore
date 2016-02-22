@@ -6,17 +6,20 @@ $(function(){
 	var model = {
 		setContentsCalled :false,
 		init: function() {
-			var topiclists=JSON.parse(localStorage.topiclists);
-			var topic = parseInt(localStorage.currentTopic);
-			model.topicName = topiclists[topic]["topic"];
-			videoList=topiclists[topic].material[localStorage.lesson];
-			if (!localStorage.notes) {
-				
-				localStorage.notes = JSON.stringify({});
+			if(!localStorageGet('lesson'))
+			{
+				$(location).attr('href', 'homepage.html');
+			}
+			var topiclists=localStorageGet('topiclists');
+			var topic = parseInt(localStorageGet('currentTopic'));
+			model.topicName = topiclists[topic];
+			videoList=topiclists[topic].material[localStorageGet('lesson')];
+			if (!localStorageGet('notes')) {
+				localStorageSet('notes',{});
 			}
 		},
 		addNewNote: function(obj) {
-			var data =JSON.parse(localStorage.notes);
+			var data =localStorageGet('notes');
 			if(data[videoList[currentVideo]])
 			{
 				data[videoList[currentVideo]].notes=obj;
@@ -25,11 +28,11 @@ $(function(){
 			{
 				data[videoList[currentVideo]]={ notes: obj};	
 			}
-			localStorage.notes = JSON.stringify(data);
+			localStorageSet('notes',data);
 			
 		},
 		addNewjsbin: function(jsbinURL) {
-			var data =JSON.parse(localStorage.notes);
+			var data =localStorageGet('notes');
 			if(data[videoList[currentVideo]])
 			{
 				data[videoList[currentVideo]].jsbin=jsbinURL;
@@ -38,10 +41,10 @@ $(function(){
 			{
 				data[videoList[currentVideo]]={ jsbin: jsbinURL};	
 			}
-			localStorage.notes = JSON.stringify(data);
+			localStorageSet('notes',data);
 		},
 		getNotesOfCurrentVideo: function() {
-			var data=JSON.parse(localStorage.notes);
+			var data=localStorageGet('notes');
 			if(data[videoList[currentVideo]])
 			{
 				return data[videoList[currentVideo]].notes;	
@@ -52,7 +55,7 @@ $(function(){
 			}
 		},
 		getjsbinOfCurrentVideo: function() {
-			var data=JSON.parse(localStorage.notes);
+			var data=localStorageGet('notes');;
 			if(data[videoList[currentVideo]])
 			{
 				return data[videoList[currentVideo]].jsbin;	
@@ -76,7 +79,7 @@ $(function(){
 			currentVideo=newVideo;
 		},
 		getCurrentLessonName: function(){
-			return localStorage.lesson;
+			return localStorageGet('lesson');;
 		},
 		getCurrentTopicName: function(){
 			return model.topicName;

@@ -1,19 +1,22 @@
 var octopus = {
 
 	init : function () {
-
+		if(!localStorageGet('topiclists')||!localStorageGet('currentTopic'))
+			{
+				$(location).attr('href', 'homepage.html');
+			}
 		view.init();
 	},
 
 	getData : function () {
-		var topics = JSON.parse(localStorage.topiclists),
-			idx = parseInt(localStorage.currentTopic);
+		var topics = localStorageGet('topiclists'),
+			idx = parseInt(localStorageGet('currentTopic'));
 
 		return topics[idx].material;
 	},
 
 	setLesson : function (attr) {
-		localStorage.lesson = attr;
+		localStorageSet('lesson',attr);
 		$(location).attr('href', 'index.html');
 	}
 },
