@@ -272,12 +272,12 @@
 	background-color:#C6C9CA;
 }
 .modal-input {
-  height: 30px;
-  width: 300px;
-  border-radius: 5px;
-  outline: none;
-   border: none;
-  padding: 0 5px;
+	height: 30px;
+	width: 300px;
+	border-radius: 5px;
+	outline: none;
+	border: none;
+	padding: 0 5px;
 }
 .fa-times {
 	right: 0;
@@ -294,12 +294,31 @@
 }
 
 .lesson-name{
+	display: inline-block;
 	padding-bottom: 5px;
 	font-size: 28px;
 	margin-top: 20px;
 	border-bottom: 1px solid #ececec;
 }
-.lesson-name-container{
+.topic-name{
+	display: inline-block;
+	padding-bottom: 5px;
+	font-size: 28px;
+	margin-top: 20px;
+	border-bottom: 1px solid #ececec;
+	font-size: 20px;
+	color: #337ab7;
+}
+.breadcrumb{
+
 	padding-left: 18px;
 	padding-right: 18px;
+	display: inline-block;
+}
+.breadcrumb--anchor{
+	text-decoration: none;
+}
+.fa-home{
+	font-size: 20px;
+	color: #337ab7;
 }
