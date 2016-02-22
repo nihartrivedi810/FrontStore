@@ -124,7 +124,7 @@
 	position: absolute;
 }
 
-.fa{
+.play-icon{
 	color:#0072BB;
 	transform: translate(-50%,-50%);
 }
@@ -150,4 +150,22 @@
 
 .template {
 	display: none;
+}
+.topic-name{
+    display: inline-block;
+    padding-bottom: 5px;
+    margin-top: 20px;
+    font-size: 20px;
+}
+.breadcrumb{
+    border-bottom: 1px solid #ececec;
+    padding-left: 18px;
+    padding-right: 18px;
+}
+.breadcrumb--anchor{
+    text-decoration: none;
+}
+.fa-home{
+    font-size: 20px;
+    color: #337ab7;
 }
