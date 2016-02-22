@@ -150,7 +150,6 @@ $(function(){
 
 		} 
 	}; 
-
 	var view = {
 		init: function() {
 			var lessonName = $("#lesson-name");

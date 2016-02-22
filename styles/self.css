@@ -299,6 +299,7 @@
 	border-bottom: 1px solid #ececec;
 }
 .lesson-name-container{
+	display: inline-block;
 	padding-left: 18px;
 	padding-right: 18px;
 }
