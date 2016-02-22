@@ -309,8 +309,10 @@
 	color: #337ab7;
 }
 .breadcrumb{
+
 	padding-left: 18px;
 	padding-right: 18px;
+	display: inline-block;
 }
 .breadcrumb--anchor{
 	text-decoration: none;
