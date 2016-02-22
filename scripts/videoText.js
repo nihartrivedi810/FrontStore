@@ -162,11 +162,11 @@ $(function(){
 			this.jsbintag=$(".jsbin");
 			lessonName.html(octopus.getCurrentLessonName());
 			topicName.html(octopus.getCurrentTopicName());
-			$("#saveNotes").on('click',function(){
+			$("#save-notes").on('click',function(){
 				a=advancedEditor.getContents();
 				octopus.addNewNote(a);
-				$("#saveNotes").attr('class','saveNotes-grey');
-				$("#saveNotes").attr('disabled','true');
+				$("#save-notes").attr('class','save-notes-btn--grey');
+				$("#save-notes").attr('disabled','true');
 			});
 			$("#saveUrl").on('click',function(){
 				var t2=$("#jsbinUrl").val();
@@ -174,8 +174,8 @@ $(function(){
 			});
 			advancedEditor.on("text-change",function(delta){
 				if(!octopus.isSetContentsCalled()){
-					$("#saveNotes").removeAttr('disabled');
-					$("#saveNotes").attr('class','saveNotes');
+					$("#save-notes").removeAttr('disabled');
+					$("#save-notes").attr('class','save-notes-btn');
 				}
 				octopus.setContentsCalled(false);
 			});
