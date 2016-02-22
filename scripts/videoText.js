@@ -8,6 +8,7 @@ $(function(){
 		init: function() {
 			var topiclists=JSON.parse(localStorage.topiclists);
 			var topic = parseInt(localStorage.currentTopic);
+			model.topicName = topiclists[topic]["topic"];
 			videoList=topiclists[topic].material[localStorage.lesson];
 			if (!localStorage.notes) {
 				
@@ -76,6 +77,9 @@ $(function(){
 		},
 		getCurrentLessonName: function(){
 			return localStorage.lesson;
+		},
+		getCurrentTopicName: function(){
+			return model.topicName;
 		}
 	};
 
@@ -117,13 +121,14 @@ $(function(){
 		getCurrentLessonName: function(){
 			return model.getCurrentLessonName();
 		},
+		getCurrentTopicName: function(){
+			return model.getCurrentTopicName();
+		},
 		isSetContentsCalled: function(){
 			return model.setContentsCalled;
 		},
 		setContentsCalled: function(val){
-			console.log("sadasd");
 			model.setContentsCalled = val;
-			console.log(model.setContentsCalled);
 		}
 	};
 	var sidePanelView = {
@@ -152,10 +157,11 @@ $(function(){
 	}; 
 	var view = {
 		init: function() {
-			var lessonName = $("#lesson-name");
+			var lessonName = $("#lesson-name"), topicName = $("#topic-name");
 			this.videoTag=$(".video");
 			this.jsbintag=$(".jsbin");
 			lessonName.html(octopus.getCurrentLessonName());
+			topicName.html(octopus.getCurrentTopicName());
 			$("#saveNotes").on('click',function(){
 				a=advancedEditor.getContents();
 				octopus.addNewNote(a);
@@ -201,7 +207,6 @@ $(function(){
 			}
 			$('#youtube').remove();
 			var curVideo=octopus.getCurrentVideo();
-			console.log(curVideo);
 			this.videoTag.prepend('<embed  id="youtube" width="100%" height="100%"src="https://www.youtube.com/embed/'+ curVideo+'" frameborder="0" allowfullscreen">');
 		}
 	};

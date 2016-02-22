@@ -1,0 +1,251 @@
+*,
+*:before,
+*:after{
+    box-sizing: border-box;
+}
+@font-face{
+    font-family: squareFont;
+    src: url('fonts/squarefont/Square.ttf');
+}
+.body{
+    margin: 0px;
+}
+/* HEADER */
+.headerBar{
+    background-color: #0072BB;
+    height: 50px;
+}
+.header:after{
+    content: '';
+    display: table;
+    clear: both;
+}
+.innerContent{
+    width: 80%;
+    height: 100%;
+    position: relative;
+    left: 10%;
+}
+.innerContent__logo{
+    height: 100%;
+    float: left;
+    width: 20%
+}
+.innerContent__logo--image{
+    max-width: 100%;
+    max-height: 90%;
+    position: relative;
+    top: 3%;
+}
+.innerContent__account{
+    height: 100%;
+    float: right;
+    width: 20%;
+    color: #FFF;
+    font-family: fantasy;
+    text-align: center;
+    
+}
+.innerContent__account--profile-Name{
+    width: 100%;
+    margin-bottom: 0px;
+    cursor: pointer;
+    margin-top: 0px;
+    height: 100%;
+    padding-top: 5%;
+    
+}
+
+.innerContent__account--profile-Name:hover{
+    background-color: #085DAD;
+}
+
+.drop-list{
+    display: none;
+    background-color: #0072BB;
+    width: 100%;
+    position: relative;
+    /* left: 30%; */
+    top: 1%;
+    /* text-align: center; */
+}
+
+.drop-list__element{
+    text-decoration: none;
+    color: #FFF;
+    display: block;
+}
+.drop-list__element:hover{
+    background-color: #085DAD;
+}
+.drop:hover .drop-list{
+    display: block;
+}
+
+/* HEADER ENDS*/
+/* MAIN BODY */
+
+.container{
+    width: 100%;
+    height: 1000px;
+    background-color: #C6C8CA;
+    overflow: auto;
+}
+
+.title-box{
+    width: 60%;
+    height: 10%;
+    background-color: #FF4C3B;
+    position: relative;
+    left: 20%;
+    border-radius: 30px;
+    margin-top: 5%;
+}
+
+.title-box__content{
+    width: 30%;
+    margin: 0px;
+    position: relative;
+    left: 35%;
+    top: 30%;
+    text-align: center;
+    font-size: x-large;
+    font-family: cursive;
+    font-weight: bolder;
+}
+
+.content-box{
+    width: 60%;
+    height: 50%;
+    border-radius: 80px;
+    background-color: #FFFFFF;
+    position: relative;
+    top: 5%;
+    left: 20%;
+    //overflow: auto;
+}
+
+.content-box .inner-content{
+    background-color: bisque;
+    /* vertical-align: middle; */
+    overflow: auto;
+    height: 80%;
+    width: 80%;
+    position: relative;
+    left: 10%;
+    top: 10%;
+    
+}
+
+.inner-content .course-add{
+    float: right;
+    font-family: cursive;
+    background-color: aliceblue;
+}
+
+.inner-content__course-card{
+    width: 80%;
+    height: auto;
+}
+.inner-content__course-card__course{
+    width: 100%;
+    background-color: aquamarine;
+    height: 50px;
+    margin: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.inner-content__course-card__course--textbox{
+    max-width: 80%;
+    /*background-color: #fff;*/
+    overflow-y: scroll;
+    overflow-x: scroll;
+    max-height: 36%;
+    margin: 1%;
+}
+
+.inner-content__course-card__course--button{
+    float: right;
+    position: absolute;
+    /* bottom: 30px; */
+    right: 19%;
+}
+
+.inner-content__course-card__lessons{
+    /*background-color: red;*/
+    position: relative;
+    width: 90%;
+    left: 65px;
+    
+}
+.lesson__add{
+    float: right;
+    position: relative;
+    left: 26%;
+    background-color: darkcyan;
+    font-family: cursive;
+}
+#clicked{
+    display: none;
+    
+}
+.lesson-name{
+    width: 100%;
+    background-color: brown;
+    height: 50px;
+    margin: 10px;
+    border-radius: 10px;
+}
+
+.lesson-name--textbox{
+    max-width: 80%;
+    /*background-color: #fff;*/
+    overflow-y: scroll;
+    overflow-x: scroll;
+    max-height: 36%;
+    margin: 1%;
+}
+
+.lesson-name--button{
+    float: right;
+    position: absolute;
+    /* bottom: 30px; */
+    right: -1.5%;
+}
+
+.lesson-wrapper{
+    width: 100%;
+    height: auto;
+}
+.video-add{
+    float: right;
+    position: relative;
+    left: 26%;
+    background-color: turquoise;
+    font-family: cursive;
+}
+.lesson-wrapper__videos{
+    width: 80%;
+    background-color: magenta;
+    height: 50px;
+    margin: 10px;
+    border-radius: 10px;
+    position: relative;
+    left: 23%;
+}
+
+.lesson-wrapper__videos--textbox{
+    max-width: 80%;
+    /*background-color: #fff;*/
+    overflow-y: scroll;
+    overflow-x: scroll;
+    max-height: 36%;
+    margin: 1%;
+}
+
+.lesson-wrapper__videos--button{
+    float: right;
+    position: absolute;
+    /* bottom: 30px; */
+    right: 0.5%;
+}

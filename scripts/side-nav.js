@@ -18,7 +18,6 @@ view = {
 		mainDiv.addEventListener("click",function(e){
 			if(e.target.id != 'bar')
 			{
-				console.log(e.target.id);
 				sideBlk.style.transform = "translateX(-100%)";
 				optSign.style.visibility = "visible";
 				document.getElementById('content-styler').style.opacity=1;
