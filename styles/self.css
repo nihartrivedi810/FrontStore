@@ -297,7 +297,6 @@
 	padding-bottom: 5px;
 	font-size: 28px;
 	margin-top: 20px;
-	border-bottom: 1px solid #ececec;
 }
 .topic-name{
 	display: inline-block;
@@ -311,6 +310,7 @@
 	border-bottom: 1px solid #ececec;
 	padding-left: 18px;
 	padding-right: 18px;
+	display: inline-block;
 }
 .breadcrumb--anchor{
 	text-decoration: none;
