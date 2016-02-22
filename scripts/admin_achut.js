@@ -42,11 +42,9 @@ hideAllForms();
 var jList = document.getElementById("list");
 
 
-var boo = function (dom, holder) {
-	var holderNode = document.createElement("div"); //
-	
-	dom.setAttribute("data-shown", "true"); // 
-	holderNode.setAttribute("id" , holder); //
+var createDomHolder = function (dom, holder) {
+	var holderNode = document.createElement("div");
+	holderNode.setAttribute("id" , holder);
 	return holderNode;
 }
 
@@ -59,17 +57,20 @@ var hideDom = function (dom) {
 jList.onclick = function (event) {
 	var dom = event.target;
 
-	console.log (event.target.parentNode);
+	console.log (dom);
 	
 	var contentAttr = dom.getAttribute('data-content');
 	if (contentAttr == "course") {
 
 		var displayAttr = dom.getAttribute ("data-shown");
-		var jDiv = boo (dom,"lesson-holder");
+		var jDiv = createDomHolder (dom,"lesson-holder");
 		var idx = parseInt(dom.getAttribute("data-index"));
 		var lessons = data[idx].material;
 
 		if (displayAttr == "false") {
+			
+			dom.setAttribute("data-shown", "true");
+
 			for (var lesson in lessons) {
 				var lessonNode = document.createElement("div");
 				addAttributes (lessonNode , lesson , "lesson" , "false" , lesson);
@@ -84,13 +85,17 @@ jList.onclick = function (event) {
 	}
 
 	else if (contentAttr == "lesson") {
-			var displayAttr = dom.getAttribute ("data-shown");
-			var jDiv = boo  (dom , "video-holder");
-			var idx = parseInt(dom.getAttribute("data-lesson-idx")); 
-			var lessons = data[idx].material;
-
+			var displayAttr = dom.getAttribute ("data-shown"),
+				jDiv = createDomHolder (dom , "video-holder"),
+				idx = parseInt(dom.getAttribute("data-lesson-idx")),
+				lessons = data[idx].material;
+			
 			if (displayAttr == "false") {
+
+				dom.setAttribute("data-shown", "true");
+
 				lessons = lessons[dom.getAttribute("data-index")];
+				
 				lessons.forEach (function (video)  {
 					var videoNode = document.createElement("div");
 					addAttributes (videoNode , video , "video" , "false" , video);
