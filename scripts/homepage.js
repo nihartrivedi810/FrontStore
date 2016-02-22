@@ -63,7 +63,7 @@ $(function(){
                         '</div>'+
                         '<div class="content-face back-box">'+
                             '<p class="content-face__text">'+topics[i]["description"]+'</p>'+
-                            '<button class="content-face__button" id='+ i +'>Learn</button>'+
+                            '<div class="content-face__bottom"> <button class="content-face__button" id='+ i +'> <div> Learn </div><div></div><div> Learn </div></button> </div>'+
                         '</div>'+
                     '</div>'+
                 '</div>');
