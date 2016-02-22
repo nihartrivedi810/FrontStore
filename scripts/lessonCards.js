@@ -15,15 +15,21 @@ var octopus = {
 	setLesson : function (attr) {
 		localStorage.lesson = attr;
 		$(location).attr('href', 'index.html');
+	},
+	getTopic: function(){
+		var topics = JSON.parse(localStorage.topiclists),
+			idx = parseInt(localStorage.currentTopic);
+			return topics[idx]["topic"];
 	}
-},
+};
 
 view = {
 
 	init :function () {
 
 		var data = octopus.getData();
-
+		var topicName = $("#topic-name");
+		topicName.html(octopus.getTopic());
 		//TODO appropriate data
 		for (val in data) {
 			
