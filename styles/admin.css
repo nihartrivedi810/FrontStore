@@ -122,5 +122,130 @@
     position: relative;
     top: 5%;
     left: 20%;
+    //overflow: auto;
+}
+
+.content-box .inner-content{
+    background-color: bisque;
+    /* vertical-align: middle; */
     overflow: auto;
+    height: 80%;
+    width: 80%;
+    position: relative;
+    left: 10%;
+    top: 10%;
+    
+}
+
+.inner-content .course-add{
+    float: right;
+    font-family: cursive;
+    background-color: aliceblue;
+}
+
+.inner-content__course-card{
+    width: 80%;
+    height: auto;
+}
+.inner-content__course-card__course{
+    width: 100%;
+    background-color: aquamarine;
+    height: 50px;
+    margin: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.inner-content__course-card__course--textbox{
+    max-width: 80%;
+    /*background-color: #fff;*/
+    overflow-y: scroll;
+    overflow-x: scroll;
+    max-height: 36%;
+    margin: 1%;
+}
+
+.inner-content__course-card__course--button{
+    float: right;
+    position: absolute;
+    /* bottom: 30px; */
+    right: 19%;
+}
+
+.inner-content__course-card__lessons{
+    /*background-color: red;*/
+    position: relative;
+    width: 90%;
+    left: 65px;
+    
+}
+.lesson__add{
+    float: right;
+    position: relative;
+    left: 26%;
+    background-color: darkcyan;
+    font-family: cursive;
+}
+#clicked{
+    display: none;
+    
+}
+.lesson-name{
+    width: 100%;
+    background-color: brown;
+    height: 50px;
+    margin: 10px;
+    border-radius: 10px;
+}
+
+.lesson-name--textbox{
+    max-width: 80%;
+    /*background-color: #fff;*/
+    overflow-y: scroll;
+    overflow-x: scroll;
+    max-height: 36%;
+    margin: 1%;
+}
+
+.lesson-name--button{
+    float: right;
+    position: absolute;
+    /* bottom: 30px; */
+    right: -1.5%;
+}
+
+.lesson-wrapper{
+    width: 100%;
+    height: auto;
+}
+.video-add{
+    float: right;
+    position: relative;
+    left: 26%;
+    background-color: turquoise;
+    font-family: cursive;
+}
+.lesson-wrapper__videos{
+    width: 80%;
+    background-color: magenta;
+    height: 50px;
+    margin: 10px;
+    border-radius: 10px;
+    position: relative;
+    left: 23%;
+}
+
+.lesson-wrapper__videos--textbox{
+    max-width: 80%;
+    /*background-color: #fff;*/
+    overflow-y: scroll;
+    overflow-x: scroll;
+    max-height: 36%;
+    margin: 1%;
+}
+
+.lesson-wrapper__videos--button{
+    float: right;
+    position: absolute;
+    /* bottom: 30px; */
+    right: 0.5%;
 }
