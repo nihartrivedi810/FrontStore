@@ -56,7 +56,7 @@
 .col-2{
 	width: 100%;
 }
-.content-style-2 .videoContain{
+.content-style-2 .video-container{
 	width: 100%;
 	height: 50%;
 }
@@ -65,7 +65,7 @@
 	margin-top: 20px;
 }
 
-.content-style-2 .notesContain{
+.content-style-2 .notes-container{
 	/*display: inline-block;*/
 	vertical-align: top;
 	width: 100%;	
@@ -75,7 +75,7 @@
 .content-style-2 .notes{
 	margin-top: 0%;
 }
-.content-style-1 .videoContain{
+.content-style-1 .video-container{
 	display: inline-block;
 	width: 50%;
 	height: 100%;
@@ -98,15 +98,13 @@
 	display: inline-block;
 	width:50%;
 }
-.content-style-1 .notesContain{
+.content-style-1 .notes-container{
 	display: inline-block;
 	vertical-align: top;
 	width: 50%;	
 	height: 100%;
 }
-.body{
-	/*background-image: url("../images/project_background.png");*/
-}
+
 .content-style-2 .content-pane-1{
 	width: 50%;
 	display: inline-block;
@@ -131,7 +129,7 @@
 
 /*header*/
 
-.headerBar{
+.header-bar{
 	background-color: #0072BB;
 	height: 50px;
 }
@@ -140,24 +138,24 @@
 	display: table;
 	clear: both;
 }
-.innerContent{
+.header-bar__inner-content{
 	width: 80%;
 	height: 100%;
 	position: relative;
 	left: 10%;
 }
-.innerContent__logo{
+.header-bar__inner-content__logo{
 	height: 100%;
 	float: left;
 	width: 20%
 }
-.innerContent__logo--image{
+.header-bar__inner-content__logo--image{
 	max-width: 100%;
 	max-height: 90%;
 	position: relative;
 	top:3%;
 }
-.innerContent__account{
+.header-bar__inner-content__account{
 	height: 100%;
 	float: right;
 	width: 20%;
@@ -166,7 +164,7 @@
 	text-align: center;
 
 }
-.innerContent__account--profile-Name{
+.header-bar__inner-content__account__profile-name{
 	width: 100%;
 	margin-bottom: 0px;
 	cursor: pointer;
@@ -175,10 +173,10 @@
 	padding-top: 7%;
 
 }
-.innerContent__account--profile-Name:hover{
+.header-bar__inner-content__account__profile-name:hover{
 	background-color: #085DAD;
 }
-.drop-list{
+.header-bar__inner-content__drop-list{
 	display: none;
 	background-color: #0072BB;
 	width: 100%;
@@ -187,21 +185,21 @@
 	top: 1%;
 	/* text-align: center; */
 }
-.drop-list__element{
+.header-bar__inner-content__drop-list__element{
 	text-decoration: none;
 	color: #FFF;
 	display: block;
 	height: 23px;
 	padding-top: 1%;
 }
-.drop-list__element:hover{
+.header-bar__inner-content__drop-list__element:hover{
 	background-color: #085DAD;
 }
-.drop:hover .drop-list{
+.drop:hover .header-bar__inner-content__drop-list{
 	display: block;
 }
 
-.innerContent__account:hover .drop-list{
+.header-bar__inner-content__innerContent__account:hover .header-bar__inner-content__drop-list{
 	background-color: #0072BB;
 	width: 100%;
 	position: relative;
@@ -209,7 +207,7 @@
 	top: 1%;
 	z-index: 1;
 }
-.saveNotes {
+.save-notes-btn {
 	
 	background-color: #337ab7;
 	color: #fff;
@@ -217,13 +215,15 @@
 	width: 50px;
 	height: 25px;
 }
-.saveNotes:hover {
+.save-notes-btn:hover {
 	background-color: black;
 	cursor: pointer;
 
 }
-.saveNotes-grey{
+
+.save-notes-btn--grey{
 	background-color: grey;
+
 	color: #fff;
 	padding: 2px;
 	width: 50px;
@@ -238,7 +238,7 @@
 	transform: scale(0);
 	transition: transform 0.2s ease-in;
 }
-.modal-container {
+.modal {
 	height: 500px;
 	width: 500px;
 	background-color: #0072BB;
@@ -250,12 +250,12 @@
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
-.modal {
+.modal__elements {
 	height: 100px;
 	width: 300px;
 	/*   background-color:#FFD034; */
 }
-.modal-btn {
+.modal__elements__btn {
 	display: block;
 	height: 35px;
 	width: 100px;
@@ -266,11 +266,11 @@
 	color: white;
 	outline: none;
 }
-.modal-btn:hover{
+.modal__elements__btn:hover{
 	cursor: pointer;
 	background-color:#C6C9CA;
 }
-.modal-input {
+.modal__elements__input {
 	height: 30px;
 	width: 300px;
 	border-radius: 5px;
@@ -282,7 +282,7 @@
 	right: 0;
 	position: absolute;
 }
-.embedBin {
+.embed-bin-btn {
 	
 	background-color: #337ab7;
 	color: #fff;
@@ -312,7 +312,7 @@
 	padding-right: 18px;
 	display: inline-block;
 }
-.breadcrumb--anchor{
+.anchor-unstyled{
 	text-decoration: none;
 }
 .fa-home{

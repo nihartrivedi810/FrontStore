@@ -9,7 +9,7 @@ body {
 text-rendering: optimizelegibility;
 }
 
-.pr{
+.position-relative{
 	position: relative;
 }
 
