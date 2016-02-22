@@ -220,8 +220,10 @@
 	cursor: pointer;
 
 }
+
 .save-notes-btn--grey{
-	background-color: #ececec;
+	background-color: grey;
+
 	color: #fff;
 	padding: 2px;
 	width: 50px;

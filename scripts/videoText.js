@@ -12,7 +12,7 @@ $(function(){
 			}
 			var topiclists=localStorageGet('topiclists');
 			var topic = parseInt(localStorageGet('currentTopic'));
-			model.topicName = topiclists[topic];
+			model.topicName = topiclists[topic]['topic'];
 			videoList=topiclists[topic].material[localStorageGet('lesson')];
 			if (!localStorageGet('notes')) {
 				localStorageSet('notes',{});
@@ -164,6 +164,7 @@ $(function(){
 			this.videoTag=$(".video");
 			this.jsbintag=$(".jsbin");
 			lessonName.html(octopus.getCurrentLessonName());
+			console.log(octopus.getCurrentTopicName());
 			topicName.html(octopus.getCurrentTopicName());
 			$("#save-notes").on('click',function(){
 				a=advancedEditor.getContents();
@@ -174,6 +175,8 @@ $(function(){
 			$("#saveUrl").on('click',function(){
 				var t2=$("#jsbinUrl").val();
 				octopus.addNewjsbin(t2);
+				$('.embedBin').eq(0).attr("disabled",true);
+				$('.embedBin').eq(0).css("background-color",'grey');
 			});
 			advancedEditor.on("text-change",function(delta){
 				if(!octopus.isSetContentsCalled()){
