@@ -149,10 +149,12 @@ $(function(){
 		init : function() {
 			var videos=octopus.getAllVideos();
 			var parent=$("#l1");
-			for(var i in videos)
-			{
-				parent.append('<li id="'+ i +'"class="lesson-list-container__lesson--title">Video'+ (parseInt(i)+1) +'</li>');
-			}
+			var index=-1;
+			var listAppend=videos.reduce(function(a,b){
+				index++;
+				return a + '<li id="'+ index +'"class="lesson-list-container__lesson--title">Video'+ (parseInt(index)+1) +'</li>';
+			},"");
+			parent.append(listAppend);
 			$("#l1").on("click", function(e) {
 				if(e.target && e.target.nodeName == "LI") {
 					octopus.changeCurrentVideo(e.target.id);
@@ -169,7 +171,7 @@ $(function(){
 
 		} 
 	}; 
-	var view = {
+	var view = {//passs variables DOM
 		init: function() {
 			document.getElementById("lesson-anchor").href = "lessonCards.html?topic="+model.topicId;
 			var lessonName = $("#lesson-name"), topicName = $("#topic-name");
@@ -187,8 +189,9 @@ $(function(){
 			$("#saveUrl").on('click',function(){
 				var t2=$("#jsbinUrl").val();
 				octopus.addNewjsbin(t2);
-				$('.embedBin').eq(0).attr("disabled",true);
-				$('.embedBin').eq(0).css("background-color",'grey');
+				$('.embed-bin-btn').eq(0).attr("disabled",true);
+				$('.embed-bin-btn').eq(0).css("background-color",'grey');
+				changeView();
 			});
 			advancedEditor.on("text-change",function(delta){
 				if(!octopus.isSetContentsCalled()){
@@ -216,11 +219,16 @@ $(function(){
 			var b=octopus.getjsbinOfCurrentVideo();
 			if(b)
 			{
+				$('.embed-bin-btn').eq(0).attr("disabled",true);
+				$('.embed-bin-btn').eq(0).css("background-color",'grey');
 				$("iframe").remove();
-				this.jsbintag.append('<iframe src=' + b + ' style="border: 1px solid rgb(170, 170, 170); width: 100%; min-height: 300px;"></iframe>');
+				this.jsbintag.append('<iframe src=' + b + ' style="border: 1px solid rgb(170, 170, 170); width: 100%; height:100%;min-height: 300px;"></iframe>');
+				changeView();
 			}
 			else
 			{
+				$('.embed-bin-btn').eq(0).removeAttr('disabled');
+				$('.embed-bin-btn').eq(0).css("background-color",'#337AB7');
 				$("iframe").remove();
 			}
 			$('#youtube').remove();

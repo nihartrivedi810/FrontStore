@@ -25,7 +25,7 @@ $(function(){
 
 			return topiclists;
 		},
-		topicClicked: function(topicID)
+		topicClicked: function(topicID)//TODO
 		{
 			//localStorageSet('currentTopic',topicID);
 			$(location).attr('href', 'lessonCards.html?topic='+topicID);
@@ -55,26 +55,29 @@ $(function(){
 		},
 		render: function() {
 			var topics=octopus.getAllTopics();
-			for(var i=0;i<topics.length;i++)
-			{
-				this.contentBox.append('<div class="content-box__course-box"><div class="content-box__course-box__course-content">'+
+			var index=-1;
+			var topicDiv=topics.reduce(function(a,b){
+				index++;
+				return a + '<div class="content-box__course-box"><div class="content-box__course-box__course-content">'+
                         '<div class="content-face front-box">'+
-                            '<img class="course-image" src=images/'+topics[i]["img"]+'>'+
+                            '<img class="course-image" src=images/'+ b["img"]+'>'+
                         '</div>'+
                         '<div class="content-face back-box">'+
-                            '<p class="content-face__text">'+topics[i]["description"]+'</p>'+
-                            '<div class="content-face__bottom"> <button class="content-face__button" id='+ i +'> <div> Learn </div><div></div><div> Learn </div></button> </div>'+
+                            '<p class="content-face__text">'+b["description"]+'</p>'+
+                            '<div class="content-face__bottom"> <button class="content-face__button" id='+ index +'> <div> Learn </div><div></div><div> Learn </div></button> </div>'+
+
                         '</div>'+
                     '</div>'+
-                '</div>');
-                $('#'+i).on('click',(function(topicID)
-                {
-                	return function()
-                	{
-                		octopus.topicClicked(topicID);	
-                	}
-                })(i));
-			}
+                '</div>'
+			},"");
+			this.contentBox.append(topicDiv);
+			this.contentBox.on('click',function(e){
+				if(e.target.parentNode.tagName==='BUTTON')
+				{
+					return octopus.topicClicked(e.target.parentNode.id);
+				}
+			});
+			console.log(topicDiv);
 		}
 	};
 	octopus.init();
