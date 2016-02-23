@@ -27,8 +27,8 @@ $(function(){
 		},
 		topicClicked: function(topicID)//TODO
 		{
-			localStorageSet('currentTopic',topicID);
-			$(location).attr('href', 'lessonCards.html');//TODO 
+			//localStorageSet('currentTopic',topicID);
+			$(location).attr('href', 'lessonCards.html?topic='+topicID);
 		}
 
 	};
