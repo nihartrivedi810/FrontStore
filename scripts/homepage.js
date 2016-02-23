@@ -64,17 +64,18 @@ $(function(){
                         '</div>'+
                         '<div class="content-face back-box">'+
                             '<p class="content-face__text">'+b["description"]+'</p>'+
-                            '<button class="content-face__button" id='+ index +'>Learn</button>'+
+                            '<div class="content-face__bottom"> <button class="content-face__button" id='+ index +'> <div> Learn </div><div></div><div> Learn </div></button> </div>'+
+
                         '</div>'+
                     '</div>'+
                 '</div>'
 			},"");
 			this.contentBox.append(topicDiv);
 			this.contentBox.on('click',function(e){
-				if(e.target.tagName==='BUTTON')
+				if(e.target.parentNode.tagName==='BUTTON')
 				{
-					alert(e.target.id);
-					return octopus.topicClicked(e.target.id);
+					alert(e.target.parentNode.id);
+					return octopus.topicClicked(e.target.parentNode.id);
 				}
 			});
 			console.log(topicDiv);
