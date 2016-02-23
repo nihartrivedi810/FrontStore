@@ -9,7 +9,7 @@ body {
 text-rendering: optimizelegibility;
 }
 
-.pr{
+.position-relative{
 	position: relative;
 }
 
@@ -18,12 +18,14 @@ text-rendering: optimizelegibility;
 }
 
 #side-bar{
-	position: absolute;
+	background-color: #0072BB;
+	position: relative;
 	height: auto;
-	width:50px;
-	top:10px;
-	left:10px;
+	width:40px;
+	left:-35px;
 	display: inline-block;
+	border-radius: 50%;
+	border: 1px solid;
 }
 
 #side-bar:hover > #lesson-list-container{
@@ -35,10 +37,10 @@ text-rendering: optimizelegibility;
 
 
 #bar{
-
 	width:50px;
 	height:30px;
-	box-shadow: 1px 1px 1px #f6f6f6;
+	border: none;
+	background: transparent;
 	top:15px;
 	left:15px;
 

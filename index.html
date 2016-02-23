@@ -11,22 +11,18 @@
 </head>
 
 <body onresize="resizeWindow()">
-	<div class="headerBar">
-
-		<div id="side-bar" class="pr">
-			<button id="bar" ><i class="fa fa-bars fa-2x"></i></button>
-		</div>
-		<div class="innerContent">
-			<div class="innerContent__logo">
-				<img class="innerContent__logo--image" src="images/sexy_sprinlklr_logo.png" alt="Sprinklr">
+	<div class="header-bar">
+		<div class="header-bar__inner-content">
+			<div class="header-bar__inner-content__logo">
+				<img class="header-bar__inner-content__logo--image" src="images/sexy_sprinlklr_logo.png" alt="Sprinklr">
 			</div>
-			<div class="innerContent__account drop">
-				<p class="innerContent__account--profile-Name">
+			<div class="header-bar__inner-content__account drop">
+				<p class="header-bar__inner-content__account__profile-name">
 					<b>Account</b>
 				</p>
-				<div class="drop-list">
-					<a class="drop-list__element" href="#">Settings</a>
-					<a class="drop-list__element" href="index.html">Logout</a>
+				<div class="header-bar__inner-content__drop-list">
+					<a class="header-bar__inner-content__drop-list__element" href="#">Settings</a>
+					<a class="header-bar__inner-content__drop-list__element" href="index.html">Logout</a>
 				</div>
 			</div>
 		</div>
@@ -35,24 +31,27 @@
 		<div class= "lesson-list-container__lesson" id="l1">
 		</div>   
 	</div>  
-
+	
 	<div class="content-style-1" id="content-styler">
-		<div class="breadcrumb">
-			<a class="breadcrumb--anchor" href="homepage.html"><i class="fa fa-home"></i></a>
-			<span class="arrow--grey">></span>
-			<a class="breadcrumb--anchor" href="lessonCards.html">
+			<div class="breadcrumb row">
+				<div id="side-bar" class="position-relative">
+				<button id="bar" ><i class="fa fa-chevron-right"></i></button>
+			</div>
+			<a class="anchor-unstyled" href="homepage.html"><i class="fa fa-home"></i></a>
+			<span class="arrow-grey">></span>
+			<a id="lesson-anchor" class="anchor-unstyled" href="lessonCards.html">
 			<div class="topic-name" id="topic-name">
 			</div>
 			</a>
-			<span class="arrow--grey">></span>
+			<span class="arrow-grey">></span>
 			<div class="lesson-name" id="lesson-name">
 			</div>
 		</div>
 		<div class="content-pane-1">
-			<div class="col-1 videoContain">
+			<div class="col-1 video-container">
 				<div class="video"></div>
 		</div><!-- 
-	--><div class="col-1 notesContain">
+	--><div class="col-1 notes-container">
 	<div class="notes">
 		<div class="content-container">
 			<div class="advanced-wrapper" id = "advance-wrapper">
@@ -147,7 +146,7 @@
 						<option value="center"></option>
 						<option value="right"></option>
 						<option value="justify"></option>
-					</select></span><span class="ql-format-group"><span title="Link" class="ql-format-button ql-link"></span><span class="ql-format-separator"></span><span title="Image" class="ql-format-button ql-image"></span><span class="ql-format-separator"></span><span title="List" class="ql-format-button ql-list"></span></span><span><button type="button" class="saveNotes-grey" id="saveNotes">Save</button></span><span><button type="button" onclick="jsbinmodal()" class="embedBin">Embed Bin</button></span></div>
+					</select></span><span class="ql-format-group"><span title="Link" class="ql-format-button ql-link"></span><span class="ql-format-separator"></span><span title="Image" class="ql-format-button ql-image"></span><span class="ql-format-separator"></span><span title="List" class="ql-format-button ql-list"></span></span><span><button type="button" class="save-notes-btn--grey" id="save-notes">Save</button></span><span><button type="button" onclick="jsbinmodal()" class="embed-bin-btn">Embed Bin</button></span></div>
 					<div class="editor-container" id = "toolbar-editor"></div>
 				</div>
 			</div>
@@ -155,7 +154,7 @@
 	</div>
 		</div><!-- 
 	--><div class="content-pane-2 col-1">
-	<div class=" jsbin">
+	<div class="jsbin">
 
 		<!-- <a class="jsbin-embed" href="http://jsbin.com/kujabup/embed?js,console">JS Bin on jsbin.com</a> -->
 
@@ -163,11 +162,11 @@
 </div>
 </div>
 <div class="modal-div">
-	<div class="modal-container center">
+	<div class="modal center">
 		<i class="fa fa-times fa-4x" onclick="hidemodal()"></i>
-		<div class="modal center">
-			<input class="modal-input center" id="jsbinUrl" type="text"/>
-			<button class="modal-btn center" id="saveUrl" onclick="changeView()">Embed!</button>
+		<div class="modal__elements center">
+			<input class="modal__elements__input center" id="jsbinUrl" type="text"/>
+			<button class="modal__elements__btn center" id="saveUrl" onclick="changeView()">Embed!</button>
 		</div>
 	</div>
 </div>
@@ -177,6 +176,7 @@
 <script type="text/javascript" src="scripts/quill.js"></script>
 <script type="text/javascript" src="scripts/advanced.js"></script>
 <script src="https://static.jsbin.com/js/embed.min.js?3.35.9"></script>
+<script type="text/javascript" src="scripts/localStorageUtil.js"></script>
 <script type="text/javascript" src="scripts/videoText.js"></script>
 <script type="text/javascript" src="scripts/videoPage.js"></script>
 <script src="scripts/side-nav.js"></script>
