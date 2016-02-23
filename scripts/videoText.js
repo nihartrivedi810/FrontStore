@@ -148,11 +148,13 @@ $(function(){
 	var sidePanelView = {
 		init : function() {
 			var videos=octopus.getAllVideos();
-			var parent=$("#l1");//TODO 
-			for(var i in videos)
-			{
-				parent.append('<li id="'+ i +'"class="lesson-list-container__lesson--title">Video'+ (parseInt(i)+1) +'</li>');
-			}
+			var parent=$("#l1");
+			var index=-1;
+			var listAppend=videos.reduce(function(a,b){
+				index++;
+				return a + '<li id="'+ index +'"class="lesson-list-container__lesson--title">Video'+ (parseInt(index)+1) +'</li>';
+			},"");
+			parent.append(listAppend);
 			$("#l1").on("click", function(e) {
 				if(e.target && e.target.nodeName == "LI") {
 					octopus.changeCurrentVideo(e.target.id);

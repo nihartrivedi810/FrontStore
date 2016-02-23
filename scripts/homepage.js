@@ -55,26 +55,29 @@ $(function(){
 		},
 		render: function() {
 			var topics=octopus.getAllTopics();
-			for(var i=0;i<topics.length;i++)//TODO forEach reduce DOM Operation
-			{
-				this.contentBox.append('<div class="content-box__course-box"><div class="content-box__course-box__course-content">'+
+			var index=-1;
+			var topicDiv=topics.reduce(function(a,b){
+				index++;
+				return a + '<div class="content-box__course-box"><div class="content-box__course-box__course-content">'+
                         '<div class="content-face front-box">'+
-                            '<img class="course-image" src=images/'+topics[i]["img"]+'>'+
+                            '<img class="course-image" src=images/'+ b["img"]+'>'+
                         '</div>'+
                         '<div class="content-face back-box">'+
-                            '<p class="content-face__text">'+topics[i]["description"]+'</p>'+
-                            '<button class="content-face__button" id='+ i +'>Learn</button>'+
+                            '<p class="content-face__text">'+b["description"]+'</p>'+
+                            '<button class="content-face__button" id='+ index +'>Learn</button>'+
                         '</div>'+
                     '</div>'+
-                '</div>');
-                $('#'+i).on('click',(function(topicID)//TODO 
-                {
-                	return function()//TODO bind
-                	{
-                		octopus.topicClicked(topicID);	
-                	}
-                })(i));
-			}
+                '</div>'
+			},"");
+			this.contentBox.append(topicDiv);
+			this.contentBox.on('click',function(e){
+				if(e.target.tagName==='BUTTON')
+				{
+					alert(e.target.id);
+					return octopus.topicClicked(e.target.id);
+				}
+			});
+			console.log(topicDiv);
 		}
 	};
 	octopus.init();
