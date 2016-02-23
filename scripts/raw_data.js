@@ -184,13 +184,29 @@ var modelCollection =  {
 	},
 
 	render : function () {
-		Courses = JSON.parse(localStorage.getItem('Courses'));
-		Lessons = JSON.parse(localStorage.getItem('Lessons'));
-		Videos = JSON.parse(localStorage.getItem('Videos'));
-		courseId =Courses.length; 
-		lessonId = Lessons.length;
-		videoId = Videos.length;
-	}
+        var obj = JSON.parse(localStorage.getItem('Courses'));
+
+        obj.forEach (function (course) {
+            Courses.push(new Course(course.name,course.lessons,course.id,course.description));
+            courseId++;
+        });
+
+        obj = JSON.parse(localStorage.getItem('Lessons'));
+        obj.forEach (function (lesson) {
+            Lessons.push(new Lesson(lesson.id,lesson.name,lesson.videos,lesson.courseId));
+            lessonId++;
+        });
+
+        obj = JSON.parse(localStorage.getItem('Videos'));
+        obj.forEach (function (video) {
+            Videos.push(new Video(video.id,video.url,video.lessonId));
+            videoId++;
+        });
+
+        /*courseId =Courses.length; 
+        lessonId = Lessons.length;
+        videoId = Videos.length;*/
+    }
 }
 
 var controller = {

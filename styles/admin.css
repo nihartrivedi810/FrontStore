@@ -176,11 +176,13 @@
     position: relative;
     width: 90%;
     left: 65px;
+    overflow: hidden;
+    height: 0;
     
 }
 .lesson__add{
     float: right;
-    position: relative;
+    
     left: 26%;
     background-color: darkcyan;
     font-family: cursive;
@@ -215,23 +217,49 @@
 
 .lesson-wrapper{
     width: 100%;
-    height: auto;
+    
+    overflow: hidden;
+}
+
+.video-wrapper{
+    width: 100%;
+    height:0;
+    overflow: hidden;
+
 }
 .video-add{
     float: right;
-    position: relative;
+    //position: relative;
     left: 26%;
     background-color: turquoise;
     font-family: cursive;
+    margin-bottom: 10px;
 }
 .lesson-wrapper__videos{
     width: 80%;
     background-color: magenta;
+    clear:both;
     height: 50px;
     margin: 10px;
     border-radius: 10px;
     position: relative;
     left: 23%;
+
+}
+
+.lesson__add__input-contain{
+    height:0;
+    overflow: hidden;
+}
+
+.video__add__input-contain{
+    height:0;
+    overflow: hidden;
+}
+
+.course__add__input-contain{
+    height:0;
+    overflow:hidden;
 }
 
 .lesson-wrapper__videos--textbox{
