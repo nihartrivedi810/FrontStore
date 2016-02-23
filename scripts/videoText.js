@@ -172,21 +172,44 @@ $(function(){
 			var parent=$("#l1");
 			var optSign = $('#bar');
 			var sideBlk = $('#lesson-list-container');
-			console.log(sideBlk);
+			var mainDiv=$('#sidenav-opacity-div'), contentStyler = $('#content-styler');
 			var index=-1;
+
 			var listAppend=videos.reduce(function(a,b){
 				index++;
 				return a + '<li id="'+ index +'"class="lesson-list-container__lesson--title">Video'+ (parseInt(index)+1) +'</li>';
 			},"");
+
 			parent.append(listAppend);
+
+			console.log(optSign,"asd");
+			optSign.on("click", function(e) {
+				console.log("asdsa");
+				sideBlk.css('transform','translateX(0%)');
+				optSign.css("visibility", "hidden");
+				$('#content-styler').css('opacity','0.1');
+				mainDiv.css("display" ,'block');
+			});
+
 			$("#l1").on("click", function(e) {
 				if(e.target && e.target.nodeName == "LI") {
 					sideBlk.css('transform','translateX(-100%)');
 					optSign.css("visibility", "visible");
 					$('#content-styler').css('opacity','1');
+					mainDiv.css("display" ,'none');
 					octopus.changeCurrentVideo(e.target.id);
 				}
 			});
+			mainDiv.on("click", function(e) {
+				if(e.target.id != 'bar'){
+					sideBlk.css('transform','translateX(-100%)');
+					optSign.css("visibility", "visible");
+					$('#content-styler').css('opacity','1');
+					mainDiv.css("display" ,'none');
+				}
+			});
+
+
 			this.render();
 		},
 		render : function() {
@@ -213,7 +236,7 @@ $(function(){
 				{
 					a=advancedEditor.getContents();
 					octopus.addNewNote(a);
-					$("#save-notes").attr('class','save-notes-btn--grey');
+					//$("#save-notes").attr('class','save-notes-btn--grey');
 					$("#save-notes").attr('disabled','true');
 				}
 				else if(e.target.id=="embed-bin-btn")
@@ -228,7 +251,7 @@ $(function(){
 			advancedEditor.on("text-change",function(delta){
 				if(!octopus.isSetContentsCalled()){
 					$("#save-notes").removeAttr('disabled');
-					$("#save-notes").attr('class','save-notes-btn');
+					//$("#save-notes").attr('class','save-notes-btn');
 				}
 				octopus.setContentsCalled(false);
 			});
@@ -249,12 +272,12 @@ $(function(){
 			}
 		},
 		disableJSButton: function() {
-			$('.embed-bin-btn').eq(0).attr("disabled",true);
-			$('.embed-bin-btn').eq(0).css("background-color",'grey');
+			$('#embed-bin-btn').eq(0).attr("disabled",true);
+			//$('.embed-bin-btn').eq(0).css("background-color",'grey');
 		},
 		enableJSButton: function() {
-			$('.embed-bin-btn').eq(0).removeAttr('disabled');
-			$('.embed-bin-btn').eq(0).css("background-color",'#337AB7');
+			$('#embed-bin-btn').eq(0).removeAttr('disabled');
+			//$('.embed-bin-btn').eq(0).css("background-color",'#337AB7');
 		},
 	};
 	var modalView = {
@@ -268,18 +291,18 @@ $(function(){
 				{
 					var t2=$("#jsbinUrl").val();
 					octopus.addNewjsbin(t2);
-					$('.embed-bin-btn').eq(0).attr("disabled",true);
-					$('.embed-bin-btn').eq(0).css("background-color",'grey');
+					$('#embed-bin-btn').eq(0).attr("disabled",true);
+					//$('.embed-bin-btn').eq(0).css("background-color",'grey');
 				}
 			});
 		},
 		jsbinmodal: function() {
-		document.getElementsByClassName('modal-div')[0].style.transform='scale(1)';
-		document.getElementById('content-styler').style.opacity=0.2;
+			document.getElementsByClassName('modal-div')[0].style.transform='scale(1)';
+			document.getElementById('content-styler').style.opacity=0.2;
 		},
 		hidemodal: function() {
-		document.getElementsByClassName('modal-div')[0].style.transform='scale(0)';
-		document.getElementById('content-styler').style.opacity=1;
+			document.getElementsByClassName('modal-div')[0].style.transform='scale(0)';
+			document.getElementById('content-styler').style.opacity=1;
 		},
 
 	};
@@ -326,11 +349,11 @@ $(function(){
 		},
 		resizeWindow: function() {
 			var toolbarTop = document.getElementById("toolbar-top"),
-				toolbarBottom = document.getElementById("toolbar-editor"),
-				container = document.getElementById("advance-wrapper"),
-				toolbarTopHeight = toolbarTop.offsetHeight,
-				containerHeight = container.offsetHeight;
-				toolbarBottom.setAttribute("style","height:"+(containerHeight - toolbarTopHeight -5) +"px");
+			toolbarBottom = document.getElementById("toolbar-editor"),
+			container = document.getElementById("advance-wrapper"),
+			toolbarTopHeight = toolbarTop.offsetHeight,
+			containerHeight = container.offsetHeight;
+			toolbarBottom.setAttribute("style","height:"+(containerHeight - toolbarTopHeight -5) +"px");
 		}
 
 	};
