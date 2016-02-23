@@ -19,17 +19,6 @@ var resizeWindow = function () {
 
 resizeWindow();
 
-var jsbinmodal = function() {
-	// var modal = $(".modal-div").css('transform','scale(1)');
-	document.getElementsByClassName('modal-div')[0].style.transform='scale(1)';
-	console.log(document.getElementById('content-styler'));
-	document.getElementById('content-styler').style.opacity=0.2;
-}
-var hidemodal = function() {
-	document.getElementsByClassName('modal-div')[0].style.transform='scale(0)';
-	document.getElementById('content-styler').style.opacity=1;
-}
-
 
 
 
