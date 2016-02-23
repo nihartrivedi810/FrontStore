@@ -1,5 +1,5 @@
-var data = JSON.parse(localStorage.topiclists),
-	courseForm = document.getElementById("course-form"),
+//var data = JSON.parse(localStorage.topiclists),
+	var courseForm = document.getElementById("course-form"),
 	lessonForm = document.getElementById("lesson-form"),
 	videoForm = document.getElementById("video-form"),
 
@@ -23,17 +23,22 @@ var retrieve = function () {
 
 	var cnt = 0;
 
-	//accumulate all the courses and then append them;
-	data.forEach (function(course) {
-
+	//accumulate all the courses and then append them;\
+	console.log(Courses);
+	Courses.forEach(function (course)
+	{
 		var jDiv = document.createElement("div");
-		
-		addAttributes (jDiv , course.topic, "course" , "false" , cnt++);
-		
-		jDiv.innerHTML = course.topic;
+		addAttributes (jDiv , course.name, "course" , "false" , cnt++);
+		console.log("inside retrieve")
+		console.log(course);
+		jDiv.innerHTML = course.name ;
 		jList.appendChild (jDiv);
 
 	});
+
+
+	
+	
 };
 
 retrieve();
@@ -60,21 +65,27 @@ jList.onclick = function (event) {
 	console.log (dom);
 	
 	var contentAttr = dom.getAttribute('data-content');
+
 	if (contentAttr == "course") {
 
 		var displayAttr = dom.getAttribute ("data-shown");
 		var jDiv = createDomHolder (dom,"lesson-holder");
 		var idx = parseInt(dom.getAttribute("data-index"));
-		var lessons = data[idx].material;
-
+		var lessonIds = Courses[idx].lessons;
+		
+		
 		if (displayAttr == "false") {
-			
+			console.log (Courses[idx]);
 			dom.setAttribute("data-shown", "true");
-
-			for (var lesson in lessons) {
+			console.log(lessonIds, "Asfsdfs");
+			for (var lessonId of lessonIds) {
 				var lessonNode = document.createElement("div");
-				addAttributes (lessonNode , lesson , "lesson" , "false" , lesson);
-				lessonNode.setAttribute("data-lesson-idx" , dom.getAttribute("data-index"));
+				console.log(lessonId);
+				console.log("cont attr course");
+				console.log(Lessons);
+
+				addAttributes (lessonNode , Lessons[parseInt(lessonId)].name , "lesson" , "false" , Lessons[lessonId].id);
+				//lessonNode.setAttribute("data-lesson-idx" , dom.getAttribute("data-index"));
 				jDiv.appendChild(lessonNode);
 			}
 			dom.appendChild(jDiv);
@@ -87,18 +98,18 @@ jList.onclick = function (event) {
 	else if (contentAttr == "lesson") {
 			var displayAttr = dom.getAttribute ("data-shown"),
 				jDiv = createDomHolder (dom , "video-holder"),
-				idx = parseInt(dom.getAttribute("data-lesson-idx")),
-				lessons = data[idx].material;
+				idx = parseInt(dom.getAttribute("data-index")),
+				videos = Lessons[idx].videos;
 			
 			if (displayAttr == "false") {
 
 				dom.setAttribute("data-shown", "true");
 
-				lessons = lessons[dom.getAttribute("data-index")];
 				
-				lessons.forEach (function (video)  {
+				
+				videos.forEach (function (video)  {
 					var videoNode = document.createElement("div");
-					addAttributes (videoNode , video , "video" , "false" , video);
+					addAttributes (videoNode , Videos[parseInt(video)].url , "video" , "false" , Videos[parseInt(video)].id);
 					jDiv.appendChild(videoNode);
 				});	
 				dom.appendChild(jDiv);
@@ -121,7 +132,7 @@ addButton.onclick = function (event) {
 	hideAllForms();
 
 	//refresh the data
-	data = JSON.parse(localStorage.topiclists);
+	
 	switch (attr) {
 		case "course-button":
 			courseForm.setAttribute("style" , "display:block;");
@@ -146,19 +157,41 @@ courseSubmit.onclick = function () {
 	var courseName = document.getElementById("add-course").value;
 	
 	if(courseName) {
-		console.log ("added " +courseName);
+		Courses.push(new Course(courseName,undefined,courseId++));
+		
+		localStorage.setItem('Courses',JSON.stringify(Courses));
+		console.log ("added " + courseName);
+
 	}
+
 	return false;
 }
 
 var lessonSubmit = document.getElementById("submit-lesson");
 
 lessonSubmit.onclick = function () {
+
+
 	var course = getSelectedOption("course-lesson-option"),
 		lesson = getInputValue("add-lesson");
 	
-	console.log (course + " " + lesson);
+	
+	//abc.
+	console.log("lesson add", lessonId);
+	Lessons.push(new Lesson(lessonId,lesson,undefined,course));
+	localStorage.setItem('Lessons',JSON.stringify(Lessons));
+	
+	Courses[parseInt(course)].lessons.push(lessonId);
+	localStorage.setItem('Courses',JSON.stringify(Courses));
+	lessonId++;
+	console.log("in the lesson submit");
+	console.log(JSON.parse(localStorage.getItem('Courses')));
+	console.log(JSON.parse(localStorage.getItem('Lessons')));
+
+	
+	
 	return false;
+
 }
 
 var videoSubmit = document.getElementById("submit-video");
@@ -167,14 +200,28 @@ videoSubmit.onclick = function () {
 	var course = getSelectedOption("course-video-option"),
 		lesson = getSelectedOption("lesson-video-option"),
 		video = getInputValue("add-video");
+		console.log("video" + video);
 
-	console.log (course + " " + lesson + " " + video);
+	Videos.push(new Video(videoId,video,lesson)); 
+	localStorage.setItem('Videos',JSON.stringify(Videos));
+	console.log(parseInt(lesson), videoId);
+	Lessons[parseInt(lesson)].videos.push(videoId);
+
+	localStorage.setItem('Lessons',JSON.stringify(Lessons));
+	videoId++;
+
+	console.log("in the video submit");
+	console.log(JSON.parse(localStorage.getItem('Lessons')));
+	console.log(JSON.parse(localStorage.getItem('Videos')));
+
 	return false;
 }
 
 var getSelectedOption = function (id) {
 	var dom = document.getElementById(id);
-	return dom.options[dom.selectedIndex].text;
+	console.log("dom.options[dom.selectedIndex].getAttribute(value)");
+	console.log(dom.options[dom.selectedIndex].value);
+	return dom.options[dom.selectedIndex].value;
 };
 
 var getInputValue = function (id) {
@@ -185,42 +232,53 @@ var addCoursesOptions = function (domId) {
 	var courseDom = document.getElementById(domId),
 		docFrag = document.createDocumentFragment();
 		courseDom.innerHTML = "";
-
-		data.forEach (function(course) {
+		
+		console.log(Courses);
+		Courses.forEach (function(course) {
+			console.log("++++++++++++++");
+			var abc = course.name;
+			console.log(abc);
 			var jOption = document.createElement("option");
-				jOption.setAttribute("value" , course.topic);
-
-			jOption.innerHTML = course.topic;
+				jOption.setAttribute("value" , course.id);
+				jOption.innerHTML = course.name;
 			docFrag.appendChild(jOption);
+
 		});
 		courseDom.appendChild (docFrag);
+		
 };
 
 var courseVideo = document.getElementById("course-video-option");
 
 var updateOptions = function () {
 
-	var value = getSelectedOption("course-video-option");
+	var courseId = getSelectedOption("course-video-option");
+	
+	lessonIds = Courses[parseInt(courseId)].lessons;
+	console.log("invideo log options");
+	console.log(lessonIds);
 	var lessonDom = document.getElementById("lesson-video-option"),
 		docFrag = document.createDocumentFragment();
 	lessonDom.innerHTML = "";
 
-	data.forEach (function (course) {
-		if (course.topic == value) {
-			var lessons = course.material;
 
-			for (var lesson in lessons) {
+	for(lesson of lessonIds) {
+				console.log("further in");
+				console.log(lesson);
+			
 				var jOption = document.createElement("option");
-					
-				jOption.setAttribute("value" , lesson);
+				
+				lesson = Lessons[lesson];
+				console.log(lesson);
+				jOption.setAttribute("value" , lesson.id);
 
-				jOption.innerHTML = lesson;
+				jOption.innerHTML = lesson.name;
 				docFrag.appendChild(jOption);
 				
-			}
+			
 			lessonDom.appendChild (docFrag);
-		}
-	});
+		
+	}
 };
 
 courseVideo.onchange = updateOptions;
