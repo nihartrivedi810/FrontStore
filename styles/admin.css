@@ -126,7 +126,7 @@
 }
 
 .content-box .inner-content{
-    background-color: bisque;
+    background-color:  #E45641;
     /* vertical-align: middle; */
     overflow: auto;
     height: 80%;
@@ -134,13 +134,14 @@
     position: relative;
     left: 10%;
     top: 10%;
-    
+    border-radius: 15px;
 }
 
 .inner-content .course-add{
     float: right;
     font-family: cursive;
     background-color: aliceblue;
+    border-radius: 13px;
 }
 
 .inner-content__course-card{
@@ -149,10 +150,10 @@
 }
 .inner-content__course-card__course{
     width: 100%;
-    background-color: aquamarine;
+    background-color:   #44B3C2;
     height: 50px;
     margin: 10px;
-    border-radius: 10px;
+    border-radius: 6px;
     cursor: pointer;
 }
 .inner-content__course-card__course--textbox{
@@ -182,21 +183,21 @@
 }
 .lesson__add{
     float: right;
-    
     left: 26%;
     background-color: darkcyan;
     font-family: cursive;
+    border-radius: 13px;
 }
 #clicked{
     display: none;
     
 }
 .lesson-name{
-    width: 100%;
-    background-color: brown;
+    width: 98%;
+    background-color:  #F1A94E;
     height: 50px;
     margin: 10px;
-    border-radius: 10px;
+    border-radius: 6px;
 }
 
 .lesson-name--textbox{
@@ -234,32 +235,58 @@
     background-color: turquoise;
     font-family: cursive;
     margin-bottom: 10px;
+    border-radius: 13px;
 }
 .lesson-wrapper__videos{
     width: 80%;
-    background-color: magenta;
+    background-color: #5D4C46;
     clear:both;
     height: 50px;
     margin: 10px;
-    border-radius: 10px;
+    border-radius: 6px;
     position: relative;
-    left: 23%;
+    left: 18%;
 
 }
 
 .lesson__add__input-contain{
     height:0;
     overflow: hidden;
+    position: relative;
+    left: 60%;
 }
-
+.lesson__add_input-contain__button{
+    background-color: darkcyan;
+    font-family: cursive;
+    border-radius: 13px;
+}
 .video__add__input-contain{
     height:0;
     overflow: hidden;
+    position: relative;
+    left: 61%;
+}
+
+.video__add_input-contain__button{
+    background-color: turquoise;
+    font-family: cursive;
+    border-radius: 13px;
+    
 }
 
 .course__add__input-contain{
     height:0;
     overflow:hidden;
+    /*height: auto;*/
+    /* float: right; */
+    position: relative;
+    left: 71%;
+}
+
+.course__add_input-contain__button{
+    font-family: cursive;
+    background-color: aliceblue;
+    border-radius: 13px;
 }
 
 .lesson-wrapper__videos--textbox{

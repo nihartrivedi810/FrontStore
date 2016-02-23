@@ -150,7 +150,7 @@ var model = {
 						console.log("in the lesson submit",lessonId);
 						console.log(JSON.parse(localStorage.getItem('Courses')));
 						console.log(JSON.parse(localStorage.getItem('Lessons')));
-						//location.reload();
+						location.reload();
 			    	}
 			    	if(event.target.className == "video-add")
 			    	{
