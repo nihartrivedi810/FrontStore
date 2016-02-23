@@ -10,7 +10,7 @@
 	<link rel="stylesheet" type="text/css" href="styles/side-nav.css">
 </head>
 
-<body onresize="resizeWindow()">
+<body>
 	<div class="header-bar">
 		<div class="header-bar__inner-content">
 			<div class="header-bar__inner-content__logo">
@@ -146,7 +146,7 @@
 						<option value="center"></option>
 						<option value="right"></option>
 						<option value="justify"></option>
-					</select></span><span class="ql-format-group"><span title="Link" class="ql-format-button ql-link"></span><span class="ql-format-separator"></span><span title="Image" class="ql-format-button ql-image"></span><span class="ql-format-separator"></span><span title="List" class="ql-format-button ql-list"></span></span><span><button type="button" class="save-notes-btn--grey" id="save-notes">Save</button></span><span><button type="button" onclick="jsbinmodal()" class="embed-bin-btn">Embed Bin</button></span></div>
+					</select></span><span class="ql-format-group"><span title="Link" class="ql-format-button ql-link"></span><span class="ql-format-separator"></span><span title="Image" class="ql-format-button ql-image"></span><span class="ql-format-separator"></span><span title="List" class="ql-format-button ql-list"></span></span><span><button type="button" class="save-notes-btn--grey" id="save-notes">Save</button></span><span><button type="button" id="embed-bin-btn" class="embed-bin-btn">Embed Bin</button></span><span><button type="button" id="change-view" class="">Change View</button></span></div>
 					<div class="editor-container" id = "toolbar-editor"></div>
 				</div>
 			</div>
@@ -162,11 +162,11 @@
 </div>
 </div>
 <div class="modal-div">
-	<div class="modal center">
-		<i class="fa fa-times fa-4x" onclick="hidemodal()"></i>
+	<div class="modal center" id="modal">
+		<i class="fa fa-times fa-4x" id="hide-jsbin"></i>
 		<div class="modal__elements center">
 			<input class="modal__elements__input center" id="jsbinUrl" type="text"/>
-			<button class="modal__elements__btn center" id="saveUrl" onclick="changeView()">Embed!</button>
+			<button class="modal__elements__btn center" id="saveUrl">Embed!</button>
 		</div>
 	</div>
 </div>
@@ -177,8 +177,8 @@
 <script type="text/javascript" src="scripts/advanced.js"></script>
 <script src="https://static.jsbin.com/js/embed.min.js?3.35.9"></script>
 <script type="text/javascript" src="scripts/localStorageUtil.js"></script>
+<!-- <script type="text/javascript" src="scripts/videoPage.js"></script> -->
 <script type="text/javascript" src="scripts/videoText.js"></script>
-<script type="text/javascript" src="scripts/videoPage.js"></script>
 <script src="scripts/side-nav.js"></script>
 
 </html>

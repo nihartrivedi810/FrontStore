@@ -121,7 +121,7 @@
 	border: 1px solid;
 	vertical-align: top;
 	display: inline-block;
-	height: 90vh;
+	height: 86vh;
 	
 }
 .content-style-1 .content-pane-2{
@@ -319,4 +319,7 @@
 .fa-home{
 	font-size: 20px;
 	color: #337ab7;
+}
+.jsbin {
+	height: 100%;
 }

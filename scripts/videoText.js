@@ -102,7 +102,11 @@ $(function(){
 		init: function() {
 			model.init();
 			view.init();
+			modalView.init();
 			sidePanelView.init();
+			youtubeView.init();
+			notesView.init();
+			jsbinView.init();
 		},
 		getCurrentVideoId: function() {
 			return model.getCurrentVideoId();
@@ -112,7 +116,7 @@ $(function(){
 		},
 		addNewjsbin: function(jsbinURL) {
 			model.addNewjsbin(jsbinURL);
-			view.render();
+			jsbinView.render();
 		},
 		getNotesOfCurrentVideo: function() {
 			return model.getNotesOfCurrentVideo();
@@ -129,8 +133,10 @@ $(function(){
 		},
 		changeCurrentVideo: function(newVideo) {
 			model.changeCurrentVideo(newVideo);
-			view.render();
 			sidePanelView.render();
+			youtubeView.render();
+			notesView.render();
+			jsbinView.render();
 		},
 		getCurrentLessonName: function(){
 			return model.getCurrentLessonName();
@@ -143,20 +149,42 @@ $(function(){
 		},
 		setContentsCalled: function(val){
 			model.setContentsCalled = val;
-		}
+		},
+		enableJSButton: function() {
+			notesView.enableJSButton();
+		},
+		disableJSButton: function() {
+			notesView.disableJSButton();
+		},
+		showModal: function() {
+			modalView.jsbinmodal();
+		},
+		hidemodal: function() {
+			modalView.hidemodal();
+		},
+		changeView: function() {
+			view.changeView();
+		},
 	};
 	var sidePanelView = {
 		init : function() {
 			var videos=octopus.getAllVideos();
 			var parent=$("#l1");
-			for(var i in videos)
-			{
-				parent.append('<li id="'+ i +'"class="lesson-list-container__lesson--title">Video'+ (parseInt(i)+1) +'</li>');
-			}
+			var optSign = $('#bar');
+			var sideBlk = $('#lesson-list-container');
+			console.log(sideBlk);
+			var index=-1;
+			var listAppend=videos.reduce(function(a,b){
+				index++;
+				return a + '<li id="'+ index +'"class="lesson-list-container__lesson--title">Video'+ (parseInt(index)+1) +'</li>';
+			},"");
+			parent.append(listAppend);
 			$("#l1").on("click", function(e) {
 				if(e.target && e.target.nodeName == "LI") {
+					sideBlk.css('transform','translateX(-100%)');
+					optSign.css("visibility", "visible");
+					$('#content-styler').css('opacity','1');
 					octopus.changeCurrentVideo(e.target.id);
-					console.log("List item ", e.target.id.replace("post-"), " was clicked!");
 				}
 			});
 			this.render();
@@ -165,30 +193,37 @@ $(function(){
 			var currentVideo=octopus.getCurrentVideoId();
 			$('.active').removeClass('active');
 			$("#"+currentVideo).addClass('active');
-			
-
 		} 
 	}; 
-	var view = {
+	var youtubeView = {
 		init: function() {
-			document.getElementById("lesson-anchor").href = "lessonCards.html?topic="+model.topicId;
-			var lessonName = $("#lesson-name"), topicName = $("#topic-name");
 			this.videoTag=$(".video");
-			this.jsbintag=$(".jsbin");
-			lessonName.html(octopus.getCurrentLessonName());
-			//console.log(octopus.getCurrentTopicName());
-			topicName.html(octopus.getCurrentTopicName());
-			$("#save-notes").on('click',function(){
-				a=advancedEditor.getContents();
-				octopus.addNewNote(a);
-				$("#save-notes").attr('class','save-notes-btn--grey');
-				$("#save-notes").attr('disabled','true');
-			});
-			$("#saveUrl").on('click',function(){
-				var t2=$("#jsbinUrl").val();
-				octopus.addNewjsbin(t2);
-				$('.embedBin').eq(0).attr("disabled",true);
-				$('.embedBin').eq(0).css("background-color",'grey');
+			this.render();
+		},
+		render : function() {
+			$('#youtube').remove();
+			var curVideo=octopus.getCurrentVideo();
+			this.videoTag.prepend('<embed  id="youtube" width="100%" height="100%"src="https://www.youtube.com/embed/'+ curVideo+'" frameborder="0" allowfullscreen">');
+		}	
+	};
+	var notesView = {
+		init: function() {
+			$('#toolbar-top').on('click',function(e){
+				if(e.target.id=="save-notes")
+				{
+					a=advancedEditor.getContents();
+					octopus.addNewNote(a);
+					$("#save-notes").attr('class','save-notes-btn--grey');
+					$("#save-notes").attr('disabled','true');
+				}
+				else if(e.target.id=="embed-bin-btn")
+				{
+					octopus.showModal();
+				}
+				else if(e.target.id=="change-view")
+				{
+					octopus.changeView();
+				}
 			});
 			advancedEditor.on("text-change",function(delta){
 				if(!octopus.isSetContentsCalled()){
@@ -197,36 +232,107 @@ $(function(){
 				}
 				octopus.setContentsCalled(false);
 			});
-			view.render();
+			this.render();
 		},
-		render: function(){
+		render: function() {
+			var notes=octopus.getNotesOfCurrentVideo();
+			if(notes)
+			{
+				octopus.setContentsCalled(true);
+				advancedEditor.setContents(notes);
+			}
+			else
+			{
+				notes=[];
+				octopus.setContentsCalled(true);
+				advancedEditor.setContents(notes);
+			}
+		},
+		disableJSButton: function() {
+			$('.embed-bin-btn').eq(0).attr("disabled",true);
+			$('.embed-bin-btn').eq(0).css("background-color",'grey');
+		},
+		enableJSButton: function() {
+			$('.embed-bin-btn').eq(0).removeAttr('disabled');
+			$('.embed-bin-btn').eq(0).css("background-color",'#337AB7');
+		},
+	};
+	var modalView = {
+		init: function() {
+			$('#modal').on('click',function(e){
+				if(e.target.id=='hide-jsbin')
+				{
+					modalView.hidemodal();
+				}
+				else if(e.target.id=='saveUrl')
+				{
+					var t2=$("#jsbinUrl").val();
+					octopus.addNewjsbin(t2);
+					$('.embed-bin-btn').eq(0).attr("disabled",true);
+					$('.embed-bin-btn').eq(0).css("background-color",'grey');
+				}
+			});
+		},
+		jsbinmodal: function() {
+		document.getElementsByClassName('modal-div')[0].style.transform='scale(1)';
+		document.getElementById('content-styler').style.opacity=0.2;
+		},
+		hidemodal: function() {
+		document.getElementsByClassName('modal-div')[0].style.transform='scale(0)';
+		document.getElementById('content-styler').style.opacity=1;
+		},
 
-			var a=octopus.getNotesOfCurrentVideo();
-			if(a)
+	};
+	var jsbinView = {
+		init: function() {
+			this.jsbintag=$(".jsbin");
+		},
+		render: function() {
+			var jsbin=octopus.getjsbinOfCurrentVideo();
+			if(jsbin)
 			{
-				octopus.setContentsCalled(true);
-				advancedEditor.setContents(a);
+				octopus.disableJSButton();
+				$("iframe").remove();
+				this.jsbintag.append('<iframe src=' + jsbin + ' style="border: 1px solid rgb(170, 170, 170); width: 100%; height:100%;min-height: 300px;"></iframe>');
+				octopus.changeView();
 			}
 			else
 			{
-				a=[];
-				octopus.setContentsCalled(true);
-				advancedEditor.setContents(a);
-			}
-			var b=octopus.getjsbinOfCurrentVideo();
-			if(b)
-			{
-				$("iframe").remove();
-				this.jsbintag.append('<iframe src=' + b + ' style="border: 1px solid rgb(170, 170, 170); width: 100%; min-height: 300px;"></iframe>');
-			}
-			else
-			{
+				octopus.enableJSButton();
 				$("iframe").remove();
 			}
-			$('#youtube').remove();
-			var curVideo=octopus.getCurrentVideo();
-			this.videoTag.prepend('<embed  id="youtube" width="100%" height="100%"src="https://www.youtube.com/embed/'+ curVideo+'" frameborder="0" allowfullscreen">');
 		}
+	};
+	var view = {
+		init: function() {
+			document.getElementById("lesson-anchor").href = "lessonCards.html?topic="+model.topicId;
+			var lessonName = $("#lesson-name"), topicName = $("#topic-name");
+			lessonName.html(octopus.getCurrentLessonName());
+			topicName.html(octopus.getCurrentTopicName());
+			view.resizeWindow();
+			$(window).eq(0).resize(function(){
+				console.log("dasd");
+				view.resizeWindow();
+			});
+		},
+		changeView: function(){
+			var div = document.getElementById("content-styler");
+			if(div.className==="content-style-1")
+				div.className="content-style-2";
+			else
+				div.className="content-style-1";
+			view.resizeWindow();
+			octopus.hidemodal();
+		},
+		resizeWindow: function() {
+			var toolbarTop = document.getElementById("toolbar-top"),
+				toolbarBottom = document.getElementById("toolbar-editor"),
+				container = document.getElementById("advance-wrapper"),
+				toolbarTopHeight = toolbarTop.offsetHeight,
+				containerHeight = container.offsetHeight;
+				toolbarBottom.setAttribute("style","height:"+(containerHeight - toolbarTopHeight -5) +"px");
+		}
+
 	};
 
 	octopus.init();
