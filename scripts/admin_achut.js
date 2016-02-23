@@ -24,15 +24,19 @@ var printList = function () {
 
 
 	//accumulate all the courses and then append them;\
-	console.log(Courses);
-	Courses.forEach(function (course)
+	//console.log(Courses);
+	Courses.forEach(function (courseElement)
 	{
-		var jDiv = document.createElement("div");
-		addAttributes (jDiv , course.name, "course" , "false" , cnt++);
-		console.log("inside retrieve")
-		console.log(course);
-		jDiv.innerHTML = course.name ;
-		jList.appendChild (jDiv);
+		var courseCard = document.createElement("div");
+        courseCard.setAttribute("class","inner-content__course-card");
+		var course = document.createElement("div");
+        course.setAttribute("class","inner-content__course-card__course");
+		addAttributes (course , courseElement.name, "course" , "false" , cnt++);
+		//console.log("inside retrieve")
+		//console.log(courseElement);
+		course.innerHTML = courseElement.name ;
+        courseCard.appendChild(course);
+		courseList.appendChild (courseCard);
 
 
 	});
@@ -67,7 +71,7 @@ var hideDom = function (dom) {
 courseList.onclick = function (event) {
 	var dom = event.target;
 
-	console.log (dom);
+	console.log (dom.parentNode);
 	
 	var contentAttr = dom.getAttribute('data-content');
 
@@ -84,19 +88,23 @@ courseList.onclick = function (event) {
 		
 		
 		if (displayAttr == "false") {
-			console.log (Courses[idx]);
+			//console.log (Courses[idx]);
 			dom.setAttribute("data-shown", "true");
 
-			console.log(lessonIds, "Asfsdfs");
+			//console.log(lessonIds, "Asfsdfs");
 			for (var lessonId of lessonIds) {
+                var lessonContainer = document.createElement("div");
+                lessonContainer.setAttribute("class","lesson-wrapper");
 				var lessonNode = document.createElement("div");
-				console.log(lessonId);
-				console.log("cont attr course");
-				console.log(Lessons);
-
+				//console.log(lessonId);
+				//console.log("cont attr course");
+				//console.log(Lessons);
+                lessonNode.setAttribute("class","lesson-name");
+                lessonNode.innerHTML = Lessons[parseInt(lessonId)].name;
 				addAttributes (lessonNode , Lessons[parseInt(lessonId)].name , "lesson" , "false" , Lessons[lessonId].id);
 				//lessonNode.setAttribute("data-lesson-idx" , dom.getAttribute("data-index"));
-				jDiv.appendChild(lessonNode);
+                lessonContainer.appendChild(lessonNode);
+				lessonWrapper.appendChild(lessonContainer);
 
 			}
 			dom.parentNode.appendChild(lessonWrapper);
@@ -109,11 +117,11 @@ courseList.onclick = function (event) {
 	else if (contentAttr == "lesson") {
 			var displayAttr = dom.getAttribute ("data-shown"),
 
-				jDiv = createDomHolder (dom , "video-holder"),
+				videoWrapper = createDomHolder (dom , "video-holder"),
 				idx = parseInt(dom.getAttribute("data-index")),
 				videos = Lessons[idx].videos;
 			
-
+                videoWrapper.setAttribute("class","lesson-wrapper");
 			if (displayAttr == "false") {
 
 				dom.setAttribute("data-shown", "true");
@@ -123,11 +131,13 @@ courseList.onclick = function (event) {
 				
 				videos.forEach (function (video)  {
 					var videoNode = document.createElement("div");
+                    videoNode.setAttribute("class","lesson-wrapper__videos");
+                    videoNode.innerHTML = Videos[parseInt(video)].url;
 					addAttributes (videoNode , Videos[parseInt(video)].url , "video" , "false" , Videos[parseInt(video)].id);
-					jDiv.appendChild(videoNode);
+					videoWrapper.appendChild(videoNode);
 
 				});	
-				dom.happendChild(videoWrapper);
+				dom.parentNode.appendChild(videoWrapper);
 
 			} else {
 				hideDom(dom);
