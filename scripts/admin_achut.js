@@ -2,26 +2,26 @@
 	var courseForm = document.getElementById("course-form"),
 	lessonForm = document.getElementById("lesson-form"),
 	videoForm = document.getElementById("video-form"),
+    courseList = document.getElementById("inner-content"),
 
 	addAttributes = function(node, value, content, display , index) {
 		node.setAttribute("data-id",value);
 		node.setAttribute("data-content",content);
 		node.setAttribute("data-shown",display);
 		node.setAttribute("data-index",index);
-		node.innerHTML = value;
-	},
+		//node.innerHTML = value;
+	};
 
-	hideAllForms = function () {
+	/*hideAllForms = function () {
 		courseForm.setAttribute("style" , "display:none;");
 		lessonForm.setAttribute("style" , "display:none;");
 		videoForm.setAttribute("style" , "display:none;");
-	};
+	};*/
 
-var retrieve = function () {
-
-	var jList = document.getElementById("list");
+var printList = function () {
 
 	var cnt = 0;
+
 
 	//accumulate all the courses and then append them;\
 	console.log(Courses);
@@ -34,6 +34,7 @@ var retrieve = function () {
 		jDiv.innerHTML = course.name ;
 		jList.appendChild (jDiv);
 
+
 	});
 
 
@@ -41,10 +42,8 @@ var retrieve = function () {
 	
 };
 
-retrieve();
-hideAllForms();
-
-var jList = document.getElementById("list");
+printList();
+/*hideAllForms();*/
 
 
 var createDomHolder = function (dom, holder) {
@@ -54,12 +53,18 @@ var createDomHolder = function (dom, holder) {
 }
 
 var hideDom = function (dom) {
+    
+    console.log(dom.innerHTML);
+
 	dom.setAttribute("data-shown", "false");
+    
+    
 	dom.innerHTML = dom.getAttribute("data-id");
+    //console.log(dom.innerHTML);
 }
 
 //TODO convert to 
-jList.onclick = function (event) {
+courseList.onclick = function (event) {
 	var dom = event.target;
 
 	console.log (dom);
@@ -69,7 +74,11 @@ jList.onclick = function (event) {
 	if (contentAttr == "course") {
 
 		var displayAttr = dom.getAttribute ("data-shown");
-		var jDiv = createDomHolder (dom,"lesson-holder");
+		var lessonWrapper = createDomHolder (dom,"lesson-holder");
+        
+        
+        lessonWrapper.setAttribute("class","inner-content__course-card__lessons");
+        
 		var idx = parseInt(dom.getAttribute("data-index"));
 		var lessonIds = Courses[idx].lessons;
 		
@@ -77,6 +86,7 @@ jList.onclick = function (event) {
 		if (displayAttr == "false") {
 			console.log (Courses[idx]);
 			dom.setAttribute("data-shown", "true");
+
 			console.log(lessonIds, "Asfsdfs");
 			for (var lessonId of lessonIds) {
 				var lessonNode = document.createElement("div");
@@ -87,8 +97,9 @@ jList.onclick = function (event) {
 				addAttributes (lessonNode , Lessons[parseInt(lessonId)].name , "lesson" , "false" , Lessons[lessonId].id);
 				//lessonNode.setAttribute("data-lesson-idx" , dom.getAttribute("data-index"));
 				jDiv.appendChild(lessonNode);
+
 			}
-			dom.appendChild(jDiv);
+			dom.parentNode.appendChild(lessonWrapper);
 
 		} else {
 			hideDom(dom);
@@ -97,22 +108,26 @@ jList.onclick = function (event) {
 
 	else if (contentAttr == "lesson") {
 			var displayAttr = dom.getAttribute ("data-shown"),
+
 				jDiv = createDomHolder (dom , "video-holder"),
 				idx = parseInt(dom.getAttribute("data-index")),
 				videos = Lessons[idx].videos;
 			
+
 			if (displayAttr == "false") {
 
 				dom.setAttribute("data-shown", "true");
 
 				
+
 				
 				videos.forEach (function (video)  {
 					var videoNode = document.createElement("div");
 					addAttributes (videoNode , Videos[parseInt(video)].url , "video" , "false" , Videos[parseInt(video)].id);
 					jDiv.appendChild(videoNode);
+
 				});	
-				dom.appendChild(jDiv);
+				dom.happendChild(videoWrapper);
 
 			} else {
 				hideDom(dom);
@@ -120,7 +135,7 @@ jList.onclick = function (event) {
 	}
 };
 
-
+/*
 var addButton = document.getElementById("add-buttons");
 
 
@@ -282,3 +297,4 @@ var updateOptions = function () {
 };
 
 courseVideo.onchange = updateOptions;
+*/
