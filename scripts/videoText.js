@@ -170,6 +170,9 @@ $(function(){
 		init : function() {
 			var videos=octopus.getAllVideos();
 			var parent=$("#l1");
+			var optSign = $('#bar');
+			var sideBlk = $('#lesson-list-container');
+			console.log(sideBlk);
 			var index=-1;
 			var listAppend=videos.reduce(function(a,b){
 				index++;
@@ -178,8 +181,10 @@ $(function(){
 			parent.append(listAppend);
 			$("#l1").on("click", function(e) {
 				if(e.target && e.target.nodeName == "LI") {
+					sideBlk.css('transform','translateX(-100%)');
+					optSign.css("visibility", "visible");
+					$('#content-styler').css('opacity','1');
 					octopus.changeCurrentVideo(e.target.id);
-					console.log("List item ", e.target.id.replace("post-"), " was clicked!");
 				}
 			});
 			this.render();
@@ -203,18 +208,23 @@ $(function(){
 	};
 	var notesView = {
 		init: function() {
-			$("#save-notes").on('click',function(){
-				a=advancedEditor.getContents();
-				octopus.addNewNote(a);
-				$("#save-notes").attr('class','save-notes-btn--grey');
-				$("#save-notes").attr('disabled','true');
+			$('#toolbar-top').on('click',function(e){
+				if(e.target.id=="save-notes")
+				{
+					a=advancedEditor.getContents();
+					octopus.addNewNote(a);
+					$("#save-notes").attr('class','save-notes-btn--grey');
+					$("#save-notes").attr('disabled','true');
+				}
+				else if(e.target.id=="embed-bin-btn")
+				{
+					octopus.showModal();
+				}
+				else if(e.target.id=="change-view")
+				{
+					octopus.changeView();
+				}
 			});
-			$('#embed-bin-btn').on('click',function(){
-				octopus.showModal();
-			});
-			$('#change-view').on('click',function() {
-				octopus.changeView();
-			})
 			advancedEditor.on("text-change",function(delta){
 				if(!octopus.isSetContentsCalled()){
 					$("#save-notes").removeAttr('disabled');
@@ -249,14 +259,18 @@ $(function(){
 	};
 	var modalView = {
 		init: function() {
-			$('#hide-jsbin').on('click',function(){
-				modalView.hidemodal();
-			});
-			$("#saveUrl").on('click',function(){
-				var t2=$("#jsbinUrl").val();
-				octopus.addNewjsbin(t2);
-				$('.embed-bin-btn').eq(0).attr("disabled",true);
-				$('.embed-bin-btn').eq(0).css("background-color",'grey');
+			$('#modal').on('click',function(e){
+				if(e.target.id=='hide-jsbin')
+				{
+					modalView.hidemodal();
+				}
+				else if(e.target.id=='saveUrl')
+				{
+					var t2=$("#jsbinUrl").val();
+					octopus.addNewjsbin(t2);
+					$('.embed-bin-btn').eq(0).attr("disabled",true);
+					$('.embed-bin-btn').eq(0).css("background-color",'grey');
+				}
 			});
 		},
 		jsbinmodal: function() {
@@ -293,7 +307,6 @@ $(function(){
 		init: function() {
 			document.getElementById("lesson-anchor").href = "lessonCards.html?topic="+model.topicId;
 			var lessonName = $("#lesson-name"), topicName = $("#topic-name");
-			//this.videoTag=$(".video");
 			lessonName.html(octopus.getCurrentLessonName());
 			topicName.html(octopus.getCurrentTopicName());
 			view.resizeWindow();
