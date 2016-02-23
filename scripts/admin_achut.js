@@ -1,4 +1,18 @@
-//var data = JSON.parse(localStorage.topiclists),
+var model = {
+
+	},
+	controller = {
+
+	},
+
+	viewDisplay = {
+
+	},
+
+	viewInsert = {
+
+	};
+
 	var courseForm = document.getElementById("course-form"),
 	lessonForm = document.getElementById("lesson-form"),
 	videoForm = document.getElementById("video-form"),
