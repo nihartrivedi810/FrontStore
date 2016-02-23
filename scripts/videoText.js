@@ -168,15 +168,16 @@ $(function(){
 	};
 	var sidePanelView = {
 		init : function() {
-			var videos=octopus.getAllVideos();
-			var parent=$("#l1");
-			var optSign = $('#bar');
-			var sideBlk = $('#lesson-list-container');
+			var videos=octopus.getAllVideos(),
+			parent=$("#l1"),
+			optSign = $('#bar'),
+			sideBlk = $('#lesson-list-container'),
+			index,listAppend;
 			console.log(sideBlk);
-			var index=-1;
-			var listAppend=videos.reduce(function(a,b){
+			index=-1;
+			listAppend=videos.reduce(function(videoHTMLString){
 				index++;
-				return a + '<li id="'+ index +'"class="lesson-list-container__lesson--title">Video'+ (parseInt(index)+1) +'</li>';
+				return videoHTMLString + '<li id="'+ index +'"class="lesson-list-container__lesson--title">Video'+ (parseInt(index)+1) +'</li>';
 			},"");
 			parent.append(listAppend);
 			$("#l1").on("click", function(e) {
