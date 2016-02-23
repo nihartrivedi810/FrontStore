@@ -92,8 +92,6 @@ and open the template in the editor.
 }
 
 .content-container{
-    
-    
     height: auto;
 }
 .content-box{
@@ -103,20 +101,20 @@ and open the template in the editor.
     left: 20%;
     top:20%;
     justify-content: space-around;
+    clear: both;
+    content: "";
+    display: table;
 }
 
-.content-box__course-box .flipped{
-    -webkit-transform: rotatex(-180deg);
-
-}
 .content-box__course-box{
     
     height: 300px;
     width: 300px;
-    margin: 5%;
-    /*display: inline-block;*/
+    margin: 7.5%;
+    /* display: inline-block; */
     position: relative;
-    word-wrap:wrap-all;
+    word-wrap: wrap-all;
+    float: left;
 
     
 }
@@ -262,7 +260,7 @@ and open the template in the editor.
 	transform: perspective( 600px ) rotateX( 180deg );
 	/*background: #80BFFF; width:240px; height:200px; border-radius: 7px;*/
 	backface-visibility: hidden;
-	transition: transform .5s linear 0s;
+	transition: transform 0.5s linear 0s;
 
     font-family: Cambria, Georgia, serif;
     font-size: 24px;
