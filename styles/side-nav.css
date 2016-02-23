@@ -9,7 +9,7 @@ body {
 text-rendering: optimizelegibility;
 }
 
-.pr{
+.position-relative{
 	position: relative;
 }
 
@@ -18,10 +18,11 @@ text-rendering: optimizelegibility;
 }
 
 #side-bar{
+	background-color: #0072BB;
 	position: relative;
 	height: auto;
-	width:50px;
-	left:-20px;
+	width:40px;
+	left:-35px;
 	display: inline-block;
 	border-radius: 50%;
 	border: 1px solid;

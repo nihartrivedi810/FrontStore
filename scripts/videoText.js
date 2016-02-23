@@ -6,17 +6,22 @@ $(function(){
 	var model = {
 		setContentsCalled :false,
 		init: function() {
-			var topiclists=JSON.parse(localStorage.topiclists);
-			var topic = parseInt(localStorage.currentTopic);
-			model.topicName = topiclists[topic]["topic"];
-			videoList=topiclists[topic].material[localStorage.lesson];
-			if (!localStorage.notes) {
-				
-				localStorage.notes = JSON.stringify({});
+			model.topicId = model.getParameterByName("topic");
+			model.lessonId = model.getParameterByName("lesson");
+			var topiclists=localStorageGet('topiclists');
+			videoList=topiclists[model.topicId].material[model.lessonId];
+			if(!localStorageGet('topiclists')||!(/^\d+$/.test(model.topicId))||!model.lessonId||!topiclists[model.topicId]||!videoList)
+			{
+				$(location).attr('href', 'homepage.html');
+			}
+			
+			model.topicName = topiclists[model.topicId]["topic"];
+			if (!localStorageGet('notes')) {
+				localStorageSet('notes',{});
 			}
 		},
 		addNewNote: function(obj) {
-			var data =JSON.parse(localStorage.notes);
+			var data =localStorageGet('notes');
 			if(data[videoList[currentVideo]])
 			{
 				data[videoList[currentVideo]].notes=obj;
@@ -25,11 +30,11 @@ $(function(){
 			{
 				data[videoList[currentVideo]]={ notes: obj};	
 			}
-			localStorage.notes = JSON.stringify(data);
+			localStorageSet('notes',data);
 			
 		},
 		addNewjsbin: function(jsbinURL) {
-			var data =JSON.parse(localStorage.notes);
+			var data =localStorageGet('notes');
 			if(data[videoList[currentVideo]])
 			{
 				data[videoList[currentVideo]].jsbin=jsbinURL;
@@ -38,10 +43,10 @@ $(function(){
 			{
 				data[videoList[currentVideo]]={ jsbin: jsbinURL};	
 			}
-			localStorage.notes = JSON.stringify(data);
+			localStorageSet('notes',data);
 		},
 		getNotesOfCurrentVideo: function() {
-			var data=JSON.parse(localStorage.notes);
+			var data=localStorageGet('notes');
 			if(data[videoList[currentVideo]])
 			{
 				return data[videoList[currentVideo]].notes;	
@@ -52,7 +57,7 @@ $(function(){
 			}
 		},
 		getjsbinOfCurrentVideo: function() {
-			var data=JSON.parse(localStorage.notes);
+			var data=localStorageGet('notes');;
 			if(data[videoList[currentVideo]])
 			{
 				return data[videoList[currentVideo]].jsbin;	
@@ -76,10 +81,19 @@ $(function(){
 			currentVideo=newVideo;
 		},
 		getCurrentLessonName: function(){
-			return localStorage.lesson;
+			return model.lessonId;
 		},
 		getCurrentTopicName: function(){
 			return model.topicName;
+		},
+		getParameterByName: function(name, url) {
+			if (!url) url = window.location.href;
+			name = name.replace(/[\[\]]/g, "\\$&");
+			var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+			results = regex.exec(url);
+			if (!results) return null;
+			if (!results[2]) return '';
+			return decodeURIComponent(results[2].replace(/\+/g, " "));
 		}
 	};
 
@@ -106,7 +120,7 @@ $(function(){
 		getjsbinOfCurrentVideo: function() {
 			return model.getjsbinOfCurrentVideo();
 		},
-	
+
 		getCurrentVideo: function() {
 			return model.getCurrentVideo();
 		},
@@ -157,25 +171,29 @@ $(function(){
 	}; 
 	var view = {
 		init: function() {
+			document.getElementById("lesson-anchor").href = "lessonCards.html?topic="+model.topicId;
 			var lessonName = $("#lesson-name"), topicName = $("#topic-name");
 			this.videoTag=$(".video");
 			this.jsbintag=$(".jsbin");
 			lessonName.html(octopus.getCurrentLessonName());
+			//console.log(octopus.getCurrentTopicName());
 			topicName.html(octopus.getCurrentTopicName());
-			$("#saveNotes").on('click',function(){
+			$("#save-notes").on('click',function(){
 				a=advancedEditor.getContents();
 				octopus.addNewNote(a);
-				$("#saveNotes").attr('class','saveNotes-grey');
-				$("#saveNotes").attr('disabled','true');
+				$("#save-notes").attr('class','save-notes-btn--grey');
+				$("#save-notes").attr('disabled','true');
 			});
 			$("#saveUrl").on('click',function(){
 				var t2=$("#jsbinUrl").val();
 				octopus.addNewjsbin(t2);
+				$('.embedBin').eq(0).attr("disabled",true);
+				$('.embedBin').eq(0).css("background-color",'grey');
 			});
 			advancedEditor.on("text-change",function(delta){
 				if(!octopus.isSetContentsCalled()){
-					$("#saveNotes").removeAttr('disabled');
-					$("#saveNotes").attr('class','saveNotes');
+					$("#save-notes").removeAttr('disabled');
+					$("#save-notes").attr('class','save-notes-btn');
 				}
 				octopus.setContentsCalled(false);
 			});

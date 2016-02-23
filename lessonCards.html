@@ -1,50 +1,58 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw==" crossorigin="anonymous">
-        <link rel="stylesheet" href="styles/cards.css">
-    </head>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw==" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/cards.css">
+</head>
 
-    <body class = "bg-clr">
+<body class = "bg-clr">
 
-        <div class="headerBar">
-                <div class="innerContent">
-                    <div class="innerContent__logo">
-                        <img class="innerContent__logo--image" src="images/sexy_sprinlklr_logo.png" alt="Sprinklr">
-                    </div>
-                    <div class="innerContent__account drop">
-                        <p class="innerContent__account--profile-Name">
-                            <b>Account</b>
-                        </p>
-                        <div class="drop-list">
-                           <a class="drop-list__element" href="#">Settings</a>
-                            <a class="drop-list__element" href="index.html">Logout</a>
-                        </div>
-                    </div>
-                </div>
-        </div>
-        <div class = "template" id = "template">
-        <div class = "cards shadow" id = "card">
-            <div class = "cards__container">
-                <div class = "cards__container__content">
-                    <div class = "content-name" id = "content-name"></div>
-                    <div class = "content-info" id = "content-info">Responsive ImagesResponsive ImagesResponsive ImagesResponsive Images Responsive Images Responsive </div>
-
-                </div>
-                <i class="fa fa-play-circle-o fa-lg cards__play"></i>
+    <div class="headerBar">
+        <div class="innerContent">
+            <div class="innerContent__logo">
+                <img class="innerContent__logo--image" src="images/sexy_sprinlklr_logo.png" alt="Sprinklr">
             </div>
+            <div class="innerContent__account drop">
+                <p class="innerContent__account--profile-Name">
+                    <b>Account</b>
+                </p>
+                <div class="drop-list">
+                 <a class="drop-list__element" href="#">Settings</a>
+                 <a class="drop-list__element" href="index.html">Logout</a>
+             </div>
+         </div>
+     </div>
+ </div>
+ <div class="breadcrumb">
+
+    <a class="breadcrumb--anchor" href="homepage.html"><i class="fa fa-home"></i></a>
+    <span class="arrow--grey">></span>
+    <div class="topic-name" id="topic-name">
+    </div>
+</div>
+<div class = "template" id = "template">
+    <div class = "cards shadow" id = "card">
+        <div class = "cards__container">
+            <div class = "cards__container__content">
+                <div class = "content-name" id = "content-name"></div>
+                <div class = "content-info" id = "content-info">Responsive ImagesResponsive ImagesResponsive ImagesResponsive Images Responsive Images Responsive </div>
+
+            </div>
+            <i class="fa fa-play-circle-o fa-lg cards__play play-icon"></i>
         </div>
     </div>
+</div>
 
+<div class = "container">
 
-    <div class = "container">
+</div>
+<script type="text/javascript" src="scripts/localStorageUtil.js"></script>
+<script src="jquery-1.12.0.min.js"></script>
+<script type="text/javascript" src = "scripts/lessonCards.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
 
-    </div>
-
-    <script type="text/javascript" src = "scripts/lessonCards.js"></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
 </body>
 </html>
 
-    
+

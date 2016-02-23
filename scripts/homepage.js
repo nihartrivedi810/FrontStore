@@ -11,13 +11,13 @@ $(function(){
 
 	var model = {
 		init: function() {
-			if (!localStorage.topiclists) {
-				localStorage.topiclists = JSON.stringify(complete);
+			if (!localStorageGet("topiclists")){
+				localStorageSet("topiclists",complete);
 			}			
 		},
 		getAllTopics: function() {
 			//var a=[];
-			var topiclists = JSON.parse(localStorage.topiclists);
+			var topiclists = localStorageGet('topiclists');
 			// for(var object in topiclists)
 			// {
 			// 	a.push(topiclists[object].topic);
@@ -27,8 +27,8 @@ $(function(){
 		},
 		topicClicked: function(topicID)
 		{
-			localStorage.currentTopic=topicID;
-			$(location).attr('href', 'lessonCards.html');
+			//localStorageSet('currentTopic',topicID);
+			$(location).attr('href', 'lessonCards.html?topic='+topicID);
 		}
 
 	};
