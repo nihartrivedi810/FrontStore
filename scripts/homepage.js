@@ -74,7 +74,6 @@ $(function(){
 			this.contentBox.on('click',function(e){
 				if(e.target.parentNode.tagName==='BUTTON')
 				{
-					alert(e.target.parentNode.id);
 					return octopus.topicClicked(e.target.parentNode.id);
 				}
 			});
