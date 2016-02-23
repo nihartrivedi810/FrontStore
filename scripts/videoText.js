@@ -6,14 +6,16 @@ $(function(){
 	var model = {
 		setContentsCalled :false,
 		init: function() {
-			if(!localStorageGet('topiclists')||(localStorageGet('currentTopic')==='false')||!localStorageGet('lesson'))
+			model.topicId = model.getParameterByName("topic");
+			model.lessonId = model.getParameterByName("lesson");
+			var topiclists=localStorageGet('topiclists');
+			videoList=topiclists[model.topicId].material[model.lessonId];
+			if(!localStorageGet('topiclists')||!(/^\d+$/.test(model.topicId))||!model.lessonId||!topiclists[model.topicId]||!videoList)
 			{
 				$(location).attr('href', 'homepage.html');
 			}
-			var topiclists=localStorageGet('topiclists');
-			var topic = parseInt(localStorageGet('currentTopic'));
-			model.topicName = topiclists[topic]['topic'];
-			videoList=topiclists[topic].material[localStorageGet('lesson')];
+			
+			model.topicName = topiclists[model.topicId]["topic"];
 			if (!localStorageGet('notes')) {
 				localStorageSet('notes',{});
 			}
@@ -79,10 +81,19 @@ $(function(){
 			currentVideo=newVideo;
 		},
 		getCurrentLessonName: function(){
-			return localStorageGet('lesson');;
+			return model.lessonId;
 		},
 		getCurrentTopicName: function(){
 			return model.topicName;
+		},
+		getParameterByName: function(name, url) {
+			if (!url) url = window.location.href;
+			name = name.replace(/[\[\]]/g, "\\$&");
+			var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+			results = regex.exec(url);
+			if (!results) return null;
+			if (!results[2]) return '';
+			return decodeURIComponent(results[2].replace(/\+/g, " "));
 		}
 	};
 
@@ -109,7 +120,7 @@ $(function(){
 		getjsbinOfCurrentVideo: function() {
 			return model.getjsbinOfCurrentVideo();
 		},
-	
+
 		getCurrentVideo: function() {
 			return model.getCurrentVideo();
 		},
@@ -160,11 +171,12 @@ $(function(){
 	}; 
 	var view = {
 		init: function() {
+			document.getElementById("lesson-anchor").href = "lessonCards.html?topic="+model.topicId;
 			var lessonName = $("#lesson-name"), topicName = $("#topic-name");
 			this.videoTag=$(".video");
 			this.jsbintag=$(".jsbin");
 			lessonName.html(octopus.getCurrentLessonName());
-			console.log(octopus.getCurrentTopicName());
+			//console.log(octopus.getCurrentTopicName());
 			topicName.html(octopus.getCurrentTopicName());
 			$("#save-notes").on('click',function(){
 				a=advancedEditor.getContents();
