@@ -2,44 +2,47 @@ var data = JSON.parse(localStorage.topiclists),
 	courseForm = document.getElementById("course-form"),
 	lessonForm = document.getElementById("lesson-form"),
 	videoForm = document.getElementById("video-form"),
+    courseList = document.getElementById("inner-content"),
 
 	addAttributes = function(node, value, content, display , index) {
 		node.setAttribute("data-id",value);
 		node.setAttribute("data-content",content);
 		node.setAttribute("data-shown",display);
 		node.setAttribute("data-index",index);
-		node.innerHTML = value;
-	},
+		//node.innerHTML = value;
+	};
 
-	hideAllForms = function () {
+	/*hideAllForms = function () {
 		courseForm.setAttribute("style" , "display:none;");
 		lessonForm.setAttribute("style" , "display:none;");
 		videoForm.setAttribute("style" , "display:none;");
-	};
+	};*/
 
-var retrieve = function () {
-
-	var jList = document.getElementById("list");
+var printList = function () {
 
 	var cnt = 0;
 
 	//accumulate all the courses and then append them;
-	data.forEach (function(course) {
+	data.forEach (function(courseElement) {
 
-		var jDiv = document.createElement("div");
+		var courseCard = document.createElement("div");
+        courseCard.setAttribute("class","inner-content__course-card");
+		var course = document.createElement("div");
+        course.setAttribute("class","inner-content__course-card__course");
+        
+        
+		addAttributes( course, courseElement.topic, "course" , "false" , cnt++);
 		
-		addAttributes (jDiv , course.topic, "course" , "false" , cnt++);
-		
-		jDiv.innerHTML = course.topic;
-		jList.appendChild (jDiv);
+		course.innerHTML = courseElement.topic;
+        
+        courseCard.appendChild(course);
+		courseList.appendChild(courseCard);
 
 	});
 };
 
-retrieve();
-hideAllForms();
-
-var jList = document.getElementById("list");
+printList();
+/*hideAllForms();*/
 
 
 var createDomHolder = function (dom, holder) {
@@ -49,12 +52,18 @@ var createDomHolder = function (dom, holder) {
 }
 
 var hideDom = function (dom) {
+    
+    console.log(dom.innerHTML);
+
 	dom.setAttribute("data-shown", "false");
+    
+    
 	dom.innerHTML = dom.getAttribute("data-id");
+    //console.log(dom.innerHTML);
 }
 
 //TODO convert to 
-jList.onclick = function (event) {
+courseList.onclick = function (event) {
 	var dom = event.target;
 
 	console.log (dom);
@@ -63,7 +72,11 @@ jList.onclick = function (event) {
 	if (contentAttr == "course") {
 
 		var displayAttr = dom.getAttribute ("data-shown");
-		var jDiv = createDomHolder (dom,"lesson-holder");
+		var lessonWrapper = createDomHolder (dom,"lesson-holder");
+        
+        
+        lessonWrapper.setAttribute("class","inner-content__course-card__lessons");
+        
 		var idx = parseInt(dom.getAttribute("data-index"));
 		var lessons = data[idx].material;
 
@@ -72,12 +85,18 @@ jList.onclick = function (event) {
 			dom.setAttribute("data-shown", "true");
 
 			for (var lesson in lessons) {
-				var lessonNode = document.createElement("div");
-				addAttributes (lessonNode , lesson , "lesson" , "false" , lesson);
-				lessonNode.setAttribute("data-lesson-idx" , dom.getAttribute("data-index"));
-				jDiv.appendChild(lessonNode);
+				
+                var lessonElement = document.createElement("div");
+                lessonElement.setAttribute("class","lesson-name");
+                
+                addAttributes(lessonElement , lesson , "lesson" , "false" , lesson);
+				lessonElement.setAttribute("data-lesson-idx", dom.getAttribute("data-index"));
+                lessonElement.innerHTML = lesson;
+                
+                lessonWrapper.appendChild(lessonElement);
+				
 			}
-			dom.appendChild(jDiv);
+			dom.parentNode.appendChild(lessonWrapper);
 
 		} else {
 			hideDom(dom);
@@ -86,10 +105,11 @@ jList.onclick = function (event) {
 
 	else if (contentAttr == "lesson") {
 			var displayAttr = dom.getAttribute ("data-shown"),
-				jDiv = createDomHolder (dom , "video-holder"),
+				videoWrapper = createDomHolder (dom , "video-holder"),
 				idx = parseInt(dom.getAttribute("data-lesson-idx")),
 				lessons = data[idx].material;
-			
+            console.log(idx);
+			videoWrapper.setAttribute("class","lesson-wrapper");
 			if (displayAttr == "false") {
 
 				dom.setAttribute("data-shown", "true");
@@ -97,11 +117,13 @@ jList.onclick = function (event) {
 				lessons = lessons[dom.getAttribute("data-index")];
 				
 				lessons.forEach (function (video)  {
-					var videoNode = document.createElement("div");
-					addAttributes (videoNode , video , "video" , "false" , video);
-					jDiv.appendChild(videoNode);
+					var videoElement = document.createElement("div");
+                    videoElement.setAttribute("class","lesson-wrapper__videos");
+                    videoElement.innerHTML= video;
+					addAttributes (videoElement , video , "video" , "false" , video);
+					videoWrapper.appendChild(videoElement);
 				});	
-				dom.appendChild(jDiv);
+				dom.happendChild(videoWrapper);
 
 			} else {
 				hideDom(dom);
@@ -109,7 +131,7 @@ jList.onclick = function (event) {
 	}
 };
 
-
+/*
 var addButton = document.getElementById("add-buttons");
 
 
@@ -224,3 +246,4 @@ var updateOptions = function () {
 };
 
 courseVideo.onchange = updateOptions;
+*/
