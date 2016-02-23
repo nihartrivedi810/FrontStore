@@ -137,7 +137,7 @@ $(function(){
 	var sidePanelView = {
 		init : function() {
 			var videos=octopus.getAllVideos();
-			var parent=$("#l1");
+			var parent=$("#l1");//TODO 
 			for(var i in videos)
 			{
 				parent.append('<li id="'+ i +'"class="lesson-list-container__lesson--title">Video'+ (parseInt(i)+1) +'</li>');
@@ -158,7 +158,7 @@ $(function(){
 
 		} 
 	}; 
-	var view = {
+	var view = {//passs variables DOM
 		init: function() {
 			var lessonName = $("#lesson-name"), topicName = $("#topic-name");
 			this.videoTag=$(".video");

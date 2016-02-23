@@ -25,10 +25,10 @@ $(function(){
 
 			return topiclists;
 		},
-		topicClicked: function(topicID)
+		topicClicked: function(topicID)//TODO
 		{
 			localStorageSet('currentTopic',topicID);
-			$(location).attr('href', 'lessonCards.html');
+			$(location).attr('href', 'lessonCards.html');//TODO 
 		}
 
 	};
@@ -55,7 +55,7 @@ $(function(){
 		},
 		render: function() {
 			var topics=octopus.getAllTopics();
-			for(var i=0;i<topics.length;i++)
+			for(var i=0;i<topics.length;i++)//TODO forEach reduce DOM Operation
 			{
 				this.contentBox.append('<div class="content-box__course-box"><div class="content-box__course-box__course-content">'+
                         '<div class="content-face front-box">'+
@@ -67,9 +67,9 @@ $(function(){
                         '</div>'+
                     '</div>'+
                 '</div>');
-                $('#'+i).on('click',(function(topicID)
+                $('#'+i).on('click',(function(topicID)//TODO 
                 {
-                	return function()
+                	return function()//TODO bind
                 	{
                 		octopus.topicClicked(topicID);	
                 	}

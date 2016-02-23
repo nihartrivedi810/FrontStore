@@ -6,7 +6,7 @@ function localStorageGet(name)
 	}
 	else
 	{
-		return false;
+		return null;
 	}
 };
 function localStorageSet(name,value)
