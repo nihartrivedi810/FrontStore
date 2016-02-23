@@ -34,8 +34,9 @@ var octopus = {
 	},
 
 	setLesson : function (attr) {
-		localStorageSet('lesson',attr);
-		$(location).attr('href', 'index.html');
+		//localStorageSet('lesson',attr);
+		console.log(attr);
+		$(location).attr('href', 'index.html?topic='+model.topicID+'&lesson='+attr);
 	},
 	getTopic: function(){
 		return model.topics[model.topicID]["topic"];
