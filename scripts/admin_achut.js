@@ -1,16 +1,230 @@
-//var data = JSON.parse(localStorage.topiclists),
+var model = {
+
+	},
+	controller = {
+		init : function () {
+			viewDisplay.init();
+		}
+	},
+
+	viewDisplay = {
+
+		courseList : document.getElementById("inner-content"),
+    	contentBox : document.getElementById("content-box"),
+
+    	init : function () {
+    		this.render();
+    		this.addhandler();
+    	},
+		
+		addAttributes : function(node, value, content, display , index) {
+			node.setAttribute("data-id",value);
+			node.setAttribute("data-content",content);
+			node.setAttribute("data-shown",display);
+			node.setAttribute("data-index",index);
+			//node.innerHTML = value;
+		},
+
+		// appendCourses : function () {
+		// 	//accumulate all the courses and then append them;\
+		// 	//console.log(Courses);
+		// 	Courses.forEach(function (courseElement) {
+		// 		var courseCard = document.createElement("div");
+		//         courseCard.setAttribute("class","inner-content__course-card");
+		// 		var course = document.createElement("div");
+		//         course.setAttribute("class","inner-content__course-card__course");
+		// 		addAttributes (course , courseElement.name, "course" , "false" , courseElement.id);
+		// 		course.innerHTML = courseElement.name ;
+		//         courseCard.appendChild(course);
+		// 		courseList.appendChild (courseCard);
+		// 	});
+		// },
+
+		render : function () {
+
+			console.log (this.addAttributes);
+
+			var that = this;
+			var str = "<button class=\"course-add\">Add Course</button> <div class=\"course__add__input-contain\" ><input type=\"text\" id=\"input_new_course\"><button class=\"course__add_input-contain__button\">Add Course</button>";
+		        
+			that.courseList.innerHTML = str;
+			Courses.forEach(function (courseElement) {
+				var courseCard = document.createElement("div");
+		        courseCard.setAttribute("class","inner-content__course-card");
+				var course = document.createElement("div");
+		        course.setAttribute("class","inner-content__course-card__course");
+				that.addAttributes (course , courseElement.name, "course" , "false" , courseElement.id);
+				course.innerHTML = courseElement.name ;
+		        courseCard.appendChild(course);
+
+		        var lessonContainer = document.createElement("div");
+		        lessonContainer.setAttribute("class","inner-content__course-card__lessons");
+
+		        
+		        lessonContainer.innerHTML = "<button class=\"lesson__add\" data-course="+courseElement.id+">Add Lesson</button> <div class=\"lesson__add__input-contain\" ><input type=\"text\" id=\"input_new_lesson\"><button class=\"lesson__add_input-contain__button\"data-course="+courseElement.id+">Add Lesson</button>";
+		        lessonIds = courseElement.lessons;
+		        for (var lessonId of lessonIds){
+		        	var lesson = Lessons[lessonId];
+
+		        	var lessonWrap = document.createElement("div");
+		        	lessonWrap.setAttribute("class","lesson-wrapper");
+
+		        	var lessonTitle = document.createElement("div");
+		        	lessonTitle.setAttribute("class","lesson-name");
+
+		        	that.addAttributes(lessonTitle,lesson.name,"lesson","false",lesson.id);
+		        	lessonTitle.innerHTML = lesson.name;
+		        	lessonWrap.appendChild(lessonTitle);
+
+		        	var videoContainer = document.createElement("div");
+		        	videoContainer.setAttribute("class","video-wrapper");
+		        	videoContainer.innerHTML = "<button class=\"video-add\" data-course="+lesson.id+">Add Video</button> <div class=\"video__add__input-contain\" ><input type=\"text\" id=\"input_new_video\"><button class=\"video__add_input-contain__button\"data-lesson="+lesson.id+">Add Video</button>";
+
+		        	//videoContainer.innerHTML = "<div class=\"input\"
+		        	for ( var videoId of lesson.videos)
+		        	{
+		        		var video = Videos[videoId];
+		        		
+		        		var videoWrapper = document.createElement("div");
+		        		videoWrapper.setAttribute("class","lesson-wrapper__videos");
+		        		that.addAttributes(videoWrapper,video.url,"video","false",video.id);
+		        		videoWrapper.innerHTML = video.url;
+
+		        		videoContainer.appendChild(videoWrapper);
+		        	}
+
+		        	lessonWrap.appendChild(videoContainer);
+
+
+		        	lessonContainer.appendChild(lessonWrap);
+		        }
+
+		        courseCard.appendChild(lessonContainer);
+
+		        console.log (that);
+				that.courseList.appendChild (courseCard);
+			});
+				
+
+		},
+
+		addhandler : function () {
+
+			this.contentBox.onclick = function(event){
+
+			    	if(event.target.className == "inner-content__course-card__course")
+			    	{
+			    		console.log("on click fired", event.target);
+			    		var sibling = event.target.nextSibling;
+			    		console.log(sibling);
+			    	}
+			    	if(event.target.className == "lesson-name")
+			    	{
+			    		var sibling = event.target.nextSibling;
+			    	}
+			    	if(sibling)
+			    		sibling.style.height = (sibling.clientHeight == 0? "auto":"0");
+
+			    	if(event.target.className == "lesson__add")
+			    	{
+			    		event.target.style.display = "none";
+			    		console.log(event.target.nextSibling.nextSibling);
+			    		event.target.nextSibling.nextSibling.style.height = "auto";
+
+			    	}
+			    	console.log(event.target.className);
+			    	if(event.target.className == "lesson__add_input-contain__button")
+			    	{
+			    		console.log("in the lesson submit");
+			    		console.log(event.target.parentNode.firstChild.value);
+			    		var lesson = event.target.parentNode.firstChild.value;
+
+			    		var course = event.target.getAttribute("data-course");
+			    		Lessons.push(new Lesson(lessonId,lesson,undefined,course));
+						localStorage.setItem('Lessons',JSON.stringify(Lessons));
+	
+						Courses[parseInt(course)].lessons.push(lessonId);
+						localStorage.setItem('Courses',JSON.stringify(Courses));
+						lessonId++;
+
+						console.log("in the lesson submit",lessonId);
+						console.log(JSON.parse(localStorage.getItem('Courses')));
+						console.log(JSON.parse(localStorage.getItem('Lessons')));
+						//location.reload();
+			    	}
+			    	if(event.target.className == "video-add")
+			    	{
+			    		event.target.style.display = "none";
+			    		console.log(event.target.nextSibling.nextSibling);
+			    		event.target.nextSibling.nextSibling.style.height = "auto";
+
+			    	}
+			    	console.log(event.target.className);
+			    	if(event.target.className == "video__add_input-contain__button")
+			    	{
+			    		console.log("in the lesson submit");
+			    		//event.target.parentNode.firstChild.value);
+			    		var video = event.target.parentNode.firstChild.value;
+			    		var lesson = event.target.getAttribute("data-lesson");
+
+			    		Videos.push(new Video(videoId,video,lesson)); 
+						localStorage.setItem('Videos',JSON.stringify(Videos));
+						console.log(parseInt(lesson), videoId);
+						Lessons[parseInt(lesson)].videos.push(videoId);
+
+						localStorage.setItem('Lessons',JSON.stringify(Lessons));
+						videoId++;
+
+						console.log("in the video submit");
+						console.log(JSON.parse(localStorage.getItem('Lessons')));
+						console.log(JSON.parse(localStorage.getItem('Videos')));
+						
+						location.reload();
+			    	}
+
+			    	if(event.target.className == "course-add")
+			    	{
+			    		event.target.style.display = "none";
+			    		console.log(event.target.nextSibling.nextSibling);
+			    		event.target.nextSibling.nextSibling.style.height = "auto";
+			    	}
+
+			    	if(event.target.className == "course__add_input-contain__button")
+			    	{
+			    		var courseName = event.target.parentNode.firstChild.value;
+	
+						if(courseName) {
+							Courses.push(new Course(courseName,undefined,courseId++));
+							
+							localStorage.setItem('Courses',JSON.stringify(Courses));
+							console.log ("added " + courseName);
+							location.reload();
+						}
+
+			    	}
+
+
+
+			    		
+			}
+
+		}
+
+	},
+
+
+
+
+	viewInsert = {
+
+	};
+
+	controller.init();
+
 	var courseForm = document.getElementById("course-form"),
 	lessonForm = document.getElementById("lesson-form"),
-	videoForm = document.getElementById("video-form"),
-    courseList = document.getElementById("inner-content"),
-
-	addAttributes = function(node, value, content, display , index) {
-		node.setAttribute("data-id",value);
-		node.setAttribute("data-content",content);
-		node.setAttribute("data-shown",display);
-		node.setAttribute("data-index",index);
-		//node.innerHTML = value;
-	};
+	videoForm = document.getElementById("video-form");
+    
 
 	/*hideAllForms = function () {
 		courseForm.setAttribute("style" , "display:none;");
@@ -18,57 +232,13 @@
 		videoForm.setAttribute("style" , "display:none;");
 	};*/
 
-var printList = function () {
-
-	var cnt = 0;
 
 
-	//accumulate all the courses and then append them;\
-	//console.log(Courses);
-	Courses.forEach(function (courseElement)
-	{
-		var courseCard = document.createElement("div");
-        courseCard.setAttribute("class","inner-content__course-card");
-		var course = document.createElement("div");
-        course.setAttribute("class","inner-content__course-card__course");
-		addAttributes (course , courseElement.name, "course" , "false" , cnt++);
-		//console.log("inside retrieve")
-		//console.log(courseElement);
-		course.innerHTML = courseElement.name ;
-        courseCard.appendChild(course);
-		courseList.appendChild (courseCard);
 
-
-	});
-
-
-	
-	
-};
-
-printList();
 /*hideAllForms();*/
 
-
-var createDomHolder = function (dom, holder) {
-	var holderNode = document.createElement("div");
-	holderNode.setAttribute("id" , holder);
-	return holderNode;
-}
-
-var hideDom = function (dom) {
-    
-    console.log(dom.innerHTML);
-
-	dom.setAttribute("data-shown", "false");
-    
-    
-	dom.innerHTML = dom.getAttribute("data-id");
-    //console.log(dom.innerHTML);
-}
-
 //TODO convert to 
-courseList.onclick = function (event) {
+/*courseList.onclick = function (event) {
 	var dom = event.target;
 
 	console.log (dom.parentNode);
@@ -121,7 +291,7 @@ courseList.onclick = function (event) {
 				idx = parseInt(dom.getAttribute("data-index")),
 				videos = Lessons[idx].videos;
 			
-                videoWrapper.setAttribute("class","lesson-wrapper");
+                videoWrapper.setAttribute("class","video-wrapper");
 			if (displayAttr == "false") {
 
 				dom.setAttribute("data-shown", "true");
@@ -145,8 +315,8 @@ courseList.onclick = function (event) {
 	}
 };
 
-/*
-var addButton = document.getElementById("add-buttons");
+/**/
+/*var addButton = document.getElementById("add-buttons");
 
 
 //which is better ? write Html or create doms ?
@@ -307,4 +477,9 @@ var updateOptions = function () {
 };
 
 courseVideo.onchange = updateOptions;
+
 */
+
+
+
+
