@@ -70,6 +70,10 @@ Lesson.prototype = {
 		return this.name;
 	},
 
+	getId : function () {
+		return this.id;
+	},
+
 	setName : function() {
 		return this.name;
 	},
@@ -103,8 +107,8 @@ Lesson.prototype = {
 };
 
 var Video = function (_id,_url,_lessonId,_note,_pen){
-	console.log("inside constructor video");
-	console.log(_url);
+	//console.log("inside constructor video");
+	//console.log(_url);
 	this.url = _url;
 	this.id = _id;
 	this.lessonId = _lessonId;
@@ -115,6 +119,10 @@ var Video = function (_id,_url,_lessonId,_note,_pen){
 
 Video.prototype = {
 	constructor : Video,
+	getId : function () {
+		return this.id;
+	},
+
 	getUrl : function() {
 		return this.url;
 	},
@@ -156,7 +164,7 @@ var modelCollection =  {
 		complete.forEach(function (value){	
 			var lessons = [];
 			
-			console.log(value);
+			//console.log(value);
 			for (lesson in value.material){
 				var lessonName = lesson;
 				var videos = [];
@@ -202,10 +210,6 @@ var modelCollection =  {
             Videos.push(new Video(video.id,video.url,video.lessonId));
             videoId++;
         });
-
-        /*courseId =Courses.length; 
-        lessonId = Lessons.length;
-        videoId = Videos.length;*/
     }
 }
 
