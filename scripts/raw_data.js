@@ -107,8 +107,8 @@ Lesson.prototype = {
 };
 
 var Video = function (_id,_url,_lessonId,_note,_pen){
-	console.log("inside constructor video");
-	console.log(_url);
+	//console.log("inside constructor video");
+	//console.log(_url);
 	this.url = _url;
 	this.id = _id;
 	this.lessonId = _lessonId;
@@ -164,7 +164,7 @@ var modelCollection =  {
 		complete.forEach(function (value){	
 			var lessons = [];
 			
-			console.log(value);
+			//console.log(value);
 			for (lesson in value.material){
 				var lessonName = lesson;
 				var videos = [];
