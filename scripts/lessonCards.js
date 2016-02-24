@@ -1,8 +1,9 @@
 var model = {
 	init: function(){
 		model.topicID = parseInt(model.getParameterByName("topic"));
+
 		model.topics = Courses;
-		//console.log(model.getQueryParams())
+		console.log(model.topicID , model.topics);
 	},
 	getParameterByName: function(name, url) {
 		if (!url) url = window.location.href;
@@ -21,8 +22,9 @@ var octopus = {
 		model.init();
 		
 		//console.log(model.topicID);
-		if(!model.topics||!model.topicID||!model.topics[model.topicID])
+		if(!model.topics||(model.topicID !== model.topicID)||!model.topics[model.topicID])
 		{
+			//console.log("should not go here : ",model.topics , model.topicID, model.topics[model.topicID]);
 			$(location).attr('href', 'homepage.html');
 		}
 		view.init();
@@ -43,8 +45,8 @@ var octopus = {
 	},
 
 	setLesson : function (attr) {
-		//localStorageSet('lesson',attr);
-		console.log(attr);
+		
+		//console.log(model.topicID,attr);
 		$(location).attr('href', 'index.html?topic='+model.topicID+'&lesson='+attr);
 	},
 	getTopic: function(){

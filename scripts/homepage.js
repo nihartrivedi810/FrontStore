@@ -11,7 +11,7 @@ $(function(){
 
 	var model = {
 		init: function() {
-			if (!localStorageGet("topiclists")){
+			if (!Courses){
 				localStorageSet("topiclists",complete);
 			}			
 		},
@@ -23,6 +23,7 @@ $(function(){
 		topicClicked: function(topicID)//TODO
 		{
 			//localStorageSet('currentTopic',topicID);
+			console.log(topicID);
 			$(location).attr('href', 'lessonCards.html?topic='+topicID);
 		}
 
@@ -34,11 +35,13 @@ $(function(){
 			return model.getAllTopics();
 		},
 		init : function() {
-			model.init();
+			//model.init();
 			view.init();
 		},
 		topicClicked : function(topicID) {
+			console.log(topicID);
 			model.topicClicked(topicID);
+			
 		}
 	};
 
@@ -70,7 +73,8 @@ $(function(){
 			this.contentBox.on('click',function(e){
 				if(e.target.parentNode.tagName==='BUTTON')
 				{
-					return octopus.topicClicked(e.target.parentNode.id);
+					console.log(parseInt(e.target.parentNode.id));
+					return octopus.topicClicked(parseInt(e.target.parentNode.id));
 				}
 			});
 			console.log(topicDiv);
