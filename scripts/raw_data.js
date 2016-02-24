@@ -70,6 +70,10 @@ Lesson.prototype = {
 		return this.name;
 	},
 
+	getId : function () {
+		return this.id;
+	},
+
 	setName : function() {
 		return this.name;
 	},
@@ -115,6 +119,10 @@ var Video = function (_id,_url,_lessonId,_note,_pen){
 
 Video.prototype = {
 	constructor : Video,
+	getId : function () {
+		return this.id;
+	},
+
 	getUrl : function() {
 		return this.url;
 	},
@@ -202,10 +210,6 @@ var modelCollection =  {
             Videos.push(new Video(video.id,video.url,video.lessonId));
             videoId++;
         });
-
-        /*courseId =Courses.length; 
-        lessonId = Lessons.length;
-        videoId = Videos.length;*/
     }
 }
 

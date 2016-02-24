@@ -4,8 +4,8 @@
     box-sizing: border-box;
 }
 @font-face{
-    font-family: squareFont;
-    src: url('fonts/squarefont/Square.ttf');
+    font-family: Helvetica;
+    src: url('fonts/Helvetica.otf');
 }
 .body{
     margin: 0px;
@@ -87,9 +87,9 @@
 
 .container{
     width: 100%;
-    height: 1000px;
-    background-color: #C6C8CA;
-    overflow: auto;
+    height: 755px;
+    background-color: #EDF1F4;
+    
 }
 
 .title-box{
@@ -99,7 +99,7 @@
     position: relative;
     left: 20%;
     border-radius: 30px;
-    margin-top: 5%;
+    top: 5%;
 }
 
 .title-box__content{
@@ -112,21 +112,22 @@
     font-size: x-large;
     font-family: cursive;
     font-weight: bolder;
+    line-height: 100%;
 }
 
 .content-box{
     width: 60%;
-    height: 50%;
+    height: 63%;
     border-radius: 80px;
     background-color: #FFFFFF;
     position: relative;
-    top: 5%;
+    top: 12%;
     left: 20%;
     //overflow: auto;
 }
 
 .content-box .inner-content{
-    background-color:  #E45641;
+    background-color:  #dcebf6;
     /* vertical-align: middle; */
     overflow: auto;
     height: 80%;
@@ -140,21 +141,25 @@
 .inner-content .course-add{
     float: right;
     font-family: cursive;
-    background-color: aliceblue;
+    background-color: #5987FA;
     border-radius: 13px;
 }
 
 .inner-content__course-card{
-    width: 80%;
+    width: 100%;
     height: auto;
 }
-.inner-content__course-card__course{
-    width: 100%;
-    background-color:   #44B3C2;
-    height: 50px;
-    margin: 10px;
-    border-radius: 6px;
+.inner-content__course-card__course{/*-------------*/
+    width: 40%;
+    background-color: #53c182;
+    height: 40px;
+    margin: 7px;
+    border-radius: 10px;
     cursor: pointer;
+    text-align: center;
+    font-family: Helvetica;
+    line-height: 40px;
+    box-shadow: 5px 5px 5px gray;
 }
 .inner-content__course-card__course--textbox{
     max-width: 80%;
@@ -175,8 +180,8 @@
 .inner-content__course-card__lessons{
     /*background-color: red;*/
     position: relative;
-    width: 90%;
-    left: 65px;
+    width: 93%;
+    left: 48px;
     overflow: hidden;
     height: 0;
     
@@ -184,7 +189,7 @@
 .lesson__add{
     float: right;
     left: 26%;
-    background-color: darkcyan;
+    background-color: #5987FA;
     font-family: cursive;
     border-radius: 13px;
 }
@@ -192,12 +197,17 @@
     display: none;
     
 }
-.lesson-name{
-    width: 98%;
-    background-color:  #F1A94E;
-    height: 50px;
-    margin: 10px;
-    border-radius: 6px;
+.lesson-name{/*------------*/
+    width: 50%;
+    background-color:  #ed775a;
+    height: 40px;
+    margin: 7px;
+    border-radius: 10px;
+    text-align: center;
+    font-family: Helvetica;
+    line-height: 40px;
+    box-shadow: 5px 5px 5px gray;
+    cursor: pointer;
 }
 
 .lesson-name--textbox{
@@ -232,43 +242,45 @@
     float: right;
     //position: relative;
     left: 26%;
-    background-color: turquoise;
+    background-color: #5987FA;
     font-family: cursive;
-    margin-bottom: 10px;
+    //margin-bottom: 10px;
     border-radius: 13px;
 }
-.lesson-wrapper__videos{
-    width: 80%;
-    background-color: #5D4C46;
+.lesson-wrapper__videos{/*----------*/
+    width: 50%;
+    background-color: #fddf78;
     clear:both;
-    height: 50px;
-    margin: 10px;
-    border-radius: 6px;
+    height: 40px;
+    margin: 7px;
+    border-radius: 10px;
     position: relative;
-    left: 18%;
-
+    left: 11%;
+    text-align: center;
+    font-family: Helvetica;
+    line-height: 40px;
+    box-shadow: 5px 5px 5px gray;
+    cursor: pointer;
 }
 
 .lesson__add__input-contain{
     height:0;
     overflow: hidden;
-    position: relative;
-    left: 60%;
+    float: right;
 }
 .lesson__add_input-contain__button{
-    background-color: darkcyan;
+    background-color: #5987FA;
     font-family: cursive;
     border-radius: 13px;
 }
 .video__add__input-contain{
     height:0;
     overflow: hidden;
-    position: relative;
-    left: 61%;
+    float: right;
 }
 
 .video__add_input-contain__button{
-    background-color: turquoise;
+    background-color: #5987FA;
     font-family: cursive;
     border-radius: 13px;
     
@@ -278,14 +290,14 @@
     height:0;
     overflow:hidden;
     /*height: auto;*/
-    /* float: right; */
-    position: relative;
-    left: 71%;
+    float: right;
+    /*position: relative;
+    left: 71%;*/
 }
 
 .course__add_input-contain__button{
     font-family: cursive;
-    background-color: aliceblue;
+    background-color: #5987FA;
     border-radius: 13px;
 }
 
