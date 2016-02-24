@@ -1,3 +1,10 @@
+var Courses = rawData.getCourses();
+var Lessons = rawData.getLessons();
+var Videos = rawData.getVideos();
+var courseId = rawData.getCourseIndex();
+var lessonId = rawData.getLessonIndex();
+var videoId = rawData.getVideoIndex();
+
 
 var HTMLBeginner= ['1cZtdKNB9jo','xIOeccZZ-5g','pyiQD2wZ07g','JsH_eSZGhyg','EsBmDg_edGQ','k_wmXN5V1_c'];
 var HTMLIntermediate= ['OpiR_euUy8A','oEz3s8JKjYI','VNr1zneQerw','159EzIheI-A','zNXiqfxzzw8','IFqcr0Z9r3Y','IdMgALgC2rM'];
