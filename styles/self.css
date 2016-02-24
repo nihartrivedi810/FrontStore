@@ -212,8 +212,10 @@
 	
 	background-color: #337ab7;
 	color: #fff;
-	padding: 2px 5px;
+	padding: 5px 5px;
 	margin: 0 2px;
+	outline: none;
+	border: none;
 }
 .button:hover {
 	background-color: black;
