@@ -2,55 +2,63 @@
 
 $(function(){
 	var videoList;
-	var currentVideo=0;
+	var currentVideo;
 	var model = {
-		setContentsCalled :false,
+
+		contentSetProgramatically :false,
 		init: function() {
 			var params = model.getAllParameters();
-			model.topicId = params["topic"];
-			model.lessonId = params["lesson"];
-			var topiclists=localStorageGet('topiclists');
-			videoList=topiclists[model.topicId].material[model.lessonId];
-			if(!localStorageGet('topiclists')||!(/^\d+$/.test(model.topicId))||!model.lessonId||!topiclists[model.topicId]||!videoList)
+			console.log(params);
+			model.topic = Courses[parseInt(params["topic"])];
+			model.lesson = Lessons[parseInt(params["lesson"])];
+			console.log(model.topic,model.lesson);
+			videoList=model.lesson.videos;
+			currentVideo = Videos[videoList[0]];
+			if(!model.topic||!model.lesson||!videoList)
 			{
+				
 				$(location).attr('href', 'homepage.html');
 			}
 			
-			model.topicName = topiclists[model.topicId]["topic"];
+			model.topicName = model.topic.name;
 			if (!localStorageGet('notes')) {
 				localStorageSet('notes',{});
 			}
+
+			console.log("came");
 		},
 		addNewNote: function(obj) {
 			var data =localStorageGet('notes');
-			if(data[videoList[currentVideo]])
+			console.log(data);
+			if(data[currentVideo.id])
 			{
-				data[videoList[currentVideo]].notes=obj;
+				data[currentVideo.id].notes=obj;
 			}
 			else
 			{
-				data[videoList[currentVideo]]={ notes: obj};	
+				data[currentVideo.id]={ notes: obj};	
 			}
 			localStorageSet('notes',data);
+			console.log(data);
 			
 		},
 		addNewjsbin: function(jsbinURL) {
 			var data =localStorageGet('notes');
-			if(data[videoList[currentVideo]])
+			if(data[currentVideo.id])
 			{
-				data[videoList[currentVideo]].jsbin=jsbinURL;
+				data[currentVideo.id].jsbin=jsbinURL;
 			}
 			else
 			{
-				data[videoList[currentVideo]]={ jsbin: jsbinURL};	
+				data[currentVideo.id]={ jsbin: jsbinURL};	
 			}
 			localStorageSet('notes',data);
 		},
 		getNotesOfCurrentVideo: function() {
 			var data=localStorageGet('notes');
-			if(data[videoList[currentVideo]])
+			if(data[currentVideo.id])
 			{
-				return data[videoList[currentVideo]].notes;	
+				return data[currentVideo.id].notes;	
 			}
 			else
 			{
@@ -59,9 +67,9 @@ $(function(){
 		},
 		getjsbinOfCurrentVideo: function() {
 			var data=localStorageGet('notes');;
-			if(data[videoList[currentVideo]])
+			if(data[currentVideo.id])
 			{
-				return data[videoList[currentVideo]].jsbin;	
+				return data[currentVideo.id].jsbin;	
 			}
 			else
 			{
@@ -70,19 +78,22 @@ $(function(){
 		},
 
 		getCurrentVideo: function() {
-			return videoList[currentVideo];
-		},
-		getCurrentVideoId: function() {
 			return currentVideo;
 		},
+		getCurrentVideoId: function() {
+			return currentVideo.id;
+		},
 		getAllVideos: function() {
-			return videoList;
+			var videos = videoList.map(function (vId){
+				return Videos[vId];
+			})
+			return videos;
 		},
 		changeCurrentVideo: function(newVideo) {
-			currentVideo=newVideo;
+			currentVideo=Videos[newVideo];
 		},
 		getCurrentLessonName: function(){
-			return model.lessonId;
+			return model.lesson.name;
 		},
 		getCurrentTopicName: function(){
 			return model.topicName;
@@ -113,12 +124,18 @@ $(function(){
 	var octopus = {
 		init: function() {
 			model.init();
+
 			view.init();
+
 			modalView.init();
+
+
 			sidePanelView.init();
+			console.log("oct came");
 			youtubeView.init();
 			notesView.init();
 			jsbinView.init();
+			jsbinView.render();
 		},
 		getCurrentVideoId: function() {
 			return model.getCurrentVideoId();
@@ -156,11 +173,11 @@ $(function(){
 		getCurrentTopicName: function(){
 			return model.getCurrentTopicName();
 		},
-		isSetContentsCalled: function(){
-			return model.setContentsCalled;
+		checkForProgramaticallySetContents: function(){
+			return model.contentSetProgramatically;
 		},
-		setContentsCalled: function(val){
-			model.setContentsCalled = val;
+		contentSetProgramatically: function(val){
+			model.contentSetProgramatically = val;
 		},
 		enableJSButton: function() {
 			notesView.enableJSButton();
@@ -174,20 +191,27 @@ $(function(){
 		hidemodal: function() {
 			modalView.hidemodal();
 		},
-		changeView: function() {
-			view.changeView();
+		renderTwoViews: function() {
+			view.renderTwoViews();
 		},
+		renderThreeViews: function() {
+			view.renderThreeViews();
+		},
+		changeView: function(){
+			view.changeView();
+		}
 	};
 	var sidePanelView = {
 		init : function() {
 
 			var videos=octopus.getAllVideos(),
+
 			parent=$("#l1"),
 			optSign = $('#bar'),
 			sideBlk = $('#lesson-list-container'),
 			mainDiv=$('#sidenav-opacity-div'), contentStyler = $('#content-styler'),
 			index,listAppend;
-			console.log(sideBlk);
+
 			index=-1;
 			listAppend=videos.reduce(function(videoHTMLString){
 				index++;
@@ -212,6 +236,7 @@ $(function(){
 					octopus.changeCurrentVideo(e.target.id);
 				}
 			});
+
 			mainDiv.on("click", function(e) {
 				if(e.target.id != 'bar'){
 					sideBlk.css('transform','translateX(-100%)');
@@ -226,8 +251,13 @@ $(function(){
 		},
 		render : function() {
 			var currentVideo=octopus.getCurrentVideoId();
+
 			$('.active').removeClass('active');
-			$("#"+currentVideo).addClass('active');
+
+			
+			$("#"+currentVideo.id).addClass('active');
+
+
 		} 
 	}; 
 	var youtubeView = {
@@ -261,11 +291,11 @@ $(function(){
 				}
 			});
 			advancedEditor.on("text-change",function(delta){
-				if(!octopus.isSetContentsCalled()){
+				if(!octopus.checkForProgramaticallySetContents()){
 					$("#save-notes").removeAttr('disabled');
 					//$("#save-notes").attr('class','save-notes-btn');
 				}
-				octopus.setContentsCalled(false);
+				octopus.contentSetProgramatically(false);
 			});
 			this.render();
 		},
@@ -273,13 +303,13 @@ $(function(){
 			var notes=octopus.getNotesOfCurrentVideo();
 			if(notes)
 			{
-				octopus.setContentsCalled(true);
+				octopus.contentSetProgramatically(true);
 				advancedEditor.setContents(notes);
 			}
 			else
 			{
 				notes=[];
-				octopus.setContentsCalled(true);
+				octopus.contentSetProgramatically(true);
 				advancedEditor.setContents(notes);
 			}
 		},
@@ -324,15 +354,17 @@ $(function(){
 		},
 		render: function() {
 			var jsbin=octopus.getjsbinOfCurrentVideo();
+			console.log(jsbin);
 			if(jsbin)
 			{
 				octopus.disableJSButton();
 				$("iframe").remove();
 				this.jsbintag.append('<iframe src=' + jsbin + ' style="border: 1px solid rgb(170, 170, 170); width: 100%; height:100%;min-height: 300px;"></iframe>');
-				octopus.changeView();
+				octopus.renderThreeViews();
 			}
 			else
 			{
+				octopus.renderTwoViews();
 				octopus.enableJSButton();
 				$("iframe").remove();
 			}
@@ -348,6 +380,18 @@ $(function(){
 			$(window).eq(0).resize(function(){
 				view.resizeWindow();
 			});
+		},
+		renderTwoViews: function(){
+			var div = document.getElementById("content-styler");
+			div.className="content-style-1";
+			view.resizeWindow();
+			octopus.hidemodal();
+		},
+		renderThreeViews: function(){
+			var div = document.getElementById("content-styler");
+			div.className="content-style-2";
+			view.resizeWindow();
+			octopus.hidemodal();
 		},
 		changeView: function(){
 			var div = document.getElementById("content-styler");

@@ -11,23 +11,19 @@ $(function(){
 
 	var model = {
 		init: function() {
-			if (!localStorageGet("topiclists")){
+			if (!Courses){
 				localStorageSet("topiclists",complete);
 			}			
 		},
 		getAllTopics: function() {
-			//var a=[];
-			var topiclists = localStorageGet('topiclists');
-			// for(var object in topiclists)
-			// {
-			// 	a.push(topiclists[object].topic);
-			// }
-
-			return topiclists;
+			
+			return Courses;
+			
 		},
 		topicClicked: function(topicID)//TODO
 		{
 			//localStorageSet('currentTopic',topicID);
+			console.log(topicID);
 			$(location).attr('href', 'lessonCards.html?topic='+topicID);
 		}
 
@@ -39,11 +35,13 @@ $(function(){
 			return model.getAllTopics();
 		},
 		init : function() {
-			model.init();
+			//model.init();
 			view.init();
 		},
 		topicClicked : function(topicID) {
+			console.log(topicID);
 			model.topicClicked(topicID);
+			
 		}
 	};
 
@@ -57,14 +55,15 @@ $(function(){
 			var topics=octopus.getAllTopics();
 			var index=-1;
 			var topicDiv=topics.reduce(function(a,b){
+				console.log(b, "inside reduce");
 				index++;
 				return a + '<div class="content-box__course-box"><div class="content-box__course-box__course-content">'+
                         '<div class="content-face front-box">'+
-                            '<img class="course-image" src=images/'+ b["img"]+'>'+
+                            '<img class="course-image" src="images/HTML5.png">'+
                         '</div>'+
                         '<div class="content-face back-box">'+
                             '<p class="content-face__text">'+b["description"]+'</p>'+
-                            '<div class="content-face__bottom"> <button class="content-face__button" id='+ index +'> <div> Learn </div><div></div><div> Learn </div></button> </div>'+
+                            '<div class="content-face__bottom"> <button class="content-face__button" id='+ b.id +'> <div> Learn </div><div></div><div> Learn </div></button> </div>'+
 
                         '</div>'+
                     '</div>'+
@@ -74,7 +73,8 @@ $(function(){
 			this.contentBox.on('click',function(e){
 				if(e.target.parentNode.tagName==='BUTTON')
 				{
-					return octopus.topicClicked(e.target.parentNode.id);
+					console.log(parseInt(e.target.parentNode.id));
+					return octopus.topicClicked(parseInt(e.target.parentNode.id));
 				}
 			});
 			console.log(topicDiv);
