@@ -4,7 +4,8 @@ $(function(){
 	var videoList;
 	var currentVideo=0;
 	var model = {
-		setContentsCalled :false,
+
+		contentSetProgramatically :false,
 		init: function() {
 			var params = model.getAllParameters();
 			model.topicId = params["topic"];
@@ -119,6 +120,7 @@ $(function(){
 			youtubeView.init();
 			notesView.init();
 			jsbinView.init();
+			jsbinView.render();
 		},
 		getCurrentVideoId: function() {
 			return model.getCurrentVideoId();
@@ -156,11 +158,11 @@ $(function(){
 		getCurrentTopicName: function(){
 			return model.getCurrentTopicName();
 		},
-		isSetContentsCalled: function(){
-			return model.setContentsCalled;
+		checkForProgramaticallySetContents: function(){
+			return model.contentSetProgramatically;
 		},
-		setContentsCalled: function(val){
-			model.setContentsCalled = val;
+		contentSetProgramatically: function(val){
+			model.contentSetProgramatically = val;
 		},
 		enableJSButton: function() {
 			notesView.enableJSButton();
@@ -174,9 +176,15 @@ $(function(){
 		hidemodal: function() {
 			modalView.hidemodal();
 		},
-		changeView: function() {
-			view.changeView();
+		renderTwoViews: function() {
+			view.renderTwoViews();
 		},
+		renderThreeViews: function() {
+			view.renderThreeViews();
+		},
+		changeView: function(){
+			view.changeView();
+		}
 	};
 	var sidePanelView = {
 		init : function() {
@@ -187,7 +195,6 @@ $(function(){
 			sideBlk = $('#lesson-list-container'),
 			mainDiv=$('#sidenav-opacity-div'), contentStyler = $('#content-styler'),
 			index,listAppend;
-			console.log(sideBlk);
 			index=-1;
 			listAppend=videos.reduce(function(videoHTMLString){
 				index++;
@@ -261,11 +268,11 @@ $(function(){
 				}
 			});
 			advancedEditor.on("text-change",function(delta){
-				if(!octopus.isSetContentsCalled()){
+				if(!octopus.checkForProgramaticallySetContents()){
 					$("#save-notes").removeAttr('disabled');
 					//$("#save-notes").attr('class','save-notes-btn');
 				}
-				octopus.setContentsCalled(false);
+				octopus.contentSetProgramatically(false);
 			});
 			this.render();
 		},
@@ -273,13 +280,13 @@ $(function(){
 			var notes=octopus.getNotesOfCurrentVideo();
 			if(notes)
 			{
-				octopus.setContentsCalled(true);
+				octopus.contentSetProgramatically(true);
 				advancedEditor.setContents(notes);
 			}
 			else
 			{
 				notes=[];
-				octopus.setContentsCalled(true);
+				octopus.contentSetProgramatically(true);
 				advancedEditor.setContents(notes);
 			}
 		},
@@ -324,15 +331,17 @@ $(function(){
 		},
 		render: function() {
 			var jsbin=octopus.getjsbinOfCurrentVideo();
+			console.log(jsbin);
 			if(jsbin)
 			{
 				octopus.disableJSButton();
 				$("iframe").remove();
 				this.jsbintag.append('<iframe src=' + jsbin + ' style="border: 1px solid rgb(170, 170, 170); width: 100%; height:100%;min-height: 300px;"></iframe>');
-				octopus.changeView();
+				octopus.renderThreeViews();
 			}
 			else
 			{
+				octopus.renderTwoViews();
 				octopus.enableJSButton();
 				$("iframe").remove();
 			}
@@ -348,6 +357,18 @@ $(function(){
 			$(window).eq(0).resize(function(){
 				view.resizeWindow();
 			});
+		},
+		renderTwoViews: function(){
+			var div = document.getElementById("content-styler");
+			div.className="content-style-1";
+			view.resizeWindow();
+			octopus.hidemodal();
+		},
+		renderThreeViews: function(){
+			var div = document.getElementById("content-styler");
+			div.className="content-style-2";
+			view.resizeWindow();
+			octopus.hidemodal();
 		},
 		changeView: function(){
 			var div = document.getElementById("content-styler");
