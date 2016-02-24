@@ -1,19 +1,21 @@
 var model = {
 	init: function(){
-		model.topicID = parseInt(model.getParameterByName("topic"));
+		model.topicID = this.getAllParameters()["topic"];
 
 		model.topics = Courses;
 		console.log(model.topicID , model.topics);
 	},
-	getParameterByName: function(name, url) {
-		if (!url) url = window.location.href;
-		name = name.replace(/[\[\]]/g, "\\$&");
-		var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-		results = regex.exec(url);
-		if (!results) return null;
-		if (!results[2]) return '';
-		return decodeURIComponent(results[2].replace(/\+/g, " "));
-	},
+	getAllParameters: function(){
+		var urlArraySplt1 = (window.location.href).split("?");
+		var urlArraySplt2 =urlArraySplt1[1].split("&");
+		var parameters = {};
+		var paramVal;
+		urlArraySplt2.forEach(function(parameter){
+			paramVal = parameter.split("=");
+			parameters[paramVal[0]] = decodeURIComponent(paramVal[1]);
+		});
+		return parameters;
+	}
 	
 }
 var octopus = {
@@ -22,7 +24,8 @@ var octopus = {
 		model.init();
 		
 		//console.log(model.topicID);
-		if(!model.topics||(model.topicID !== model.topicID)||!model.topics[model.topicID])
+		var topicID = model.topicID;
+		if(!model.topics||isNaN(topicID)||!model.topics[topicID])
 		{
 			//console.log("should not go here : ",model.topics , model.topicID, model.topics[model.topicID]);
 			$(location).attr('href', 'homepage.html');
