@@ -2,56 +2,63 @@
 
 $(function(){
 	var videoList;
-	var currentVideo=0;
+	var currentVideo;
 	var model = {
 
 		contentSetProgramatically :false,
 		init: function() {
 			var params = model.getAllParameters();
-			model.topicId = params["topic"];
-			model.lessonId = params["lesson"];
-			var topiclists=localStorageGet('topiclists');
-			videoList=topiclists[model.topicId].material[model.lessonId];
-			if(!localStorageGet('topiclists')||!(/^\d+$/.test(model.topicId))||!model.lessonId||!topiclists[model.topicId]||!videoList)
+			console.log(params);
+			model.topic = Courses[parseInt(params["topic"])];
+			model.lesson = Lessons[parseInt(params["lesson"])];
+			console.log(model.topic,model.lesson);
+			videoList=model.lesson.videos;
+			currentVideo = Videos[videoList[0]];
+			if(!model.topic||!model.lesson||!videoList)
 			{
+				
 				$(location).attr('href', 'homepage.html');
 			}
 			
-			model.topicName = topiclists[model.topicId]["topic"];
+			model.topicName = model.topic.name;
 			if (!localStorageGet('notes')) {
 				localStorageSet('notes',{});
 			}
+
+			console.log("came");
 		},
 		addNewNote: function(obj) {
 			var data =localStorageGet('notes');
-			if(data[videoList[currentVideo]])
+			console.log(data);
+			if(data[currentVideo.id])
 			{
-				data[videoList[currentVideo]].notes=obj;
+				data[currentVideo.id].notes=obj;
 			}
 			else
 			{
-				data[videoList[currentVideo]]={ notes: obj};	
+				data[currentVideo.id]={ notes: obj};	
 			}
 			localStorageSet('notes',data);
+			console.log(data);
 			
 		},
 		addNewjsbin: function(jsbinURL) {
 			var data =localStorageGet('notes');
-			if(data[videoList[currentVideo]])
+			if(data[currentVideo.id])
 			{
-				data[videoList[currentVideo]].jsbin=jsbinURL;
+				data[currentVideo.id].jsbin=jsbinURL;
 			}
 			else
 			{
-				data[videoList[currentVideo]]={ jsbin: jsbinURL};	
+				data[currentVideo.id]={ jsbin: jsbinURL};	
 			}
 			localStorageSet('notes',data);
 		},
 		getNotesOfCurrentVideo: function() {
 			var data=localStorageGet('notes');
-			if(data[videoList[currentVideo]])
+			if(data[currentVideo.id])
 			{
-				return data[videoList[currentVideo]].notes;	
+				return data[currentVideo.id].notes;	
 			}
 			else
 			{
@@ -60,9 +67,9 @@ $(function(){
 		},
 		getjsbinOfCurrentVideo: function() {
 			var data=localStorageGet('notes');;
-			if(data[videoList[currentVideo]])
+			if(data[currentVideo.id])
 			{
-				return data[videoList[currentVideo]].jsbin;	
+				return data[currentVideo.id].jsbin;	
 			}
 			else
 			{
@@ -71,19 +78,22 @@ $(function(){
 		},
 
 		getCurrentVideo: function() {
-			return videoList[currentVideo];
-		},
-		getCurrentVideoId: function() {
 			return currentVideo;
 		},
+		getCurrentVideoId: function() {
+			return currentVideo.id;
+		},
 		getAllVideos: function() {
-			return videoList;
+			var videos = videoList.map(function (vId){
+				return Videos[vId];
+			})
+			return videos;
 		},
 		changeCurrentVideo: function(newVideo) {
-			currentVideo=newVideo;
+			currentVideo=Videos[newVideo];
 		},
 		getCurrentLessonName: function(){
-			return model.lessonId;
+			return model.lesson.name;
 		},
 		getCurrentTopicName: function(){
 			return model.topicName;
@@ -114,9 +124,14 @@ $(function(){
 	var octopus = {
 		init: function() {
 			model.init();
+
 			view.init();
+
 			modalView.init();
+
+
 			sidePanelView.init();
+			console.log("oct came");
 			youtubeView.init();
 			notesView.init();
 			jsbinView.init();
@@ -190,11 +205,13 @@ $(function(){
 		init : function() {
 
 			var videos=octopus.getAllVideos(),
+
 			parent=$("#l1"),
 			optSign = $('#bar'),
 			sideBlk = $('#lesson-list-container'),
 			mainDiv=$('#sidenav-opacity-div'), contentStyler = $('#content-styler'),
 			index,listAppend;
+
 			index=-1;
 			listAppend=videos.reduce(function(videoHTMLString){
 				index++;
@@ -219,6 +236,7 @@ $(function(){
 					octopus.changeCurrentVideo(e.target.id);
 				}
 			});
+
 			mainDiv.on("click", function(e) {
 				if(e.target.id != 'bar'){
 					sideBlk.css('transform','translateX(-100%)');
@@ -233,8 +251,13 @@ $(function(){
 		},
 		render : function() {
 			var currentVideo=octopus.getCurrentVideoId();
+
 			$('.active').removeClass('active');
-			$("#"+currentVideo).addClass('active');
+
+			
+			$("#"+currentVideo.id).addClass('active');
+
+
 		} 
 	}; 
 	var youtubeView = {
