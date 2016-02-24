@@ -208,27 +208,23 @@
 	top: 1%;
 	z-index: 1;
 }
-.save-notes-btn {
+.button{
 	
 	background-color: #337ab7;
 	color: #fff;
-	padding: 2px;
-	width: 50px;
-	height: 25px;
+	padding: 5px 5px;
+	margin: 0 2px;
+	outline: none;
+	border: none;
 }
-.save-notes-btn:hover {
+.button:hover {
 	background-color: black;
 	cursor: pointer;
-
 }
 
-.save-notes-btn--grey{
+.button:disabled{
 	background-color: grey;
-
 	color: #fff;
-	padding: 2px;
-	width: 50px;
-	height: 25px;
 }
 .modal-div {
 	width:100%;
@@ -283,7 +279,7 @@
 	right: 0;
 	position: absolute;
 }
-.embed-bin-btn {
+/*.embed-bin-btn {
 	
 	background-color: #337ab7;
 	color: #fff;
@@ -291,7 +287,7 @@
 	width: 80px;
 	height: 25px;
 	margin-left: 5px;
-}
+}*/
 
 .lesson-name{
 	display: inline-block;
@@ -322,4 +318,11 @@
 }
 .jsbin {
 	height: 100%;
+}
+#sidenav-opacity-div{
+	display:none;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	z-index: 1;
 }

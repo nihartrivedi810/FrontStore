@@ -4,10 +4,12 @@ $(function(){
 	var videoList;
 	var currentVideo=0;
 	var model = {
-		setContentsCalled :false,
+
+		contentSetProgramatically :false,
 		init: function() {
-			model.topicId = model.getParameterByName("topic");
-			model.lessonId = model.getParameterByName("lesson");
+			var params = model.getAllParameters();
+			model.topicId = params["topic"];
+			model.lessonId = params["lesson"];
 			var topiclists=localStorageGet('topiclists');
 			videoList=topiclists[model.topicId].material[model.lessonId];
 			if(!localStorageGet('topiclists')||!(/^\d+$/.test(model.topicId))||!model.lessonId||!topiclists[model.topicId]||!videoList)
@@ -86,14 +88,25 @@ $(function(){
 		getCurrentTopicName: function(){
 			return model.topicName;
 		},
-		getParameterByName: function(name, url) {
-			if (!url) url = window.location.href;
-			name = name.replace(/[\[\]]/g, "\\$&");
-			var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-			results = regex.exec(url);
-			if (!results) return null;
-			if (!results[2]) return '';
-			return decodeURIComponent(results[2].replace(/\+/g, " "));
+		// getParameterByName: function(name, url) {
+		// 	if (!url) url = window.location.href;
+		// 	name = name.replace(/[\[\]]/g, "\\$&");
+		// 	var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+		// 	results = regex.exec(url);
+		// 	if (!results) return null;
+		// 	if (!results[2]) return '';
+		// 	return decodeURIComponent(results[2].replace(/\+/g, " "));
+		// }
+		getAllParameters: function(){
+			var urlArraySplt1 = (window.location.href).split("?");
+			var urlArraySplt2 =urlArraySplt1[1].split("&");
+			var parameters = {};
+			var paramVal;
+			urlArraySplt2.forEach(function(parameter){
+				paramVal = parameter.split("=");
+				parameters[paramVal[0]] = decodeURIComponent(paramVal[1]);
+			});
+			return parameters;
 		}
 	};
 
@@ -107,6 +120,7 @@ $(function(){
 			youtubeView.init();
 			notesView.init();
 			jsbinView.init();
+			jsbinView.render();
 		},
 		getCurrentVideoId: function() {
 			return model.getCurrentVideoId();
@@ -144,11 +158,11 @@ $(function(){
 		getCurrentTopicName: function(){
 			return model.getCurrentTopicName();
 		},
-		isSetContentsCalled: function(){
-			return model.setContentsCalled;
+		checkForProgramaticallySetContents: function(){
+			return model.contentSetProgramatically;
 		},
-		setContentsCalled: function(val){
-			model.setContentsCalled = val;
+		contentSetProgramatically: function(val){
+			model.contentSetProgramatically = val;
 		},
 		enableJSButton: function() {
 			notesView.enableJSButton();
@@ -162,32 +176,59 @@ $(function(){
 		hidemodal: function() {
 			modalView.hidemodal();
 		},
-		changeView: function() {
-			view.changeView();
+		renderTwoViews: function() {
+			view.renderTwoViews();
 		},
+		renderThreeViews: function() {
+			view.renderThreeViews();
+		},
+		changeView: function(){
+			view.changeView();
+		}
 	};
 	var sidePanelView = {
 		init : function() {
+
 			var videos=octopus.getAllVideos(),
 			parent=$("#l1"),
 			optSign = $('#bar'),
 			sideBlk = $('#lesson-list-container'),
+			mainDiv=$('#sidenav-opacity-div'), contentStyler = $('#content-styler'),
 			index,listAppend;
-			console.log(sideBlk);
 			index=-1;
 			listAppend=videos.reduce(function(videoHTMLString){
 				index++;
 				return videoHTMLString + '<li id="'+ index +'"class="lesson-list-container__lesson--title">Video'+ (parseInt(index)+1) +'</li>';
 			},"");
+
 			parent.append(listAppend);
+
+			optSign.on("click", function(e) {
+				sideBlk.css('transform','translateX(0%)');
+				optSign.css("visibility", "hidden");
+				$('#content-styler').css('opacity','0.1');
+				mainDiv.css("display" ,'block');
+			});
+
 			$("#l1").on("click", function(e) {
 				if(e.target && e.target.nodeName == "LI") {
 					sideBlk.css('transform','translateX(-100%)');
 					optSign.css("visibility", "visible");
 					$('#content-styler').css('opacity','1');
+					mainDiv.css("display" ,'none');
 					octopus.changeCurrentVideo(e.target.id);
 				}
 			});
+			mainDiv.on("click", function(e) {
+				if(e.target.id != 'bar'){
+					sideBlk.css('transform','translateX(-100%)');
+					optSign.css("visibility", "visible");
+					$('#content-styler').css('opacity','1');
+					mainDiv.css("display" ,'none');
+				}
+			});
+
+
 			this.render();
 		},
 		render : function() {
@@ -214,7 +255,7 @@ $(function(){
 				{
 					a=advancedEditor.getContents();
 					octopus.addNewNote(a);
-					$("#save-notes").attr('class','save-notes-btn--grey');
+					//$("#save-notes").attr('class','save-notes-btn--grey');
 					$("#save-notes").attr('disabled','true');
 				}
 				else if(e.target.id=="embed-bin-btn")
@@ -227,11 +268,11 @@ $(function(){
 				}
 			});
 			advancedEditor.on("text-change",function(delta){
-				if(!octopus.isSetContentsCalled()){
+				if(!octopus.checkForProgramaticallySetContents()){
 					$("#save-notes").removeAttr('disabled');
-					$("#save-notes").attr('class','save-notes-btn');
+					//$("#save-notes").attr('class','save-notes-btn');
 				}
-				octopus.setContentsCalled(false);
+				octopus.contentSetProgramatically(false);
 			});
 			this.render();
 		},
@@ -239,23 +280,23 @@ $(function(){
 			var notes=octopus.getNotesOfCurrentVideo();
 			if(notes)
 			{
-				octopus.setContentsCalled(true);
+				octopus.contentSetProgramatically(true);
 				advancedEditor.setContents(notes);
 			}
 			else
 			{
 				notes=[];
-				octopus.setContentsCalled(true);
+				octopus.contentSetProgramatically(true);
 				advancedEditor.setContents(notes);
 			}
 		},
 		disableJSButton: function() {
-			$('.embed-bin-btn').eq(0).attr("disabled",true);
-			$('.embed-bin-btn').eq(0).css("background-color",'grey');
+			$('#embed-bin-btn').eq(0).attr("disabled",true);
+			//$('.embed-bin-btn').eq(0).css("background-color",'grey');
 		},
 		enableJSButton: function() {
-			$('.embed-bin-btn').eq(0).removeAttr('disabled');
-			$('.embed-bin-btn').eq(0).css("background-color",'#337AB7');
+			$('#embed-bin-btn').eq(0).removeAttr('disabled');
+			//$('.embed-bin-btn').eq(0).css("background-color",'#337AB7');
 		},
 	};
 	var modalView = {
@@ -269,18 +310,18 @@ $(function(){
 				{
 					var t2=$("#jsbinUrl").val();
 					octopus.addNewjsbin(t2);
-					$('.embed-bin-btn').eq(0).attr("disabled",true);
-					$('.embed-bin-btn').eq(0).css("background-color",'grey');
+					$('#embed-bin-btn').eq(0).attr("disabled",true);
+					//$('.embed-bin-btn').eq(0).css("background-color",'grey');
 				}
 			});
 		},
 		jsbinmodal: function() {
-		document.getElementsByClassName('modal-div')[0].style.transform='scale(1)';
-		document.getElementById('content-styler').style.opacity=0.2;
+			document.getElementsByClassName('modal-div')[0].style.transform='scale(1)';
+			document.getElementById('content-styler').style.opacity=0.2;
 		},
 		hidemodal: function() {
-		document.getElementsByClassName('modal-div')[0].style.transform='scale(0)';
-		document.getElementById('content-styler').style.opacity=1;
+			document.getElementsByClassName('modal-div')[0].style.transform='scale(0)';
+			document.getElementById('content-styler').style.opacity=1;
 		},
 
 	};
@@ -290,15 +331,17 @@ $(function(){
 		},
 		render: function() {
 			var jsbin=octopus.getjsbinOfCurrentVideo();
+			console.log(jsbin);
 			if(jsbin)
 			{
 				octopus.disableJSButton();
 				$("iframe").remove();
 				this.jsbintag.append('<iframe src=' + jsbin + ' style="border: 1px solid rgb(170, 170, 170); width: 100%; height:100%;min-height: 300px;"></iframe>');
-				octopus.changeView();
+				octopus.renderThreeViews();
 			}
 			else
 			{
+				octopus.renderTwoViews();
 				octopus.enableJSButton();
 				$("iframe").remove();
 			}
@@ -312,9 +355,20 @@ $(function(){
 			topicName.html(octopus.getCurrentTopicName());
 			view.resizeWindow();
 			$(window).eq(0).resize(function(){
-				console.log("dasd");
 				view.resizeWindow();
 			});
+		},
+		renderTwoViews: function(){
+			var div = document.getElementById("content-styler");
+			div.className="content-style-1";
+			view.resizeWindow();
+			octopus.hidemodal();
+		},
+		renderThreeViews: function(){
+			var div = document.getElementById("content-styler");
+			div.className="content-style-2";
+			view.resizeWindow();
+			octopus.hidemodal();
 		},
 		changeView: function(){
 			var div = document.getElementById("content-styler");
@@ -327,11 +381,11 @@ $(function(){
 		},
 		resizeWindow: function() {
 			var toolbarTop = document.getElementById("toolbar-top"),
-				toolbarBottom = document.getElementById("toolbar-editor"),
-				container = document.getElementById("advance-wrapper"),
-				toolbarTopHeight = toolbarTop.offsetHeight,
-				containerHeight = container.offsetHeight;
-				toolbarBottom.setAttribute("style","height:"+(containerHeight - toolbarTopHeight -5) +"px");
+			toolbarBottom = document.getElementById("toolbar-editor"),
+			container = document.getElementById("advance-wrapper"),
+			toolbarTopHeight = toolbarTop.offsetHeight,
+			containerHeight = container.offsetHeight;
+			toolbarBottom.setAttribute("style","height:"+(containerHeight - toolbarTopHeight -5) +"px");
 		}
 
 	};
