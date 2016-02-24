@@ -1,17 +1,14 @@
 
 
 $(function(){
-	var videoList;
-	var currentVideo;
+	var videoList,currentVideo;
 	var model = {
-
-		contentSetProgramatically :false,
+		isSaved :false,
 		init: function() {
 			var params = model.getAllParameters();
-			console.log(params);
-			model.topic = Courses[parseInt(params["topic"])];
+			model.topicId=parseInt(params["topic"])
+			model.topic = Courses[model.topicId];
 			model.lesson = Lessons[parseInt(params["lesson"])];
-			console.log(model.topic,model.lesson);
 			videoList=model.lesson.videos;
 			currentVideo = Videos[videoList[0]];
 			if(!model.topic||!model.lesson||!videoList)
@@ -20,16 +17,15 @@ $(function(){
 				$(location).attr('href', 'homepage.html');
 			}
 			
-			model.topicName = model.topic.name;
+			//model.topicName = model.topic.name;
 			if (!localStorageGet('notes')) {
 				localStorageSet('notes',{});
 			}
 
-			console.log("came");
+			// console.log("came");
 		},
 		addNewNote: function(obj) {
 			var data =localStorageGet('notes');
-			console.log(data);
 			if(data[currentVideo.id])
 			{
 				data[currentVideo.id].notes=obj;
@@ -39,7 +35,6 @@ $(function(){
 				data[currentVideo.id]={ notes: obj};	
 			}
 			localStorageSet('notes',data);
-			console.log(data);
 			
 		},
 		addNewjsbin: function(jsbinURL) {
@@ -96,7 +91,7 @@ $(function(){
 			return model.lesson.name;
 		},
 		getCurrentTopicName: function(){
-			return model.topicName;
+			return model.topic.name;
 		},
 		// getParameterByName: function(name, url) {
 		// 	if (!url) url = window.location.href;
@@ -131,7 +126,6 @@ $(function(){
 
 
 			sidePanelView.init();
-			console.log("oct came");
 			youtubeView.init();
 			notesView.init();
 			jsbinView.init();
@@ -173,11 +167,11 @@ $(function(){
 		getCurrentTopicName: function(){
 			return model.getCurrentTopicName();
 		},
-		checkForProgramaticallySetContents: function(){
-			return model.contentSetProgramatically;
+		isSaved: function(){
+			return model.isSaved;
 		},
-		contentSetProgramatically: function(val){
-			model.contentSetProgramatically = val;
+		save: function(val){
+			model.isSaved = val;
 		},
 		enableJSButton: function() {
 			notesView.enableJSButton();
@@ -268,7 +262,7 @@ $(function(){
 		render : function() {
 			$('#youtube').remove();
 			var curVideo=octopus.getCurrentVideo();
-			this.videoTag.prepend('<embed  id="youtube" width="100%" height="100%"src="https://www.youtube.com/embed/'+ curVideo+'" frameborder="0" allowfullscreen">');
+			this.videoTag.prepend('<embed  id="youtube" width="100%" height="100%"src="https://www.youtube.com/embed/'+ curVideo["url"]+'" frameborder="0" allowfullscreen">');
 		}	
 	};
 	var notesView = {
@@ -291,11 +285,11 @@ $(function(){
 				}
 			});
 			advancedEditor.on("text-change",function(delta){
-				if(!octopus.checkForProgramaticallySetContents()){
+				if(!octopus.isSaved()){
 					$("#save-notes").removeAttr('disabled');
 					//$("#save-notes").attr('class','save-notes-btn');
 				}
-				octopus.contentSetProgramatically(false);
+				octopus.save(false);
 			});
 			this.render();
 		},
@@ -303,13 +297,13 @@ $(function(){
 			var notes=octopus.getNotesOfCurrentVideo();
 			if(notes)
 			{
-				octopus.contentSetProgramatically(true);
+				octopus.save(true);
 				advancedEditor.setContents(notes);
 			}
 			else
 			{
 				notes=[];
-				octopus.contentSetProgramatically(true);
+				octopus.save(true);
 				advancedEditor.setContents(notes);
 			}
 		},
@@ -354,7 +348,6 @@ $(function(){
 		},
 		render: function() {
 			var jsbin=octopus.getjsbinOfCurrentVideo();
-			console.log(jsbin);
 			if(jsbin)
 			{
 				octopus.disableJSButton();
