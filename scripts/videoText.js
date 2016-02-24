@@ -6,8 +6,9 @@ $(function(){
 	var model = {
 		setContentsCalled :false,
 		init: function() {
-			model.topicId = model.getParameterByName("topic");
-			model.lessonId = model.getParameterByName("lesson");
+			var params = model.getAllParameters();
+			model.topicId = params["topic"];
+			model.lessonId = params["lesson"];
 			var topiclists=localStorageGet('topiclists');
 			videoList=topiclists[model.topicId].material[model.lessonId];
 			if(!localStorageGet('topiclists')||!(/^\d+$/.test(model.topicId))||!model.lessonId||!topiclists[model.topicId]||!videoList)
@@ -86,14 +87,25 @@ $(function(){
 		getCurrentTopicName: function(){
 			return model.topicName;
 		},
-		getParameterByName: function(name, url) {
-			if (!url) url = window.location.href;
-			name = name.replace(/[\[\]]/g, "\\$&");
-			var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-			results = regex.exec(url);
-			if (!results) return null;
-			if (!results[2]) return '';
-			return decodeURIComponent(results[2].replace(/\+/g, " "));
+		// getParameterByName: function(name, url) {
+		// 	if (!url) url = window.location.href;
+		// 	name = name.replace(/[\[\]]/g, "\\$&");
+		// 	var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+		// 	results = regex.exec(url);
+		// 	if (!results) return null;
+		// 	if (!results[2]) return '';
+		// 	return decodeURIComponent(results[2].replace(/\+/g, " "));
+		// }
+		getAllParameters: function(){
+			var urlArraySplt1 = (window.location.href).split("?");
+			var urlArraySplt2 =urlArraySplt1[1].split("&");
+			var parameters = {};
+			var paramVal;
+			urlArraySplt2.forEach(function(parameter){
+				paramVal = parameter.split("=");
+				parameters[paramVal[0]] = decodeURIComponent(paramVal[1]);
+			});
+			return parameters;
 		}
 	};
 
@@ -182,9 +194,7 @@ $(function(){
 
 			parent.append(listAppend);
 
-			console.log(optSign,"asd");
 			optSign.on("click", function(e) {
-				console.log("asdsa");
 				sideBlk.css('transform','translateX(0%)');
 				optSign.css("visibility", "hidden");
 				$('#content-styler').css('opacity','0.1');
@@ -334,7 +344,6 @@ $(function(){
 			topicName.html(octopus.getCurrentTopicName());
 			view.resizeWindow();
 			$(window).eq(0).resize(function(){
-				console.log("dasd");
 				view.resizeWindow();
 			});
 		},
