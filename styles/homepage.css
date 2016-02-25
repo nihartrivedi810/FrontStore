@@ -24,17 +24,18 @@
     height: 50px;
 }
 
-.header:after{
-    clear: both;
-    content: '';
-    display: table;
-}
+
 
 .innerContent{
     height: 100%;
-    position: relative;
-    margin: 0 auto;
+    width: 80%;
+    margin: auto;
+}
 
+.innerContent:after{
+    clear: both;
+    content: '';
+    display: table;
 }
 
 .innerContent__logo{
@@ -56,15 +57,17 @@
     font-family: fantasy;
     height: 100%;
     text-align: center;
-
+    width: 200px;
 }
 
 .innerContent__account--profile-Name{
     cursor: pointer;
-    height: 100%;
-    margin-bottom: 0px;
-    margin-top: 0px;
-    padding-top: 5%;
+    /* height: 100%; */
+    /* margin-bottom: 0px; */
+    /* margin-top: 0px; */
+    /* padding-top: 5%; */
+    /* vertical-align: middle; */
+    line-height: 50px;
 
 }
 
@@ -96,6 +99,7 @@
 
 .content-container{
     height: auto;
+    margin-top: 100px;
 }
 
 .content-box{
@@ -103,24 +107,26 @@
     width: 80%;
     position: relative;
     margin: 0 auto;
-    margin-top: 7.5%;
 
 }
-
+.content-box:after{
+    clear: both;
+    content: '';
+    display: table;
+}
 .content-box__course-box{
     height: 300px;
     width: 300px;
-
-    position: relative;
-    float: left;
-    margin-left: 5%;
+    margin-left: 16%;
+    margin-bottom: 16%;
+    display: inline-block;
 
 }
 
 .content-box__course-box__course-content{
     height: 100%;
 
-    position: absolute;
+    position: relative;
 
 }
 
