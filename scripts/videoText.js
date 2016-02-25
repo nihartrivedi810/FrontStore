@@ -11,7 +11,7 @@ $(function(){
 		isSaved :false,
 		init: function() {
 			var params = model.getAllParameters();
-			model.topicId=parseInt(params["topic"])
+			model.topicId=parseInt(params["topic"]);
 			model.topic = Courses[model.topicId];
 			model.lesson = Lessons[parseInt(params["lesson"])];
 			videoList=model.lesson.videos;
@@ -120,7 +120,7 @@ $(function(){
 		}
 	};
 
-
+	//Controller
 	var octopus = {
 		init: function() {
 			model.init();
@@ -200,21 +200,18 @@ $(function(){
 			view.changeView();
 		}
 	};
+
 	var sidePanelView = {
 		init : function() {
-
 			var videos=octopus.getAllVideos(),
+				parent=$("#l1"),
+				optSign = $('#bar'),
+				sideBlk = $('#lesson-list-container'),
+				mainDiv=$('#sidenav-opacity-div'), contentStyler = $('#content-styler'),
+				index,listAppend;
 
-			parent=$("#l1"),
-			optSign = $('#bar'),
-			sideBlk = $('#lesson-list-container'),
-			mainDiv=$('#sidenav-opacity-div'), contentStyler = $('#content-styler'),
-			index,listAppend;
-
-			index=-1;
-			listAppend=videos.reduce(function(videoHTMLString){
-				index++;
-				return videoHTMLString + '<li id="'+ index +'"class="lesson-list-container__lesson--title">Video'+ (parseInt(index)+1) +'</li>';
+			listAppend=videos.reduce(function(videoHTMLString,video){
+				return videoHTMLString + '<li id="'+ video.id +'"class="lesson-list-container__lesson--title">Video'+ (parseInt(video.id)+1) +'</li>';
 			},"");
 
 			parent.append(listAppend);
@@ -226,7 +223,7 @@ $(function(){
 				mainDiv.css("display" ,'block');
 			});
 
-			$("#l1").on("click", function(e) {
+			parent.on("click", function(e) {
 				if(e.target && e.target.nodeName == "LI") {
 					sideBlk.css('transform','translateX(-100%)');
 					optSign.css("visibility", "visible");
@@ -249,16 +246,13 @@ $(function(){
 			this.render();
 		},
 		render : function() {
-			var currentVideo=octopus.getCurrentVideoId();
-
+			var currentVideo=octopus.getCurrentVideo();
 			$('.active').removeClass('active');
-
-			
 			$("#"+currentVideo.id).addClass('active');
-
-
+			console.log(currentVideo.id);
 		} 
 	}; 
+
 	var youtubeView = {
 		init: function() {
 			this.videoTag=$(".video");
@@ -270,6 +264,7 @@ $(function(){
 			this.videoTag.prepend('<embed  id="youtube" width="100%" height="100%"src="https://www.youtube.com/embed/'+ curVideo["url"]+'" frameborder="0" allowfullscreen">');
 		}	
 	};
+
 	var notesView = {
 		init: function() {
 			$('#toolbar-top').on('click',function(e){
@@ -321,32 +316,35 @@ $(function(){
 			//$('.embed-bin-btn').eq(0).css("background-color",'#337AB7');
 		},
 	};
+
 	var modalView = {
 		init: function() {
-			$('#modal').on('click',function(e){
-				if(e.target.id=='hide-jsbin')
+			this.modalDiv=document.getElementsByClassName('modal-div')[0],
+			this.contentStyler=document.getElementById('content-styler');
+			$('#modal').on('click',function(event){
+				if(event.target.id=='hide-jsbin')
 				{
 					modalView.hidemodal();
 				}
-				else if(e.target.id=='saveUrl')
+				else if(event.target.id=='saveUrl')
 				{
 					var t2=$("#jsbinUrl").val();
 					octopus.addNewjsbin(t2);
-					$('#embed-bin-btn').eq(0).attr("disabled",true);
-					//$('.embed-bin-btn').eq(0).css("background-color",'grey');
+					octopus.disableJSButton();
 				}
 			});
 		},
 		jsbinmodal: function() {
-			document.getElementsByClassName('modal-div')[0].style.transform='scale(1)';
-			document.getElementById('content-styler').style.opacity=0.2;
+			this.modalDiv.style.transform='scale(1)';
+			this.contentStyler.style.opacity=0.2;
 		},
 		hidemodal: function() {
-			document.getElementsByClassName('modal-div')[0].style.transform='scale(0)';
-			document.getElementById('content-styler').style.opacity=1;
+			this.modalDiv.style.transform='scale(0)';
+			this.contentStyler.style.opacity=1;
 		},
 
 	};
+
 	var jsbinView = {
 		init: function() {
 			this.jsbintag=$(".jsbin");
@@ -368,45 +366,49 @@ $(function(){
 			}
 		}
 	};
+
 	var view = {
 		init: function() {
 			document.getElementById("lesson-anchor").href = "lessonCards.html?topic="+model.topicId;
-			var lessonName = $("#lesson-name"), topicName = $("#topic-name");
+			var lessonName = $("#lesson-name"), 
+				topicName = $("#topic-name");
+
+			this.toolbarTop = document.getElementById("toolbar-top");
+			this.toolbarBottom = document.getElementById("toolbar-editor");
+			this.container = document.getElementById("advance-wrapper");
+			this.ResizeDiv = document.getElementById("content-styler");
+
 			lessonName.html(octopus.getCurrentLessonName());
 			topicName.html(octopus.getCurrentTopicName());
-			view.resizeWindow();
 			$(window).eq(0).resize(function(){
 				view.resizeWindow();
 			});
+			view.resizeWindow();
 		},
 		renderTwoViews: function(){
-			var div = document.getElementById("content-styler");
-			div.className="content-style-1";
+			this.ResizeDiv.className="content-style-1";
 			view.resizeWindow();
 			octopus.hidemodal();
 		},
 		renderThreeViews: function(){
-			var div = document.getElementById("content-styler");
-			div.className="content-style-2";
+			this.ResizeDiv.className="content-style-2";
 			view.resizeWindow();
 			octopus.hidemodal();
 		},
 		changeView: function(){
-			var div = document.getElementById("content-styler");
-			if(div.className==="content-style-1")
-				div.className="content-style-2";
-			else
-				div.className="content-style-1";
+			if(this.ResizeDiv.className==="content-style-1"){
+				this.ResizeDiv.className="content-style-2";
+			}
+			else{
+				this.ResizeDiv.className="content-style-1";
+			}
 			view.resizeWindow();
 			octopus.hidemodal();
 		},
 		resizeWindow: function() {
-			var toolbarTop = document.getElementById("toolbar-top"),
-			toolbarBottom = document.getElementById("toolbar-editor"),
-			container = document.getElementById("advance-wrapper"),
-			toolbarTopHeight = toolbarTop.offsetHeight,
-			containerHeight = container.offsetHeight;
-			toolbarBottom.setAttribute("style","height:"+(containerHeight - toolbarTopHeight -5) +"px");
+			var toolbarTopHeight = this.toolbarTop.offsetHeight,
+			containerHeight = this.container.offsetHeight;
+			this.toolbarBottom.setAttribute("style","height:"+(containerHeight - toolbarTopHeight -5) +"px");
 		}
 
 	};
