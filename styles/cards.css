@@ -1,52 +1,60 @@
 *,
 *: before,
 *: after{
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 .headerBar{
     background-color: #0072BB;
     height: 50px;
 }
+
 .header:after{
+    clear: both;
     content: '';
     display: table;
-    clear: both;
 }
+
 .innerContent{
-    width: 80%;
     height: 100%;
+    margin: 0 auto;
     position: relative;
-    left: 10%;
+    width: 80%;
 }
+
 .innerContent__logo{
-    height: 100%;
     float: left;
+    height: 100%;
     width: 20%
 }
+
 .innerContent__logo--image{
-    max-width: 100%;
     max-height: 90%;
+    max-width: 100%;
     position: relative;
     top:3%;
 }
+
 .innerContent__account{
-    height: 100%;
-    float: right;
-    width: 20%;
     color: #FFF;
+    float: right;
     font-family: fantasy;
-    text-align: center;
-    
-}
-.innerContent__account--profile-Name{
-    width: 100%;
-    margin-bottom: 0px;
-    cursor: pointer;
-    margin-top: 0px;
     height: 100%;
-    padding-top: 7%;
-    
+    text-align: center;    
+    width: 20%;
+}
+
+.innerContent__account--profile-Name{
+    cursor: pointer;
+    height: 100%;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    padding-top: 7%;    
+    width: 100%;
 }
 
 .innerContent__account--profile-Name:hover{
@@ -54,73 +62,72 @@
 }
 
 .drop-list{
-    display: none;
     background-color: #0072BB;
-    width: 100%;
+    display: none;
     position: relative;
-    /* left: 30%; */
     top: 1%;
-    /* text-align: center; */
+    width: 100%;
 }
 
 .drop-list__element{
-    text-decoration: none;
     color: #FFF;
     display: block;
+    text-decoration: none;
 }
+
 .drop-list__element:hover{
     background-color: #085DAD;
 }
+
 .drop:hover .drop-list{
     display: block;
 }
+
 .cards {
-	width :100%;
-	margin-top : 40px;
-	min-height: 70px;
-	margin-bottom: 40px;
-	border: 1px solid #dcdcdc;
-	border-radius: 2px;
-	background-color: #fff;
-	cursor: pointer;
+    background-color: #fff;
+    border-radius: 2px;
+    border: 1px solid #dcdcdc;
+    cursor: pointer;
+    margin-bottom: 40px;
+    margin-top : 40px;
+    min-height: 70px;
+    width :100%;
 }
 
 .container {
-	width: 50%;
-	margin: 0 auto;
-	vertical-align: middle;
+    margin: 0 auto;
+    vertical-align: middle;
+    width: 50%;
 }
 
 .shadow:hover{
-	-moz-box-shadow:    2px 2px 2px 2px #ccc;
-	-webkit-box-shadow: 2px 2px 2px 2px #ccc;
-	box-shadow:         2px 2px 2px 2px #ccc;
+    -moz-box-shadow:    2px 2px 2px 2px #ccc;
+    -webkit-box-shadow: 2px 2px 2px 2px #ccc;
+    box-shadow:         2px 2px 2px 2px #ccc;
 }
 
 .cards__container__content {
 	float: left;
 	width: 80%;
-	//position: relative;
-	//top: 8px;
-
 }
+
 .content-name {
-	font-weight: 700;
-	font-size: 16px;
-	margin-bottom: 4px;
-	color: #666;
+    color: #666;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 4px;
 }
 
 .content-info {
-	font-size: 12px;
-	color: #b3b3b3;
-	word-wrap: break-word;
+    color: #b3b3b3;
+    font-size: 12px;
+    word-wrap: break-word;
 }
 
 .cards__play {
-	top:50%;
-	right: 0;
-	position: absolute;
+    position: absolute;
+    right: 0;
+    top:50%;
 }
 
 .play-icon{
@@ -129,18 +136,18 @@
 }
 
 .cards__container {
-	padding: 10px;
-	width:100%;
-	min-height:70px;
+    min-height:70px;
+    padding: 10px;
+    width:100%;
     position: relative;
 }
 
 .cards__container::after {
-	content:" ";
-	height:0px;
-	visibility: none;
-	clear:both;
-	display: block;
+    clear:both;
+    content:" ";
+    display: block;
+    height:0px;
+    visibility: none;
 }
 
 .bg-clr {
@@ -151,21 +158,25 @@
 .template {
 	display: none;
 }
+
 .topic-name{
     display: inline-block;
-    padding-bottom: 5px;
-    margin-top: 20px;
     font-size: 20px;
+    margin-top: 20px;
+    padding-bottom: 5px;
 }
+
 .breadcrumb{
     border-bottom: 1px solid #ececec;
     padding-left: 18px;
     padding-right: 18px;
 }
+
 .breadcrumb--anchor{
     text-decoration: none;
 }
+
 .fa-home{
-    font-size: 20px;
     color: #337ab7;
+    font-size: 20px;
 }
