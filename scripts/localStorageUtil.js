@@ -20,7 +20,6 @@ function getAllParameters(url){
 	}
 	var urlArraySplit1 = url.split("?");
 	var urlArraySplit2 =urlArraySplit1[1].split("&");
-	//console.log(urlArraySplit1,urlArraySplit2)
 	var parameters = {};
 	var paramVal;
 	urlArraySplit2.forEach(function(parameter){

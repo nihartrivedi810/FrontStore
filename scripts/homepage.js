@@ -15,15 +15,11 @@ $(function(){
 			}			
 		},
 		getAllTopics: function() {
-			
-			return Courses;
-			
+			return Courses;	
 		},
-		topicClicked: function(topicID)
-		{
+		topicClicked: function(topicID){
 			$(location).attr('href', 'lessonCards.html?topic='+topicID);
-		}
-
+		},
 	};
 
 
@@ -37,10 +33,8 @@ $(function(){
 		},
 		topicClicked : function(topicID) {
 			model.topicClicked(topicID);
-		}
+		},
 	};
-
-
 	var view = {
 		init: function() {
 			this.contentBox=$('.content-box');
