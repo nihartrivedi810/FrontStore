@@ -1,27 +1,24 @@
 *,
 *:before,
 *:after{
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-
 }
 
-
 .navbar{
-	width: 100%;
-	margin:auto;
-	text-align: justify;
-	height:50px;
+	align-items:center;
 	background:#f5f5f5;
 	display: inline-flex;
 	flex-wrap: wrap;
+	height:50px;
 	justify-content: space-around;
-	align-items:center;
-	list-style: none;
-	
+	list-style: none;	
+	margin:auto;
+	text-align: justify;
+	width: 100%;
 }
 
 #navbar1 {
@@ -29,8 +26,6 @@
 }
 
 #navbar1 .nav-list{
-	
-	
 	background:#4484ef;
 }
 
@@ -44,22 +39,26 @@
 
 .stretch-li{
 	display:inline-block;
-	line-height: 0px;
 	font-size: 0px;
+	line-height: 0px;
 	width: 100%;
 }
+
 .row{
 	width: 100%;
 }
+
 .col-1{
 	width:50%;
 }
+
 .col-2{
 	width: 100%;
 }
+
 .content-style-2 .video-container{
-	width: 100%;
 	height: 50%;
+	width: 100%;
 }
 
 .content-style-2 .video{
@@ -67,156 +66,165 @@
 }
 
 .content-style-2 .notes-container{
-	/*display: inline-block;*/
+	height: 50%;
 	vertical-align: top;
 	width: 100%;	
-	height: 50%;
 }
 
 .content-style-2 .notes{
 	margin-top: 0%;
 }
+
 .content-style-1 .video-container{
 	display: inline-block;
-	width: 50%;
 	height: 100%;
+	width: 50%;
 }
+
 .video{
-	margin:auto;
-	margin-top: 3%;
-	width:95%;
 	height: 90%;
+	margin-top: 3%;
+	margin:auto;
+	width:95%;
 }
 
 .notes{
-	margin:auto;
-	margin-top: 3%;
-	width:95%;
 	height: 90%;
+	margin-top: 3%;
+	margin:auto;
+	width:95%;
 }
 
 .right{
 	display: inline-block;
 	width:50%;
 }
+
 .content-style-1 .notes-container{
 	display: inline-block;
+	height: 100%;
 	vertical-align: top;
 	width: 50%;	
-	height: 100%;
 }
 
 .content-style-2 .content-pane-1{
+	display: inline-block;
+	height: 90vh;
 	width: 50%;
-	display: inline-block;
-	height: 90vh;
 }
+
 .content-style-1 .content-pane-1{
-	width: 100%;
 	display: inline-block;
 	height: 90vh;
+	width: 100%;
 }
+
 .content-style-2 .content-pane-2{
-	margin-top: 20px;
 	border: 1px solid;
-	vertical-align: top;
 	display: inline-block;
 	height: 86vh;
-	
+	margin-top: 20px;
+	vertical-align: top;
 }
+
 .content-style-1 .content-pane-2{
 	display: none;
 }
-
-/*header*/
 
 .header-bar{
 	background-color: #0072BB;
 	height: 50px;
 }
+
 .header:after{
+	clear: both;
 	content: '';
 	display: table;
-	clear: both;
 }
+
 .header-bar__inner-content{
-	width: 80%;
 	height: 100%;
+	margin: 0 auto;
 	position: relative;
-	left: 10%;
+	width: 80%;
 }
+
 .header-bar__inner-content__logo{
-	height: 100%;
 	float: left;
+	height: 100%;
 	width: 20%
 }
+
 .header-bar__inner-content__logo--image{
-	max-width: 100%;
 	max-height: 90%;
+	max-width: 100%;
 	position: relative;
 	top:3%;
 }
+
 .header-bar__inner-content__account{
-	height: 100%;
-	float: right;
-	width: 20%;
 	color: #FFF;
+	float: right;
 	font-family: fantasy;
-	text-align: center;
-
-}
-.header-bar__inner-content__account__profile-name{
-	width: 100%;
-	margin-bottom: 0px;
-	cursor: pointer;
-	margin-top: 0px;
 	height: 100%;
-	padding-top: 7%;
-
+	text-align: center;
+	width: 20%;
 }
+
+.header-bar__inner-content__account__profile-name{
+	cursor: pointer;
+	height: 100%;
+	margin-bottom: 0px;
+	margin-top: 0px;
+	padding-top: 7%;
+	width: 100%;
+}
+
 .header-bar__inner-content__account__profile-name:hover{
 	background-color: #085DAD;
 }
+
 .header-bar__inner-content__drop-list{
-	display: none;
 	background-color: #0072BB;
-	width: 100%;
+	display: none;
 	position: relative;
-	/* left: 30%; */
 	top: 1%;
-	/* text-align: center; */
+	width: 100%;
 }
+
 .header-bar__inner-content__drop-list__element{
-	text-decoration: none;
 	color: #FFF;
 	display: block;
 	height: 23px;
 	padding-top: 1%;
+	text-decoration: none;
 }
+
 .header-bar__inner-content__drop-list__element:hover{
 	background-color: #085DAD;
 }
+
 .drop:hover .header-bar__inner-content__drop-list{
 	display: block;
 }
 
 .header-bar__inner-content__innerContent__account:hover .header-bar__inner-content__drop-list{
 	background-color: #0072BB;
-	width: 100%;
 	position: relative;
-	/* left: 30%; */
 	top: 1%;
+	width: 100%;
 	z-index: 1;
 }
-.button{
-	
+
+.button{	
 	background-color: #337ab7;
+	border: none;
 	color: #fff;
-	padding: 5px 5px;
 	margin: 0 2px;
 	outline: none;
-	border: none;
+	padding: 5px 5px;
 }
+
 .button:hover {
 	background-color: black;
 	cursor: pointer;
@@ -226,103 +234,107 @@
 	background-color: grey;
 	color: #fff;
 }
+
 .modal-div {
-	width:100%;
-	height: 100%;
-	top: 0;
-	position: absolute;
 	background-color: rgba(0,0,0,0);
+	height: 100%;
+	position: absolute;
+	top: 0;
 	transform: scale(0);
 	transition: transform 0.2s ease-in;
+	width:100%;
 }
+
 .modal {
-	height: 500px;
-	width: 500px;
 	background-color: #0072BB;
 	border-radius: 50%;
+	height: 500px;
+	width: 500px;
 }
+
 .center {
+	left: 50%;
 	position: absolute;
 	top: 50%;
-	left: 50%;
 	transform: translate(-50%, -50%);
 }
+
 .modal__elements {
 	height: 100px;
 	width: 300px;
-	/*   background-color:#FFD034; */
 }
+
 .modal__elements__btn {
-	display: block;
-	height: 35px;
-	width: 100px;
-	transform: translate(-50%, 150%);
-	border-radius: 5px;
 	background-color: #000000;
+	border-radius: 5px;
 	border: none;
 	color: white;
+	display: block;
+	height: 35px;
 	outline: none;
+	transform: translate(-50%, 150%);
+	width: 100px;
 }
+
 .modal__elements__btn:hover{
-	cursor: pointer;
 	background-color:#C6C9CA;
+	cursor: pointer;
 }
+
 .modal__elements__input {
-	height: 30px;
-	width: 300px;
 	border-radius: 5px;
-	outline: none;
 	border: none;
+	height: 30px;
+	outline: none;
 	padding: 0 5px;
+	width: 300px;
 }
+
 .fa-times {
-	right: 0;
 	position: absolute;
+	right: 0;
 }
-/*.embed-bin-btn {
-	
-	background-color: #337ab7;
-	color: #fff;
-	padding: 2px;
-	width: 80px;
-	height: 25px;
-	margin-left: 5px;
-}*/
 
 .lesson-name{
 	display: inline-block;
-	padding-bottom: 5px;
 	font-size: 28px;
 	margin-top: 20px;
+	padding-bottom: 5px;
 }
+
 .topic-name{
+	color: #337ab7;
 	display: inline-block;
-	padding-bottom: 5px;
+	font-size: 20px;
 	font-size: 28px;
 	margin-top: 20px;
-	font-size: 20px;
-	color: #337ab7;
+	padding-bottom: 5px;
 }
+
 .breadcrumb{
 	border-bottom: 1px solid #ececec;
+	display: inline-block;
 	padding-left: 18px;
 	padding-right: 18px;
-	display: inline-block;
 }
+
 .anchor-unstyled{
 	text-decoration: none;
 }
+
 .fa-home{
-	font-size: 20px;
 	color: #337ab7;
+	font-size: 20px;
 }
+
 .jsbin {
 	height: 100%;
 }
+
 #sidenav-opacity-div{
 	display:none;
-	width: 100%;
 	height: 100%;
 	position: absolute;
+	width: 100%;
 	z-index: 1;
 }
