@@ -275,6 +275,8 @@ $(function(){
 
 	var modalView = {
 		init: function() {
+			this.modalDiv = document.getElementById("modal");
+			this.contentStyler = document.getElementById("content-styler");
 			$('#modal').on('click',function(event){
 				if(event.target.id==='hide-jsbin'){
 					modalView.hidemodal();
@@ -287,13 +289,14 @@ $(function(){
 			});
 		},
 		jsbinmodal: function() {
-			this.modalDiv.style.transform='scale(1)';
-			this.contentStyler.style.opacity=0.2;
+			document.getElementsByClassName('modal-div')[0].style.transform='scale(1)';
+			document.getElementById('content-styler').style.opacity=0.2;
 		},
 		hidemodal: function() {
-			this.modalDiv.style.transform='scale(0)';
-			this.contentStyler.style.opacity=1;
+			document.getElementsByClassName('modal-div')[0].style.transform='scale(0)';
+			document.getElementById('content-styler').style.opacity=1;
 		},
+
 
 	};
 
