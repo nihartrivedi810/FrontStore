@@ -1,10 +1,10 @@
 // Intern who is trying to change code here , tumse na hoayega.
-var Courses = rawData.getCourses();
+/*var Courses = rawData.getCourses();
 var Lessons = rawData.getLessons();
 var Videos = rawData.getVideos();
 var courseId = rawData.getCourseIndex();
 var lessonId = rawData.getLessonIndex();
-var videoId = rawData.getVideoIndex();
+var videoId = rawData.getVideoIndex();*/
 
 var model = {
 
@@ -14,71 +14,70 @@ var model = {
 		},
 
 		getLessons : function () {
-			return Lessons;
+			return rawData.getLessons();;
 		},
 
-		addLessonToCourse : function (courseId) {
+		getVideos : function () {
+			return rawData.getVideos();
+		},
+
+		addLessonToCourse : function (lessonId,courseId) {
+			
 			var courses = this.getCourses();
-			courses[courseId].lessons.push(this.getCurrentLessonId());
+			courses[courseId].lessons.push(lessonId);
+			
 		},
 		getCourses : function () {
-			return Courses;
+			return rawData.getCourses();
 		},
 
-		_incrementLessonIndex : function () {
-			lessonId++;
-		},
+		
 
-		getCurrentLessonId : function () {
-			return lessonId;
-		},
+		
 
-		addLesson : function (lesson,course) {
+		addLesson : function (lessonName,courseId) {
 			var lessons = this.getLessons();
-			lessons.push(rawData.createLessonObj(model.getCurrentLessonId(), lesson, undefined, course) );
+			var lesson = rawData.createLessonObj(lessonName, undefined, courseId);
 
-			this.addLessonToCourse(parseInt(course));
-			this._incrementLessonIndex();
+			lessons.push(lesson.id);
+
+			this.addLessonToCourse(parseInt(lesson.id),parseInt(courseId));
+			
 		},
 
-		addVideo : function (video , lesson) {
+		addVideo : function (videoUrl , lessonId) {
 			var videos = this.getVideos();
-			videos.push( rawData.createVideoObj (model.getCurrentVideoId(),video,lesson) );
+			var video = rawData.createVideoObj(videoUrl,lessonId) ;
+			videos.push( video);
 
-			this.addVideoToLesson ( parseInt(lesson) );
-			this._incrementVideoIndex();
+			this.addVideoToLesson ( parseInt(video.id), parseInt(lessonId) );
+			
 		},
 
 		addCourse : function (courseName) {
 			var courses = this.getCourses ();
-			courses.push (rawData.createCourseObj(courseName,undefined,model.getCurrentCourseId()) );
+			courses.push(rawData.createCourseObj(courseName));
 			
-			this._incrementCourseIndex();
+			
 		},
 
-		getVideos : function () {
-			return Videos;
-		},
+		
 
 		getCurrentVideoId : function () {
 			return videoId;
 		},
 
-		_incrementVideoIndex : function () {
-			videoId++;
-		},
+		
 
 		getCurrentCourseId : function () {
 			return courseId;
 		},
 
-		_incrementCourseIndex : function () {
-			courseId++;
-		},
+		
 
-		addVideoToLesson : function (lessonId) {
+		addVideoToLesson : function (videoId,lessonId) {
 			var lessons = this.getLessons();
-			lessons[lessonId].videos.push(this.getCurrentVideoId());
+			lessons[lessonId].videos.push(videoId);
 		}
 
 	},
@@ -125,17 +124,19 @@ var model = {
 		createLesson : function (courseElement) {
 			var lessonIds = courseElement.lessons,
 				lessonId;
+			var lessons = model.getLessons();
 			for (lessonId of lessonIds){
-				var lesson = Lessons[lessonId];
+				var lesson = lessons[lessonId] ;
 				viewDisplay.renderLesson (lesson);
 			}
 		},
 
 		createVideo : function (lesson) {
 			var videoId;
+			var videos = model.getVideos();
 			for (videoId of lesson.videos)
         	{
-        		var video = Videos[videoId];
+        		var video = videos[videoId];
         		viewDisplay.renderVideo(video);
         	}
 		}
@@ -240,7 +241,7 @@ var model = {
 			this.contentBoxEl.onclick = function(event){
 				var target = event.target,
 					className = target.className;
-
+					console.log(className);
 				switch (className) {
 					case "inner-content__course-card__course":
 					case "lesson-name":
