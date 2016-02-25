@@ -89,12 +89,8 @@ $(function(){
 		init: function() {
 			var params = getAllParameters(window.location.href);
 			model.init(params["topic"],params["lesson"]);
-
 			view.init();
-
 			modalView.init();
-
-
 			sidePanelView.init();
 			youtubeView.init();
 			notesView.init();
