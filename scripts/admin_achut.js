@@ -155,7 +155,7 @@ var model = {
 
     	init : function () {
     		this.render();
-    		this.addhandler();
+    		this.addHandler();
     	},
 
     	setCourseHolders : function () {
