@@ -250,15 +250,23 @@ var rawData = (function () {
 			getLessonIndex : function () {
 				return lessonId;
 			},
-			createCourseObj : function (name ,lessons,id,description) {
-				return new Course(name ,lessons,id,description);
+			createCourseObj : function (name ,lessons,description) {
+				var course = new Course(name ,lessons,courseId++,description);
+				Courses.push(course);
+				return course;
 			},
-			createLessonObj : function (id,name,videos,courseId) {
-				return new Lesson(id,name,videos,courseId);
+			createLessonObj : function (name,videos,courseId) {
+				var lesson = new Lesson(lessonId++,name,videos,courseId);
+				Lessons.push(lesson);
+				return lesson;
 			},
-			createVideoObj : function (id,url,lessonId) {
-				return new Video(id,url,lessonId);
+			createVideoObj : function (url,lessonId) {
+				var video = new Video(videoId++,url,lessonId);
+				Videos.push(video);
+				return video;
+
 			}
+				
 	}
 	
 }());
