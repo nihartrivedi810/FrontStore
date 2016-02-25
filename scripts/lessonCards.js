@@ -58,6 +58,7 @@ var octopus = {
 	setLesson : function (attr) {
 		
 		//console.log(model.topicID,attr);
+
 		$(location).attr('href', 'index.html?topic='+model.topicID+'&lesson='+attr);
 	},
 	getTopic: function(){
@@ -70,8 +71,8 @@ view = {
 	init :function () {
 
 		var data = octopus.getData(),
-			topicName = $("#topic-name"),
-			that = this;
+		topicName = $("#topic-name"),
+		that = this;
 
 		console.log("data is:", data);
 		topicName.html(octopus.getTopic());
@@ -79,57 +80,31 @@ view = {
 
 		data.forEach (function (val) {
 			var template = '<div class = "cards shadow" id = "card_'+val.id+'" data-id = "'+ val.id +'" >'+
-        '<div class = "cards__container" data-id = "'+ val.id +'" >'+
-            '<div class = "cards__container__content" data-id = "'+ val.id +'" >'+
-                '<div class = "content-name" id = "content-name_'+val.id+'" data-id = "'+ val.id +'" >'+ val.name +'</div>'+
-                '<div class = "content-info" id = "content-info_'+val.id+'" data-id = "'+ val.id +'" >'+ val.name +'</div>'+
-            '</div>'+
-            '<i class="fa fa-play-circle-o fa-lg cards__play play-icon" data-id = "'+ val.id +'" ></i>'+
-        '</div>'+
-    '</div>';
+			'<div class = "cards__container" data-id = "'+ val.id +'" >'+
+			'<div class = "cards__container__content" data-id = "'+ val.id +'" >'+
+			'<div class = "content-name" id = "content-name_'+val.id+'" data-id = "'+ val.id +'" >'+ val.name +'</div>'+
+			'<div class = "content-info" id = "content-info_'+val.id+'" data-id = "'+ val.id +'" >'+ val.name +'</div>'+
+			'</div>'+
+			'<i class="fa fa-play-circle-o fa-lg cards__play play-icon" data-id = "'+ val.id +'" ></i>'+
+			'</div>'+
+			'</div>';
 
 			var dom = document.getElementsByClassName("container")[0],
-				contentName,
-				contentInfo;
+			contentName,
+			contentInfo;
 
-			//that.addId(template, val.id);
+			
 			dom.innerHTML += template;
 
-			//dom.insertAdjacentHTML('beforeend' ,template.innerHTML );
 			
-			// contentName = document.getElementById("content-name_"+val.id);
-			// contentInfo = document.getElementById("content-info_"+val.id);
-			
-			// contentName.innerHTML = val.name;
-			// contentInfo.innerHTML = val.name;
-			that.addHandlers(val.id);
+			dom.onclick=function(event){
+				//console.log(event.target.getAttribute("data-id"));
+				var attr = event.target.getAttribute("data-id");
+				octopus.setLesson (attr);
+			}
 		});
-	},
+},
 
-	addId : function (node,id) {
-
-		var attr = node.getAttribute ("id"),
-		that = this,
-		children = node.children;
-
-		if (attr) {
-			node.setAttribute("id" , attr+"_"+id);
-		}
-		node.setAttribute ("data-id" , id);
-
-		[].forEach.call(children,function (element) {
-			that.addId(element,id);
-		});
-	},
-
-	addHandlers : function (id) {
-		var node = document.getElementById("card_"+id);
-		
-		node.onclick  = function (e) {
-			var attr = e.target.getAttribute("data-id");
-			octopus.setLesson (attr);
-		};
-	}
 
 };
 
