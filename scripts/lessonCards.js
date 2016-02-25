@@ -1,3 +1,11 @@
+var Courses = rawData.getCourses();
+var Lessons = rawData.getLessons();
+var Videos = rawData.getVideos();
+var courseId = rawData.getCourseIndex();
+var lessonId = rawData.getLessonIndex();
+var videoId = rawData.getVideoIndex();
+
+
 var model = {
 	init: function(){
 		model.topicID = this.getAllParameters()["topic"];
@@ -61,29 +69,41 @@ view = {
 
 	init :function () {
 
-		var data = octopus.getData();
-		console.log("data is:", data);
+		var data = octopus.getData(),
+			topicName = $("#topic-name"),
+			that = this;
 
-		var topicName = $("#topic-name");
+		console.log("data is:", data);
 		topicName.html(octopus.getTopic());
 		//TODO appropriate data
-		for (val of data) {
-			
-			var template = document.getElementById("template").cloneNode(true),
-			dom = document.getElementsByClassName("container")[0],
-			contentName,
-			contentInfo;
 
-			this.addId(template, val.id);
-			dom.insertAdjacentHTML('beforeend' ,template.innerHTML );
+		data.forEach (function (val) {
+			var template = '<div class = "cards shadow" id = "card_'+val.id+'" data-id = "'+ val.id +'" >'+
+        '<div class = "cards__container" data-id = "'+ val.id +'" >'+
+            '<div class = "cards__container__content" data-id = "'+ val.id +'" >'+
+                '<div class = "content-name" id = "content-name_'+val.id+'" data-id = "'+ val.id +'" >'+ val.name +'</div>'+
+                '<div class = "content-info" id = "content-info_'+val.id+'" data-id = "'+ val.id +'" >'+ val.name +'</div>'+
+            '</div>'+
+            '<i class="fa fa-play-circle-o fa-lg cards__play play-icon" data-id = "'+ val.id +'" ></i>'+
+        '</div>'+
+    '</div>';
+
+			var dom = document.getElementsByClassName("container")[0],
+				contentName,
+				contentInfo;
+
+			//that.addId(template, val.id);
+			dom.innerHTML += template;
+
+			//dom.insertAdjacentHTML('beforeend' ,template.innerHTML );
 			
-			contentName = document.getElementById("content-name_"+val.id);
-			contentInfo = document.getElementById("content-info_"+val.id);
+			// contentName = document.getElementById("content-name_"+val.id);
+			// contentInfo = document.getElementById("content-info_"+val.id);
 			
-			contentName.innerHTML = val.name;
-			contentInfo.innerHTML = val.name;
-			this.addHandlers(val.id);
-		};
+			// contentName.innerHTML = val.name;
+			// contentInfo.innerHTML = val.name;
+			that.addHandlers(val.id);
+		});
 	},
 
 	addId : function (node,id) {

@@ -1,14 +1,16 @@
 // Intern who is trying to change code here , tumse na hoayega.
+var Courses = rawData.getCourses();
+var Lessons = rawData.getLessons();
+var Videos = rawData.getVideos();
+var courseId = rawData.getCourseIndex();
+var lessonId = rawData.getLessonIndex();
+var videoId = rawData.getVideoIndex();
 
 var model = {
 
 
 		toJSON : function (data) {
 			return JSON.stringify(data);
-		},
-
-		setToLocalStorage : function (key , value) {
-			localStorage.setItem(key,value);
 		},
 
 		getLessons : function () {
@@ -19,12 +21,11 @@ var model = {
 			var courses = this.getCourses();
 			courses[courseId].lessons.push(this.getCurrentLessonId());
 		},
-
 		getCourses : function () {
 			return Courses;
 		},
 
-		incrementLessonIndex : function () {
+		_incrementLessonIndex : function () {
 			lessonId++;
 		},
 
@@ -34,17 +35,25 @@ var model = {
 
 		addLesson : function (lesson,course) {
 			var lessons = this.getLessons();
-			lessons.push(new Lesson(model.getCurrentLessonId(), lesson, undefined, course));
+			lessons.push(rawData.createLessonObj(model.getCurrentLessonId(), lesson, undefined, course) );
+
+			this.addLessonToCourse(parseInt(course));
+			this._incrementLessonIndex();
 		},
 
 		addVideo : function (video , lesson) {
 			var videos = this.getVideos();
-			Videos.push(new Video(model.getCurrentVideoId(),video,lesson)); 
+			videos.push( rawData.createVideoObj (model.getCurrentVideoId(),video,lesson) );
+
+			this.addVideoToLesson ( parseInt(lesson) );
+			this._incrementVideoIndex();
 		},
 
 		addCourse : function (courseName) {
 			var courses = this.getCourses ();
-			courses.push(new Course(courseName,undefined,model.getCurrentCourseId()));
+			courses.push (rawData.createCourseObj(courseName,undefined,model.getCurrentCourseId()) );
+			
+			this._incrementCourseIndex();
 		},
 
 		getVideos : function () {
@@ -55,7 +64,7 @@ var model = {
 			return videoId;
 		},
 
-		incrementVideoIndex : function () {
+		_incrementVideoIndex : function () {
 			videoId++;
 		},
 
@@ -63,7 +72,7 @@ var model = {
 			return courseId;
 		},
 
-		incrementCourseIndex : function () {
+		_incrementCourseIndex : function () {
 			courseId++;
 		},
 
@@ -79,42 +88,30 @@ var model = {
 			viewDisplay.init();
 		},
 
+		setToLocalStorage : function (key , value) {
+			localStorage.setItem(key,value);
+		},
+
 		addLesson : function (lesson,course) {
 
 			model.addLesson (lesson,course);
 
-			model.setToLocalStorage("Lessons" , model.toJSON ( model.getLessons() ) );
-			
-			model.addLessonToCourse(parseInt(course));
-
-			model.setToLocalStorage("Courses" , model.toJSON ( model.getCourses() ) );
-			
-			model.incrementLessonIndex();
-
+			this.setToLocalStorage("Lessons" , model.toJSON ( model.getLessons() ) );
+			this.setToLocalStorage("Courses" , model.toJSON ( model.getCourses() ) );
 		},
 
 		addVideo : function (video , lesson) {
 			
 			model.addVideo (video, lesson);
-			
-			model.setToLocalStorage ( "Videos" , model.toJSON (model.getVideos() ) );
-		
-			model.addVideoToLesson ( parseInt(lesson) );
 
-			model.setToLocalStorage ("Lessons" , model.toJSON ( model.getLessons() ) );
-			
-			model.incrementVideoIndex();
-
+			this.setToLocalStorage ( "Videos" , model.toJSON (model.getVideos() ) );
+			this.setToLocalStorage ("Lessons" , model.toJSON ( model.getLessons() ) );
 		},
 
 		addCourse : function (courseName) {
 
 			model.addCourse(courseName);
-
-			model.incrementCourseIndex();
-
-			model.setToLocalStorage ("Courses" , model.toJSON ( model.getCourses() ) );
-
+			this.setToLocalStorage ("Courses" , model.toJSON ( model.getCourses() ) );
 		},
 
 		createCourse : function () {
