@@ -1,4 +1,5 @@
 var Courses = rawData.getCourses();
+console.log(Courses);
 var Lessons = rawData.getLessons();
 var Videos = rawData.getVideos();
 var courseId = rawData.getCourseIndex();
@@ -38,6 +39,7 @@ $(function(){
 	var view = {
 		init: function() {
 			this.contentBox=$('.content-box');
+            
 			this.contentBox.on('click',function(e){
 				if(e.target.parentNode.tagName==='BUTTON')
 				{
