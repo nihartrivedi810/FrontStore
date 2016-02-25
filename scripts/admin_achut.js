@@ -143,14 +143,14 @@ var model = {
 
 	viewDisplay = {
 
-		courseList : document.getElementById("inner-content"),
-    	contentBox : document.getElementById("content-box"),
-    	courseCard : document.createElement("div"),
-		course : document.createElement("div"),
-		lessonContainer : document.createElement("div"),
-		lessonWrap : document.createElement("div"),
-		videoContainer : document.createElement("div"),
-		lessonTitle : document.createElement("div"),
+		courseListEl : document.getElementById("inner-content"),
+    	contentBoxEl : document.getElementById("content-box"),
+    	courseCardEl : document.createElement("div"),
+		courseEl : document.createElement("div"),
+		lessonContainerEl : document.createElement("div"),
+		lessonWrapEl : document.createElement("div"),
+		videoContainerEl : document.createElement("div"),
+		lessonTitleEl : document.createElement("div"),
 
     	init : function () {
     		this.render();
@@ -158,9 +158,9 @@ var model = {
     	},
 
     	setCourseHolders : function () {
-    		viewDisplay.courseCard = document.createElement("div");
-			viewDisplay.course = document.createElement("div");
-			viewDisplay.lessonContainer = document.createElement("div");
+    		viewDisplay.courseCardEl = document.createElement("div");
+			viewDisplay.courseEl = document.createElement("div");
+			viewDisplay.lessonContainerEl = document.createElement("div");
     	},
 		
 		addAttributes : function(node, value, content, display , index) {
@@ -173,44 +173,44 @@ var model = {
 		renderCourse : function (courseElement) {
 			
 				this.setCourseHolders ();
-				this.courseCard.setAttribute("class","inner-content__course-card");
-		        this.course.setAttribute("class","inner-content__course-card__course");
+				this.courseCardEl.setAttribute("class","inner-content__course-card");
+		        this.courseEl.setAttribute("class","inner-content__course-card__course");
 				
-				this.addAttributes (this.course , courseElement.getName(), "course" , "false" , courseElement.getId());
+				this.addAttributes (this.courseEl , courseElement.getName(), "course" , "false" , courseElement.getId());
 				
-				this.course.innerHTML = courseElement.getName() ;
-		        this.courseCard.appendChild(this.course);
+				this.courseEl.innerHTML = courseElement.getName() ;
+		        this.courseCardEl.appendChild(this.courseEl);
 		        
-		        this.lessonContainer.setAttribute("class","inner-content__course-card__lessons");
-				this.lessonContainer.innerHTML = "<button class=\"lesson__add\" data-course="+courseElement.getId()+">Add Lesson</button> <div class=\"lesson__add__input-contain\" ><input type=\"text\" id=\"input_new_lesson\"><button class=\"lesson__add_input-contain__button\"data-course="+courseElement.getId()+">Add Lesson</button>";
+		        this.lessonContainerEl.setAttribute("class","inner-content__course-card__lessons");
+				this.lessonContainerEl.innerHTML = "<button class=\"lesson__add\" data-course="+courseElement.getId()+">Add Lesson</button> <div class=\"lesson__add__input-contain\" ><input type=\"text\" id=\"input_new_lesson\"><button class=\"lesson__add_input-contain__button\"data-course="+courseElement.getId()+">Add Lesson</button>";
 			
 				controller.createLesson(courseElement);
 
-				this.courseCard.appendChild(this.lessonContainer);
-				this.courseList.appendChild (this.courseCard);
+				this.courseCardEl.appendChild(this.lessonContainerEl);
+				this.courseListEl.appendChild (this.courseCardEl);
 		},
 
 		renderLesson : function (lesson) {
 		
-			this.lessonWrap = document.createElement("div");
-        	this.lessonWrap.setAttribute("class","lesson-wrapper");
+			this.lessonWrapEl = document.createElement("div");
+        	this.lessonWrapEl.setAttribute("class","lesson-wrapper");
 
-        	this.lessonTitle = document.createElement("div");
-        	this.lessonTitle.setAttribute("class","lesson-name");
+        	this.lessonTitleEl = document.createElement("div");
+        	this.lessonTitleEl.setAttribute("class","lesson-name");
 
-        	this.addAttributes(this.lessonTitle,lesson.getName(),"lesson","false",lesson.getId());
+        	this.addAttributes(this.lessonTitleEl,lesson.getName(),"lesson","false",lesson.getId());
         	
-        	this.lessonTitle.innerHTML = lesson.getName();
-        	this.lessonWrap.appendChild(viewDisplay.lessonTitle);
+        	this.lessonTitleEl.innerHTML = lesson.getName();
+        	this.lessonWrapEl.appendChild(viewDisplay.lessonTitleEl);
 
-        	this.videoContainer = document.createElement("div");
-        	this.videoContainer.setAttribute("class","video-wrapper");
-        	this.videoContainer.innerHTML = "<button class=\"video-add\" data-course="+lesson.getId()+">Add Video</button> <div class=\"video__add__input-contain\" ><input type=\"text\" id=\"input_new_video\"><button class=\"video__add_input-contain__button\"data-lesson="+lesson.getId()+">Add Video</button>";
+        	this.videoContainerEl = document.createElement("div");
+        	this.videoContainerEl.setAttribute("class","video-wrapper");
+        	this.videoContainerEl.innerHTML = "<button class=\"video-add\" data-course="+lesson.getId()+">Add Video</button> <div class=\"video__add__input-contain\" ><input type=\"text\" id=\"input_new_video\"><button class=\"video__add_input-contain__button\"data-lesson="+lesson.getId()+">Add Video</button>";
 
         	controller.createVideo(lesson);
 
-        	this.lessonWrap.appendChild(this.videoContainer);
-		    this.lessonContainer.appendChild(this.lessonWrap);
+        	this.lessonWrapEl.appendChild(this.videoContainerEl);
+		    this.lessonContainerEl.appendChild(this.lessonWrapEl);
 		},
 
 		renderVideo : function (video) {
@@ -219,7 +219,7 @@ var model = {
         		
         		this.addAttributes(viewDisplay.videoWrapper,video.getUrl(),"video","false",video.getId());
         		this.videoWrapper.innerHTML = video.getUrl();
-        		this.videoContainer.appendChild(this.videoWrapper);
+        		this.videoContainerEl.appendChild(this.videoWrapper);
 		},
 
 		// if i die then it is because of refactoring this function.
@@ -228,16 +228,16 @@ var model = {
 			var that = this,
 				str = "<button class=\"course-add\">Add Course</button> <div class=\"course__add__input-contain\" ><input type=\"text\" id=\"input_new_course\"><button class=\"course__add_input-contain__button\">Add Course</button>";
 		        
-			that.courseList.innerHTML = str;
+			that.courseListEl.innerHTML = str;
 			controller.createCourse();
 		},
 
-		addhandler : function () {
+		addHandler : function () {
 
 			// hopefully this is what delegation is .
 			// If not then god help me.
 
-			this.contentBox.onclick = function(event){
+			this.contentBoxEl.onclick = function(event){
 				var target = event.target,
 					className = target.className;
 
