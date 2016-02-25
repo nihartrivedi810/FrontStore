@@ -47,7 +47,7 @@ var octopus = {
 	},
 
 	setLesson : function (attr) {
-		$(location).attr('href', 'index.html?topic='+model.topicID+'&lesson='+attr);
+		$(location).attr('href', 'videotext.html?topic='+model.topicID+'&lesson='+attr);
 	},
 
 	getTopic: function(){
