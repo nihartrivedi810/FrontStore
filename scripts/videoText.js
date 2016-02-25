@@ -9,34 +9,24 @@ $(function(){
 	var videoList,currentVideo;
 	var model = {
 		isSaved :false,
-		init: function() {
-			var params = model.getAllParameters();
-			model.topicId=parseInt(params["topic"])
-			model.topic = Courses[model.topicId];
-			model.lesson = Lessons[parseInt(params["lesson"])];
-			videoList=model.lesson.videos;
-			currentVideo = Videos[videoList[0]];
-			if(!model.topic||!model.lesson||!videoList)
-			{
-				
+		init: function(topicId,lessonId) {
+			
+			if(isNaN(topicId)||isNaN(lessonId)||!(model.topic = Courses[topicId])||!(model.lesson = Lessons[lessonId])||!(videoList = model.lesson.videos)||Lessons[lessonId]["courseId"]!==+topicId){
 				$(location).attr('href', 'homepage.html');
 			}
-			
-			//model.topicName = model.topic.name;
+			model.topicId=topicId;
+			currentVideo = Videos[videoList[0]];
+
 			if (!localStorageGet('notes')) {
 				localStorageSet('notes',{});
 			}
-
-			// console.log("came");
 		},
 		addNewNote: function(obj) {
 			var data =localStorageGet('notes');
-			if(data[currentVideo.id])
-			{
+			if(data[currentVideo.id]){
 				data[currentVideo.id].notes=obj;
 			}
-			else
-			{
+			else{
 				data[currentVideo.id]={ notes: obj};	
 			}
 			localStorageSet('notes',data);
@@ -44,35 +34,29 @@ $(function(){
 		},
 		addNewjsbin: function(jsbinURL) {
 			var data =localStorageGet('notes');
-			if(data[currentVideo.id])
-			{
+			if(data[currentVideo.id]){
 				data[currentVideo.id].jsbin=jsbinURL;
 			}
-			else
-			{
+			else{
 				data[currentVideo.id]={ jsbin: jsbinURL};	
 			}
 			localStorageSet('notes',data);
 		},
 		getNotesOfCurrentVideo: function() {
 			var data=localStorageGet('notes');
-			if(data[currentVideo.id])
-			{
+			if(data[currentVideo.id]){
 				return data[currentVideo.id].notes;	
 			}
-			else
-			{
+			else{
 				return false;
 			}
 		},
 		getjsbinOfCurrentVideo: function() {
 			var data=localStorageGet('notes');;
-			if(data[currentVideo.id])
-			{
+			if(data[currentVideo.id]){
 				return data[currentVideo.id].jsbin;	
 			}
-			else
-			{
+			else{
 				return false;
 			}
 		},
@@ -84,8 +68,8 @@ $(function(){
 			return currentVideo.id;
 		},
 		getAllVideos: function() {
-			var videos = videoList.map(function (vId){
-				return Videos[vId];
+			var videos = videoList.map(function (videoId){
+				return Videos[videoId];
 			})
 			return videos;
 		},
@@ -97,39 +81,16 @@ $(function(){
 		},
 		getCurrentTopicName: function(){
 			return model.topic.name;
-		},
-		// getParameterByName: function(name, url) {
-		// 	if (!url) url = window.location.href;
-		// 	name = name.replace(/[\[\]]/g, "\\$&");
-		// 	var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-		// 	results = regex.exec(url);
-		// 	if (!results) return null;
-		// 	if (!results[2]) return '';
-		// 	return decodeURIComponent(results[2].replace(/\+/g, " "));
-		// }
-		getAllParameters: function(){
-			var urlArraySplt1 = (window.location.href).split("?");
-			var urlArraySplt2 =urlArraySplt1[1].split("&");
-			var parameters = {};
-			var paramVal;
-			urlArraySplt2.forEach(function(parameter){
-				paramVal = parameter.split("=");
-				parameters[paramVal[0]] = decodeURIComponent(paramVal[1]);
-			});
-			return parameters;
 		}
 	};
 
-
+	//Controller
 	var octopus = {
 		init: function() {
-			model.init();
-
+			var params = getAllParameters(window.location.href);
+			model.init(params["topic"],params["lesson"]);
 			view.init();
-
 			modalView.init();
-
-
 			sidePanelView.init();
 			youtubeView.init();
 			notesView.init();
@@ -175,7 +136,7 @@ $(function(){
 		isSaved: function(){
 			return model.isSaved;
 		},
-		save: function(val){
+		toggleSave: function(val){
 			model.isSaved = val;
 		},
 		enableJSButton: function() {
@@ -196,48 +157,45 @@ $(function(){
 		renderThreeViews: function() {
 			view.renderThreeViews();
 		},
-		changeView: function(){
-			view.changeView();
+		toggleView: function(){
+			view.toggleView();
 		}
 	};
+
 	var sidePanelView = {
 		init : function() {
-
 			var videos=octopus.getAllVideos(),
+				parent=$("#l1"),
+				optSign = $('#bar'),
+				sideBlk = $('#lesson-list-container'),
+				mainDiv=$('#sidenav-opacity-div'), contentStyler = $('#content-styler'),
+				index,listAppend;
 
-			parent=$("#l1"),
-			optSign = $('#bar'),
-			sideBlk = $('#lesson-list-container'),
-			mainDiv=$('#sidenav-opacity-div'), contentStyler = $('#content-styler'),
-			index,listAppend;
-
-			index=-1;
-			listAppend=videos.reduce(function(videoHTMLString){
-				index++;
-				return videoHTMLString + '<li id="'+ index +'"class="lesson-list-container__lesson--title">Video'+ (parseInt(index)+1) +'</li>';
+			listAppend=videos.reduce(function(videoHTMLString,video){
+				return videoHTMLString + '<li id="'+ video.id +'"class="lesson-list-container__lesson--title">Video'+ (parseInt(video.id)+1) +'</li>';
 			},"");
 
 			parent.append(listAppend);
 
-			optSign.on("click", function(e) {
+			optSign.on("click", function(event) {
 				sideBlk.css('transform','translateX(0%)');
 				optSign.css("visibility", "hidden");
 				$('#content-styler').css('opacity','0.1');
 				mainDiv.css("display" ,'block');
 			});
 
-			$("#l1").on("click", function(e) {
-				if(e.target && e.target.nodeName == "LI") {
+			$("#l1").on("click", function(event) {
+				if(event.target && event.target.nodeName === "LI") {
 					sideBlk.css('transform','translateX(-100%)');
 					optSign.css("visibility", "visible");
 					$('#content-styler').css('opacity','1');
 					mainDiv.css("display" ,'none');
-					octopus.changeCurrentVideo(e.target.id);
+					octopus.changeCurrentVideo(event.target.id);
 				}
 			});
 
-			mainDiv.on("click", function(e) {
-				if(e.target.id != 'bar'){
+			mainDiv.on("click", function(event) {
+				if(event.target.id != 'bar'){
 					sideBlk.css('transform','translateX(-100%)');
 					optSign.css("visibility", "visible");
 					$('#content-styler').css('opacity','1');
@@ -249,16 +207,13 @@ $(function(){
 			this.render();
 		},
 		render : function() {
-			var currentVideo=octopus.getCurrentVideoId();
-
+			var currentVideo=octopus.getCurrentVideo();
 			$('.active').removeClass('active');
-
-			
 			$("#"+currentVideo.id).addClass('active');
-
-
+			console.log(currentVideo.id);
 		} 
 	}; 
+
 	var youtubeView = {
 		init: function() {
 			this.videoTag=$(".video");
@@ -270,23 +225,21 @@ $(function(){
 			this.videoTag.prepend('<embed  id="youtube" width="100%" height="100%"src="https://www.youtube.com/embed/'+ curVideo["url"]+'" frameborder="0" allowfullscreen">');
 		}	
 	};
+
 	var notesView = {
 		init: function() {
-			$('#toolbar-top').on('click',function(e){
-				if(e.target.id=="save-notes")
-				{
+			$('#toolbar-top').on('click',function(event){
+				if(event.target.id==="save-notes"){
 					a=advancedEditor.getContents();
 					octopus.addNewNote(a);
 					//$("#save-notes").attr('class','save-notes-btn--grey');
 					$("#save-notes").attr('disabled','true');
 				}
-				else if(e.target.id=="embed-bin-btn")
-				{
+				else if(event.target.id==="embed-bin-btn"){
 					octopus.showModal();
 				}
-				else if(e.target.id=="change-view")
-				{
-					octopus.changeView();
+				else if(event.target.id==="change-view"){
+					octopus.toggleView();
 				}
 			});
 			advancedEditor.on("text-change",function(delta){
@@ -294,21 +247,19 @@ $(function(){
 					$("#save-notes").removeAttr('disabled');
 					//$("#save-notes").attr('class','save-notes-btn');
 				}
-				octopus.save(false);
+				octopus.toggleSave(false);
 			});
 			this.render();
 		},
 		render: function() {
 			var notes=octopus.getNotesOfCurrentVideo();
-			if(notes)
-			{
-				octopus.save(true);
+			if(notes){
+				octopus.toggleSave(true);
 				advancedEditor.setContents(notes);
 			}
-			else
-			{
+			else{
 				notes=[];
-				octopus.save(true);
+				octopus.toggleSave(true);
 				advancedEditor.setContents(notes);
 			}
 		},
@@ -321,92 +272,94 @@ $(function(){
 			//$('.embed-bin-btn').eq(0).css("background-color",'#337AB7');
 		},
 	};
+
 	var modalView = {
 		init: function() {
-			$('#modal').on('click',function(e){
-				if(e.target.id=='hide-jsbin')
-				{
+			$('#modal').on('click',function(event){
+				if(event.target.id==='hide-jsbin'){
 					modalView.hidemodal();
 				}
-				else if(e.target.id=='saveUrl')
-				{
+				else if(event.target.id==='saveUrl'){
 					var t2=$("#jsbinUrl").val();
 					octopus.addNewjsbin(t2);
-					$('#embed-bin-btn').eq(0).attr("disabled",true);
-					//$('.embed-bin-btn').eq(0).css("background-color",'grey');
+					octopus.disableJSButton();
 				}
 			});
 		},
 		jsbinmodal: function() {
-			document.getElementsByClassName('modal-div')[0].style.transform='scale(1)';
-			document.getElementById('content-styler').style.opacity=0.2;
+			this.modalDiv.style.transform='scale(1)';
+			this.contentStyler.style.opacity=0.2;
 		},
 		hidemodal: function() {
-			document.getElementsByClassName('modal-div')[0].style.transform='scale(0)';
-			document.getElementById('content-styler').style.opacity=1;
+			this.modalDiv.style.transform='scale(0)';
+			this.contentStyler.style.opacity=1;
 		},
 
 	};
+
 	var jsbinView = {
 		init: function() {
 			this.jsbintag=$(".jsbin");
 		},
 		render: function() {
 			var jsbin=octopus.getjsbinOfCurrentVideo();
-			if(jsbin)
-			{
+			if(jsbin){
 				octopus.disableJSButton();
 				$("iframe").remove();
 				this.jsbintag.append('<iframe src=' + jsbin + ' style="border: 1px solid rgb(170, 170, 170); width: 100%; height:100%;min-height: 300px;"></iframe>');
 				octopus.renderThreeViews();
 			}
-			else
-			{
+			else{
 				octopus.renderTwoViews();
 				octopus.enableJSButton();
 				$("iframe").remove();
 			}
 		}
 	};
+
 	var view = {
 		init: function() {
 			document.getElementById("lesson-anchor").href = "lessonCards.html?topic="+model.topicId;
-			var lessonName = $("#lesson-name"), topicName = $("#topic-name");
+			var lessonName = $("#lesson-name"), 
+				topicName = $("#topic-name");
+
+			this.toolbarTop = document.getElementById("toolbar-top");
+			this.toolbarBottom = document.getElementById("toolbar-editor");
+			this.container = document.getElementById("advance-wrapper");
+			this.ResizeDiv = document.getElementById("content-styler");
+
 			lessonName.html(octopus.getCurrentLessonName());
 			topicName.html(octopus.getCurrentTopicName());
-			view.resizeWindow();
 			$(window).eq(0).resize(function(){
 				view.resizeWindow();
 			});
+			view.resizeWindow();
 		},
 		renderTwoViews: function(){
-			var div = document.getElementById("content-styler");
-			div.className="content-style-1";
+			this.ResizeDiv.className="content-style-1";
 			view.resizeWindow();
 			octopus.hidemodal();
 		},
 		renderThreeViews: function(){
-			var div = document.getElementById("content-styler");
-			div.className="content-style-2";
+			this.ResizeDiv.className="content-style-2";
 			view.resizeWindow();
 			octopus.hidemodal();
 		},
-		changeView: function(){
+		toggleView: function(){
 			var div = document.getElementById("content-styler");
-			if(div.className==="content-style-1")
+			if(div.className==="content-style-1"){
 				div.className="content-style-2";
-			else
+			}
+			else{
 				div.className="content-style-1";
+			}
 			view.resizeWindow();
 			octopus.hidemodal();
 		},
 		resizeWindow: function() {
-			var toolbarTop = document.getElementById("toolbar-top"),
-			toolbarBottom = document.getElementById("toolbar-editor"),
-			container = document.getElementById("advance-wrapper"),
-			toolbarTopHeight = toolbarTop.offsetHeight,
-			containerHeight = container.offsetHeight;
-			toolbarBottom.setAttribute("style","height:"+(containerHeight - toolbarTopHeight -5) +"px");
+			var toolbarTopHeight = this.toolbarTop.offsetHeight,
+			containerHeight = this.container.offsetHeight;
+			this.toolbarBottom.setAttribute("style","height:"+(containerHeight - toolbarTopHeight -5) +"px");
 		}
 
 	};

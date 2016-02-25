@@ -9,58 +9,47 @@ var videoId = rawData.getVideoIndex();
 var model = {
 	init: function(){
 		model.topicID = this.getAllParameters()["topic"];
-
 		model.topics = Courses;
-		console.log(model.topicID , model.topics);
 	},
 	getAllParameters: function(){
-		var urlArraySplt1 = (window.location.href).split("?");
-		var urlArraySplt2 =urlArraySplt1[1].split("&");
-		var parameters = {};
-		var paramVal;
+		var urlArraySplt1 = (window.location.href).split("?"),
+			urlArraySplt2 =urlArraySplt1[1].split("&"),
+			parameters = {},
+			paramVal;
 		urlArraySplt2.forEach(function(parameter){
 			paramVal = parameter.split("=");
 			parameters[paramVal[0]] = decodeURIComponent(paramVal[1]);
 		});
 		return parameters;
 	}
-	
 }
 var octopus = {
 
 	init : function () {
 		model.init();
-		
-		//console.log(model.topicID);
 		var topicID = model.topicID;
 		if(!model.topics||isNaN(topicID)||!model.topics[topicID])
 		{
-			//console.log("should not go here : ",model.topics , model.topicID, model.topics[model.topicID]);
 			$(location).attr('href', 'homepage.html');
 		}
 		view.init();
-		
 	},
 
 	getData : function (topicID) {
-		
-		var lIds =  model.topics[model.topicID].lessons;
-		var lessons = lIds.map(function(lId){
-			if( Lessons && Lessons[parseInt(lId)])
-			{
-				return Lessons[parseInt(lId)];
-			}
-		});
-
+		var lIds =  model.topics[model.topicID].lessons,
+			lessons = lIds.map(function(lId){
+				if( Lessons && Lessons[parseInt(lId)])
+				{
+					return Lessons[parseInt(lId)];
+				}
+			});
 		return lessons;
 	},
 
 	setLesson : function (attr) {
-		
-		//console.log(model.topicID,attr);
-
 		$(location).attr('href', 'index.html?topic='+model.topicID+'&lesson='+attr);
 	},
+
 	getTopic: function(){
 		return model.topics[model.topicID].name;
 	},
@@ -69,15 +58,10 @@ var octopus = {
 view = {
 
 	init :function () {
-
 		var data = octopus.getData(),
 		topicName = $("#topic-name"),
 		that = this;
-
-		console.log("data is:", data);
 		topicName.html(octopus.getTopic());
-		//TODO appropriate data
-
 		data.forEach (function (val) {
 			var template = '<div class = "cards shadow" id = "card_'+val.id+'" data-id = "'+ val.id +'" >'+
 			'<div class = "cards__container" data-id = "'+ val.id +'" >'+
@@ -88,24 +72,16 @@ view = {
 			'<i class="fa fa-play-circle-o fa-lg cards__play play-icon" data-id = "'+ val.id +'" ></i>'+
 			'</div>'+
 			'</div>';
-
 			var dom = document.getElementsByClassName("container")[0],
 			contentName,
 			contentInfo;
-
-			
 			dom.innerHTML += template;
-
-			
 			dom.onclick=function(event){
-				//console.log(event.target.getAttribute("data-id"));
 				var attr = event.target.getAttribute("data-id");
 				octopus.setLesson (attr);
 			}
 		});
-},
-
-
+	},
 };
 
 octopus.init();

@@ -1,68 +1,81 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : Feb 17, 2016, 1:27:09 PM
-    Author     : vedant12
-*/
+
 *,
 *:before,
 *:after{
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
+
 @font-face{
     font-family: squareFont;
     src: url('fonts/squarefont/Square.ttf');
 }
+
 .body{
-    margin: 0px;
     background-image: url("../images/background_homepage.jpg");
+    margin: 0px;
 }
+
 .headerBar{
     background-color: #0072BB;
     height: 50px;
 }
+
 .header:after{
+    clear: both;
     content: '';
     display: table;
-    clear: both;
 }
+
 .innerContent{
+    height: 100%;
+<<<<<<< HEAD
+    margin: auto;
     width: 80%;
-    height: 100%;
+=======
     position: relative;
-    left: 10%;
+    margin: 0 auto;
+>>>>>>> 6b58086813922502465bfca79d7f793b005d9fbe
 }
+
 .innerContent__logo{
-    height: 100%;
     float: left;
+    height: 100%;
     width: 20%
 }
+
 .innerContent__logo--image{
-    max-width: 100%;
     max-height: 90%;
+    max-width: 100%;
     position: relative;
     top: 3%;
 }
+
 .innerContent__account{
-    height: 100%;
-    float: right;
-    width: 20%;
     color: #FFF;
+    float: right;
     font-family: fantasy;
-    text-align: center;
-    
-}
-.innerContent__account--profile-Name{
-    width: 100%;
-    margin-bottom: 0px;
-    cursor: pointer;
-    margin-top: 0px;
     height: 100%;
+    text-align: center;
+<<<<<<< HEAD
+    width: 20%;
+=======
+>>>>>>> 6b58086813922502465bfca79d7f793b005d9fbe
+}
+
+.innerContent__account--profile-Name{
+    cursor: pointer;
+    height: 100%;
+    margin-bottom: 0px;
+    margin-top: 0px;
     padding-top: 5%;
-    
+<<<<<<< HEAD
+    width: 100%;
+=======
+>>>>>>> 6b58086813922502465bfca79d7f793b005d9fbe
 }
 
 .innerContent__account--profile-Name:hover{
@@ -70,23 +83,26 @@ and open the template in the editor.
 }
 
 .drop-list{
-    display: none;
     background-color: #0072BB;
-    width: 100%;
+    display: none;
     position: relative;
-    /* left: 30%; */
     top: 1%;
-    /* text-align: center; */
+<<<<<<< HEAD
+    width: 100%;
+=======
+>>>>>>> 6b58086813922502465bfca79d7f793b005d9fbe
 }
 
 .drop-list__element{
-    text-decoration: none;
     color: #FFF;
     display: block;
+    text-decoration: none;
 }
+
 .drop-list__element:hover{
     background-color: #085DAD;
 }
+
 .drop:hover .drop-list{
     display: block;
 }
@@ -94,194 +110,170 @@ and open the template in the editor.
 .content-container{
     height: auto;
 }
+
 .content-box{
-    display: inline-flex;
-    width: 60%;
-    position: relative;
-    left: 20%;
-    top:20%;
+<<<<<<< HEAD
     justify-content: space-around;
-    clear: both;
-    content: "";
-    display: table;
+    left: 20%;
+    position: relative;
+    top:20%;
+    width: 60%;
+=======
+    width: 80%;
+    position: relative;
+    margin: 0 auto;
+    margin-top: 7.5%;
+>>>>>>> 6b58086813922502465bfca79d7f793b005d9fbe
 }
 
 .content-box__course-box{
-    
     height: 300px;
     width: 300px;
+<<<<<<< HEAD
     margin: 7.5%;
-    /* display: inline-block; */
-    position: relative;
-    word-wrap: wrap-all;
     float: left;
-
     
+=======
+    position: relative;
+    float: left;
+    margin-left: 5%;
+>>>>>>> 6b58086813922502465bfca79d7f793b005d9fbe
 }
 
 .content-box__course-box__course-content{
-    width: 100%;
     height: 100%;
-    /*-webkit-transform-style: preserve-3d;
-    -webkit-transition: 0.5s;*/
+<<<<<<< HEAD
+    position: relative;
+    width: 100%;
+=======
     position: absolute;
-
-
-    
+>>>>>>> 6b58086813922502465bfca79d7f793b005d9fbe
 }
+
 .content-face{
     width: 100%;
     height: 100%;
-    
     position: absolute;
-    /*-webkit-backface-visibility: hidden ;
-    z-index: 2;*/
 }  
 
 .content-face__text{
     height: 66%;
     width: 80%;
-    
     font-size: 15px;
-    
-    /* position: absolute; */
     margin-left: 10%;
     overflow: auto;
     word-wrap: break-all;
-
-    
 }
 
 .content-face__button{
-    width: 55%;
-    height: 40%;
+    background-color: #BDB76B;
     cursor: pointer;
     font-size: 14px;
-    
-    /* margin: 0px; */
-    /* padding: 0px; */
-    position: relative;
-    /* margin-bottom: 100%; */
-    /* bottom: 42%; */
+    height: 40%;
     left: 22%;
-    top:20%;
-    /* top: -10%; */
     overflow: hidden;
-   
-    background-color: #BDB76B;
-   
-    
-    
+    position: relative;
+    top:20%;
+    width: 55%;
 }
-
-
 
 .content-face__button div {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    background-color: #BDB76B;
+    box-sizing: border-box;
+    height: 100%;
+    left:0px;
+    line-height: 14px;
+    padding: 10px;
     position: absolute;
     text-align: center;
-    width: 100%;
-    height: 100%;
-    box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    padding: 10px;
-    top:0px;
-    left:0px;
-    vertical-align: middle;
-    line-height: 14px;
     text-transform: uppercase;
-    background-color: #BDB76B;
-
-}
+    top:0px;
+    vertical-align: middle;
+    width: 100%;
 }
 
 .content-face__button div:nth-child(1) {
-    color: #808000;
     background-color: #ffffff;
+    color: #808000;
 }
 
 .content-face__button div:nth-child(2) {
-    background-color: #808000;
-    width: 230px;
-    transition: all 0.2s ease;
-    -webkit-transition: all 0.2s ease;
-    -moz-transition: all 0.2s ease;
-    transform: translate(-250px, 0px) skewX(-30deg);
-    -webkit-transform: translate(-250px, 0px) skewX(-30deg);
     -moz-transform: translate(-250px, 0px) skewX(-30deg);
+    -moz-transition: all 0.2s ease;
+    -webkit-transform: translate(-250px, 0px) skewX(-30deg);
+    -webkit-transition: all 0.2s ease;
+    background-color: #808000;
+    transform: translate(-250px, 0px) skewX(-30deg);
+    transition: all 0.2s ease;
+    width: 230px;
 }
 
 .content-face__button div:nth-child(3) {
+    -moz-transition: left 0.2s ease;
+    -webkit-transition: left 0.2s ease;
+    background-color:#808000;
     color: #ffffff;
     left: -200px;
     transition: left 0.2s ease;
-    -webkit-transition: left 0.2s ease;
-    -moz-transition: left 0.2s ease;
-    background-color:#808000;
 }
 
 .content-face__button:hover div:nth-child(2) {
-    transition: all 0.5s ease;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    transform: translate(-15px, 0px) skewX(-30deg);
-    -webkit-transform: translate(-15px, 0px) skewX(-30deg);
     -moz-transform: translate(-15px, 0px) skewX(-30deg);
+    -moz-transition: all 0.5s ease;
+    -webkit-transform: translate(-15px, 0px) skewX(-30deg);
+    -webkit-transition: all 0.5s ease;
+    transform: translate(-15px, 0px) skewX(-30deg);
+    transition: all 0.5s ease;
 }
 
 .content-face__button:hover div:nth-child(3) {
+    -moz-transition: left 0.30000000000000004s ease;
+    -webkit-transition: left 0.30000000000000004s ease;
     left: 0px;
     transition: left 0.30000000000000004s ease;
-    -webkit-transition: left 0.30000000000000004s ease;
-    -moz-transition: left 0.30000000000000004s ease;
 }
 
+
 .content-face__bottom{
-    
-    
     height:25%;
 }
+
 .content-box__course-box__course-content > .front-box{  
-    position:absolute;
-	transform: perspective( 600px ) rotateX( 0deg );
-	/*background:#FC0; width:240px; height:200px; border-radius: 7px;*/
-	backface-visibility: hidden;
-	transition: transform .5s linear 0s;
-    /*z-index: 1;
-    position: absolute;*/
+    backface-visibility: hidden;
     background-color: #FFD034;
     cursor: pointer;
+    position:absolute;
+    transform: perspective( 600px ) rotateX( 0deg );
+    transition: transform .5s linear 0s;
 }
 
 .content-box__course-box__course-content > .back-box{
-    /*-webkit-transform: rotatex(-180deg);*/
+    backface-visibility: hidden;
     background-color: #FFFFE0;
-    position:absolute;
-	transform: perspective( 600px ) rotateX( 180deg );
-	/*background: #80BFFF; width:240px; height:200px; border-radius: 7px;*/
-	backface-visibility: hidden;
-	transition: transform 0.5s linear 0s;
-
+    box-shadow: 0 0 20px #fff;
     font-family: Cambria, Georgia, serif;
     font-size: 24px;
     font-style: italic;
     font-variant: normal;
     font-weight: 500;
     line-height: 26.4px;
-
-    box-shadow: 0 0 20px #fff;
-
-
+    position:absolute;
+    transform: perspective( 600px ) rotateX( 180deg );
+    transition: transform 0.5s linear 0s;
 }
 
 .content-box__course-box__course-content:hover > .front-box{
 	transform: perspective( 600px ) rotateX( -180deg );
 }
+
 .content-box__course-box__course-content:hover > .back-box{
 	transform: perspective( 600px ) rotateX( 0deg );
 }
+
 .course-image{
-    width:80%;
     height: 80%;
     margin: 10%;
+    width:80%;
 }
