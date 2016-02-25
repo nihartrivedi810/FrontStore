@@ -1,4 +1,9 @@
-
+var Courses = rawData.getCourses();
+var Lessons = rawData.getLessons();
+var Videos = rawData.getVideos();
+var courseId = rawData.getCourseIndex();
+var lessonId = rawData.getLessonIndex();
+var videoId = rawData.getVideoIndex();
 
 $(function(){
 	var videoList,currentVideo;
