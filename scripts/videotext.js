@@ -14,7 +14,7 @@ $(function(){
 		init: function(topicId,lessonId) {
 			
 			if(isNaN(topicId)||isNaN(lessonId)||!(model.topic = Courses[topicId])||!(model.lesson = Lessons[lessonId])||!(videoList = model.lesson.videos)||Lessons[lessonId]["courseId"]!==+topicId){
-				$(location).attr('href', 'homepage.html');
+				$(location).attr('href', 'index.html');
 			}
 			model.topicId=topicId;
 			currentVideo = Videos[videoList[0]];
