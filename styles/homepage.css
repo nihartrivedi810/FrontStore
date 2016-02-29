@@ -80,13 +80,15 @@
     display: none;
     position: relative;
     top: 1%;
-
+    z-index: 1;
 }
 
 .drop-list__element{
     color: #FFF;
     display: block;
     text-decoration: none;
+    height: 50px;
+    line-height: 50px;
 }
 
 .drop-list__element:hover{
@@ -137,11 +139,13 @@
 }  
 
 .content-face__text{
-    height: 66%;
+    height: 75%;
     width: 80%;
     font-size: 15px;
-    margin-left: 10%;
+    /* margin-left: 10%; */
     overflow: auto;
+    margin: 0 auto;
+    padding: 15px;
     word-wrap: break-all;
 }
 
@@ -149,12 +153,14 @@
     background-color: #BDB76B;
     cursor: pointer;
     font-size: 14px;
-    height: 40%;
-    left: 22%;
+    height: 50%;
+    /* left: 22%; */
     overflow: hidden;
     position: relative;
-    top:20%;
+    top: 20%;
     width: 55%;
+    padding: 5px;
+    bottom: 0px;
 }
 
 .content-face__button div {
@@ -217,7 +223,11 @@
 
 
 .content-face__bottom{
-    height:25%;
+    height: 25%;
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    bottom: 0px;
 }
 
 .content-box__course-box__course-content > .front-box{  
