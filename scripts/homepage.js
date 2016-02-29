@@ -1,10 +1,9 @@
-var Courses = rawData.getCourses();
-console.log(Courses);
-var Lessons = rawData.getLessons();
-var Videos = rawData.getVideos();
-var courseId = rawData.getCourseIndex();
-var lessonId = rawData.getLessonIndex();
-var videoId = rawData.getVideoIndex();
+var Courses = rawData.getCourses(),
+	Lessons = rawData.getLessons(),
+	Videos = rawData.getVideos(),
+	courseId = rawData.getCourseIndex(),
+	lessonId = rawData.getLessonIndex(),
+	videoId = rawData.getVideoIndex();
 
 
 $(function(){
@@ -41,10 +40,11 @@ $(function(){
 			this.contentBox=$('.content-box');
             
 			this.contentBox.on('click',function(e){
-				if(e.target.parentNode.tagName==='BUTTON')
+				var targetNode = e.target.parentNode;
+				if(targetNode.tagName==='BUTTON')
 				{
-					console.log(parseInt(e.target.parentNode.id));
-					return octopus.topicClicked(parseInt(e.target.parentNode.id));
+					console.log(parseInt(targetNode.id));
+					return octopus.topicClicked(parseInt(targetNode.id));
 				}
 			});
 			view.render();

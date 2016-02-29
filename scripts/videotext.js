@@ -1,13 +1,15 @@
-var Courses = rawData.getCourses();
-var Lessons = rawData.getLessons();
-var Videos = rawData.getVideos();
-var courseId = rawData.getCourseIndex();
-var lessonId = rawData.getLessonIndex();
-var videoId = rawData.getVideoIndex();
+var Courses = rawData.getCourses(),
+	Lessons = rawData.getLessons(),
+	Videos = rawData.getVideos(),
+	courseId = rawData.getCourseIndex(),
+	lessonId = rawData.getLessonIndex(),
+	videoId = rawData.getVideoIndex();
 
 $(function(){
-	var videoList,currentVideo;
-	var model = {
+	var videoList,
+		currentVideo,
+		
+		model = {
 		isSaved :false,
 		init: function(topicId,lessonId) {
 			

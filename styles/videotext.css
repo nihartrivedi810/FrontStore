@@ -307,8 +307,7 @@
 .topic-name{
 	color: #337ab7;
 	display: inline-block;
-	font-size: 20px;
-	font-size: 28px;
+	font-size: 24px;
 	margin-top: 20px;
 	padding-bottom: 5px;
 }
@@ -326,7 +325,7 @@
 
 .fa-home{
 	color: #337ab7;
-	font-size: 20px;
+	font-size: 24px;
 }
 
 .jsbin {
