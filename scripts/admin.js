@@ -150,6 +150,7 @@ var model = {
 		lessonContainerEl : document.createElement("div"),
 		lessonWrapEl : document.createElement("div"),
 		videoContainerEl : document.createElement("div"),
+		videoWrapperEl : document.createElement("div"),
 		lessonTitleEl : document.createElement("div"),
 
     	init : function () {
@@ -205,20 +206,24 @@ var model = {
 
         	this.videoContainerEl = document.createElement("div");
         	this.videoContainerEl.setAttribute("class","video-wrapper");
-        	this.videoContainerEl.innerHTML = "<button class=\"video-add\" data-course="+lesson.getId()+">Add Video</button> <div class=\"video__add__input-contain\" ><input type=\"text\" id=\"input_new_video\"><button class=\"video__add_input-contain__button\"data-lesson="+lesson.getId()+">Add Video</button>";
+        	this.videoContainerEl.innerHTML = "<button class=\"video-add\" data-course="+lesson.getId()+">Add Video</button> <div class=\"video__add__input-contain\" ><input type=\"text\" id=\"input_new_video\"><button class=\"video__add_input-contain__button\"data-lesson="+lesson.getId()+">Add Video</button> ";
+        	this.videoWrapperEl.setAttribute("class","video-container");
 
         	controller.createVideo(lesson);
-
+        	console.log(this.videoContainerEl,this.videoWrapperEl);
+        	
         	this.lessonWrapEl.appendChild(this.videoContainerEl);
 		    this.lessonContainerEl.appendChild(this.lessonWrapEl);
 		},
 
 		renderVideo : function (video) {
+				this.videoBox = document.createElement("div");
 				this.videoWrapper = document.createElement("div");
         		this.videoWrapper.setAttribute("class","lesson-wrapper__videos");
         		
         		this.addAttributes(viewDisplay.videoWrapper,video.getUrl(),"video","false",video.getId());
         		this.videoWrapper.innerHTML = video.getUrl();
+
         		this.videoContainerEl.appendChild(this.videoWrapper);
 		},
 
@@ -243,10 +248,14 @@ var model = {
 					console.log(className);
 				switch (className) {
 					case "inner-content__course-card__course":
-					case "lesson-name":
 						var sibling = event.target.nextSibling;
 						if(sibling)
 		    				sibling.style.height = (sibling.clientHeight == 0 ? "221px":"0");
+						break;
+					case "lesson-name":
+						var sibling = event.target.nextSibling;
+						if(sibling)
+		    				sibling.style.height = (sibling.clientHeight == 0 ? "auto":"0");
 						break;
 
 					case "lesson__add":
