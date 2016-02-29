@@ -78,6 +78,8 @@
 
 .drop-list__element:hover{
     background-color: #085DAD;
+    color: #FFF;
+    text-decoration: none;
 }
 
 .drop:hover .drop-list{
