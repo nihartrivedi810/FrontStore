@@ -62,11 +62,6 @@
 
 .innerContent__account--profile-Name{
     cursor: pointer;
-    /* height: 100%; */
-    /* margin-bottom: 0px; */
-    /* margin-top: 0px; */
-    /* padding-top: 5%; */
-    /* vertical-align: middle; */
     line-height: 50px;
 
 }
@@ -80,7 +75,7 @@
     display: none;
     position: relative;
     top: 1%;
-
+    
 }
 
 .drop-list__element{
@@ -125,7 +120,6 @@
 
 .content-box__course-box__course-content{
     height: 100%;
-
     position: relative;
 
 }

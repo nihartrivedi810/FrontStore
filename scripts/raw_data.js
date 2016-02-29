@@ -42,7 +42,7 @@ var rawData = (function () {
 		},
 
 		addLesson : function (id) {
-			id = parseInt(i);
+			id = parseInt(id);
 			if(id)
 			{
 				this.videos.push(id);
