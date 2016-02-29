@@ -54,7 +54,7 @@ $(function(){
 			topicDiv=topics.reduce(function(accumulator,topic){
 				return accumulator + '<div class="content-box__course-box"><div class="content-box__course-box__course-content">'+
                         '<div class="content-face front-box">'+
-                            '<img class="course-image" src="images/HTML5.png">'+
+                            '<img class="course-image" src='+topic.getImage()+'>'+
                         '</div>'+
                         '<div class="content-face back-box">'+
                             '<p class="content-face__text">'+topic["description"]+'</p>'+

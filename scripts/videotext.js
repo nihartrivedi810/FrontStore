@@ -174,7 +174,8 @@ $(function(){
 				index,listAppend;
 
 			listAppend=videos.reduce(function(videoHTMLString,video){
-				return videoHTMLString + '<li id="'+ video.id +'"class="lesson-list-container__lesson--title">Video'+ (parseInt(video.id)+1) +'</li>';
+				console.log(video);
+				return videoHTMLString + '<li id="'+ video.id +'"class="lesson-list-container__lesson--title">'+ video.name +'</li>';
 			},"");
 
 			parent.append(listAppend);
