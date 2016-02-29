@@ -1,7 +1,7 @@
 *{
 	margin:0;
 	padding:0;
-	font:normal normal normal 14px/1 FontAwesome;
+	
 }
 
 body {
@@ -45,6 +45,7 @@ text-rendering: optimizelegibility;
 	left:15px;
 
 }
+
 .lesson-list-container__lesson {
 	margin-top: 60px;
 }
@@ -122,6 +123,7 @@ text-rendering: optimizelegibility;
 	transform: translate(-100%);
 	transition: transform 0.28s ease-out;
 	overflow: auto;
+    font:normal normal normal 14px/1 FontAwesome;
 }
 
 .lesson-list-container__lesson--video-list{
