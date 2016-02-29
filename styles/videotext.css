@@ -175,6 +175,7 @@
     height: 100%;
     text-align: center;
     width: 200px;
+    -webkit-font-smoothing: auto;
 }
 
 .innerContent__account--profile-Name{
