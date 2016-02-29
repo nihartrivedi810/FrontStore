@@ -1,0 +1,327 @@
+*,
+*:before,
+*:after{
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+@font-face{
+    font-family: Helvetica;
+    src: url('fonts/Helvetica.otf');
+}
+.body{
+    margin: 0px;
+}
+/* HEADER */
+.headerBar{
+    background-color: #0072BB;
+    height: 50px;
+}
+
+
+
+.innerContent{
+    height: 100%;
+    width: 80%;
+    margin: auto;
+}
+
+.innerContent:after{
+    clear: both;
+    content: '';
+    display: table;
+}
+
+.innerContent__logo{
+    float: left;
+    height: 100%;
+    width: 20%
+}
+
+.innerContent__logo--image{
+    max-height: 90%;
+    max-width: 100%;
+    position: relative;
+    top: 3%;
+}
+
+.innerContent__account{
+    color: #FFF;
+    float: right;
+    font-family: fantasy;
+    height: 100%;
+    text-align: center;
+    width: 200px;
+}
+
+.innerContent__account--profile-Name{
+    cursor: pointer;
+    line-height: 50px;
+
+}
+
+.innerContent__account--profile-Name:hover{
+    background-color: #085DAD;
+}
+
+.drop-list{
+    background-color: #0072BB;
+    display: none;
+    position: relative;
+    top: 1%;
+    z-index: 1;
+    /* text-align: center; */
+}
+
+.drop-list__element{
+    color: #FFF;
+    display: block;
+    height: 50px;
+    line-height: 50px;
+    text-decoration: none;
+}
+
+.drop-list__element:hover{
+    background-color: #085DAD;
+}
+
+.drop:hover .drop-list{
+    display: block;
+}
+
+/* HEADER ENDS*/
+/* MAIN BODY */
+
+.container{
+    width: 100%;
+    height: 755px;
+    background-color: #EDF1F4;
+    
+}
+
+.title-box{
+    width: 60%;
+    height: 10%;
+    background-color: #FF4C3B;
+    position: relative;
+    left: 20%;
+    border-radius: 30px;
+    top: 5%;
+}
+
+.title-box__content{
+    width: 30%;
+    margin: 0px;
+    position: relative;
+    left: 35%;
+    top: 30%;
+    text-align: center;
+    font-size: x-large;
+    font-family: cursive;
+    font-weight: bolder;
+    line-height: 100%;
+}
+
+.content-box{
+    width: 60%;
+    height: 63%;
+    border-radius: 80px;
+    background-color: #FFFFFF;
+    position: relative;
+    top: 12%;
+    left: 20%;
+    //overflow: auto;
+}
+
+.content-box .inner-content{
+    background-color:  #dcebf6;
+    /* vertical-align: middle; */
+    overflow: auto;
+    height: 80%;
+    width: 80%;
+    position: relative;
+    left: 10%;
+    top: 10%;
+    border-radius: 15px;
+}
+
+.inner-content .course-add{
+    float: right;
+    font-family: cursive;
+    background-color: #5987FA;
+    border-radius: 13px;
+}
+
+.inner-content__course-card{
+    width: 100%;
+    height: auto;
+}
+.inner-content__course-card__course{/*-------------*/
+    width: 40%;
+    background-color: #53c182;
+    height: 40px;
+    margin: 7px;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+    font-family: Helvetica;
+    line-height: 40px;
+    box-shadow: 5px 5px 5px gray;
+}
+.inner-content__course-card__course--textbox{
+    max-width: 80%;
+    /*background-color: #fff;*/
+    overflow-y: scroll;
+    overflow-x: scroll;
+    max-height: 36%;
+    margin: 1%;
+}
+
+.inner-content__course-card__course--button{
+    float: right;
+    position: absolute;
+    /* bottom: 30px; */
+    right: 19%;
+}
+
+.inner-content__course-card__lessons{
+    /*background-color: red;*/
+    position: relative;
+    width: 93%;
+    left: 48px;
+    overflow: hidden;
+    height: 0;
+    
+}
+.lesson__add{
+    float: right;
+    left: 26%;
+    background-color: #5987FA;
+    font-family: cursive;
+    border-radius: 13px;
+}
+#clicked{
+    display: none;
+    
+}
+.lesson-name{/*------------*/
+    width: 50%;
+    background-color:  #ed775a;
+    height: 40px;
+    margin: 7px;
+    border-radius: 10px;
+    text-align: center;
+    font-family: Helvetica;
+    line-height: 40px;
+    box-shadow: 5px 5px 5px gray;
+    cursor: pointer;
+}
+
+.lesson-name--textbox{
+    max-width: 80%;
+    /*background-color: #fff;*/
+    overflow-y: scroll;
+    overflow-x: scroll;
+    max-height: 36%;
+    margin: 1%;
+}
+
+.lesson-name--button{
+    float: right;
+    position: absolute;
+    /* bottom: 30px; */
+    right: -1.5%;
+}
+
+.lesson-wrapper{
+    width: 100%;
+    
+    overflow: hidden;
+}
+
+.video-wrapper{
+    width: 100%;
+    height:0;
+    overflow: hidden;
+
+}
+.video-add{
+    float: right;
+    //position: relative;
+    left: 26%;
+    background-color: #5987FA;
+    font-family: cursive;
+    //margin-bottom: 10px;
+    border-radius: 13px;
+}
+.lesson-wrapper__videos{/*----------*/
+    width: 50%;
+    background-color: #fddf78;
+    clear:both;
+    height: 40px;
+    margin: 7px;
+    border-radius: 10px;
+    position: relative;
+    left: 11%;
+    text-align: center;
+    font-family: Helvetica;
+    line-height: 40px;
+    box-shadow: 5px 5px 5px gray;
+    cursor: pointer;
+}
+
+.lesson__add__input-contain{
+    height:0;
+    overflow: hidden;
+    float: right;
+}
+.lesson__add_input-contain__button{
+    background-color: #5987FA;
+    font-family: cursive;
+    border-radius: 13px;
+}
+.video__add__input-contain{
+    height:0;
+    overflow: hidden;
+    float: right;
+}
+
+.video__add_input-contain__button{
+    background-color: #5987FA;
+    font-family: cursive;
+    border-radius: 13px;
+    
+}
+
+.course__add__input-contain{
+    height:0;
+    overflow:hidden;
+    /*height: auto;*/
+    float: right;
+    /*position: relative;
+    left: 71%;*/
+}
+
+.course__add_input-contain__button{
+    font-family: cursive;
+    background-color: #5987FA;
+    border-radius: 13px;
+}
+
+.lesson-wrapper__videos--textbox{
+    max-width: 80%;
+    /*background-color: #fff;*/
+    overflow-y: scroll;
+    overflow-x: scroll;
+    max-height: 36%;
+    margin: 1%;
+}
+
+.lesson-wrapper__videos--button{
+    float: right;
+    position: absolute;
+    /* bottom: 30px; */
+    right: 0.5%;
+}
