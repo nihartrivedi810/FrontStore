@@ -246,7 +246,7 @@ var model = {
 					case "lesson-name":
 						var sibling = event.target.nextSibling;
 						if(sibling)
-		    				sibling.style.height = (sibling.clientHeight == 0 ? "auto":"0");
+		    				sibling.style.height = (sibling.clientHeight == 0 ? "221px":"0");
 						break;
 
 					case "lesson__add":
