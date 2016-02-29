@@ -71,6 +71,10 @@
 	width: 100%;	
 }
 
+,content-style-1{
+    font:normal normal normal 14px/1 FontAwesome;
+}
+
 .content-style-2 .notes{
 	margin-top: 0%;
 }
@@ -131,57 +135,56 @@
 	display: none;
 }
 
+/*HEADER*/
+
 .header-bar{
-	background-color: #0072BB;
-	height: 50px;
+    background-color: #0072BB;
+    height: 50px;
 }
 
-.header:after{
-	clear: both;
-	content: '';
-	display: table;
+
+.innerContent{
+    height: 100%;
+    width: 80%;
+    margin: auto;
 }
 
-.header-bar__inner-content{
-	height: 100%;
-	margin: 0 auto;
-	position: relative;
-	width: 80%;
+.innerContent:after{
+    clear: both;
+    content: '';
+    display: table;
 }
 
-.header-bar__inner-content__logo{
-	float: left;
-	height: 100%;
-	width: 20%
+.innerContent__logo{
+    float: left;
+    height: 100%;
+    width: 20%
 }
 
-.header-bar__inner-content__logo--image{
-	max-height: 90%;
-	max-width: 100%;
-	position: relative;
-	top:3%;
+.innerContent__logo--image{
+    max-height: 90%;
+    max-width: 100%;
+    position: relative;
+    top: 3%;
 }
 
-.header-bar__inner-content__account{
-	color: #FFF;
-	float: right;
-	font-family: fantasy;
-	height: 100%;
-	text-align: center;
-	width: 20%;
+.innerContent__account{
+    color: #FFF;
+    float: right;
+    font-family: fantasy;
+    height: 100%;
+    text-align: center;
+    width: 200px;
 }
 
-.header-bar__inner-content__account__profile-name{
-	cursor: pointer;
-	height: 100%;
-	margin-bottom: 0px;
-	margin-top: 0px;
-	padding-top: 7%;
-	width: 100%;
+.innerContent__account--profile-Name{
+    cursor: pointer;
+    line-height: 50px;
+
 }
 
-.header-bar__inner-content__account__profile-name:hover{
-	background-color: #085DAD;
+.innerContent__account--profile-Name:hover{
+    background-color: #085DAD;
 }
 
 .header-bar__inner-content__drop-list{
@@ -202,21 +205,35 @@
 	text-decoration: none;
 }
 
-.header-bar__inner-content__drop-list__element:hover{
-	background-color: #085DAD;
+.drop-list{
+    background-color: #0072BB;
+    display: none;
+    position: relative;
+    top: 1%;
+
 }
 
-.drop:hover .header-bar__inner-content__drop-list{
-	display: block;
+.drop-list__element{
+    color: #FFF;
+    display: block;
+    text-decoration: none;
 }
 
-.header-bar__inner-content__innerContent__account:hover .header-bar__inner-content__drop-list{
+.drop-list__element:hover{
+    background-color: #085DAD;
+}
+
+.drop:hover .drop-list{
+    display: block;
+}
+
+/*.header-bar__inner-content__innerContent__account:hover .header-bar__inner-content__drop-list{
 	background-color: #0072BB;
 	position: relative;
 	top: 1%;
 	width: 100%;
 	z-index: 1;
-}
+}*/
 
 .button{	
 	background-color: #337ab7;
@@ -245,6 +262,7 @@
 	transform: scale(0);
 	transition: transform 0.2s ease-in;
 	width:100%;
+    font:normal normal normal 14px/1 FontAwesome;
 }
 
 .modal {
@@ -307,8 +325,7 @@
 .topic-name{
 	color: #337ab7;
 	display: inline-block;
-	font-size: 20px;
-	font-size: 28px;
+	font-size: 24px;
 	margin-top: 20px;
 	padding-bottom: 5px;
 }
@@ -326,7 +343,7 @@
 
 .fa-home{
 	color: #337ab7;
-	font-size: 20px;
+	font-size: 24px;
 }
 
 .jsbin {
@@ -339,4 +356,5 @@
 	position: absolute;
 	width: 100%;
 	z-index: 1;
+    font:normal normal normal 14px/1 FontAwesome;
 }
