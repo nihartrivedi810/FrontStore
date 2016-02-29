@@ -31,7 +31,7 @@ var Courses = rawData.getCourses(),
 			var topicID = model.topicID;
 			if(!model.topics||isNaN(topicID)||!model.topics[topicID])
 			{
-				$(location).attr('href', 'homepage.html');
+				$(location).attr('href', 'index.html');
 			}
 			view.init();
 		},
