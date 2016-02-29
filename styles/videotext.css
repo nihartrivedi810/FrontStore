@@ -137,7 +137,7 @@
 
 /*HEADER*/
 
-.header-bar{
+.headerBar{
     background-color: #0072BB;
     height: 50px;
 }
@@ -187,36 +187,22 @@
     background-color: #085DAD;
 }
 
-.header-bar__inner-content__drop-list{
-	background-color: #0072BB;
-	display: none;
-	position: relative;
-	top: 1%;
-	width: 100%;
-	z-index: 1;
-}
-
-.header-bar__inner-content__drop-list__element{
-	color: #FFF;
-	display: block;
-	height: 50px;
-    line-height: 50px;
-	padding-top: 1%;
-	text-decoration: none;
-}
 
 .drop-list{
     background-color: #0072BB;
     display: none;
     position: relative;
     top: 1%;
-
+    z-index: 1;
 }
 
 .drop-list__element{
     color: #FFF;
     display: block;
     text-decoration: none;
+    height: 50px;
+    line-height: 50px;
+
 }
 
 .drop-list__element:hover{
@@ -226,7 +212,6 @@
 .drop:hover .drop-list{
     display: block;
 }
-
 /*.header-bar__inner-content__innerContent__account:hover .header-bar__inner-content__drop-list{
 	background-color: #0072BB;
 	position: relative;
