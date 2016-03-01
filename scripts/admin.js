@@ -34,7 +34,7 @@ var model = {
 		var lessons = this.getLessons();
 		var lesson = rawData.createLessonObj(lessonName, undefined, courseId);
 
-		lessons.push(lesson.id);
+		//lessons.push(lesson.id);
 
 		this.addLessonToCourse(parseInt(lesson.id),parseInt(courseId));
 
@@ -43,7 +43,7 @@ var model = {
 	addVideo : function (videoName , videoUrl , lessonId) {
 		var videos = this.getVideos();
 		var video = rawData.createVideoObj(videoName,videoUrl,lessonId) ;
-		videos.push( video);
+		//videos.push( video);
 
 		this.addVideoToLesson ( parseInt(video.id), parseInt(lessonId) );
 
