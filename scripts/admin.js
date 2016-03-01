@@ -304,7 +304,7 @@ var model = {
 							if (courseName && courseDes && courseImage) {
 								controller.addCourse(courseName, courseDes , courseImage);
 							}
-							//location.reload();
+							location.reload();
 							break;
 						case "add-lesson-button" :
 							var lessonName = document.getElementById("lessonName").value.trim();
