@@ -30,11 +30,6 @@ var model = {
 	getCourses : function () {
 		return rawData.getCourses();
 	},
-
-
-
-
-
 	addLesson : function (lessonName,courseId) {
 		var lessons = this.getLessons();
 		var lesson = rawData.createLessonObj(lessonName, undefined, courseId);
@@ -239,70 +234,53 @@ var model = {
 			controller.createCourse();
 		},
 
+		hideHirerachy : function (node , className) {
+			var domNodes = node.getElementsByClassName(className);
+			Array.prototype.forEach.call(domNodes, function (element) {
+				element.style.height = 0;
+			});
+		},
+
 		addHandler : function () {
 
 			// hopefully this is what delegation is .
 			// If not then god help me.
-
+			var that = this;
 			this.contentBoxEl.onclick = function(event){
 				var target = event.target,
 				className = target.className;
 				console.log(className);
 				switch (className) {
+					
 					case "inner-content__course-card__course":
 					var sibling = event.target.nextSibling;
-					if(sibling)
+					if(sibling) {
 						sibling.style.height = (sibling.clientHeight == 0 ? "221px":"0");
+					}
 					break;
+
 					case "lesson-name":
 					var sibling = event.target.nextSibling;
-					if(sibling)
+					if(sibling) {
 						sibling.style.height = (sibling.clientHeight == 0 ? "auto":"0");
+					}
 					break;
 
 					case "lesson__add":
 						var courseId = target.getAttribute("data-course");
 						viewDisplay.displayModal("lesson-modal", courseId);
-					//console.log("gpooog " , );
-						break;
-
-					// case "lesson__add_input-contain__button":
-					// var lesson = target.parentNode.firstChild.value,
-					// course = target.getAttribute("data-course");
-
-					// controller.addLesson(lesson,course);
-					// location.reload();
-					// break;
+					break;
 
 					case "video-add":
 						var lessonid = target.getAttribute("data-course");
 						viewDisplay.displayModal("video-modal" , lessonid);
 					break;
 
-					// case "video__add_input-contain__button":
-
-					// var video = event.target.parentNode.firstChild.value,
-					// lesson = event.target.getAttribute("data-lesson");
-
-					// controller.addVideo(video,lesson);
-					// location.reload();
-					// break;
-
 					case "course-add":
-					viewDisplay.displayModal("course-modal");
+						viewDisplay.displayModal("course-modal");
 					break;
-
-		    // 		case "course__add_input-contain__button":
-
-		    // 			var courseName = event.target.parentNode.firstChild.value;
-
-						// if(courseName) {
-						// 	controller.addCourse(courseName);	
-						// 	location.reload();
-						// }
-						// break;
-					}
 				}
+			}
 				this.modalContainerEl.onclick = function(event){
 					var id = event.target.id,
 						target = event.target;
