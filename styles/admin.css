@@ -202,12 +202,10 @@
 }
 
 .inner-content__course-card__lessons{
-    /* background-color: red; */
     position: relative;
     width: 80%;
-    /* left: 48px; */
-    overflow: scroll;
-    max-height: 0px;
+    overflow: auto;
+    height: 221px;
     margin-bottom: 20px;
     margin-left: 40px;
 }

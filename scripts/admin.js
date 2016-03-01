@@ -34,7 +34,7 @@ var model = {
 		var lessons = this.getLessons();
 		var lesson = rawData.createLessonObj(lessonName, undefined, courseId);
 
-		lessons.push(lesson.id);
+		//lessons.push(lesson.id);
 
 		this.addLessonToCourse(parseInt(lesson.id),parseInt(courseId));
 
@@ -43,7 +43,7 @@ var model = {
 	addVideo : function (videoName , videoUrl , lessonId) {
 		var videos = this.getVideos();
 		var video = rawData.createVideoObj(videoName,videoUrl,lessonId) ;
-		videos.push( video);
+		//videos.push( video);
 
 		this.addVideoToLesson ( parseInt(video.id), parseInt(lessonId) );
 
@@ -54,6 +54,7 @@ var model = {
 		var courses = this.getCourses ();
 
 		var course = rawData.createCourseObj(courseName,undefined, courseDes, courseImage);
+		console.log(course);
 			// courses.push(course);
 		},
 
@@ -197,9 +198,7 @@ var model = {
 
 			this.lessonWrapEl = document.createElement("div");
 			this.lessonWrapEl.setAttribute("class","lesson-wrapper");
-            var arrow = document.createElement("div");
-            arrow.setAttribute("class","arrow");
-            this.lessonWrapEl.appendChild(arrow);
+
 			this.lessonTitleEl = document.createElement("div");
 			this.lessonTitleEl.setAttribute("class","lesson-name");
 
@@ -211,28 +210,24 @@ var model = {
 			this.videoContainerEl = document.createElement("div");
 			this.videoContainerEl.setAttribute("class","video-wrapper");
 			this.videoContainerEl.innerHTML = "<button class=\"video-add\" data-course="+lesson.getId()+">Add Video</button> <div class=\"video__add__input-contain\" ><input type=\"text\" id=\"input_new_video\"><button class=\"video__add_input-contain__button\"data-lesson="+lesson.getId()+">Add Video</button> ";
-			//this.videoWrapperEl.setAttribute("class","video-container");
+			this.videoWrapperEl.setAttribute("class","video-container");
 
 			controller.createVideo(lesson);
-			//console.log(this.videoContainerEl,this.videoWrapperEl);
+			console.log(this.videoContainerEl,this.videoWrapperEl);
 
 			this.lessonWrapEl.appendChild(this.videoContainerEl);
 			this.lessonContainerEl.appendChild(this.lessonWrapEl);
 		},
 
 		renderVideo : function (video) {
-			var videoBox = document.createElement("div");
-            videoBox.setAttribute("class", "video-container");
-            var arrow = document.createElement("div");
-            arrow.setAttribute("class","arrow");
-            videoBox.appendChild(arrow);
+			this.videoBox = document.createElement("div");
 			this.videoWrapper = document.createElement("div");
 			this.videoWrapper.setAttribute("class","lesson-wrapper__videos");
 
 			this.addAttributes(viewDisplay.videoWrapper,video.getUrl(),"video","false",video.getId());
 			this.videoWrapper.innerHTML = video.getName();
-            videoBox.appendChild(this.videoWrapper);
-			this.videoContainerEl.appendChild(videoBox);
+
+			this.videoContainerEl.appendChild(this.videoWrapper);
 		},
 
 		// if i die then it is because of refactoring this function.
@@ -264,6 +259,7 @@ var model = {
 				switch (className) {
 					
 					case "inner-content__course-card__course":
+
 					var sibling = target.nextSibling,
  						parent = target.parentNode;
                         
@@ -273,6 +269,7 @@ var model = {
  						sibling.style.maxHeight = (sibling.clientHeight == 0 ? "221px":"0");
  						that.hideHirerachy(parent, "video-wrapper");
  					}
+
 					break;
 
 					case "lesson-name":
