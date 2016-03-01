@@ -80,7 +80,7 @@ var model = {
 
 	controller = {
 		init : function () {
-			viewDisplay.init();
+			viewDisplay.init(this);
 		},
 
 		setToLocalStorage : function (key , value) {
@@ -151,7 +151,8 @@ var model = {
 		lessonTitleEl : document.createElement("div"),
 		modalContainerEl: document.getElementById("modal-container"),
 
-		init : function () {
+		init : function (options) {
+			this.options = options;
 			this.render();
 			this.addHandler();
 		},
@@ -183,7 +184,7 @@ var model = {
 			this.lessonContainerEl.setAttribute("class","inner-content__course-card__lessons");
 			this.lessonContainerEl.innerHTML = "<button class=\"lesson__add\" data-course="+courseElement.getId()+">Add Lesson</button> <div class=\"lesson__add__input-contain\" ><input type=\"text\" id=\"input_new_lesson\"><button class=\"lesson__add_input-contain__button\"data-course="+courseElement.getId()+">Add Lesson</button>";
 			
-			controller.createLesson(courseElement);
+			this.options.createLesson(courseElement);
 
 			this.courseCardEl.appendChild(this.lessonContainerEl);
 			this.courseListEl.appendChild (this.courseCardEl);
@@ -207,7 +208,7 @@ var model = {
 			this.videoContainerEl.innerHTML = "<button class=\"video-add\" data-course="+lesson.getId()+">Add Video</button> <div class=\"video__add__input-contain\" ><input type=\"text\" id=\"input_new_video\"><button class=\"video__add_input-contain__button\"data-lesson="+lesson.getId()+">Add Video</button> ";
 			this.videoWrapperEl.setAttribute("class","video-container");
 
-			controller.createVideo(lesson);
+			this.options.createVideo(lesson);
 			console.log(this.videoContainerEl,this.videoWrapperEl);
 
 			this.lessonWrapEl.appendChild(this.videoContainerEl);
@@ -232,7 +233,7 @@ var model = {
 			str = "<button class=\"course-add\">Add Course</button>";
 
 			that.courseListEl.innerHTML = str;
-			controller.createCourse();
+			this.options.createCourse();
 		},
 
 		hideHirerachy : function (node , className) {
@@ -296,7 +297,7 @@ var model = {
 								courseDes = document.getElementById("courseDescription").value.trim(),
 								courseImage = document.getElementById("courseImage").value.trim();
 							if (courseName && courseDes && courseImage) {
-								controller.addCourse(courseName, courseDes , courseImage);
+								that.options.addCourse(courseName, courseDes , courseImage);
 							}
 							//location.reload();
 							break;
@@ -305,7 +306,8 @@ var model = {
 							var course = target.getAttribute("data-id");
 							console.log(course);
 							if (lessonName) {
-								controller.addLesson(lessonName,course);
+								console.log(that.options);
+								that.options.addLesson(lessonName,course);
 							}
 							location.reload();
 							break;
@@ -315,7 +317,7 @@ var model = {
 							var lesson = target.getAttribute("data-id");
 							console.log (lesson);
 							if (videoName && videoLink) {
-								controller.addVideo(videoName, videoLink ,lesson);
+								that.options.addVideo(videoName, videoLink ,lesson);
 							}
 							location.reload();
 							break;
