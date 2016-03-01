@@ -254,10 +254,12 @@ var model = {
 				switch (className) {
 					
 					case "inner-content__course-card__course":
-					var sibling = event.target.nextSibling;
-					if(sibling) {
-						sibling.style.height = (sibling.clientHeight == 0 ? "221px":"0");
-					}
+					var sibling = target.nextSibling,
+ 						parent = target.parentNode;
+ 					if(sibling) {
+ 						sibling.style.height = (sibling.clientHeight == 0 ? "221px":"0");
+ 						that.hideHirerachy(parent, "video-wrapper");
+ 					}
 					break;
 
 					case "lesson-name":
