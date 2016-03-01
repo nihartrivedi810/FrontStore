@@ -130,6 +130,7 @@ $(function(){
 			youtubeView.render();
 			notesView.render();
 			jsbinView.render();
+			breadCrumbView.printVideoName();
 		},
 		getCurrentLessonName: function(){
 			return model.getCurrentLessonName();
@@ -337,16 +338,21 @@ $(function(){
 		init: function(){
 			var lessonName = $("#lesson-name"), 
 				topicName = $("#topic-name"),
-				videoName = $("#video-name"),
+				
 				embedBinBtn = document.getElementById("embed-bin-btn"),
 			    changeViewBtn = document.getElementById("change-view");
 
 			lessonName.html(octopus.getCurrentLessonName());
 			topicName.html(octopus.getCurrentTopicName());
-			videoName.html(octopus.getCurrentVideoName());
+			this.printVideoName();
 
 			changeViewBtn.onclick = octopus.toggleView;
 			embedBinBtn.onclick = octopus.showModal;
+		},
+
+		printVideoName: function(){
+			var videoName = $("#video-name");
+			videoName.html(octopus.getCurrentVideoName());
 		}
 
 	};
