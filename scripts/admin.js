@@ -54,9 +54,10 @@ var model = {
 			
 		},
 
-		addCourse : function (courseName) {
+		addCourse : function (courseName,courseDes, courseImage) {
 			var courses = this.getCourses ();
-			var course = rawData.createCourseObj(courseName)
+
+			var course = rawData.createCourseObj(courseName,undefined, courseDes, courseImage);
 			// courses.push(course);
 		},
 
