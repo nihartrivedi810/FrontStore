@@ -194,7 +194,7 @@
     position: relative;
     width: 80%;
     /* left: 48px; */
-    overflow: scroll;
+    overflow: auto;
     height: 221px;
     margin-bottom: 20px;
     
