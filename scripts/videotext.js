@@ -83,7 +83,8 @@ $(function(){
 		},
 		getCurrentTopicName: function(){
 			return model.topic.name;
-		}
+		},
+		
 	};
 
 	//Controller
@@ -98,6 +99,7 @@ $(function(){
 			notesView.init();
 			jsbinView.init();
 			jsbinView.render();
+			breadCrumbView.init();
 		},
 		getCurrentVideoId: function() {
 			return model.getCurrentVideoId();
@@ -135,6 +137,9 @@ $(function(){
 		getCurrentTopicName: function(){
 			return model.getCurrentTopicName();
 		},
+		getCurrentVideoName: function(){
+			return model.getCurrentVideo().name;
+		},
 		isSaved: function(){
 			return model.isSaved;
 		},
@@ -162,6 +167,7 @@ $(function(){
 		toggleView: function(){
 			view.toggleView();
 		}
+
 	};
 
 	var sidePanelView = {
@@ -240,6 +246,7 @@ $(function(){
 				}
 				else if(event.target.id==="embed-bin-btn"){
 					octopus.showModal();
+
 				}
 				else if(event.target.id==="change-view"){
 					octopus.toggleView();
@@ -278,8 +285,8 @@ $(function(){
 
 	var modalView = {
 		init: function() {
-			this.modalDiv = document.getElementById("modal");
-			this.contentStyler = document.getElementById("content-styler");
+			this.modalDiv = $('.modal-div').eq(0);
+			this.contentStyler = $("#content-styler");
 			$('#modal').on('click',function(event){
 				if(event.target.id==='hide-jsbin'){
 					modalView.hidemodal();
@@ -292,12 +299,15 @@ $(function(){
 			});
 		},
 		jsbinmodal: function() {
-			document.getElementsByClassName('modal-div')[0].style.transform='scale(1)';
-			document.getElementById('content-styler').style.opacity=0.2;
+			
+
+			this.modalDiv.css('transform','scale(1)');
+			this.contentStyler.css('opacity','0.2');			
+
 		},
 		hidemodal: function() {
-			document.getElementsByClassName('modal-div')[0].style.transform='scale(0)';
-			document.getElementById('content-styler').style.opacity=1;
+			this.modalDiv.css('transform','scale(0)');
+			this.contentStyler.css('opacity','1');
 		},
 
 
@@ -323,23 +333,41 @@ $(function(){
 		}
 	};
 
+	var breadCrumbView = {
+		init: function(){
+			var lessonName = $("#lesson-name"), 
+				topicName = $("#topic-name"),
+				videoName = $("#video-name"),
+				embedBinBtn = document.getElementById("embed-bin-btn"),
+			    changeViewBtn = document.getElementById("change-view");
+
+			lessonName.html(octopus.getCurrentLessonName());
+			topicName.html(octopus.getCurrentTopicName());
+			videoName.html(octopus.getCurrentVideoName());
+
+			changeViewBtn.onclick = octopus.toggleView;
+			embedBinBtn.onclick = octopus.showModal;
+		}
+
+	};
+
 	var view = {
 		init: function() {
 			document.getElementById("lesson-anchor").href = "lessonCards.html?topic="+model.topicId;
-			var lessonName = $("#lesson-name"), 
-				topicName = $("#topic-name");
+			
 
 			this.toolbarTop = document.getElementById("toolbar-top");
 			this.toolbarBottom = document.getElementById("toolbar-editor");
 			this.container = document.getElementById("advance-wrapper");
 			this.ResizeDiv = document.getElementById("content-styler");
+			
 
-			lessonName.html(octopus.getCurrentLessonName());
-			topicName.html(octopus.getCurrentTopicName());
+			
 			$(window).eq(0).resize(function(){
 				view.resizeWindow();
 			});
 			view.resizeWindow();
+			
 		},
 		renderTwoViews: function(){
 			this.ResizeDiv.className="content-style-1";

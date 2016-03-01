@@ -50,6 +50,7 @@ var model = {
 	},
 
 	addCourse : function (courseName,courseDes, courseImage) {
+		console.log(courseImage);
 		var courses = this.getCourses ();
 
 		var course = rawData.createCourseObj(courseName,undefined, courseDes, courseImage);
@@ -103,7 +104,7 @@ var model = {
 		},
 
 		addCourse : function (courseName, courseDes , courseImage) {
-
+			console.log (courseImage);
 			model.addCourse(courseName, courseDes , courseImage);
 			this.setToLocalStorage ("Courses" , model.toJSON ( model.getCourses() ) );
 		},
@@ -259,10 +260,12 @@ var model = {
 				switch (className) {
 					
 					case "inner-content__course-card__course":
-					var sibling = event.target.nextSibling;
-					if(sibling) {
-						sibling.style.maxHeight = (sibling.clientHeight == 0 ? "221px":"0");
-					}
+					var sibling = target.nextSibling,
+ 						parent = target.parentNode;
+ 					if(sibling) {
+ 						sibling.style.maxHeight = (sibling.clientHeight == 0 ? "221px":"0");
+ 						that.hideHirerachy(parent, "video-wrapper");
+ 					}
 					break;
 
 					case "lesson-name":
@@ -301,7 +304,7 @@ var model = {
 							if (courseName && courseDes && courseImage) {
 								controller.addCourse(courseName, courseDes , courseImage);
 							}
-							location.reload();
+							//location.reload();
 							break;
 						case "add-lesson-button" :
 							var lessonName = document.getElementById("lessonName").value.trim();

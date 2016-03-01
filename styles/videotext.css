@@ -7,6 +7,9 @@
 	margin: 0;
 	padding: 0;
 }
+.float-right{
+	float:right;
+}
 
 .navbar{
 	align-items:center;
@@ -310,6 +313,13 @@
 	padding-bottom: 5px;
 }
 
+.video-name{
+	display: inline-block;
+    font-size: 28px;
+    margin-top: 20px;
+    padding-bottom: 5px;
+}
+
 .topic-name{
 	color: #337ab7;
 	display: inline-block;
@@ -328,6 +338,11 @@
 
 .breadcrumb--anchor{
 	text-decoration: none;
+}
+
+.breadcrumb__right{
+	height:50px;
+	margin-top:20px;
 }
 
 .fa-home{
