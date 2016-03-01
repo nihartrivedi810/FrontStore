@@ -173,6 +173,7 @@
     border: solid 1px #aaa;
     /*box-shadow: 5px 5px 5px gray;*/
     margin-left: 40px;
+    //background-color: #00477D;
 }
 .arrow{
     height: 0px;
@@ -239,6 +240,7 @@
     /* right: 0; */
     /* margin: auto; */
     margin-left: auto;
+    //background-color: #6A94BE;
 }
 
 .lesson-name--textbox{
