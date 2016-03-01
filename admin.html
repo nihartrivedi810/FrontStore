@@ -1,35 +1,36 @@
 <html>
-    <head>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="styles/admin.css">
-        <!--SCRIPTS-->
-        <script src="scripts/raw_data.js" type="text/javascript" defer></script>
-        <script src="scripts/admin.js" type="text/javascript" defer></script>
-        <!--SCRIPTS END-->
-    </head>
-    <body class="body">
-        <div class="headerBar">
-            <div class="innerContent">
-                <div class="innerContent__logo">
-                    <img class="innerContent__logo--image" src="images/sexy_sprinlklr_logo.png" alt="Sprinklr">
-                </div>
-                <div class="innerContent__account drop">
-                    <p class="innerContent__account--profile-Name">
-                        <b>Account</b>
-                    </p>
-                    <div class="drop-list">
-                       <a class="drop-list__element" href="admin.html">Settings</a>
-                        <a class="drop-list__element">Logout</a>
-                    </div>
-                </div>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="styles/admin.css">
+    <!--SCRIPTS-->
+    <script src="scripts/raw_data.js" type="text/javascript" defer></script>
+    <script src="scripts/admin.js" type="text/javascript" defer></script>
+    <!--SCRIPTS END-->
+</head>
+<body class="body">
+    <div class="headerBar">
+        <div class="innerContent">
+            <div class="innerContent__logo">
+                <a href="index.html"><img class="innerContent__logo--image" src="images/sexy_sprinlklr_logo.png" alt="Sprinklr"></a> 
             </div>
-        </div>
-        <div class="container">
-            <div class="title-box">
-               <p class="title-box__content">Welcome to Admin Panel</p>
-            </div>
-            <div class="content-box" id="content-box">
-                <div class="inner-content" id="inner-content">
+            <div class="innerContent__account drop">
+                <p class="innerContent__account--profile-Name">
+                    <b>Account</b>
+                </p>
+                <div class="drop-list">
+                 <a class="drop-list__element" href="admin.html">Settings</a>
+                 <a class="drop-list__element">Logout</a>
+             </div>
+         </div>
+     </div>
+ </div>
+ <div class="container" id="container">
+    <div class="title-box">
+     <p class="title-box__content">Welcome to Admin Panel</p>
+ </div>
+ <div class="content-box" id="content-box">
+    <div class="inner-content" id="inner-content">
                    <!--button class="course-add">Add Course</button>
                     <div class="inner-content__course-card">
                         <div class="inner-content__course-card__course">
@@ -57,7 +58,39 @@
                 </div>
             </div>
         </div>
+        <div id="modal-container">
+            <div class="modal-div" id="course-modal">
+                <div class="modal center">
+                    <i class="fa fa-times fa-4x" id="hide-modal"></i>
+                    <div class="modal__elements center">
+                        <input class="modal__elements__input" id="courseName" type="text" placeholder="Course Name"/>
+                        <input class="modal__elements__input" id="courseDescription" type="text" placeholder="Course Description"/>
+                        <input class="modal__elements__input" id="courseImage" type="text" placeholder="Course Image Url"/>
+                        <button class="modal__elements__btn center data-class" id = "add-course-button">Add Course</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-div" id="lesson-modal">
+                <div class="modal center">
+                <i class="fa fa-times fa-4x" id="hide-modal"></i>
+                    <div class="modal__elements center">
+                        <input class="modal__elements__input " id="lessonName" type="text" placeholder="Lesson Name"/>
+                        <button class="modal__elements__btn center data-class" id = "add-lesson-button">Add Lesson</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-div" id="video-modal">
+                <div class="modal center">
+                    <i class="fa fa-times fa-4x" id="hide-modal"></i>
+                    <div class="modal__elements center">
+                        <input class="modal__elements__input" id="videoName" type="text" placeholder="Video Name"/>
+                        <input class="modal__elements__input" id="videoLink" type="text" placeholder="Video Link"/>
+                        <button class="modal__elements__btn center data-class" id = "add-video-button">Add Video</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
-    
-    
-</html>
+
+
+    </html>
