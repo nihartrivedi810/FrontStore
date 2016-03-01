@@ -271,8 +271,8 @@
 
 .video-wrapper{
     width: 80%;
-    height: 0;
-    overflow: hidden;
+    //height: 0px;
+    overflow: auto;
     margin-left: auto;
 
 }

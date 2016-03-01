@@ -250,7 +250,7 @@ var model = {
 		hideHirerachy : function (node , className) {
 			var domNodes = node.getElementsByClassName(className);
 			Array.prototype.forEach.call(domNodes, function (element) {
-				element.style.height = 0;
+				element.style.maxHeight = 0;
                 
                 element.parentNode.firstChild.style.transform = "rotateX(0deg)";
 			});
@@ -290,7 +290,8 @@ var model = {
                         
                         
 					if(sibling) {
-						sibling.style.height = (sibling.clientHeight == 0 ? "auto":"0");
+                        //console.log(sibling.clientHeight);
+						sibling.style.maxHeight = (sibling.clientHeight == 0 ? "221px":"0");
 					}
 					break;
 
