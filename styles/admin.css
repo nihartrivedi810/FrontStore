@@ -98,7 +98,7 @@
 
 .container{
     width: 100%;
-    height: 755px;
+    min-height: 755px;
     background-color: #EDF1F4;
     
 }
@@ -173,6 +173,15 @@
     border: solid 1px #aaa;
     /*box-shadow: 5px 5px 5px gray;*/
 }
+.arrow{
+    height: 0px;
+    width: 0px;
+    float: left;
+    margin-top: 10px;
+    border-bottom: 15px solid transparent;
+    border-left: 15px solid black;
+    border-top: 15px solid transparent;
+}
 .inner-content__course-card__course--textbox{
     max-width: 80%;
     /*background-color: #fff;*/
@@ -190,11 +199,9 @@
 }
 
 .inner-content__course-card__lessons{
-    /* background-color: red; */
     position: relative;
     width: 80%;
-    /* left: 48px; */
-    overflow: scroll;
+    overflow: auto;
     height: 221px;
     margin-bottom: 20px;
     
@@ -205,7 +212,7 @@
     background-color: #337ab7;
     border: none;
     color: #fff;
-    margin: 0 2px;
+    margin: 7px 0px 2px 0px;
     outline: none;
     padding: 5px 5px
 }
@@ -218,7 +225,7 @@
     background-color: #f6f6f6;
     height: 40px;
     /* margin: 7px; */
-    margin-bottom: 5px;
+    margin-top: 5px;
     border-radius: 2px;
     text-align: center;
     line-height: 40px;
@@ -271,22 +278,29 @@
     background-color: #337ab7;
     border: none;
     color: #fff;
-    margin: 0 2px;
+    margin: 7px 0px;
     outline: none;
     padding: 5px 5px
+}
+.video-container{
+    width: 100%;
+    clear: both;
+    content: "";
+    height: 40px;
+    display: table;
+    cursor: pointer;
+    margin-left: auto;
+    margin-bottom: 6px;
 }
 .lesson-wrapper__videos{/*----------*/
     width: 80%;
     background-color: #f6f6f6;
-    clear: both;
-    height: 40px;
-    /* margin: 7px; */
-    /* border-radius: 10px; */
+    
     position: relative;
-    /* left: 11%; */
+    
     text-align: center;
     line-height: 40px;
-    /* box-shadow: 5px 5px 5px gray; */
+    
     cursor: pointer;
     border: solid 1px #aaa;
     margin-left: auto;
@@ -298,6 +312,7 @@
     overflow: hidden;
     float: right;
 }
+
 .lesson__add_input-contain__button{
     background-color: #5987FA;
     //font-family: cursive;
