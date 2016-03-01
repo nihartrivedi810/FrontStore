@@ -28,11 +28,14 @@ text-rendering: optimizelegibility;
 	border: 1px solid;
 }
 
-#side-bar:hover > #lesson-list-container{
+#bar:focus{
 
+	outline:none !important;
 	
 
 }
+
+
 
 
 
