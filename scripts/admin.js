@@ -238,23 +238,33 @@ var model = {
 			controller.createCourse();
 		},
 
+		hideHirerachy : function (node , className) {
+			var domNodes = node.getElementsByClassName(className);
+			Array.prototype.forEach.call(domNodes, function (element) {
+				element.style.height = 0;
+			});
+		},
+
 		addHandler : function () {
 
 			// hopefully this is what delegation is .
 			// If not then god help me.
-
+			var that = this;
 			this.contentBoxEl.onclick = function(event){
 				var target = event.target,
 					className = target.className;
-					console.log(className);
+					
 				switch (className) {
 					case "inner-content__course-card__course":
-						var sibling = event.target.nextSibling;
-						if(sibling)
-		    				sibling.style.height = (sibling.clientHeight == 0 ? "221px":"0");
+						var sibling = target.nextSibling,
+							parent = target.parentNode;
+						if(sibling) {
+							sibling.style.height = (sibling.clientHeight == 0 ? "221px":"0");
+							that.hideHirerachy(parent, "video-wrapper");
+						}
 						break;
 					case "lesson-name":
-						var sibling = event.target.nextSibling;
+						var sibling = target.nextSibling;
 						if(sibling)
 		    				sibling.style.height = (sibling.clientHeight == 0 ? "auto":"0");
 						break;
@@ -265,10 +275,12 @@ var model = {
 		    			break;
 
 		    		case "lesson__add_input-contain__button":
-		    			var lesson = target.parentNode.firstChild.value,
+		    			var lesson = target.parentNode.firstChild.value.trim(),
 			    			course = target.getAttribute("data-course");
 
-			    		controller.addLesson(lesson,course);
+			    		if (lesson) {
+			    			controller.addLesson(lesson,course);
+			    		}
 						location.reload();
 						break;
 
@@ -279,10 +291,12 @@ var model = {
 
 		    		case "video__add_input-contain__button":
 		    			
-			    		var video = event.target.parentNode.firstChild.value,
-			    			lesson = event.target.getAttribute("data-lesson");
+			    		var video = target.parentNode.firstChild.value.trim(),
+			    			lesson = target.getAttribute("data-lesson");
 
-			    		controller.addVideo(video,lesson);
+			    		if (video) {
+			    			controller.addVideo(video,lesson);
+			    		}
 						location.reload();
 						break;
 
@@ -293,12 +307,12 @@ var model = {
 
 		    		case "course__add_input-contain__button":
 
-		    			var courseName = event.target.parentNode.firstChild.value;
+		    			var courseName = target.parentNode.firstChild.value.trim();
 
 						if(courseName) {
-							controller.addCourse(courseName);	
-							location.reload();
+							controller.addCourse(courseName);
 						}
+						location.reload();
 						break;
 				}
 			}
