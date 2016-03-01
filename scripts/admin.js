@@ -251,6 +251,8 @@ var model = {
 			var domNodes = node.getElementsByClassName(className);
 			Array.prototype.forEach.call(domNodes, function (element) {
 				element.style.height = 0;
+                
+                element.parentNode.firstChild.style.transform = "rotateX(0deg)";
 			});
 		},
 
