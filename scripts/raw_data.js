@@ -266,7 +266,6 @@ var rawData = (function () {
 				return video;
 
 			}
-				
 	}
 	
 }());
