@@ -1,15 +1,15 @@
 var Courses = rawData.getCourses(),
-	Lessons = rawData.getLessons(),
-	Videos = rawData.getVideos(),
-	courseId = rawData.getCourseIndex(),
-	lessonId = rawData.getLessonIndex(),
-	videoId = rawData.getVideoIndex();
+Lessons = rawData.getLessons(),
+Videos = rawData.getVideos(),
+courseId = rawData.getCourseIndex(),
+lessonId = rawData.getLessonIndex(),
+videoId = rawData.getVideoIndex();
 
 $(function(){
 	var videoList,
-		currentVideo,
-		
-		model = {
+	currentVideo,
+
+	model = {
 		isSaved :false,
 		init: function(topicId,lessonId) {
 			
@@ -98,6 +98,7 @@ $(function(){
 			notesView.init();
 			jsbinView.init();
 			jsbinView.render();
+			breadCrumbView.init();
 		},
 		getCurrentVideoId: function() {
 			return model.getCurrentVideoId();
@@ -168,14 +169,14 @@ $(function(){
 	var sidePanelView = {
 		init : function() {
 			var videos=octopus.getAllVideos(),
-				parent=$("#l1"),
-				optSign = $('#bar'),
-				sideBlk = $('#lesson-list-container'),
-				mainDiv=$('#sidenav-opacity-div'), contentStyler = $('#content-styler'),
-				index,listAppend;
+			parent=$("#l1"),
+			optSign = $('#bar'),
+			sideBlk = $('#lesson-list-container'),
+			mainDiv=$('#sidenav-opacity-div'), contentStyler = $('#content-styler'),
+			index,listAppend;
 
 			listAppend=videos.reduce(function(videoHTMLString,video){
-				return videoHTMLString + '<li id="'+ video.id +'"class="lesson-list-container__lesson--title">Video'+ (parseInt(video.id)+1) +'</li>';
+				return videoHTMLString + '<li id="'+ video.id +'"class="lesson-list-container__lesson--title">'+ (video.name) +'</li>';
 			},"");
 
 			parent.append(listAppend);
@@ -323,14 +324,13 @@ $(function(){
 		}
 	};
 
-<<<<<<< HEAD
 	var breadCrumbView = {
 		init: function(){
 			var lessonName = $("#lesson-name"), 
-				topicName = $("#topic-name"),
-				
-				embedBinBtn = document.getElementById("embed-bin-btn"),
-			    changeViewBtn = document.getElementById("change-view");
+			topicName = $("#topic-name"),
+			embedBinBtn = document.getElementById("embed-bin-btn"),
+			changeViewBtn = document.getElementById("change-view");
+			this.videoName = $("#video-name"),
 
 			lessonName.html(octopus.getCurrentLessonName());
 			topicName.html(octopus.getCurrentTopicName());
@@ -341,19 +341,18 @@ $(function(){
 		},
 
 		printVideoName: function(){
-			var videoName = $("#video-name");
-			videoName.html(octopus.getCurrentVideoName());
+			
+			// console.log("dsfas",octopus.getCurrentVideo())
+			this.videoName.html(octopus.getCurrentVideo().name);
 		}
 
 	};
 
-=======
->>>>>>> 3d16fbe40f952de4019ad68d7c97aca7433a9e34
 	var view = {
 		init: function() {
 			document.getElementById("lesson-anchor").href = "lessonCards.html?topic="+model.topicId;
 			var lessonName = $("#lesson-name"), 
-				topicName = $("#topic-name");
+			topicName = $("#topic-name");
 
 			this.toolbarTop = document.getElementById("toolbar-top");
 			this.toolbarBottom = document.getElementById("toolbar-editor");

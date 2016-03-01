@@ -257,7 +257,7 @@ var model = {
 					case "inner-content__course-card__course":
 					var sibling = event.target.nextSibling;
 					if(sibling) {
-						sibling.style.height = (sibling.clientHeight == 0 ? "221px":"0");
+						sibling.style.height = (sibling.clientHeight == 0 ? "auto":"0");
 					}
 					break;
 

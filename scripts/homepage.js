@@ -39,11 +39,11 @@ $(function(){
 		init: function() {
 			this.contentBox=$('.content-box');
             
-			this.contentBox.on('click',function(e){
-				var targetNode = e.target.parentNode;
+			this.contentBox.on('click',function(event){
+				var targetNode = event.target.parentNode;
 				if(targetNode.tagName==='BUTTON')
 				{
-					console.log(parseInt(targetNode.id));
+					//console.log(parseInt(targetNode.id));
 					return octopus.topicClicked(parseInt(targetNode.id));
 				}
 			});

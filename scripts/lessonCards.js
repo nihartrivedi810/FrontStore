@@ -8,19 +8,8 @@ var Courses = rawData.getCourses(),
 
 	model = {
 		init: function(){
-			model.topicID = this.getAllParameters()["topic"];
+			model.topicID = getAllParameters(window.location.href)["topic"];
 			model.topics = Courses;
-		},
-		getAllParameters: function(){
-			var urlArraySplt1 = (window.location.href).split("?"),
-				urlArraySplt2 =urlArraySplt1[1].split("&"),
-				parameters = {},
-				paramVal;
-			urlArraySplt2.forEach(function(parameter){
-				paramVal = parameter.split("=");
-				parameters[paramVal[0]] = decodeURIComponent(paramVal[1]);
-			});
-			return parameters;
 		}
 	},
 
@@ -67,11 +56,12 @@ var Courses = rawData.getCourses(),
 		init :function () {
 			var lessons = octopus.getData(),
 			topicName = $("#topic-name"),
+			dom = $(".container").eq(0), template = "",
 			that = this;
 			topicName.html(octopus.getTopic());
 			
 			lessons.forEach (function (lesson) {
-				var template = '<div class = "cards shadow" id = "card_'+ octopus.getIdOfLesson(lesson) +'" data-id = "'+ octopus.getIdOfLesson(lesson) +'" >'+
+				template+= '<div class = "cards shadow" id = "card_'+ octopus.getIdOfLesson(lesson) +'" data-id = "'+ octopus.getIdOfLesson(lesson) +'" >'+
 								'<div class = "cards__container" data-id = "'+ octopus.getIdOfLesson(lesson) +'" >'+
 								'<div class = "cards__container__content" data-id = "'+ octopus.getIdOfLesson(lesson) +'" >'+
 								'<div class = "content-name" id = "content-name_'+ octopus.getIdOfLesson(lesson) +'" data-id = "'+ octopus.getIdOfLesson(lesson) +'" >'+ octopus.getNameOfLesson(lesson) +'</div>'+
@@ -79,16 +69,14 @@ var Courses = rawData.getCourses(),
 								'</div>'+
 								'<i class="fa fa-play-circle-o fa-lg cards__play play-icon" data-id = "'+ octopus.getIdOfLesson(lesson) +'" ></i>'+
 								'</div>'+
-								'</div>',
-					dom = document.getElementsByClassName("container")[0],
-					contentName,
-					contentInfo;
-					dom.innerHTML += template;
-					dom.onclick=function(event){
+								'</div>';	
+			});
+			//console.log(template);
+			dom.append(template);
+			dom.on("click",function(event){
 						var attr = event.target.getAttribute("data-id");
 						octopus.setLesson (attr);
-					}
-			});
+					});
 		}
 	};
 
