@@ -166,6 +166,9 @@ var rawData = (function () {
 		},
 		setPen : function(_pen) {
 			return this.pen = _pen;
+		},
+		getName : function () {
+			return this.name;
 		}
 	};
 
@@ -282,8 +285,8 @@ var rawData = (function () {
 				Lessons.push(lesson);
 				return lesson;
 			},
-			createVideoObj : function (url,lessonId) {
-				var video = new Video(videoId++,url,lessonId);
+			createVideoObj : function (name ,url,lessonId) {
+				var video = new Video(videoId++,url,name,lessonId);
 				Videos.push(video);
 				return video;
 
