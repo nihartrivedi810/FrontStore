@@ -276,7 +276,7 @@ var rawData = (function () {
 				return lessonId;
 			},
 			createCourseObj : function (name ,lessons,description,imageUrl) {
-				var course = new Course(name ,lessons,courseId++,description);
+				var course = new Course(name ,lessons,courseId++,description,imageUrl);
 				Courses.push(course);
 				return course;
 			},

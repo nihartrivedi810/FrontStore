@@ -50,6 +50,7 @@ var model = {
 	},
 
 	addCourse : function (courseName,courseDes, courseImage) {
+		console.log(courseImage);
 		var courses = this.getCourses ();
 
 		var course = rawData.createCourseObj(courseName,undefined, courseDes, courseImage);
@@ -103,7 +104,7 @@ var model = {
 		},
 
 		addCourse : function (courseName, courseDes , courseImage) {
-
+			console.log (courseImage);
 			model.addCourse(courseName, courseDes , courseImage);
 			this.setToLocalStorage ("Courses" , model.toJSON ( model.getCourses() ) );
 		},
@@ -295,7 +296,7 @@ var model = {
 							if (courseName && courseDes && courseImage) {
 								controller.addCourse(courseName, courseDes , courseImage);
 							}
-							location.reload();
+							//location.reload();
 							break;
 						case "add-lesson-button" :
 							var lessonName = document.getElementById("lessonName").value.trim();
