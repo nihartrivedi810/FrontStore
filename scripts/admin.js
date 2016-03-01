@@ -9,54 +9,50 @@ var videoId = rawData.getVideoIndex();*/
 var model = {
 
 
-		toJSON : function (data) {
-			return JSON.stringify(data);
-		},
+	toJSON : function (data) {
+		return JSON.stringify(data);
+	},
 
-		getLessons : function () {
-			return rawData.getLessons();;
-		},
+	getLessons : function () {
+		return rawData.getLessons();;
+	},
 
-		getVideos : function () {
-			return rawData.getVideos();
-		},
+	getVideos : function () {
+		return rawData.getVideos();
+	},
 
-		addLessonToCourse : function (lessonId,courseId) {
-			
-			var courses = this.getCourses();
-			courses[courseId].lessons.push(lessonId);
-			
-		},
-		getCourses : function () {
-			return rawData.getCourses();
-		},
+	addLessonToCourse : function (lessonId,courseId) {
 
-		
+		var courses = this.getCourses();
+		courses[courseId].lessons.push(lessonId);
 
-		
+	},
+	getCourses : function () {
+		return rawData.getCourses();
+	},
+	addLesson : function (lessonName,courseId) {
+		var lessons = this.getLessons();
+		var lesson = rawData.createLessonObj(lessonName, undefined, courseId);
 
-		addLesson : function (lessonName,courseId) {
-			var lessons = this.getLessons();
-			var lesson = rawData.createLessonObj(lessonName, undefined, courseId);
+		lessons.push(lesson.id);
 
-			lessons.push(lesson.id);
+		this.addLessonToCourse(parseInt(lesson.id),parseInt(courseId));
 
-			this.addLessonToCourse(parseInt(lesson.id),parseInt(courseId));
-			
-		},
+	},
 
-		addVideo : function (videoUrl , lessonId) {
-			var videos = this.getVideos();
-			var video = rawData.createVideoObj(videoUrl,lessonId) ;
-			videos.push( video);
+	addVideo : function (videoName , videoUrl , lessonId) {
+		var videos = this.getVideos();
+		var video = rawData.createVideoObj(videoName,videoUrl,lessonId) ;
+		videos.push( video);
 
-			this.addVideoToLesson ( parseInt(video.id), parseInt(lessonId) );
-			
-		},
+		this.addVideoToLesson ( parseInt(video.id), parseInt(lessonId) );
 
-		addCourse : function (courseName) {
-			var courses = this.getCourses ();
-			var course = rawData.createCourseObj(courseName)
+	},
+
+	addCourse : function (courseName,courseDes, courseImage) {
+		var courses = this.getCourses ();
+
+		var course = rawData.createCourseObj(courseName,undefined, courseDes, courseImage);
 			// courses.push(course);
 		},
 
@@ -98,17 +94,17 @@ var model = {
 			this.setToLocalStorage("Courses" , model.toJSON ( model.getCourses() ) );
 		},
 
-		addVideo : function (video , lesson) {
+		addVideo : function (videoName, videoLink , lesson) {
 			
-			model.addVideo (video, lesson);
+			model.addVideo (videoName, videoLink , lesson);
 
 			this.setToLocalStorage ( "Videos" , model.toJSON (model.getVideos() ) );
 			this.setToLocalStorage ("Lessons" , model.toJSON ( model.getLessons() ) );
 		},
 
-		addCourse : function (courseName) {
+		addCourse : function (courseName, courseDes , courseImage) {
 
-			model.addCourse(courseName);
+			model.addCourse(courseName, courseDes , courseImage);
 			this.setToLocalStorage ("Courses" , model.toJSON ( model.getCourses() ) );
 		},
 
@@ -122,7 +118,7 @@ var model = {
 
 		createLesson : function (courseElement) {
 			var lessonIds = courseElement.lessons,
-				lessonId;
+			lessonId;
 			var lessons = model.getLessons();
 			for (lessonId of lessonIds){
 				var lesson = lessons[lessonId] ;
@@ -134,34 +130,36 @@ var model = {
 			var videoId;
 			var videos = model.getVideos();
 			for (videoId of lesson.videos)
-        	{
-        		var video = videos[videoId];
-        		viewDisplay.renderVideo(video);
-        	}
+			{
+				var video = videos[videoId];
+				viewDisplay.renderVideo(video);
+			}
 		}
 	},
 
 	viewDisplay = {
 
 		courseListEl : document.getElementById("inner-content"),
-    	contentBoxEl : document.getElementById("content-box"),
-    	courseCardEl : document.createElement("div"),
+		contentBoxEl : document.getElementById("content-box"),
+		courseCardEl : document.createElement("div"),
 		courseEl : document.createElement("div"),
 		lessonContainerEl : document.createElement("div"),
 		lessonWrapEl : document.createElement("div"),
 		videoContainerEl : document.createElement("div"),
+		videoWrapperEl : document.createElement("div"),
 		lessonTitleEl : document.createElement("div"),
+		modalContainerEl: document.getElementById("modal-container"),
 
-    	init : function () {
-    		this.render();
-    		this.addHandler();
-    	},
+		init : function () {
+			this.render();
+			this.addHandler();
+		},
 
-    	setCourseHolders : function () {
-    		viewDisplay.courseCardEl = document.createElement("div");
+		setCourseHolders : function () {
+			viewDisplay.courseCardEl = document.createElement("div");
 			viewDisplay.courseEl = document.createElement("div");
 			viewDisplay.lessonContainerEl = document.createElement("div");
-    	},
+		},
 		
 		addAttributes : function(node, value, content, display , index) {
 			node.setAttribute("data-id",value);
@@ -172,127 +170,170 @@ var model = {
 
 		renderCourse : function (courseElement) {
 			
-				this.setCourseHolders ();
-				this.courseCardEl.setAttribute("class","inner-content__course-card");
-		        this.courseEl.setAttribute("class","inner-content__course-card__course");
-				
-				this.addAttributes (this.courseEl , courseElement.getName(), "course" , "false" , courseElement.getId());
-				
-				this.courseEl.innerHTML = courseElement.getName() ;
-		        this.courseCardEl.appendChild(this.courseEl);
-		        
-		        this.lessonContainerEl.setAttribute("class","inner-content__course-card__lessons");
-				this.lessonContainerEl.innerHTML = "<button class=\"lesson__add\" data-course="+courseElement.getId()+">Add Lesson</button> <div class=\"lesson__add__input-contain\" ><input type=\"text\" id=\"input_new_lesson\"><button class=\"lesson__add_input-contain__button\"data-course="+courseElement.getId()+">Add Lesson</button>";
-			
-				controller.createLesson(courseElement);
+			this.setCourseHolders ();
+			this.courseCardEl.setAttribute("class","inner-content__course-card");
+			this.courseEl.setAttribute("class","inner-content__course-card__course");
 
-				this.courseCardEl.appendChild(this.lessonContainerEl);
-				this.courseListEl.appendChild (this.courseCardEl);
+			this.addAttributes (this.courseEl , courseElement.getName(), "course" , "false" , courseElement.getId());
+
+			this.courseEl.innerHTML = courseElement.getName() ;
+			this.courseCardEl.appendChild(this.courseEl);
+
+			this.lessonContainerEl.setAttribute("class","inner-content__course-card__lessons");
+			this.lessonContainerEl.innerHTML = "<button class=\"lesson__add\" data-course="+courseElement.getId()+">Add Lesson</button> <div class=\"lesson__add__input-contain\" ><input type=\"text\" id=\"input_new_lesson\"><button class=\"lesson__add_input-contain__button\"data-course="+courseElement.getId()+">Add Lesson</button>";
+			
+			controller.createLesson(courseElement);
+
+			this.courseCardEl.appendChild(this.lessonContainerEl);
+			this.courseListEl.appendChild (this.courseCardEl);
 		},
 
 		renderLesson : function (lesson) {
-		
+
 			this.lessonWrapEl = document.createElement("div");
-        	this.lessonWrapEl.setAttribute("class","lesson-wrapper");
+			this.lessonWrapEl.setAttribute("class","lesson-wrapper");
 
-        	this.lessonTitleEl = document.createElement("div");
-        	this.lessonTitleEl.setAttribute("class","lesson-name");
+			this.lessonTitleEl = document.createElement("div");
+			this.lessonTitleEl.setAttribute("class","lesson-name");
 
-        	this.addAttributes(this.lessonTitleEl,lesson.getName(),"lesson","false",lesson.getId());
-        	
-        	this.lessonTitleEl.innerHTML = lesson.getName();
-        	this.lessonWrapEl.appendChild(viewDisplay.lessonTitleEl);
+			this.addAttributes(this.lessonTitleEl,lesson.getName(),"lesson","false",lesson.getId());
 
-        	this.videoContainerEl = document.createElement("div");
-        	this.videoContainerEl.setAttribute("class","video-wrapper");
-        	this.videoContainerEl.innerHTML = "<button class=\"video-add\" data-course="+lesson.getId()+">Add Video</button> <div class=\"video__add__input-contain\" ><input type=\"text\" id=\"input_new_video\"><button class=\"video__add_input-contain__button\"data-lesson="+lesson.getId()+">Add Video</button>";
+			this.lessonTitleEl.innerHTML = lesson.getName();
+			this.lessonWrapEl.appendChild(viewDisplay.lessonTitleEl);
 
-        	controller.createVideo(lesson);
+			this.videoContainerEl = document.createElement("div");
+			this.videoContainerEl.setAttribute("class","video-wrapper");
+			this.videoContainerEl.innerHTML = "<button class=\"video-add\" data-course="+lesson.getId()+">Add Video</button> <div class=\"video__add__input-contain\" ><input type=\"text\" id=\"input_new_video\"><button class=\"video__add_input-contain__button\"data-lesson="+lesson.getId()+">Add Video</button> ";
+			this.videoWrapperEl.setAttribute("class","video-container");
 
-        	this.lessonWrapEl.appendChild(this.videoContainerEl);
-		    this.lessonContainerEl.appendChild(this.lessonWrapEl);
+			controller.createVideo(lesson);
+			console.log(this.videoContainerEl,this.videoWrapperEl);
+
+			this.lessonWrapEl.appendChild(this.videoContainerEl);
+			this.lessonContainerEl.appendChild(this.lessonWrapEl);
 		},
 
 		renderVideo : function (video) {
-				this.videoWrapper = document.createElement("div");
-        		this.videoWrapper.setAttribute("class","lesson-wrapper__videos");
-        		
-        		this.addAttributes(viewDisplay.videoWrapper,video.getUrl(),"video","false",video.getId());
-        		this.videoWrapper.innerHTML = video.getUrl();
-        		this.videoContainerEl.appendChild(this.videoWrapper);
+			this.videoBox = document.createElement("div");
+			this.videoWrapper = document.createElement("div");
+			this.videoWrapper.setAttribute("class","lesson-wrapper__videos");
+
+			this.addAttributes(viewDisplay.videoWrapper,video.getUrl(),"video","false",video.getId());
+			this.videoWrapper.innerHTML = video.getName();
+
+			this.videoContainerEl.appendChild(this.videoWrapper);
 		},
 
 		// if i die then it is because of refactoring this function.
 
 		render : function () {
 			var that = this,
-				str = "<button class=\"course-add\">Add Course</button> <div class=\"course__add__input-contain\" ><input type=\"text\" id=\"input_new_course\"><button class=\"course__add_input-contain__button\">Add Course</button>";
-		        
+			str = "<button class=\"course-add\">Add Course</button>";
+
 			that.courseListEl.innerHTML = str;
 			controller.createCourse();
+		},
+
+		hideHirerachy : function (node , className) {
+			var domNodes = node.getElementsByClassName(className);
+			Array.prototype.forEach.call(domNodes, function (element) {
+				element.style.height = 0;
+			});
 		},
 
 		addHandler : function () {
 
 			// hopefully this is what delegation is .
 			// If not then god help me.
-
+			var that = this;
 			this.contentBoxEl.onclick = function(event){
 				var target = event.target,
-					className = target.className;
-					console.log(className);
+				className = target.className;
+				console.log(className);
 				switch (className) {
+					
 					case "inner-content__course-card__course":
+					var sibling = event.target.nextSibling;
+					if(sibling) {
+						sibling.style.height = (sibling.clientHeight == 0 ? "221px":"0");
+					}
+					break;
+
 					case "lesson-name":
-						var sibling = event.target.nextSibling;
-						if(sibling)
-		    				sibling.style.height = (sibling.clientHeight == 0 ? "auto":"0");
-						break;
+					var sibling = event.target.nextSibling;
+					if(sibling) {
+						sibling.style.height = (sibling.clientHeight == 0 ? "auto":"0");
+					}
+					break;
 
 					case "lesson__add":
-						target.style.display = "none";
-		    			target.nextSibling.nextSibling.style.height = "auto";
-		    			break;
-
-		    		case "lesson__add_input-contain__button":
-		    			var lesson = target.parentNode.firstChild.value,
-			    			course = target.getAttribute("data-course");
-
-			    		controller.addLesson(lesson,course);
-						location.reload();
-						break;
+						var courseId = target.getAttribute("data-course");
+						viewDisplay.displayModal("lesson-modal", courseId);
+					break;
 
 					case "video-add":
-						target.style.display = "none";
-		    			target.nextSibling.nextSibling.style.height = "auto";
-		    			break;
-
-		    		case "video__add_input-contain__button":
-		    			
-			    		var video = event.target.parentNode.firstChild.value,
-			    			lesson = event.target.getAttribute("data-lesson");
-
-			    		controller.addVideo(video,lesson);
-						location.reload();
-						break;
+						var lessonid = target.getAttribute("data-course");
+						viewDisplay.displayModal("video-modal" , lessonid);
+					break;
 
 					case "course-add":
-						target.style.display = "none";
-		    			target.nextSibling.nextSibling.style.height = "auto";
-		    			break;
-
-		    		case "course__add_input-contain__button":
-
-		    			var courseName = event.target.parentNode.firstChild.value;
-
-						if(courseName) {
-							controller.addCourse(courseName);	
-							location.reload();
-						}
-						break;
+						viewDisplay.displayModal("course-modal");
+					break;
 				}
 			}
-		},
-	};
+				this.modalContainerEl.onclick = function(event){
+					var id = event.target.id,
+						target = event.target;
+					switch(id){
+						case "hide-modal":
+							viewDisplay.hideModal(target.parentNode.parentNode.id);
+							break;
+						case "add-course-button" :
+							var courseName = document.getElementById("courseName").value.trim(),
+								courseDes = document.getElementById("courseDescription").value.trim(),
+								courseImage = document.getElementById("courseImage").value.trim();
+							if (courseName && courseDes && courseImage) {
+								controller.addCourse(courseName, courseDes , courseImage);
+							}
+							location.reload();
+							break;
+						case "add-lesson-button" :
+							var lessonName = document.getElementById("lessonName").value.trim();
+							var course = target.getAttribute("data-id");
+							console.log(course);
+							if (lessonName) {
+								controller.addLesson(lessonName,course);
+							}
+							location.reload();
+							break;
+						case "add-video-button" :
+							var videoName = document.getElementById("videoName").value.trim();
+							var videoLink = document.getElementById("videoLink").value.trim();
+							var lesson = target.getAttribute("data-id");
+							console.log (lesson);
+							if (videoName && videoLink) {
+								controller.addVideo(videoName, videoLink ,lesson);
+							}
+							location.reload();
+							break;
+						
+					}		
 
-	controller.init();
+				}
+			},
+			displayModal: function(id , dataId){
+				var dom = document.getElementById(id);
+				var button = dom.querySelector(".data-class");
+				if (dataId) {
+					button.setAttribute("data-id" , dataId);
+				}
+				document.getElementById(id).style.transform='scale(1)';
+				document.getElementById('container').style.opacity=0.2;
+			},
+			hideModal: function(id){
+				document.getElementById(id).style.transform='scale(0)';
+				document.getElementById('container').style.opacity=1;
+			}
+		};
+
+		controller.init();

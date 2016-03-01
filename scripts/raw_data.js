@@ -17,14 +17,15 @@ var rawData = (function () {
 	lessonJS[0]=['U-hpXA8g6kM','Mt7y_c4Q2Rs','fgwXXQfKq34','wBQ5Rp_naGE','Kcd8OkwISoA','StZfE4l8fww','n2jeKqJt0OA','Q3aUwnzBMVk'];
 	lessonJS[1]=['HlEgVe1EZSY','TXJB8QymWkY','I6GtlbTTK1c','Jfprj0kO7Uk','emzhXIGjfQA','kC9sPPglOWI','I3FJPqdHQRQ','obR8E9nOwQc','4nnjOzkKVw4'];
 
-	complete=[{"topic":"HTML And CSS", "material":{"Intro to HTML and CSS - Basics":lessonHTML[0],"Intro to HTML and CSS - Intermediate":lessonHTML[1],"Intro to HTML and CSS - Advanced":lessonHTML[2]}, "description":"This Course contains all essential information about HTML And CSS.","img":"HTML5.png"},{"topic":"JavaScript", "material":{"JavaScript Basics":lessonJS[0],"Object Oriented Programing in JavaScript":lessonJS[1]},"description":"This Course contains all essential information about JavaScript.","img":"Javascript.png"}];
+	complete=[{"topic":"HTML And CSS", "material":{"Intro to HTML and CSS - Basics":lessonHTML[0],"Intro to HTML and CSS - Intermediate":lessonHTML[1],"Intro to HTML and CSS - Advanced":lessonHTML[2]}, "description":"This Course contains all essential information about HTML And CSS.","img":"images/HTML5.png"},{"topic":"JavaScript", "material":{"JavaScript Basics":lessonJS[0],"Object Oriented Programing in JavaScript":lessonJS[1]},"description":"This Course contains all essential information about JavaScript.","img":"images/Javascript.png"}];
 
 
-	var Course = function (_name ,_lessons,_id,_description){
-		this.name = _name;
-		this.lessons = _lessons || [];
-		this.id = _id;
-		this.description=_description;
+	var Course = function (name ,lessons,id,description, img){
+		this.name = name;
+		this.lessons = lessons || [];
+		this.id = id;
+		this.description=description;
+		this.image = img;
 	};
 
 	Course.prototype = {
@@ -55,8 +56,15 @@ var rawData = (function () {
 
 		setId : function (id) {
 			return this.id = id;
-		}
+		},
 
+		getImage : function (){
+			return this.image;
+		},
+
+		setImage : function (imageUrl){
+			this.iamge = imageUrl;
+		}
 	};
 
 
@@ -110,12 +118,13 @@ var rawData = (function () {
 		}
 	};
 
-	var Video = function (_id,_url,_lessonId,_note,_pen){
-		this.url = _url;
-		this.id = _id;
-		this.lessonId = _lessonId;
-		this.note = _note;
-		this.pen = _pen;
+	var Video = function (id,url,name,lessonId,note,pen){
+		this.url = url;
+		this.id = id;
+		this.name = name;
+		this.lessonId = lessonId;
+		this.note = note;
+		this.pen = pen;
 
 	};
 
@@ -157,6 +166,9 @@ var rawData = (function () {
 		},
 		setPen : function(_pen) {
 			return this.pen = _pen;
+		},
+		getName : function () {
+			return this.name;
 		}
 	};
 
@@ -165,6 +177,8 @@ var rawData = (function () {
 
 		init : function () {
 //TODO index
+			var that = this;
+
 			complete.forEach(function (value, index){	
 				var lessons = [];
 				
@@ -173,8 +187,9 @@ var rawData = (function () {
 					var lessonName = lesson;
 					var videos = [];
 					
-					value.material[lesson].forEach(function(_value){
-						Videos.push(new Video(videoId,_value,lessonId));
+					value.material[lesson].forEach(function(v){
+						var name = that._makeName();
+						Videos.push(new Video(videoId,v,name,lessonId));
 						videos.push(videoId++);
 					});
 
@@ -182,7 +197,7 @@ var rawData = (function () {
 					lessons.push(lessonId);
 					lessonId++;
 				}
-				Courses.push(new Course(value.topic,lessons,courseId,value.description));
+				Courses.push(new Course(value.topic,lessons,courseId,value.description,value.img));
 				courseId++;
 			});
 
@@ -195,11 +210,21 @@ var rawData = (function () {
 			return localStorage.Courses;
 		},
 
+		_makeName : function () {
+		    var text = "";
+		    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+		    for( var i=0; i < 5; i++ )
+		        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+		    return text;
+		},
+
 		render : function () {
 	        var obj = JSON.parse(localStorage.getItem('Courses'));
 
 	        obj.forEach (function (course) {
-	            Courses.push(new Course(course.name,course.lessons,course.id,course.description));
+	            Courses.push(new Course(course.name,course.lessons,course.id,course.description,course.image));
 	            courseId++;
 	        });
 
@@ -211,7 +236,7 @@ var rawData = (function () {
 
 	        obj = JSON.parse(localStorage.getItem('Videos'));
 	        obj.forEach (function (video) {
-	            Videos.push(new Video(video.id,video.url,video.lessonId));
+	            Videos.push(new Video(video.id,video.url,video.name,video.lessonId));
 	            videoId++;
 	        });
 	    }
@@ -250,7 +275,7 @@ var rawData = (function () {
 			getLessonIndex : function () {
 				return lessonId;
 			},
-			createCourseObj : function (name ,lessons,description) {
+			createCourseObj : function (name ,lessons,description,imageUrl) {
 				var course = new Course(name ,lessons,courseId++,description);
 				Courses.push(course);
 				return course;
@@ -260,13 +285,12 @@ var rawData = (function () {
 				Lessons.push(lesson);
 				return lesson;
 			},
-			createVideoObj : function (url,lessonId) {
-				var video = new Video(videoId++,url,lessonId);
+			createVideoObj : function (name ,url,lessonId) {
+				var video = new Video(videoId++,url,name,lessonId);
 				Videos.push(video);
 				return video;
 
 			}
-				
 	}
 	
 }());

@@ -54,9 +54,9 @@ text-rendering: optimizelegibility;
 .lesson-list-container__lesson--title{
 	width:80%;
 	height:40px;
+	line-height: 50px;
+	margin: 20px auto;
 	
-	margin: 0 auto;
-	margin-top: 20px;
 	border-radius:5%;
 	text-align: center;
 	vertical-align: middle;
@@ -90,6 +90,8 @@ text-rendering: optimizelegibility;
 .lesson-list-container__lesson--title:hover{
 	background-color: rgb(0, 114, 187); 
 	color:#ffffff;
+	border-style: outset;
+    
 }
 
 
@@ -112,9 +114,9 @@ text-rendering: optimizelegibility;
 #lesson-list-container{
 
 	position:fixed;
-	width:23%;
+	width:30%;
 	height:100%;
-	background-color: rgba(0,0,0,0.67);
+	background-color: #222222;
 	top:0;
 	left:0;
 	list-style: none;
