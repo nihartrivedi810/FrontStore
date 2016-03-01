@@ -23,59 +23,7 @@ Clicking the course name reveals the lessons in it which when clicked display a 
 	
 In sprinklr, this can be handy while imparting training to newcomers, while deploying newer technology for development, or while going back to the usage of some previously referred resource.
 
-INSTALLATION:
 
+HOW TO RUN
 
-
-Behind the scene:
-
-InterFace:
-Website had been modelled by following the model-view-controller architecture for all the three pages : 
-Home Page
-           
-	Model: Puts data into localstorage.
-	View: Initiates model and view.
-	Controller: renders the course cards on the homepage.
-
-LessonCards Page
-	
-	Model: parsing the lessoncard URL for the selected course and making the data available for the page.
-	View: show the lessons of the selected course and redirect to the videos page.
-	Controller: get appropriate data required by the view and setting the URL for next page.
-
-Video Rendering Page
-	Model: 
-	View:
-	Controller:
-
-Admin Page
-	
-	Model: get data from raw_data.js and saving new data.
-	View: render the courses and add new courses.
-	Controller: transferring the inputs to model. Storing the data to localStorage.
-
-     B) Server and Back End:
-
-1.Data Storage:
-	The data for server side had been stored locally in localStorage.
-
-	2.Classes and Connections:
-		1.Courses:
-			consist of fields like
-			
-
-2.API for writing/reading data:
-	Data-Write:
-		Once the website is loaded some static data that is stores in server is stored in local Storage 
-	
-	
-
-
-
-
-
-Future scope:
-There can be an admin-page button that can navigate admin to a page for admin form. For normal users, this button won’t be visible.
-
-      2.   User profiling can be done and notes can pens corresponding to videos can be  stored
-
+Open the url and start working with the website.
