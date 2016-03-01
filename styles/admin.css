@@ -104,54 +104,42 @@
 }
 
 .title-box{
-    width: 60%;
-    height: 10%;
+    width: 40%;
+    height: 60px;
+    line-height: 60px;
     position: relative;
-    left: 20%;
+    margin: auto;
     border-radius: 30px;
-    top: 5%;
 }
 
 .title-box__content{
-    width: 261px;
-    margin: 0px;
-    position: relative;
-    left: 35%;
-    top: 30%;
     text-align: center;
     font-size: x-large;
-    //font-family: cursive;
-    font-weight: bolder;
-    line-height: 100%;
     font-weight: 200;
 }
 
 .content-box{
-    width: 60%;
+    width: 40%;
     //height: 63%;
     background-color: #EDF1F4;
     position: relative;
-    top: 12%;
-    left: 20%;
+    margin: auto;
 }
 
 .content-box .inner-content{
     /* vertical-align: middle; */
     overflow: auto;
     //height: 80%;
-    width: 80%;
+    width: 100%;
     position: relative;
-    left: 10%;
-    top: 10%;
+    margin: auto;
 }
 
 .inner-content .course-add{
-    width: 720px;
-
+    width: 100%;
     background-color: #337ab7;
     border: none;
     color: #fff;
-    margin: 0 2px;
     outline: none;
     padding: 5px 5px;
     height: 40px;
@@ -165,7 +153,8 @@
     height: auto;
 }
 .inner-content__course-card__course{/*-------------*/
-    width: 80%;
+    width: 90%;
+    margin-left: 10%;
     background-color: #f6f6f6;
     margin-top: 20px;
     height: 40px;
@@ -177,8 +166,6 @@
     line-height: 40px;
     border: solid 1px #aaa;
     /*box-shadow: 5px 5px 5px gray;*/
-    margin-left: 40px;
-    //background-color: #00477D;
 }
 
 .arrow{
@@ -214,7 +201,7 @@
     overflow: auto;
     height: 0px;
     margin-bottom: 20px;
-    margin-left: 40px;
+    margin: auto;
 }
 .lesson__add{
     width: 100%;
@@ -236,7 +223,7 @@
     
 }
 .lesson-name{/*------------*/
-    width: 80%;
+    width: 90%;
     background-color: #f6f6f6;
     height: 40px;
     /* margin: 7px; */
@@ -282,9 +269,8 @@
 
 .video-wrapper{
     width: 80%;
-    //height: 0px;
     overflow: auto;
-    margin-left: auto;
+    margin: auto;
 
 }
 .video-add{
@@ -314,7 +300,7 @@
     margin-bottom: 6px;
 }
 .lesson-wrapper__videos{/*----------*/
-    width: 80%;
+    width: 90%;
     background-color: #f6f6f6;
     
     position: relative;
@@ -441,4 +427,7 @@
 .fa-times {
     position: absolute;
     right: 0;
+}
+.fa-times:before{
+    font-family: fontAwesome;
 }
