@@ -260,13 +260,14 @@ var model = {
 					
 					case "inner-content__course-card__course":
 
+
 					var sibling = target.nextSibling,
  						parent = target.parentNode;
                         
                     parent.firstChild.style.transform = (parent.firstChild.style.transform == "rotateZ(90deg)"?"rotateZ(0deg)":"rotateZ(90deg)");
                         
  					if(sibling) {
- 						sibling.style.maxHeight = (sibling.clientHeight == 0 ? "221px":"0");
+ 						sibling.style.height = (sibling.clientHeight == 0 ? "auto":"0");
  						that.hideHirerachy(parent, "video-wrapper");
  					}
 
