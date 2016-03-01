@@ -172,15 +172,18 @@
     line-height: 40px;
     border: solid 1px #aaa;
     /*box-shadow: 5px 5px 5px gray;*/
+    margin-left: 40px;
 }
 .arrow{
     height: 0px;
     width: 0px;
     float: left;
     margin-top: 10px;
-    border-bottom: 15px solid transparent;
-    border-left: 15px solid black;
-    border-top: 15px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid black;
+    border-top: 10px solid transparent;
+    margin-left: 10px;
+    transform: rotateZ(0deg);
 }
 .inner-content__course-card__course--textbox{
     max-width: 80%;
@@ -206,7 +209,7 @@
     overflow: scroll;
     max-height: 0px;
     margin-bottom: 20px;
-    
+    margin-left: 40px;
 }
 .lesson__add{
     float: right;

@@ -171,13 +171,17 @@ var model = {
 
 		renderCourse : function (courseElement) {
 			
+            var arrow = document.createElement("div");
+            arrow.setAttribute("class","arrow");
 			this.setCourseHolders ();
 			this.courseCardEl.setAttribute("class","inner-content__course-card");
+            
 			this.courseEl.setAttribute("class","inner-content__course-card__course");
 
 			this.addAttributes (this.courseEl , courseElement.getName(), "course" , "false" , courseElement.getId());
 
 			this.courseEl.innerHTML = courseElement.getName() ;
+            this.courseCardEl.appendChild(arrow);
 			this.courseCardEl.appendChild(this.courseEl);
 
 			this.lessonContainerEl.setAttribute("class","inner-content__course-card__lessons");
@@ -262,6 +266,9 @@ var model = {
 					case "inner-content__course-card__course":
 					var sibling = target.nextSibling,
  						parent = target.parentNode;
+                        
+                    parent.firstChild.style.transform = (parent.firstChild.style.transform == "rotateZ(90deg)"?"rotateZ(0deg)":"rotateZ(90deg)");
+                        
  					if(sibling) {
  						sibling.style.maxHeight = (sibling.clientHeight == 0 ? "221px":"0");
  						that.hideHirerachy(parent, "video-wrapper");
@@ -270,6 +277,11 @@ var model = {
 
 					case "lesson-name":
 					var sibling = event.target.nextSibling;
+                    var par = event.target.parentNode.firstChild;
+                        
+                        par.style.transform = (par.style.transform == "rotateZ(90deg)"?"rotateZ(0deg)":"rotateZ(90deg)");
+                        
+                        
 					if(sibling) {
 						sibling.style.height = (sibling.clientHeight == 0 ? "auto":"0");
 					}
