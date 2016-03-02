@@ -143,6 +143,7 @@
     outline: none;
     padding: 5px 5px;
     height: 40px;
+    margin-left: 58px;
 }
 .inner-content .course-add:hover{
     cursor: pointer;
@@ -210,7 +211,7 @@
     background-color: #337ab7;
     border: none;
     color: #fff;
-    margin: 7px 0px 2px 0px;
+    margin: 7px 0px 2px 46px;
     outline: none;
     padding: 5px 5px
 }
@@ -281,7 +282,7 @@
     background-color: #337ab7;
     border: none;
     color: #fff;
-    margin: 7px 0px;
+    margin: 7px 0px 7px 37px;
     outline: none;
     padding: 5px 5px
 }
