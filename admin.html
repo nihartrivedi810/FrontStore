@@ -1,5 +1,6 @@
 <html>
 <head>
+    <title>FrontStore</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="styles/admin.css">
@@ -19,8 +20,9 @@
                     <b>Account</b>
                 </p>
                 <div class="drop-list">
-                 <a class="drop-list__element" href="admin.html">Settings</a>
-                 <a class="drop-list__element">Logout</a>
+                    <div class="small-arrow"></div>
+                     <a class="drop-list__element" href="admin.html">Settings</a>
+                     <a class="drop-list__element">Logout</a>
              </div>
          </div>
      </div>
@@ -30,67 +32,44 @@
      <p class="title-box__content">Welcome to Admin Panel</p>
  </div>
  <div class="content-box" id="content-box">
-    <div class="inner-content" id="inner-content">
-                   <!--button class="course-add">Add Course</button>
-                    <div class="inner-content__course-card">
-                        <div class="inner-content__course-card__course">
-                            <p class="inner-content__course-card__course--textbox">Course Name</p>
-                            <button class="inner-content__course-card__course--button">Edit</button>
-                        </div>
-                        <div class="inner-content__course-card__lessons">
-                            <button class="lesson__add">Add Lesson</button>
-                            <div class="lesson-wrapper">
-                                <div class="lesson-name">
-                                    <p class="lesson-name--textbox">Lesson Name</p>
-                                    <button class="lesson-name--button">Edit</button>
-                                </div>
-
-                                <div class="video-wrapper">
-                                    <button class="video-add">Add Video</button>
-                                    <div class="lesson-wrapper__videos">
-                                        <p class="lesson-wrapper__videos--textbox">Video Name</p>
-                                        <button class="lesson-wrapper__videos--button">Edit</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> 
-                    </div-->       
-                </div>
+    <div class="inner-content" id="inner-content">    
+        
+    </div>
+</div>
+</div>
+<div id="modal-container">
+    <div class="modal-div" id="course-modal">
+        <div class="modal center">
+            <i class="fa fa-times fa-4x" id="hide-modal"></i>
+            <div class="modal__elements center">
+                <input class="modal__elements__input" id="courseName" type="text" placeholder="Course Name"/>
+                <input class="modal__elements__input" id="courseDescription" type="text" placeholder="Course Description"/>
+                <input class="modal__elements__input" id="courseImage" type="text" placeholder="Course Image Url"/>
+                <button class="modal__elements__btn center data-class" id = "add-course-button">Add Course</button>
             </div>
         </div>
-        <div id="modal-container">
-            <div class="modal-div" id="course-modal">
-                <div class="modal center">
-                    <i class="fa fa-times fa-4x" id="hide-modal"></i>
-                    <div class="modal__elements center">
-                        <input class="modal__elements__input" id="courseName" type="text" placeholder="Course Name"/>
-                        <input class="modal__elements__input" id="courseDescription" type="text" placeholder="Course Description"/>
-                        <input class="modal__elements__input" id="courseImage" type="text" placeholder="Course Image Url"/>
-                        <button class="modal__elements__btn center data-class" id = "add-course-button">Add Course</button>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-div" id="lesson-modal">
-                <div class="modal center">
-                <i class="fa fa-times fa-4x" id="hide-modal"></i>
-                    <div class="modal__elements center">
-                        <input class="modal__elements__input " id="lessonName" type="text" placeholder="Lesson Name"/>
-                        <button class="modal__elements__btn center data-class" id = "add-lesson-button">Add Lesson</button>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-div" id="video-modal">
-                <div class="modal center">
-                    <i class="fa fa-times fa-4x" id="hide-modal"></i>
-                    <div class="modal__elements center">
-                        <input class="modal__elements__input" id="videoName" type="text" placeholder="Video Name"/>
-                        <input class="modal__elements__input" id="videoLink" type="text" placeholder="Video Link"/>
-                        <button class="modal__elements__btn center data-class" id = "add-video-button">Add Video</button>
-                    </div>
-                </div>
+    </div>
+    <div class="modal-div" id="lesson-modal">
+        <div class="modal center">
+            <i class="fa fa-times fa-4x" id="hide-modal"></i>
+            <div class="modal__elements center">
+                <input class="modal__elements__input " id="lessonName" type="text" placeholder="Lesson Name"/>
+                <button class="modal__elements__btn center data-class" id = "add-lesson-button">Add Lesson</button>
             </div>
         </div>
-    </body>
+    </div>
+    <div class="modal-div" id="video-modal">
+        <div class="modal center">
+            <i class="fa fa-times fa-4x" id="hide-modal"></i>
+            <div class="modal__elements center">
+                <input class="modal__elements__input" id="videoName" type="text" placeholder="Video Name"/>
+                <input class="modal__elements__input" id="videoLink" type="text" placeholder="Video Link"/>
+                <button class="modal__elements__btn center data-class" id = "add-video-button">Add Video</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
 
 
-    </html>
+</html>

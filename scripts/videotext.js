@@ -13,10 +13,15 @@ $(function(){
 		isSaved :false,
 		init: function(topicId,lessonId) {
 			
-			if(isNaN(topicId)||isNaN(lessonId)||!(model.topic = Courses[topicId])||!(model.lesson = Lessons[lessonId])||!(videoList = model.lesson.videos)||Lessons[lessonId]["courseId"]!==+topicId){
+			if(!topicId||!lessonId||!Courses[topicId]||!(Lessons[lessonId])|| Lessons[lessonId].videos.length == 0||Lessons[lessonId]["courseId"] != +topicId){
 				$(location).attr('href', 'index.html');
+				//console.log(Lessons[lessonId]["courseId"] , +topicId);
+				//console.log(topicId , lessonId);
 			}
 			model.topicId=topicId;
+			model.lesson = Lessons[lessonId];
+			model.topic = Courses[topicId];
+			videoList = Lessons[lessonId].videos;
 			currentVideo = Videos[videoList[0]];
 
 			if (!localStorageGet('notes')) {

@@ -74,11 +74,23 @@
 }
 
 .drop-list{
-    background-color: #0072BB;
+    
     display: none;
     position: relative;
     top: 1%;
     z-index: 1;
+}
+
+.small-arrow{
+    width: 7px;
+    height: 7px;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    content: "";
+    border-bottom: 7px solid #0072BB;
+    /* position: absolute; */
+    /* right: 7px; */
+    margin-left: 180px;
 }
 
 .drop-list__element{
@@ -89,6 +101,7 @@
     line-height: 50px;
     font-weight: bold;
     font-weight: bold;
+    background-color: #0072BB;
 }
 
 .drop-list__element:hover{
