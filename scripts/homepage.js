@@ -29,28 +29,30 @@ $(function(){
 		},
 		init : function() {
 			model.init();
-			view.init();
+			view.init(this.getAllTopics,this.topicClicked);
 		},
 		topicClicked : function(topicID) {
 			model.topicClicked(topicID);
 		},
 	};
 	var view = {
-		init: function() {
+		init: function(getAllTopics,topicClicked) {
+			this.getAllTopics = getAllTopics;
+			this.topicClicked = topicClicked;
 			this.contentBox=$('.content-box');
-            
+            that = this;
 			this.contentBox.on('click',function(event){
 				var targetNode = event.target.parentNode;
 				if(targetNode.tagName==='BUTTON')
 				{
 					//console.log(parseInt(targetNode.id));
-					return octopus.topicClicked(parseInt(targetNode.id));
+					return that.topicClicked(parseInt(targetNode.id));
 				}
 			});
 			view.render();
 		},
 		render: function() {
-			var topics=octopus.getAllTopics(),
+			var topics=that.getAllTopics(),
 			topicDiv=topics.reduce(function(accumulator,topic){
 				return accumulator + '<div class="content-box__course-box"><div class="content-box__course-box__course-content">'+
                         '<div class="content-face front-box">'+

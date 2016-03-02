@@ -22,7 +22,7 @@ var Courses = rawData.getCourses(),
 			{
 				$(location).attr('href', 'index.html');
 			}
-			view.init();
+			view.init(this.getData,this.getTopic,this.getIdOfLesson,this.getNameOfLesson,this.setLesson);
 		},
 
 		getData : function (topicID) {
@@ -53,21 +53,28 @@ var Courses = rawData.getCourses(),
 
 	view = {
 
-		init :function () {
+		init :function (getData,getTopic,getIdOfLesson,getNameOfLesson,setLesson) {
+			
+			this.getData = getData;
+			this.getTopic = getTopic;
+			this.getIdOfLesson = getIdOfLesson;
+			this.getNameOfLesson = getNameOfLesson;
+			this.setLesson = setLesson;
+			that = this;
 			var lessons = octopus.getData(),
 			topicName = $("#topic-name"),
-			dom = $(".container").eq(0), template = "",
-			that = this;
+			dom = $(".container").eq(0), template = "";
+			
 			topicName.html(octopus.getTopic());
 			
 			lessons.forEach (function (lesson) {
-				template+= '<div class = "cards shadow" id = "card_'+ octopus.getIdOfLesson(lesson) +'" data-id = "'+ octopus.getIdOfLesson(lesson) +'" >'+
-								'<div class = "cards__container" data-id = "'+ octopus.getIdOfLesson(lesson) +'" >'+
-								'<div class = "cards__container__content" data-id = "'+ octopus.getIdOfLesson(lesson) +'" >'+
-								'<div class = "content-name" id = "content-name_'+ octopus.getIdOfLesson(lesson) +'" data-id = "'+ octopus.getIdOfLesson(lesson) +'" >'+ octopus.getNameOfLesson(lesson) +'</div>'+
-								'<div class = "content-info" id = "content-info_'+ octopus.getIdOfLesson(lesson) +'" data-id = "'+ octopus.getIdOfLesson(lesson) +'" >'+ octopus.getNameOfLesson(lesson) +'</div>'+
+				template+= '<div class = "cards shadow" id = "card_'+ that.getIdOfLesson(lesson) +'" data-id = "'+ that.getIdOfLesson(lesson) +'" >'+
+								'<div class = "cards__container" data-id = "'+ that.getIdOfLesson(lesson) +'" >'+
+								'<div class = "cards__container__content" data-id = "'+ that.getIdOfLesson(lesson) +'" >'+
+								'<div class = "content-name" id = "content-name_'+ that.getIdOfLesson(lesson) +'" data-id = "'+ that.getIdOfLesson(lesson) +'" >'+ that.getNameOfLesson(lesson) +'</div>'+
+								'<div class = "content-info" id = "content-info_'+ that.getIdOfLesson(lesson) +'" data-id = "'+ that.getIdOfLesson(lesson) +'" >'+ that.getNameOfLesson(lesson) +'</div>'+
 								'</div>'+
-								'<i class="fa fa-play-circle-o fa-lg cards__play play-icon" data-id = "'+ octopus.getIdOfLesson(lesson) +'" ></i>'+
+								'<i class="fa fa-play-circle-o fa-lg cards__play play-icon" data-id = "'+ that.getIdOfLesson(lesson) +'" ></i>'+
 								'</div>'+
 								'</div>';	
 			});
@@ -75,7 +82,7 @@ var Courses = rawData.getCourses(),
 			dom.append(template);
 			dom.on("click",function(event){
 						var attr = event.target.getAttribute("data-id");
-						octopus.setLesson (attr);
+						that.setLesson (attr);
 					});
 		}
 	};
