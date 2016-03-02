@@ -46,7 +46,7 @@ var rawData = (function () {
 			id = parseInt(id);
 			if(id)
 			{
-				this.videos.push(id);
+				this.lessons.push(id);
 			}
 		},
 
@@ -223,22 +223,37 @@ var rawData = (function () {
 		render : function () {
 	        var obj = JSON.parse(localStorage.getItem('Courses'));
 
-	        obj.forEach (function (course) {
+	        /*obj.forEach (function (course) {
 	            Courses.push(new Course(course.name,course.lessons,course.id,course.description,course.image));
-	            courseId++;
+	            
+	        });*/
+				        	
+
+	        Courses = obj.map(function (course){
+	        	courseId++;
+	        	return new Course(course.name,course.lessons,course.id,course.description,course.image);
+
 	        });
 
 	        obj = JSON.parse(localStorage.getItem('Lessons'));
-	        obj.forEach (function (lesson) {
+	        Lessons = obj.map(function ( lesson){
+	        	lessonId++;
+	        	return new Lesson(lesson.id,lesson.name,lesson.videos,lesson.courseId);
+	        })
+	        	
+
+	        
+	       /* obj.forEach (function (lesson) {
 	            Lessons.push(new Lesson(lesson.id,lesson.name,lesson.videos,lesson.courseId));
 	            lessonId++;
-	        });
+	        });*/
 
 	        obj = JSON.parse(localStorage.getItem('Videos'));
-	        obj.forEach (function (video) {
-	            Videos.push(new Video(video.id,video.url,video.name,video.lessonId));
-	            videoId++;
-	        });
+	        Videos = obj.map(function (video){
+	        	videoId++;
+	        	return new Video(video.id,video.url,video.name,video.lessonId);
+	        })
+	        
 	    }
 	}
 

@@ -54,7 +54,7 @@ var model = {
 		var courses = this.getCourses ();
 
 		var course = rawData.createCourseObj(courseName,undefined, courseDes, courseImage);
-		console.log(course);
+		console.log(courvideose);
 			// courses.push(course);
 		},
 
@@ -301,6 +301,7 @@ var model = {
 					break;
 
 					case "video-add":
+						console.log("came here");
 						var lessonid = target.getAttribute("data-course");
 						viewDisplay.displayModal("video-modal" , lessonid);
 					break;
