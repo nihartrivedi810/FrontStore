@@ -127,9 +127,11 @@
 }
 
 .title-box__content{
+    width: 90%;
     text-align: center;
     font-size: x-large;
     font-weight: 200;
+    margin-left: 59px;
 }
 
 .content-box{
@@ -150,7 +152,7 @@
 }
 
 .inner-content .course-add{
-    width: 100%;
+    width: 90%;
     background-color: #337ab7;
     border: none;
     color: #fff;
@@ -161,7 +163,7 @@
 }
 .inner-content .course-add:hover{
     cursor: pointer;
-    background-color: black;
+    background-color: #085DAD;
 }
 .inner-content__course-card{
     width: 100%;
@@ -219,7 +221,7 @@
     margin: auto;
 }
 .lesson__add{
-    width: 100%;
+    width: 90%;
     height: 40px;
     left: 26%;
     background-color: #337ab7;
@@ -231,7 +233,7 @@
 }
 .lesson__add:hover{
     cursor: pointer;
-    background-color: black;
+    background-color: #085DAD;
 }
 #clicked{
     display: none;
@@ -289,7 +291,7 @@
 
 }
 .video-add{
-    width:100%;
+    width:90%;
     height: 40px;
     //position: relative;
     left: 26%;
@@ -302,7 +304,7 @@
 }
 .video-add:hover{
     cursor: pointer;
-    background-color: black;
+    background-color: #085DAD;
 }
 .video-container{
     width: 100%;
