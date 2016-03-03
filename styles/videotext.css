@@ -369,6 +369,8 @@
 }
 
 #sidenav-opacity-div{
+	background: #000000;
+	top: 0;
 	display:none;
 	height: 100%;
 	position: absolute;
