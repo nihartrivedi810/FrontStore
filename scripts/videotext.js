@@ -108,6 +108,7 @@ $(function(){
 				return;
 			}
 			model.init(params["topic"],params["lesson"]);
+			breadCrumbView.init(this.getCurrentLessonName,this.getCurrentTopicName,this.toggleView,this.showModal,this.getCurrentVideo);
 			view.init(this.getCurrentLessonName,this.getCurrentTopicName,this.hidemodal);
 			modalView.init(this.addNewjsbin,this.disableJSButton);
 			sidePanelView.init(this.getAllVideos,this.getCurrentVideo,this.changeCurrentVideo);
@@ -116,7 +117,6 @@ $(function(){
 			notesView.init(this.addNewNote,this.showModal,this.toggleView,this.isSaved,this.toggleSave,this.getNotesOfCurrentVideo);
 			jsbinView.init(this.getjsbinOfCurrentVideo,this.disableJSButton,this.renderThreeViews,this.renderTwoViews,this.enableJSButton);
 			jsbinView.render();
-			breadCrumbView.init(this.getCurrentLessonName,this.getCurrentTopicName,this.toggleView,this.showModal,this.getCurrentVideo);
 		},
 		getCurrentVideoId: function() {
 			return model.getCurrentVideoId();
@@ -364,20 +364,39 @@ $(function(){
 
 	var breadCrumbView = {
 		init: function(getCurrentLessonName,getCurrentTopicName,toggleView,showModal,getCurrentVideo){
+			var breadCrumb = '<a class="breadcrumb--anchor" href="index.html"><i class="fa fa-home"></i></a>',
+				jBreadCrumbHolder = $("#breadcrum-data"),
+				embedBinBtn = document.getElementById("embed-bin-btn"),
+				changeViewBtn = document.getElementById("change-view");
+
 			this.getCurrentLessonName = getCurrentLessonName;
 			this.getCurrentTopicName = getCurrentTopicName;
 			this.getCurrentVideo = getCurrentVideo;
+
+			if (this.getCurrentTopicName()) {
+				breadCrumb += '<span><i class="fa fa-chevron-right"></i></span>'+
+				'<a id="lesson-anchor" class="breadcrumb--anchor" href="lessonCards.html">'+
+					'<div class="topic-name" id="topic-name">'+this.getCurrentTopicName()
+					+'</div>'+
+				'</a>';
+
+				if (this.getCurrentLessonName()) {
+					breadCrumb += '<span><i class="fa fa-chevron-right"></i></span>'+
+								  '<div class="lesson-name" id="lesson-name">'+ this.getCurrentLessonName()+
+								  '</div>'
+					if (this.getCurrentVideo()) {
+						breadCrumb += '<span><i class="fa fa-chevron-right"></i></span>'+
+										'<div class="video-name" id="video-name">'+ this.getCurrentVideo().name+
+										'</div>'
+					}
+				}
+			}
+			console.log (breadCrumb);
+			jBreadCrumbHolder.html(breadCrumb);
+
+
 			this.toggleView = toggleView;
 			this.showModal = showModal;
-			var lessonName = $("#lesson-name"), 
-			topicName = $("#topic-name"),
-			embedBinBtn = document.getElementById("embed-bin-btn"),
-			changeViewBtn = document.getElementById("change-view");
-			this.videoName = $("#video-name"),
-
-			lessonName.html(this.getCurrentLessonName());
-			topicName.html(this.getCurrentTopicName());
-			this.printVideoName();
 
 			changeViewBtn.onclick = this.toggleView;
 			embedBinBtn.onclick = this.showModal;
@@ -385,8 +404,10 @@ $(function(){
 
 		printVideoName: function(){
 			
-			// console.log("dsfas",octopus.getCurrentVideo())
-			this.videoName.html(breadCrumbView.getCurrentVideo().name);
+			var jVideoName = $("#video-name");
+			if (jVideoName) {
+				jVideoName.html(breadCrumbView.getCurrentVideo().name);
+			}
 		}
 
 	};

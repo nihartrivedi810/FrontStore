@@ -378,3 +378,7 @@
 	z-index: 1;
     font:normal normal normal 14px/1 FontAwesome;
 }
+
+#breadcrum-data {
+	display: inline-block;
+}
