@@ -264,7 +264,7 @@ var model = {
 			this.contentBoxEl.onclick = function(event){
 				var target = event.target,
 				className = target.className;
-				console.log(className);
+				//console.log(className);
 				switch (className) {
 					
 					case "inner-content__course-card__course":
@@ -310,6 +310,7 @@ var model = {
 					break;
 				}
 			}
+		
 				this.modalContainerEl.onclick = function(event){
 					var id = event.target.id,
 						target = event.target;
@@ -318,28 +319,30 @@ var model = {
 							viewDisplay.hideModal(target.parentNode.parentNode.id);
 							break;
 						case "add-course-button" :
-							var courseName = document.getElementById("courseName").value.trim(),
-								courseDes = document.getElementById("courseDescription").value.trim(),
-								courseImage = document.getElementById("courseImage").value.trim();
+							var courseName = viewDisplay.modalContainerEl.querySelector("#courseName").value.trim(),
+								courseDes = viewDisplay.modalContainerEl.querySelector("#courseDescription").value.trim(),
+								courseImage = viewDisplay.modalContainerEl.querySelector("#courseImage").value.trim();
+								// console.log(target,document.getElementById("courseName"));
 							if (courseName && courseDes && courseImage) {
 								controller.addCourse(courseName, courseDes , courseImage);
+								location.reload();
 							}
-							location.reload();
+							
 							break;
 						case "add-lesson-button" :
-							var lessonName = document.getElementById("lessonName").value.trim();
+							var lessonName = viewDisplay.modalContainerEl.querySelector("#lessonName").value.trim();
 							var course = target.getAttribute("data-id");
-							console.log(course);
+							//console.log(course);
 							if (lessonName) {
 								controller.addLesson(lessonName,course);
 							}
 							location.reload();
 							break;
 						case "add-video-button" :
-							var videoName = document.getElementById("videoName").value.trim();
-							var videoLink = document.getElementById("videoLink").value.trim();
+							var videoName = viewDisplay.modalContainerEl.querySelector("#videoName").value.trim();
+							var videoLink = viewDisplay.modalContainerEl.querySelector("#videoLink").value.trim();
 							var lesson = target.getAttribute("data-id");
-							console.log (lesson);
+							//console.log (lesson);
 							if (videoName && videoLink) {
 								controller.addVideo(videoName, videoLink ,lesson);
 							}
