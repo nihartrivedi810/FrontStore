@@ -8,7 +8,6 @@ videoId = rawData.getVideoIndex();
 $(function(){
 	var videoList,
 	currentVideo,
-
 	model = {
 		isSaved :false,
 		init: function(topicId,lessonId) {
@@ -103,6 +102,11 @@ $(function(){
 		},
 		init: function() {
 			var params = getAllParameters(window.location.href);
+			console.log(params);
+			if(!params){
+				$(location).attr('href', 'index.html');
+				return;
+			}
 			model.init(params["topic"],params["lesson"]);
 			view.init(this.getCurrentLessonName,this.getCurrentTopicName,this.hidemodal);
 			modalView.init(this.addNewjsbin,this.disableJSButton);
@@ -172,7 +176,6 @@ $(function(){
 			view.toggleView();
 		}
 	};
-
 	var sidePanelView = {
 		init : function(getAllVideos,getCurrentVideo,changeVideo) {
 			this.getCurrentVideo = getCurrentVideo;
@@ -183,7 +186,7 @@ $(function(){
 			parent=$("#l1"),
 			optSign = $('#bar'),
 			sideBlk = $('#lesson-list-container'),
-			mainDiv=$('#sidenav-opacity-div'), contentStyler = $('#content-styler'),
+			mainDiv=$('#sidenav-opacity-div'), /*contentStyler = $('#content-styler')*/
 			index,listAppend;
 
 			listAppend=videos.reduce(function(videoHTMLString,video){
@@ -195,7 +198,7 @@ $(function(){
 			optSign.on("click", function(event) {
 				sideBlk.css('transform','translateX(0%)');
 				optSign.css("visibility", "hidden");
-				$('#content-styler').css('opacity','0.1');
+				mainDiv.css('opacity','0.5');
 				mainDiv.css("display" ,'block');
 			});
 
@@ -203,8 +206,10 @@ $(function(){
 				if(event.target && event.target.nodeName === "LI") {
 					sideBlk.css('transform','translateX(-100%)');
 					optSign.css("visibility", "visible");
-					$('#content-styler').css('opacity','1');
+					//$('#content-styler').css('opacity','1');
 					mainDiv.css("display" ,'none');
+					mainDiv.css('opacity','1');
+					octopus.changeCurrentVideo(event.target.id);
 					sidePanelView.changeVideo(event.target.id);
 				}
 			});
@@ -213,7 +218,7 @@ $(function(){
 				if(event.target.id != 'bar'){
 					sideBlk.css('transform','translateX(-100%)');
 					optSign.css("visibility", "visible");
-					$('#content-styler').css('opacity','1');
+					mainDiv.css('opacity','1');
 					mainDiv.css("display" ,'none');
 				}
 			});
@@ -242,7 +247,6 @@ $(function(){
 			this.videoTag.prepend('<embed  id="youtube" width="100%" height="100%"src="https://www.youtube.com/embed/'+ curVideo["url"]+'" frameborder="0" allowfullscreen">');
 		}	
 	};
-
 	var notesView = {
 		init: function(addNewNote,showModal,toggleView,isSaved,toggleSave,getNotesOfCurrentVideo) {
 			this.toggleSave = toggleSave;
@@ -256,6 +260,7 @@ $(function(){
 			that = this;
 
 			$('#toolbar-top').on('click',function(event){
+				//todo
 				if(event.target.id==="save-notes"){
 					a=advancedEditor.getContents();
 					that.addNewNote(a);

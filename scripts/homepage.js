@@ -1,4 +1,5 @@
-var Courses = rawData.getCourses(),
+//todo
+var Courses = rawData.getCourses(), 
 	Lessons = rawData.getLessons(),
 	Videos = rawData.getVideos(),
 	courseId = rawData.getCourseIndex(),
