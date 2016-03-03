@@ -6,7 +6,10 @@
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    //font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: "EB Garamond", sans-serif;
+    /*font-family: "Old Standard TT", sans-serif;*/
+    
 }
 @font-face{
     font-family: Helvetica;
@@ -19,6 +22,7 @@
 .headerBar{
     background-color: #0072BB;
     height: 50px;
+    font-size: 18px;
 }
 
 
@@ -44,8 +48,7 @@
 .innerContent__logo--image{
     max-height: 90%;
     max-width: 100%;
-    position: relative;
-    top: 3%;
+    margin-top: 2px;
 }
 
 .innerContent__account{
@@ -94,8 +97,8 @@
     text-decoration: none;
     height: 50px;
     line-height: 50px;
-    font-weight: bold;
-    font-weight: bold;
+    //font-weight: bold;
+    
     background-color: #0072BB;
 }
 
