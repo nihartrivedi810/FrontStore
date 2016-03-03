@@ -127,9 +127,11 @@
 }
 
 .title-box__content{
+    width: 90%;
     text-align: center;
     font-size: x-large;
     font-weight: 200;
+    margin-left: 59px;
 }
 
 .content-box{
@@ -150,26 +152,27 @@
 }
 
 .inner-content .course-add{
-    width: 100%;
+    width: 90%;
     background-color: #337ab7;
     border: none;
     color: #fff;
     outline: none;
     padding: 5px 5px;
     height: 40px;
-    margin-left: 58px;
+    margin-left: 52px;
 }
 .inner-content .course-add:hover{
     cursor: pointer;
-    background-color: black;
+    background-color: #085DAD;
 }
 .inner-content__course-card{
     width: 100%;
     height: auto;
+    margin-bottom: 3px;
 }
 .inner-content__course-card__course{/*-------------*/
     width: 90%;
-    margin-left: 10%;
+    margin-left: 9%;
     background-color: #f6f6f6;
     margin-top: 20px;
     height: 40px;
@@ -180,9 +183,12 @@
     /* font-family: Helvetica; */
     line-height: 40px;
     border: solid 1px #aaa;
-    /*box-shadow: 5px 5px 5px gray;*/
+    //box-shadow: 5px 5px 5px gray;
 }
 
+.inner-content__course-card__course:hover{
+    box-shadow: 2px 2px 5px gray;
+}
 .arrow{
     height: 0px;
     width: 0px;
@@ -219,19 +225,19 @@
     margin: auto;
 }
 .lesson__add{
-    width: 100%;
+    width: 90%;
     height: 40px;
     left: 26%;
     background-color: #337ab7;
     border: none;
     color: #fff;
-    margin: 7px 0px 2px 46px;
+    margin: 7px 0px 2px 43px;
     outline: none;
     padding: 5px 5px
 }
 .lesson__add:hover{
     cursor: pointer;
-    background-color: black;
+    background-color: #085DAD;
 }
 #clicked{
     display: none;
@@ -246,14 +252,19 @@
     border-radius: 2px;
     text-align: center;
     line-height: 40px;
-    /* box-shadow: 5px 5px 5px gray; */
+    //box-shadow: -5px 7px 7px gray;
     cursor: pointer;
     border: solid 1px #aaa;
-    margin-right: 0;
+    margin-right: 3px;
     /* right: 0; */
     /* margin: auto; */
     margin-left: auto;
     //background-color: #6A94BE;
+    margin-bottom: 3px;
+}
+
+.lesson-name:hover{
+    box-shadow: 2px 2px 5px gray;
 }
 
 .lesson-name--textbox{
@@ -286,10 +297,10 @@
     width: 80%;
     overflow: auto;
     margin: auto;
-
+    padding-right: 10px;
 }
 .video-add{
-    width:100%;
+    width:90%;
     height: 40px;
     //position: relative;
     left: 26%;
@@ -302,7 +313,7 @@
 }
 .video-add:hover{
     cursor: pointer;
-    background-color: black;
+    background-color: #085DAD;
 }
 .video-container{
     width: 100%;

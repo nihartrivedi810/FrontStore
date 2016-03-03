@@ -54,7 +54,7 @@ var model = {
 		var courses = this.getCourses ();
 
 		var course = rawData.createCourseObj(courseName,undefined, courseDes, courseImage);
-		console.log(course);
+		console.log(courvideose);
 			// courses.push(course);
 		},
 
@@ -186,7 +186,7 @@ var model = {
 			this.courseCardEl.appendChild(this.courseEl);
 
 			this.lessonContainerEl.setAttribute("class","inner-content__course-card__lessons");
-			this.lessonContainerEl.innerHTML = "<button class=\"lesson__add\" data-course="+courseElement.getId()+">Add Lesson</button> <div class=\"lesson__add__input-contain\" ><input type=\"text\" id=\"input_new_lesson\"><button class=\"lesson__add_input-contain__button\"data-course="+courseElement.getId()+">Add Lesson</button>";
+			this.lessonContainerEl.innerHTML = "<button class='lesson__add' data-course="+courseElement.getId()+">Add Lesson</button> <div class=\"lesson__add__input-contain\" ><input type=\"text\" id=\"input_new_lesson\"><button class=\"lesson__add_input-contain__button\"data-course="+courseElement.getId()+">Add Lesson</button>";
 			
 			controller.createLesson(courseElement);
 
@@ -224,9 +224,9 @@ var model = {
 			this.videoBox = document.createElement("div");
             var videoBox = document.createElement("div");
             videoBox.setAttribute("class", "video-container");
-            var arrow = document.createElement("div");
-            arrow.setAttribute("class","arrow");
-            videoBox.appendChild(arrow);
+            //var arrow = document.createElement("div");
+            //arrow.setAttribute("class","arrow");
+            //videoBox.appendChild(arrow);
 			this.videoWrapper = document.createElement("div");
 			this.videoWrapper.setAttribute("class","lesson-wrapper__videos");
 
@@ -301,6 +301,7 @@ var model = {
 					break;
 
 					case "video-add":
+						console.log("came here");
 						var lessonid = target.getAttribute("data-course");
 						viewDisplay.displayModal("video-modal" , lessonid);
 					break;
@@ -308,6 +309,30 @@ var model = {
 					case "course-add":
 						viewDisplay.displayModal("course-modal");
 					break;
+                        
+                    case "arrow":
+                    
+					var sibling = target.nextSibling,
+ 						parent = target.parentNode;
+                        
+                    parent.firstChild.style.transform = (parent.firstChild.style.transform == "rotateZ(90deg)"?"rotateZ(0deg)":"rotateZ(90deg)");
+                        
+ 					if(sibling.nextSibling) {
+                        
+                        if(sibling.className=="inner-content__course-card__course"){
+                            console.log("burrah");
+                            sibling.nextSibling.style.height = (sibling.nextSibling.clientHeight == 0 ? "auto":"0");
+ 						     that.hideHirerachy(parent, "video-wrapper");
+                        }
+                        else if(sibling.className=="lesson-name"){
+                            sibling.nextSibling.style.maxHeight = (sibling.nextSibling.clientHeight == 0 ? "221px":"0");
+                        }
+ 						
+ 					}
+
+					break;
+                        
+                        
 				}
 			}
 		
