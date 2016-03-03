@@ -391,9 +391,7 @@ $(function(){
 					}
 				}
 			}
-			console.log (breadCrumb);
 			jBreadCrumbHolder.html(breadCrumb);
-
 
 			this.toggleView = toggleView;
 			this.showModal = showModal;
