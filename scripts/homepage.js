@@ -1,10 +1,10 @@
 //todo
-var Courses = rawData.getCourses(), 
-	Lessons = rawData.getLessons(),
-	Videos = rawData.getVideos(),
-	courseId = rawData.getCourseIndex(),
-	lessonId = rawData.getLessonIndex(),
-	videoId = rawData.getVideoIndex();
+var Courses = dataAPI.getCourses(), 
+	Lessons = dataAPI.getLessons(),
+	Videos = dataAPI.getVideos(),
+	courseId = dataAPI.getCourseIndex(),
+	lessonId = dataAPI.getLessonIndex(),
+	videoId = dataAPI.getVideoIndex();
 
 
 $(function(){
