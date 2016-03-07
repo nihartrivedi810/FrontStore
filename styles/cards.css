@@ -1,6 +1,6 @@
 *,
-*: before,
-*: after{
+*:before,
+*:after{
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -8,13 +8,17 @@
     padding: 0;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
-
+@font-face{
+    font-family: Helvetica;
+    src: url('../fonts/Helvetica.otf');
+}
 .headerBar{
     background-color: #0072BB;
     height: 50px;
-    font-family: "EB Garamond", sans-serif;
+    font-family: Helvetica;
     /*font-family: "Old Standard TT", sans-serif;*/
-    font-size: 18px;
+    font-size: 15px;
+    font-weight: bold;
 }
 
 
@@ -89,8 +93,6 @@
     text-decoration: none;
     height: 50px;
     line-height: 50px;
-    font-weight: bold;
-    font-weight: bold;
     background-color: #0072BB;
 }
 
