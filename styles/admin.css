@@ -6,7 +6,6 @@
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     /*font-family: "EB Garamond", sans-serif;*/
     /*font-family: "Old Standard TT", sans-serif;*/
     
@@ -17,6 +16,7 @@
 }
 .body{
     margin: 0px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 /* HEADER */
 .headerBar{
