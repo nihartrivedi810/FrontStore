@@ -8,11 +8,11 @@ var model = {
 	},
 
 	getLessons : function () {
-		return rawData.getLessons();;
+		return dataAPI.getLessons();;
 	},
 
 	getVideos : function () {
-		return rawData.getVideos();
+		return dataAPI.getVideos();
 	},
 
 	addLessonToCourse : function (lessonId,courseId) {
@@ -22,23 +22,23 @@ var model = {
 	},
 
 	getCourses : function () {
-		return rawData.getCourses();
+		return dataAPI.getCourses();
 	},
 
 	addLesson : function (lessonName,courseId) {
 
-		var lesson = rawData.createLessonObj(lessonName, undefined, courseId);
+		var lesson = dataAPI.createLessonObj(lessonName, undefined, courseId);
 		this.addLessonToCourse(parseInt(lesson.id),parseInt(courseId));
 	},
 
 	addVideo : function (videoName , videoUrl , lessonId) {
 
-		var video = rawData.createVideoObj(videoName,videoUrl,lessonId) ;
+		var video = dataAPI.createVideoObj(videoName,videoUrl,lessonId) ;
 		this.addVideoToLesson ( parseInt(video.id), parseInt(lessonId) );
 	},
 
 	addCourse : function (courseName,courseDes, courseImage) {
-		var course = rawData.createCourseObj(courseName,undefined, courseDes, courseImage);
+		var course = dataAPI.createCourseObj(courseName,undefined, courseDes, courseImage);
 	},
 
 	getCurrentVideoId : function () {

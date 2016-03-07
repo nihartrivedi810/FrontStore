@@ -1,5 +1,4 @@
-var rawData = (function () {
-
+var dataAPI = (function () {
 
 	var Courses = [],
 	Lessons = [],
@@ -176,16 +175,15 @@ var rawData = (function () {
 	var modelCollection =  {
 
 		init : function () {
-//TODO index
+
 			var that = this;
 
-			complete.forEach(function (value, index){	
+			complete.forEach(function (value){	
 				var lessons = [];
-				
-				//console.log(value);
+
 				for (lesson in value.material){
-					var lessonName = lesson;
-					var videos = [];
+					var lessonName = lesson,
+						videos = [];
 					
 					value.material[lesson].forEach(function(v){
 						var name = that._makeName();
@@ -211,8 +209,8 @@ var rawData = (function () {
 		},
 
 		_makeName : function () {
-		    var text = "";
-		    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+		    var text = "",
+		    	possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
 		    for( var i=0; i < 5; i++ )
 		        text += possible.charAt(Math.floor(Math.random() * possible.length));
@@ -220,39 +218,26 @@ var rawData = (function () {
 		    return text;
 		},
 
-		render : function () {
-	        var obj = JSON.parse(localStorage.getItem('Courses'));
+		reInit : function () {
+	        var courseObj = JSON.parse(localStorage.getItem('Courses')),
+	        	lessonObj = JSON.parse(localStorage.getItem('Lessons')),
+	        	videoObj = JSON.parse(localStorage.getItem('Videos'));
 
-	        /*obj.forEach (function (course) {
-	            Courses.push(new Course(course.name,course.lessons,course.id,course.description,course.image));
-	            
-	        });*/
-				        	
-
-	        Courses = obj.map(function (course){
+	        Courses = courseObj.map(function (course){
 	        	courseId++;
 	        	return new Course(course.name,course.lessons,course.id,course.description,course.image);
 
 	        });
 
-	        obj = JSON.parse(localStorage.getItem('Lessons'));
-	        Lessons = obj.map(function ( lesson){
+	        Lessons = lessonObj.map(function (lesson){
 	        	lessonId++;
 	        	return new Lesson(lesson.id,lesson.name,lesson.videos,lesson.courseId);
-	        })
-	        	
+	        });
 
-	        
-	       /* obj.forEach (function (lesson) {
-	            Lessons.push(new Lesson(lesson.id,lesson.name,lesson.videos,lesson.courseId));
-	            lessonId++;
-	        });*/
-
-	        obj = JSON.parse(localStorage.getItem('Videos'));
-	        Videos = obj.map(function (video){
+	        Videos = videoObj.map(function (video){
 	        	videoId++;
 	        	return new Video(video.id,video.url,video.name,video.lessonId);
-	        })
+	        });
 	        
 	    }
 	}
@@ -264,7 +249,7 @@ var rawData = (function () {
 				modelCollection.init();
 			}
 			else {
-				modelCollection.render();
+				modelCollection.reInit();
 			}
 		}
 	}
@@ -304,7 +289,6 @@ var rawData = (function () {
 				var video = new Video(videoId++,url,name,lessonId);
 				Videos.push(video);
 				return video;
-
 			}
 	}
 	
